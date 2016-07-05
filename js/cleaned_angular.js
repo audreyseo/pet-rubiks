@@ -84,7 +84,8 @@ app.value('cookieData', {
 			practiceCards: [],
 			cardPriorities: {},
 			cardOptions: {},
-			practiceButton: "Select cases to practice"
+			practiceButton: "Select cases to practice",
+			cards: {maxNumber: 0, options: []}
 	});
 app.value('cookieDataTypes', {
 			practicing: "object",
@@ -157,7 +158,8 @@ app.directive('ollRow', function() {
 
 
 app.factory('cookieSavedData', ['cookieStrings', '$cookies', 'cookieData', function(cookieStringData, $cookies, cookieData) {
-	var factory = {data: cookieData, cookies: cookieStringData, cards: {}};
+	var factory = {data: angular.copy(cookieData), cookies: angular.copy(cookieStringData), cards: {}};
+	angular.copy(cookieData, factory.data);
 	
 	factory.initialize = function() {
 		for (var ind in factory.data) {
@@ -261,11 +263,11 @@ app.factory('cookieSavedData', ['cookieStrings', '$cookies', 'cookieData', funct
 	
 	factory.savePracticeCards = function(newValue) {
 		$cookies.putObject(factory.cookies.practiceCards, newValue)
-	}
+	};
 	
 	factory.saveCards = function(newValue) {
 		$cookies.putObject(factory.cookies.dataCards, newValue);
-	}
+	};
 	
 	factory.getAlgorithmOption = function(caseCode) {
 		if (angular.isDefined(factory.data.cardOptions[caseCode])) {
@@ -276,15 +278,15 @@ app.factory('cookieSavedData', ['cookieStrings', '$cookies', 'cookieData', funct
 	
 	factory.setAlgorithmOption = function(caseCode, value) {
 		factory.data.cardOptions[caseCode] = value;
-	}
+	};
 	
 	factory.removeAlgorithmOption = function(caseCode) {
 		factory.setAlgorithmOption(caseCode, undefined);
-	}
+	};
 	
 	factory.saveAlgorithmOptions = function(newValue) {
 		$cookies.putObject(factory.cookies.cardOptions, newValue);
-	}
+	};
 	
 	
 	return(factory);
