@@ -41,8 +41,9 @@
 										<input class="{{cClass}}" type="checkbox" ng-model="hidden[cClass]" ng-true-value=1 ng-false-value=0 ng-click="hide($event)">
 									</td>
 								<td ng-if=showing.editCol></td>
-								</tr>
-								
+							</tr>
+							
+							
 							<tr ng--repeat="case in filteredCases | orderBy:column:reverse" class="{{case.code}}">
 								<td ng-cloak><img class="icon" ng-src="{{case.src}}"></td>
 								<td class="num" >{{case.num}}</td>
@@ -70,6 +71,7 @@
 									</select>
 								</td>
 							</tr>
+							
 						</table>
 					</div>
 
@@ -111,13 +113,14 @@
 								<div id="timesforeground">
 									<table id="timesTable">
 										<tr>
-											<th>Del</th>
+											<th>#</th>
 											<th>Time</th>
+											<th>Del</th>
 										</tr>
 										<tr ng--repeat="record in records track by $index" class="timesTable">
 											<td>{{$index + 1}}</td>
 											<td>{{record}}</td>
-											<td><input type="button" value="x"></td>
+											<td><input type="button" value="x" ng-click="deleteRecord($event, $index)"></td>
 										</tr>
 									</table>
 								</div>

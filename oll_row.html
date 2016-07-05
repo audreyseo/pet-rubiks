@@ -1,0 +1,27 @@
+<tr ng--repeat="case in mycases | orderBy:mycolumn:myreverse" class="{{case.code}}">
+	<td ng-cloak><img class="icon" ng-src="{{case.src}}"></td>
+	<td class="num" >{{case.num}}</td>
+	<td class="code" >{{case.code}}</td>
+	<td class="solve1" ng-bind-html="case.solve1.alg | colorCodeAlgorithms"></td>
+	<td class="length1" >{{case.solve1.length}}</td>
+	<td class="solve2" ng-bind-html="case.solve2.alg | colorCodeAlgorithms"></td>
+	<td class="length2" >{{case.solve2.length}}</td>
+	<td class="prob" >{{case.prob | number: 5}}</td>
+	<td ng-if=showing.editCol> <!--class="known">-->
+		<input id="{{case.code}}" type="checkbox" ng-model="hiddenRows[case.code]" ng-true-value=1 ng-false-value=0> <!-- ng-click="cookiefy($event)">-->
+	</td>
+	<td ng-if=showing.flashCardCol><input id="{{case.code}}" type="checkbox" ng-model='practicing[case.code]'></td>
+	<td ng-if=showing.priorityCol>
+		<select ng-show='practicing[case.code]' class="priorities" ng-model='cardPriorities[case.code]'>
+			<option></option>
+			<option ng-repeat="val in cards.options" value="{{val}}">{{val}}</option>
+		</select>
+	</td>
+	<td ng-if=pickAnAlgorithm(case)>
+		<select ng-model='cardOptions[case.code]'>
+			<option></option>
+			<option>1</option>
+			<option>2</option>
+		</select>
+	</td>
+</tr>

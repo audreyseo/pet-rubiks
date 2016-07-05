@@ -132,6 +132,15 @@ app.directive('flashCardDisplay', function() {
 		};
 	});
 
+app.directive('ollRow', function() {
+	return {
+		transclude: true,
+		scope: {mycases: "@mycases", mycolumn: "@mycolumn", myreverse: "@myreverse"},
+		restrict: 'E',
+		templateUrl: 'oll_row.html'
+	};
+});
+
 
 app.controller('ContentController', ['$scope', 'cases', 'hiddenRowsY', 'cookieStrings','$cookies',  'orderByFilter', 'filterFilter', function($scope, cases, hiddenRows, cookieString, $cookies, orderBy, filterFilter) {
 		$scope.cases = cases;
@@ -752,6 +761,12 @@ app.controller('timerController', ['$scope', '$interval', '$cookies', function($
     	$cookies.putObject($scope.recordsCookie, newValue);
     	console.log("Cookie records: \n" + angular.toJson($cookies.getObject($scope.recordsCookie)));
     });
+    
+    $scope.deleteRecord = function(event, index) {
+    	if (index < $scope.records.length) {
+    		$scope.records.splice(index, 1);
+    	}
+    };
     
     console.log("help");
     

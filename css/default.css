@@ -299,13 +299,15 @@ tr.timesTable:nth-child(odd) td {
 	background-color: #FFFFFF;
 	float: right;
 	/*margin-right: 10%;*/
-	padding: 30px;
+	padding: 20px;
+	padding-top: 30px;
+	padding-bottom: 30px;
 	/*border: 2px dashed #FF00FF;*/
 	border-radius: 30px;
 	color: #222222;
 	font: 14px Arial;
 	/*margin-top: 5px;*/
-	width: 250px;
+	width: 270px;
 	margin-bottom: -40px;
 }
 
@@ -341,6 +343,7 @@ tr.timesTable:nth-child(odd) td {
 	display: block;
 	border-radius: 3px;
 }
+
 .title.big {
 	background-image: -moz-linear-gradient(top, #445577 0%, #F9F9F9 15%, #445577 100%);
 	background-image: -webkit-linear-gradient(top, #445577 0%, #FFFFFF 10%, #445577 94%);
