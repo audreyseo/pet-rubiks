@@ -1,7 +1,7 @@
 /**
  * http://usejsdoc.org/
  */
-var app = angular.module('myApp', ['ngCookies', 'ngSanitize']);
+var app = angular.module('myApp', ['ngCookies', 'ngSanitize', 'ollCaseContent', 'flashCards', 'cubeScrambler']);
 
 app.config(function($cookiesProvider) {
 		var date = new Date();

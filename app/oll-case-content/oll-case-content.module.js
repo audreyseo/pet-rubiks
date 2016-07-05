@@ -1,7 +1,7 @@
 /**
  * http://usejsdoc.org/
  */
-var caseModule = angular.module('oll-case-content', ['cases', 'hiddenRowsY', 'cookieStrings', 'flashCards', '$cookies', 'orderByFilter', 'filterFilter']);
+var caseModule = angular.module('ollCaseContent', ['cases', 'hiddenRowsY', 'cookieStrings', 'flashCards', '$cookies', 'orderByFilter', 'filterFilter']);
 
 
 caseModule.controller('ContentController', ['$scope', 'cases', 'hiddenRowsY', 'cookieStrings', 'flashCardData', '$cookies',  'orderByFilter', 'filterFilter', function($scope, cases, hiddenRows, cookieString, flashData, $cookies, orderBy, filterFilter) {
