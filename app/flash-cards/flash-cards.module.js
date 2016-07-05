@@ -3,9 +3,7 @@
  */
 
 
-var cardModule = angular.module('myApp');
-
-cardModule.factory('flashCardData', ['cookieStrings', '$cookies', 'cookieData', function(cookieStringData, $cookies, cookieData) {
+angular.module('myApp').factory('flashCardData', ['cookieStrings', '$cookies', 'cookieData', function(cookieStringData, $cookies, cookieData) {
 	var factory = {data: cookieData, cookies: cookieStringData, cards: {}};
 //	angular.copy(cookieData, factory.data);
 	
@@ -32,11 +30,6 @@ cardModule.factory('flashCardData', ['cookieStrings', '$cookies', 'cookieData', 
 			factory.data.cards.maxNumber = parseInt(factory.data.cards.maxNumber);
 			$cookies.putObject(factory.cookies.cards, factory.data.cards);
 		}
-//		for (var i in factory.data.cardPriorities) {
-//			if (angular.isString(factory.data.cardPriorities[i])) {
-//				factory.data.cardPriorities[i] = parseInt(factory.data.cardPriorities[i]);
-//			}
-//		}
 	};
 	
 	factory.isPracticing = function(value) {

@@ -1,10 +1,7 @@
 /**
  * http://usejsdoc.org/
  */
-var caseModule = angular.module('myApp');
-
-
-caseModule.controller('ContentController', ['$scope', 'cases', 'hiddenRowsY', 'cookieStrings', 'flashCardData', '$cookies',  'orderByFilter', 'filterFilter', function($scope, cases, hiddenRows, cookieString, flashData, $cookies, orderBy, filterFilter) {
+angular.module('myApp').controller('ContentController', ['$scope', 'cases', 'hiddenRowsY', 'cookieStrings', 'flashCardData', '$cookies',  'orderByFilter', 'filterFilter', function($scope, cases, hiddenRows, cookieString, flashData, $cookies, orderBy, filterFilter) {
 
 	$scope.cases = cases;
 	$scope.cookieString = cookieString;
@@ -22,8 +19,9 @@ caseModule.controller('ContentController', ['$scope', 'cases', 'hiddenRowsY', 'c
 	$scope.cardOptions = flashData.data.cardOptions;
 	$scope.cardPriorities = flashData.data.cardPriorities;
 	$scope.cards = flashData.data.cards;
+	$scope.useCookieInfo = useCookieInfo();
 	
-	$scope.useCookieInfo = function() {
+	function useCookieInfo() {
 		// Content, Info
 		$scope.hiddenRowsData();
 		$scope.hiddenColsData();
