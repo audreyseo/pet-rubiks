@@ -1,7 +1,7 @@
 /**
  * http://usejsdoc.org/
  */
-var app = angular.module('myApp', ['ngCookies', 'ngSanitize', 'ollCaseContent', 'flashCards', 'cubeScrambler']);
+var app = angular.module('myApp', ['ngCookies', 'ngSanitize']);
 
 app.config(function($cookiesProvider) {
 		var date = new Date();
@@ -84,6 +84,7 @@ app.value('cookieData', {
 			practiceCards: [],
 			cardPriorities: {},
 			cardOptions: {},
+			cards: {maxNumber: 0, options: []},
 			practiceButton: "Select cases to practice"
 	});
 app.value('cookieDataTypes', {

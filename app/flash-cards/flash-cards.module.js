@@ -3,10 +3,11 @@
  */
 
 
-var module = angular.module('flashCards', ['cookieStrings', '$cookies', 'cookieData']);
+var cardModule = angular.module('myApp');
 
-module.factory('flashCardData', ['cookieStrings', '$cookies', 'cookieData', function(cookieStringData, $cookies, cookieData) {
+cardModule.factory('flashCardData', ['cookieStrings', '$cookies', 'cookieData', function(cookieStringData, $cookies, cookieData) {
 	var factory = {data: cookieData, cookies: cookieStringData, cards: {}};
+//	angular.copy(cookieData, factory.data);
 	
 	factory.initialize = function() {
 		for (var ind in factory.data) {
@@ -15,6 +16,7 @@ module.factory('flashCardData', ['cookieStrings', '$cookies', 'cookieData', func
 				 factory.data[ind] = $cookies.getObject(factory.cookies[ind]);
 				} catch(e) {
 					factory.data[ind] = cookieData[ind];
+					console.log(angular.toJson(cookieData));
 					$cookies.putObject(factory.cookies[ind], factory.data[ind]);
 				}
 				console.log(ind + ": " + angular.toJson(factory.data[ind]));
@@ -30,6 +32,11 @@ module.factory('flashCardData', ['cookieStrings', '$cookies', 'cookieData', func
 			factory.data.cards.maxNumber = parseInt(factory.data.cards.maxNumber);
 			$cookies.putObject(factory.cookies.cards, factory.data.cards);
 		}
+//		for (var i in factory.data.cardPriorities) {
+//			if (angular.isString(factory.data.cardPriorities[i])) {
+//				factory.data.cardPriorities[i] = parseInt(factory.data.cardPriorities[i]);
+//			}
+//		}
 	};
 	
 	factory.isPracticing = function(value) {
@@ -131,7 +138,7 @@ module.factory('flashCardData', ['cookieStrings', '$cookies', 'cookieData', func
 		factory.setAlgorithmOption(caseCode, undefined);
 	}
 	
-	factory.saveAlgorithmOptions = function(newValue) {
+	factory.saveCardOptions = function(newValue) {
 		$cookies.putObject(factory.cookies.cardOptions, newValue);
 	}
 	

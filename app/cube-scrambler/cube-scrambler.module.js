@@ -2,9 +2,9 @@
  * http://usejsdoc.org/
  */
 
-var cubeModule = angular.module('cubeScrambler', ['hiddenRowsY']);
+var cubeModule = angular.module('myApp');
 
-module.controller('cubeScrambler', ['$scope', 'hiddenRowsY', function($scope, hiddenRows) {
+cubeModule.controller('cubeScrambler', ['$scope', 'hiddenRowsY', function($scope, hiddenRows) {
 	$scope.code333 = [
 	          		    [
 	          		      "R", "R'", "R2"

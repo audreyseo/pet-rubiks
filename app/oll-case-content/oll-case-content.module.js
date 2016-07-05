@@ -1,7 +1,7 @@
 /**
  * http://usejsdoc.org/
  */
-var caseModule = angular.module('ollCaseContent', ['cases', 'hiddenRowsY', 'cookieStrings', 'flashCards', '$cookies', 'orderByFilter', 'filterFilter']);
+var caseModule = angular.module('myApp');
 
 
 caseModule.controller('ContentController', ['$scope', 'cases', 'hiddenRowsY', 'cookieStrings', 'flashCardData', '$cookies',  'orderByFilter', 'filterFilter', function($scope, cases, hiddenRows, cookieString, flashData, $cookies, orderBy, filterFilter) {
@@ -36,6 +36,7 @@ caseModule.controller('ContentController', ['$scope', 'cases', 'hiddenRowsY', 'c
 		flashData.initialize();
 		
 		console.log("Practicing: " + angular.toJson(flashData.data.practicing));
+		console.log("New Practicing: " + angular.toJson($scope.practicing));
 		
 		$scope.practicing = flashData.data.practicing;
 		$scope.practiceCards = flashData.data.practiceCards;
@@ -50,18 +51,21 @@ caseModule.controller('ContentController', ['$scope', 'cases', 'hiddenRowsY', 'c
 	};
 	
 	$scope.$watchCollection('practiceCards', function(newValue, oldValue) {
-		$cookies.putObject($scope.cookieString.practiceCards, newValue);
+//		$cookies.putObject($scope.cookieString.practiceCards, newValue);
+		flashData.savePracticeCards(newValue);
 	});
 	
 	$scope.$watchCollection('cardPriorities', function(newValue, oldValue){
 		for (var i = 0; i < $scope.practiceCards.length; i++) {
 			for (var ind in newValue) {
 				if (ind == $scope.practiceCards[i].code) {
-					$scope.practiceCards[i].priority = newValue[ind];
+					$scope.practiceCards[i].priority = parseInt(newValue[ind]);
 				}
 			}
 		}
-		$cookies.putObject($scope.cookieString.cardPriorities, newValue);
+		flashData.saveCardPriorities(newValue);
+//		console.log(angular.toJson(newValue));
+//		$cookies.putObject($scope.cookieString.cardPriorities, newValue);
 	});
 	
 	$scope.$watchCollection('cardOptions', function(newValue, oldValue){
@@ -72,7 +76,8 @@ caseModule.controller('ContentController', ['$scope', 'cases', 'hiddenRowsY', 'c
 				}
 			}
 		}
-		$cookies.putObject($scope.cookieString.cardOptions, newValue);
+//		$cookies.putObject($scope.cookieString.cardOptions, newValue);
+		flashData.saveCardOptions(newValue);
 	});
 
 	
@@ -114,7 +119,8 @@ caseModule.controller('ContentController', ['$scope', 'cases', 'hiddenRowsY', 'c
 				}
 			}
 		}
-		$cookies.putObject($scope.cookieString.practicing, newValue);
+		flashData.savePracticing(newValue);
+//		$cookies.putObject($scope.cookieString.practicing, newValue);
 		
 //		var str1 = "";
 //		for (var i = 0; i < $scope.practiceCards.length; i++) {
@@ -279,8 +285,11 @@ caseModule.controller('ContentController', ['$scope', 'cases', 'hiddenRowsY', 'c
 	};
 	
 	$scope.pickAnAlgorithm = function(myCase) {
+//		console.log(myCase.code + ": " + angular.isDefined($scope.cardPriorities[myCase.code]) + "  " + $scope.cardPriorities[myCase.code]);
+//		console.log(myCase.code + " " + $scope.cardPriorities[myCase.code] + " " + angular.toJson(myCase) + " " + myCase.solve2.length > 0);		
 		if (angular.isDefined($scope.cardPriorities[myCase.code])) {
-			return($scope.showing.algorithmCol && angular.isNumber($scope.cardPriorities[myCase.code]) && myCase.solve2.length > 0);
+			console.log(myCase.code + " :   " +  myCase.solve2.length + " : " + (myCase.solve2.length > 0) + " ; " + $scope.cardPriorities[myCase.code] + " : " + (angular.isString($scope.cardPriorities[myCase.code])));
+			return($scope.showing.algorithmCol && angular.isNumber(parseInt($scope.cardPriorities[myCase.code])) && myCase.solve2.length > 0);
 		} else {
 			return(false);
 		}

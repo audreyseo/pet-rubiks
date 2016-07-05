@@ -33,6 +33,7 @@
 								<th ng-if=showing.editCol>Know it?</th>
 								<th ng-if=showing.flashCardCol>Select Cases for Flashcards</th>
 								<th ng-if=showing.priorityCol>Select Priority</th>
+								<th>
 								<th ng-if=showing.algorithmCol>Select Preferred Algorithm</th>
 							</tr>
 							<tr id="editRow" ng-show=showing.editRow ng-cloak>
@@ -58,12 +59,11 @@
 								</td>
 								<td ng-if=showing.flashCardCol><input id="{{case.code}}" type="checkbox" ng-model='practicing[case.code]'></td>
 								<td ng-if=showing.priorityCol>
-									<select ng-show='practicing[case.code]' class="priorities" ng-model='cardPriorities[case.code]'>
-										<option></option>
-										<option ng-repeat="val in cards.options" value="{{val}}">{{val}}</option>
+									<select ng-show='practicing[case.code]' class="priorities" ng-model=cardPriorities[case.code]>
+										<option ng-repeat="val in cards.options" value="{{val}}">{{val | number:0}}</option>
 									</select>
 								</td>
-								<td ng-if=pickAnAlgorithm(case)>
+								<td ng-if="pickAnAlgorithm(case)">
 									<select ng-model='cardOptions[case.code]'>
 										<option></option>
 										<option>1</option>
@@ -173,7 +173,7 @@
 		<script type="text/javascript" src="/app/app.module.js"></script>
 		<script type="text/javascript" src="/app/cube-scrambler/cube-scrambler.module.js"></script>
 		<script type="text/javascript" src="/app/flash-cards/flash-cards.module.js"></script>
-		<script type="text/javascript" src="/app/oll-case-content.module.js"></script>
+		<script type="text/javascript" src="/app/oll-case-content/oll-case-content.module.js"></script>
 		
 		<script type="text/javascript" src="/js/animation.js"></script>
 		<!--<script type="text/javascript" src="js/controllers.js"></script>
