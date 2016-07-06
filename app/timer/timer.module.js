@@ -4,7 +4,7 @@
 
 angular
 	.module('myApp')
-	.controller('timerController',  TimerController);
+	.controller('TimerController',  TimerController);
 
 TimerController.$inject = ['$scope', '$interval', '$cookies', '$log'];
 
@@ -30,12 +30,13 @@ function TimerController($scope, $interval, $cookies, $log) {
     vm.stop = stop;
     vm.time = {string: "00:00.00"};
     vm.update = update;
+    vm.watchRecords = watchRecords;
     
     vm.getCookies();
     vm.reset();
     
-    function deleteRecord(event, index) {
-    	if (index < vm.records.length) {
+    function deleteRecord(index) {
+    	if (index < vm.records.length && index >= 0) {
     		vm.records.splice(index, 1);
     	}
     }
@@ -131,11 +132,13 @@ function TimerController($scope, $interval, $cookies, $log) {
     
     $scope.$watchCollection(
     		"vm.records",
-    		function(newValue, oldValue) {
-        	$log.info("Filed!");
-        	$log.info("Our records: \n" + angular.toJson(vm.records));
-        	$cookies.putObject(vm.recordsCookie, newValue);
-        	$log.info("Cookie records: \n" + angular.toJson($cookies.getObject(vm.recordsCookie)));
-    		}
+    		vm.watchRecords
     );
+    
+    function watchRecords(newValue, oldValue) {
+    	$log.info("Filed!");
+    	$log.info("Our records: \n" + angular.toJson(vm.records));
+    	$cookies.putObject(vm.recordsCookie, vm.records);
+    	$log.info("Cookie records: \n" + angular.toJson($cookies.getObject(vm.recordsCookie)));
+    }
 }

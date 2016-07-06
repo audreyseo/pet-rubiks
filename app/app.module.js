@@ -19,6 +19,6 @@ app.directive('ollRow', function() {
 
 
 
-app.controller("infoController", function($scope) {
+app.controller("InfoController", function($scope) {
 		
 	});
