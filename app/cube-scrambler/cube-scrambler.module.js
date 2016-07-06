@@ -30,15 +30,10 @@ function CubeScrambler() {
 	          		  ];
 	vm.scramble = scramble;
 	vm.randomXValue = randomXValue;
+	
 	vm.scramble();
 	
-	function randomXValue(indexes) {
-		if (indexes.length > 0) {
-			
-		} else {
-			return Math.floor(Math.random() * vm.code333.length);
-		}
-	}
+	
 	
 	function scramble() {
 		var indexX = [];

@@ -1,19 +1,20 @@
 /**
  * http://usejsdoc.org/
  */
-angular.module('myApp').controller('ContentController', ['$scope', 'cases', 'hiddenRowsY', 'cookieStrings', 'flashCardData', '$cookies',  'orderByFilter', 'filterFilter', function($scope, cases, hiddenRows, cookieString, flashData, $cookies, orderBy, filterFilter) {
+angular
+	.module('myApp')
+	.controller('ContentController', ContentController);
+
+ContentController.$inject(['$scope', 'cases', 'hiddenRowsY', 'cookieStrings', 'flashCardData', '$cookies',  'orderByFilter', 'filterFilter']);
+
+function ContentController($scope, cases, hiddenRows, cookieString, flashData, $cookies, orderBy, filterFilter) {
+	
 
 	$scope.cases = cases;
 	$scope.cookieString = cookieString;
 	$scope.hiddenRows = hiddenRows;
 	
 	// Flashcard stuff - dependent on the content
-//	$scope.practicing = {};
-//	$scope.practiceCards = [];
-//	$scope.cardPriorities = {};
-//	$scope.cardOptions = {};
-//	$scope.practiceButton = "Select cases to practice";	
-	
 	$scope.practicing = flashData.data.practicing;
 	$scope.practiceCards = flashData.data.practiceCards;
 	$scope.cardOptions = flashData.data.cardOptions;
@@ -27,6 +28,29 @@ angular.module('myApp').controller('ContentController', ['$scope', 'cases', 'hid
 		$scope.hiddenColsData();
 		$scope.flashCardsData();
 	};
+	
+	function returnAddress(value) {
+		var string = "img/" + value + ".png";
+		console.log(string);
+		return string;
+	}
+
+	function declassify(event) {
+		var str = $(event.target).attr("id");
+//		str = str.substring(1, str.length);
+		return str;
+	}
+
+	function addOptions(max) {
+		// most likely obsolete
+		var priorities = $("select .priorities");
+		priorities.remove();
+		priorities.each(function() {
+			for (var i = 1; i <= max; i++) {
+				this.append("<option>" + i + "</option>");
+			}
+		})
+	}
 	
 	$scope.flashCardsData = function() {
 		console.log("Practicing: " + angular.toJson($scope.practicing));
@@ -403,4 +427,4 @@ angular.module('myApp').controller('ContentController', ['$scope', 'cases', 'hid
 //		console.log($scope.filterString);
 		$scope.filteredCases = filterFilter($scope.cases, $scope.filterString);
 	};
-}]);
+};
