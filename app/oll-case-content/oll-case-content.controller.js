@@ -308,7 +308,7 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 	});
 	
 	$scope.$watchCollection('cardPriorities', function(newValue, oldValue){
-		for (var i = 0; i < $scope.practiceCards.length; i++) {
+		for (var i = 0; i < vm.practiceCards.length; i++) {
 			for (var ind in newValue) {
 				if (ind == $scope.practiceCards[i].code) {
 					$scope.practiceCards[i].priority = parseInt(newValue[ind]);
@@ -319,7 +319,7 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 	});
 	
 	$scope.$watchCollection('cardOptions', function(newValue, oldValue){
-		for (var i = 0; i < $scope.practiceCards.length; i++) {
+		for (var i = 0; i < vm.practiceCards.length; i++) {
 			for (var ind in newValue) {
 				if (ind == $scope.practiceCards[i].code) {
 					$scope.practiceCards[i].option = newValue[ind];
@@ -330,30 +330,30 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 	});
 
 	
-	$scope.$watchCollection('practicing', function(newValue, oldValue) {
+	$scope.$watchCollection('vm.practicing', function(newValue, oldValue) {
 		// Content, flashcards (mostly flashcards, but heavily dependent on cases)
 		
-		for (var i = 0; i < $scope.cases.length; i++) {
-			if (newValue[$scope.cases[i].code] !== undefined) {
-				if (newValue[$scope.cases[i].code]) {
-					if ($scope.practiceCards.length == 0) {
+		for (var i = 0; i < vm.cases.length; i++) {
+			if (newValue[vm.cases[i].code] !== undefined) {
+				if (newValue[vm.cases[i].code]) {
+					if (vm.practiceCards.length == 0) {
 						$scope.practiceCards.push({});
-						angular.copy($scope.cases[i], $scope.practiceCards[$scope.practiceCards.length - 1]);
-						$scope.practiceCards[$scope.practiceCards.length - 1].priority = 0;
+						angular.copy(vm.cases[i], $scope.practiceCards[vm.practiceCards.length - 1]);
+						$scope.practiceCards[vm.practiceCards.length - 1].priority = 0;
 					} else {
-						for (var j = 0; j < $scope.practiceCards.length; j++) {
-							if ($scope.practiceCards[j].code == $scope.cases[i].code) {
+						for (var j = 0; j < vm.practiceCards.length; j++) {
+							if ($scope.practiceCards[j].code == vm.cases[i].code) {
 								break;
-							} else if (j + 1 == $scope.practiceCards.length) {
+							} else if (j + 1 == vm.practiceCards.length) {
 								$scope.practiceCards.push({});
-								angular.copy($scope.cases[i], $scope.practiceCards[$scope.practiceCards.length - 1]);
-								$scope.practiceCards[$scope.practiceCards.length - 1].priority = 0;
+								angular.copy(vm.cases[i], $scope.practiceCards[vm.practiceCards.length - 1]);
+								$scope.practiceCards[vm.practiceCards.length - 1].priority = 0;
 							}
 						}
 					}
 				} else {
-					for (var j = 0; j < $scope.practiceCards.length; j++) {
-						if ($scope.practiceCards[j].code == $scope.cases[i].code) {
+					for (var j = 0; j < vm.practiceCards.length; j++) {
+						if ($scope.practiceCards[j].code == vm.cases[i].code) {
 							$scope.practiceCards.splice(j, 1);
 							break;
 						}
@@ -365,7 +365,7 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 	});
 	
 	$scope.$watchCollection('cards', function(newValue, oldValue) {
-		$cookies.putObject($scope.cookieString.cards, newValue);
+		$cookies.putObject(vm.cookieString.cards, newValue);
 
 		if (newValue.maxNumber !== oldValue.maxNumber) {
 			$scope.addPriorityOptions();
@@ -387,13 +387,13 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 	
 	$scope.$watchCollection('hiddenRows', function(newValue, oldValue) {
 		// Content, floashcards, controls, cookies
-		$cookies.putObject($scope.cookieString.hiddenRows, newValue);
-		$scope.countCases();
+		$cookies.putObject(vm.cookieString.hiddenRows, newValue);
+		vm.countCases();
 	});
 	
 	
 	$scope.$watchCollection('hidden', function(newValue, oldValue) {
 		// Cookies, content
-		$cookies.putObject($scope.cookieString.hiddenCols, newValue);
+		$cookies.putObject(vm.cookieString.hiddenCols, newValue);
 	});
 };

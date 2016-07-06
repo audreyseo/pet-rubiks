@@ -30,12 +30,17 @@ angular
   		for (var i in factory.data.practiceCards) {
   			factory.cards[factory.data.practiceCards[i].code] = factory.data.practiceCards[i];
   		}
-  		
-  		if (!angular.isNumber(factory.data.cards.maxNumber)) {
-  //		$scope.cards = {maxNumber: 0, options: []};
-  			factory.data.cards.maxNumber = parseInt(factory.data.cards.maxNumber);
+  		try {
+  			if (!angular.isNumber(factory.data.cards.maxNumber)) {
+  			  //		$scope.cards = {maxNumber: 0, options: []};
+  			  			factory.data.cards.maxNumber = parseInt(factory.data.cards.maxNumber);
+  			  			$cookies.putObject(factory.cookies.cards, factory.data.cards);
+  			  		}
+  		} catch (e) {
+  			factory.data.cards = {maxNumber: 0, options: []};
   			$cookies.putObject(factory.cookies.cards, factory.data.cards);
   		}
+  		
   	};
   	
   	factory.isPracticing = function(value) {
