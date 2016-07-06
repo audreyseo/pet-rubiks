@@ -118,8 +118,8 @@
 											<th>Del</th>
 										</tr>
 										<tr ng--repeat="record in tc.records track by $index" class="timesTable">
-											<td>{{$index + 1}}</td>
-											<td>{{record}}</td>
+											<td>{{record.index}}</td>
+											<td>{{record.time}}</td>
 											<td><input type="button" value="x" ng-click="tc.deleteRecord($event, $index)"></td>
 										</tr>
 									</table>
@@ -182,7 +182,7 @@
 		<script type="text/javascript" src="/app/cube-scrambler/cube-scrambler.module.js"></script>
 		<script type="text/javascript" src="/app/timer/timer.module.js"></script>
 		<script type="text/javascript" src="/app/flash-cards/flash-cards.module.js"></script>
-		<script type="text/javascript" src="/app/oll-case-content/oll-case-content.module.js"></script>
+		<script type="text/javascript" src="/app/oll-case-content/oll-case-content.controller.js"></script>
 		
 		<script type="text/javascript" src="/js/animation.js"></script>
 		<!--<script type="text/javascript" src="js/controllers.js"></script>

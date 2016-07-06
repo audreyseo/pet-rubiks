@@ -6,9 +6,9 @@ angular
 	.module('myApp')
 	.controller('timerController',  TimerController);
 
-TimerController.$inject = ['$scope', '$interval', '$cookies'];
+TimerController.$inject = ['$scope', '$interval', '$cookies', '$log'];
 
-function TimerController($scope, $interval, $cookies) {
+function TimerController($scope, $interval, $cookies, $log) {
 		var vm = this;
 		
     vm.clock = 0;
@@ -54,12 +54,15 @@ function TimerController($scope, $interval, $cookies) {
     function getCookies() {
     	try {
     		vm.records = $cookies.getObject(vm.recordsCookie);
+    		console.log("Defined?: " + (typeof vm.records));
+    		console.log("Records: " + angular.toJson(vm.records));
     		if (angular.isUndefined(vm.records)) {
+    			console.log("Caught #1");
     			vm.records = [];
     			$cookies.putObject(vm.recordsCookie, vm.records);
     		}
     	} catch(e) {
-//    		console.log("caught!");
+    		console.log("Caught #2");
     		vm.records = [];
     		$cookies.putObject(vm.recordsCookie, vm.records);
     	}
@@ -81,19 +84,19 @@ function TimerController($scope, $interval, $cookies) {
     function returnNames() {
     	if (vm.state.running) {
     		return "Stop" ;
-    	} else {
-    		return "Start";
     	}
+    		return "Start";
+    	
     }
     
     function returnObjects() {
     	if (vm.state.running) {
     		console.log('please help me 1 ' + vm.time.string);
     		return vm.stop();
-    	} else {
+    	}
     		console.log('please help me 3 ' + vm.time.string);
     		return vm.start();
-    	}
+    	
     }
     
     
@@ -110,7 +113,10 @@ function TimerController($scope, $interval, $cookies) {
     function stop() {
     	vm.state.running = false;
     	vm.state.stopped = true;
-    	vm.records.push(vm.time.string);
+    	var timeRecordsObject = {time: "", index: (vm.records.length + 1)};
+    	timeRecordsObject.time = vm.time.string;
+    	vm.time.string = "";
+    	vm.records.push(timeRecordsObject);
     	$interval.cancel(vm.interval);
     	vm.interval = undefined;
     	vm.render();
@@ -123,18 +129,13 @@ function TimerController($scope, $interval, $cookies) {
 //    	return vm.display;
     }
     
-    $scope.$watchCollection('vm.time', function(newValue, oldValue) {
-//    	console.log("scope fired");
-    	if (angular.isDefined(newValue)) {
-    		console.log(angular.toJson(newValue));
-      	vm.displayTimeString = newValue.string;
-    	}
-    });
-    
-    $scope.$watchCollection('vm.records', function(newValue, oldValue) {
-//    	console.log("Filed!");
-//    	console.log("Cookie records: \n" + angular.toJson(newValue));
-    	$cookies.putObject(vm.recordsCookie, vm.records);
-//    	console.log("Cookie records: \n" + angular.toJson($cookies.getObject(vm.recordsCookie)));
-    });
+    $scope.$watchCollection(
+    		"vm.records",
+    		function(newValue, oldValue) {
+        	$log.info("Filed!");
+        	$log.info("Our records: \n" + angular.toJson(vm.records));
+        	$cookies.putObject(vm.recordsCookie, newValue);
+        	$log.info("Cookie records: \n" + angular.toJson($cookies.getObject(vm.recordsCookie)));
+    		}
+    );
 }
