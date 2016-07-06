@@ -385,16 +385,6 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 			}
 		}
 		flashData.savePracticing(newValue);
-//			$cookies.putObject($scope.cookieString.practicing, newValue);
-		
-//			var str1 = "";
-//			for (var i = 0; i < $scope.practiceCards.length; i++) {
-//				str1 = str1.concat(angular.toJson($scope.practiceCards[i]) + "  |  ");
-//			}
-//			str = str.substring(0, str.length - 3);
-//			str1 = str1.substring(0, str1.length - 3);
-//			console.log(str);
-//			console.log(str1);
 	});
 	
 	$scope.$watchCollection('cards', function(newValue, oldValue) {
