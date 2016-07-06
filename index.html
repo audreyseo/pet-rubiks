@@ -97,17 +97,17 @@
 				</div>
 			<div id="leftBar">
 				<div id="controls" ng-controller="infoController">
-					<div ng-controller="cubeScrambler">
+					<div ng-controller="cubeScrambler as cs">
 						<span class="title">Scramble</span>
-						<input id="scrambleButton" type="button" ng-click="scramble()" value="Click to Scramble"><br><br>
-						<div class="scrambleCodeDiv" >{{code}}</div>
+						<input id="scrambleButton" type="button" ng-click="cs.scramble()" value="Click to Scramble"><br><br>
+						<div class="scrambleCodeDiv" >{{cs.code}}</div>
 						<br><br>
 						<!--Some random text: <span>{{hiddenRows | json}}</span>-->
-						<div ng-controller="timerController" id="timerDiv">
+						<div ng-controller="timerController as tc" id="timerDiv">
 							<div id="timer">
 								<span class="title">Timer</span>
-								<span class="stopwatch" ng-bind-html="displayTimeString"></span><br>
-								<input type="button" id="timerButton" ng-click="returnObjects()" tabindex="1" ng-keyup="scramble()" value={{returnName()}}>
+								<span class="stopwatch">{{tc.time.string}}</span><br>
+								<input type="button" id="timerButton" ng-click="tc.returnObjects()" tabindex="1" value={{tc.returnNames()}}>
 							</div>
 							<div id="timesRecord">
 								<div id="timesforeground">
@@ -117,10 +117,10 @@
 											<th>Time</th>
 											<th>Del</th>
 										</tr>
-										<tr ng--repeat="record in records track by $index" class="timesTable">
+										<tr ng--repeat="record in tc.records track by $index" class="timesTable">
 											<td>{{$index + 1}}</td>
 											<td>{{record}}</td>
-											<td><input type="button" value="x" ng-click="deleteRecord($event, $index)"></td>
+											<td><input type="button" value="x" ng-click="tc.deleteRecord($event, $index)"></td>
 										</tr>
 									</table>
 								</div>
@@ -171,6 +171,14 @@
 		<script type="text/javascript" src="http://code.angularjs.org/1.4.12/angular-cookies.min.js"></script>
 		<script type="text/javascript" src="http://code.angularjs.org/1.4.12/angular-sanitize.min.js"></script>
 		<script type="text/javascript" src="/app/app.module.js"></script>
+		<script type="text/javascript" src="/app/cases.value.js"></script>
+		<script type="text/javascript" src="/app/app.config.js"></script>
+		<script type="text/javascript" src="/app/colorCodeAlgorithms.filter.js"></script>
+		<script type="text/javascript" src="/app/cookieData.value.js"></script>
+		<script type="text/javascript" src="/app/cookieDataTypes.value.js"></script>
+		<script type="text/javascript" src="/app/cookieStrings.value.js"></script>
+		<script type="text/javascript" src="/app/flashCard.directive.js"></script>
+		<script type="text/javascript" src="/app/hiddenRows.value.js"></script>
 		<script type="text/javascript" src="/app/cube-scrambler/cube-scrambler.module.js"></script>
 		<script type="text/javascript" src="/app/timer/timer.module.js"></script>
 		<script type="text/javascript" src="/app/flash-cards/flash-cards.module.js"></script>

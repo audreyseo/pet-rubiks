@@ -6,16 +6,15 @@ angular
 	.module('myApp')
 	.controller('timerController',  TimerController);
 
-TimerController.$inject['$interval', '$cookies'];
+TimerController.$inject = ['$scope', '$interval', '$cookies'];
 
-function TimerController($interval, $cookies) {
+function TimerController($scope, $interval, $cookies) {
 		var vm = this;
 		
-    vm.clock;
+    vm.clock = 0;
     vm.deleteRecord = deleteRecord;
     vm.delta = delta;
     vm.displayTimeString = "00:00.00";
-    vm.clock = 0;
     vm.getCookies = getCookies;
     vm.interval = null;
     vm.offset;
@@ -25,7 +24,7 @@ function TimerController($interval, $cookies) {
     vm.render = render;
     vm.reset = reset;
     vm.returnObjects = returnObjects;
-    vm.returnName = returnName;
+    vm.returnNames = returnNames;
     vm.start = start;
     vm.state = {running: false, stopped: false};
     vm.stop = stop;
@@ -57,7 +56,7 @@ function TimerController($interval, $cookies) {
     		vm.records = $cookies.getObject(vm.recordsCookie);
     		if (angular.isUndefined(vm.records)) {
     			vm.records = [];
-    			vm.putObject(vm.recordsCookie, vm.records);
+    			$cookies.putObject(vm.recordsCookie, vm.records);
     		}
     	} catch(e) {
 //    		console.log("caught!");
@@ -70,7 +69,7 @@ function TimerController($interval, $cookies) {
     	var minutes = ((vm.clock < 1000 * 60) ? "00" : ((vm.clock < 10 * 60 * 1000) ? "0" + Math.floor(vm.clock / 60000) : Math.floor(vm.clock / 60000)));
     	var seconds = (((vm.clock % 60000) < 1000) ? ":00" : (((vm.clock % 60000) < 1000 * 10) ? ":0" + Math.floor((vm.clock % 60000) / 1000) : ":" + Math.floor((vm.clock % 60000) / 1000)));
     	var milliseconds = (((vm.clock % 1000) < 10) ? ".00" + parseInt(vm.clock % 1000) : ((vm.clock % 1000) < 100) ? ".0" + (vm.clock % 1000) : "." + (vm.clock % 1000));
-    	vm.time.string = minutes + seconds + milliseconds;
+    	vm.time['string'] = minutes + seconds + milliseconds;
     }
     
     function reset() {
@@ -79,21 +78,21 @@ function TimerController($interval, $cookies) {
     	vm.render();
     }
     
-    function returnName() {
+    function returnNames() {
     	if (vm.state.running) {
-    		return("Stop");
+    		return "Stop" ;
     	} else {
-    		return("Start");
+    		return "Start";
     	}
     }
     
     function returnObjects() {
     	if (vm.state.running) {
     		console.log('please help me 1 ' + vm.time.string);
-    		vm.stop();
+    		return vm.stop();
     	} else {
     		console.log('please help me 3 ' + vm.time.string);
-    		vm.start();
+    		return vm.start();
     	}
     }
     
@@ -105,16 +104,17 @@ function TimerController($interval, $cookies) {
     		vm.state.stopped = false;
     	  vm.offset   = Date.now();
     	  vm.interval = $interval(vm.update, vm.options.delay);
+    	  vm.render();
     }
     
     function stop() {
-    		vm.state.running = false;
-    		vm.state.stopped = true;
-    		vm.records.push(vm.time.string);
-    	  $interval.cancel(vm.interval);
+    	vm.state.running = false;
+    	vm.state.stopped = true;
+    	vm.records.push(vm.time.string);
+    	$interval.cancel(vm.interval);
+    	vm.interval = undefined;
     	vm.render();
     }
-    
     
     
     function update() {
@@ -123,14 +123,18 @@ function TimerController($interval, $cookies) {
 //    	return vm.display;
     }
     
-    vm.$watchCollection('time', function(newValue, oldValue) {
+    $scope.$watchCollection('vm.time', function(newValue, oldValue) {
 //    	console.log("scope fired");
-    	vm.displayTimeString = vm.time.string;
+    	if (angular.isDefined(newValue)) {
+    		console.log(angular.toJson(newValue));
+      	vm.displayTimeString = newValue.string;
+    	}
     });
     
-    vm.$watchCollection('records', function(newValue, oldValue) {
-    	console.log("Filed!");
-    	$cookies.putObject(vm.recordsCookie, newValue);
-    	console.log("Cookie records: \n" + angular.toJson($cookies.getObject(vm.recordsCookie)));
+    $scope.$watchCollection('vm.records', function(newValue, oldValue) {
+//    	console.log("Filed!");
+//    	console.log("Cookie records: \n" + angular.toJson(newValue));
+    	$cookies.putObject(vm.recordsCookie, vm.records);
+//    	console.log("Cookie records: \n" + angular.toJson($cookies.getObject(vm.recordsCookie)));
     });
 }

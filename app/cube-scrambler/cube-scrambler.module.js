@@ -29,7 +29,6 @@ function CubeScrambler() {
 	          		    ]
 	          		  ];
 	vm.scramble = scramble;
-	vm.randomXValue = randomXValue;
 	
 	vm.scramble();
 	

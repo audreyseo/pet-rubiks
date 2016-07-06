@@ -5,7 +5,7 @@ angular
 	.module('myApp')
 	.controller('ContentController', ContentController);
 
-ContentController.$inject(['$scope', 'cases', 'hiddenRowsY', 'cookieStrings', 'flashCardData', '$cookies',  'orderByFilter', 'filterFilter']);
+ContentController.$inject = ['$scope', 'cases', 'hiddenRowsY', 'cookieStrings', 'flashCardData', '$cookies',  'orderByFilter', 'filterFilter'];
 
 function ContentController($scope, cases, hiddenRows, cookieString, flashData, $cookies, orderBy, filterFilter) {
 	
@@ -20,7 +20,7 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 	$scope.cardOptions = flashData.data.cardOptions;
 	$scope.cardPriorities = flashData.data.cardPriorities;
 	$scope.cards = flashData.data.cards;
-	$scope.useCookieInfo = useCookieInfo();
+	$scope.useCookieInfo = useCookieInfo;
 	
 	function useCookieInfo() {
 		// Content, Info
@@ -53,12 +53,12 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 	}
 	
 	$scope.flashCardsData = function() {
-		console.log("Practicing: " + angular.toJson($scope.practicing));
+//		console.log("Practicing: " + angular.toJson($scope.practicing));
 		
 		flashData.initialize();
 		
-		console.log("Practicing: " + angular.toJson(flashData.data.practicing));
-		console.log("New Practicing: " + angular.toJson($scope.practicing));
+//		console.log("Practicing: " + angular.toJson(flashData.data.practicing));
+//		console.log("New Practicing: " + angular.toJson($scope.practicing));
 		
 		$scope.practicing = flashData.data.practicing;
 		$scope.practiceCards = flashData.data.practiceCards;
@@ -66,7 +66,7 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 		$scope.cardPriorities = flashData.data.cardPriorities;
 		$scope.cards = flashData.data.cards;
 		
-		console.log("Practicing: " + angular.toJson($scope.practicing));
+//		console.log("Practicing: " + angular.toJson($scope.practicing));
 		
 		$scope.addPriorityOptions();
 //		addOptions($scope.cards.maxNumber);
@@ -310,7 +310,7 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 //		console.log(myCase.code + ": " + angular.isDefined($scope.cardPriorities[myCase.code]) + "  " + $scope.cardPriorities[myCase.code]);
 //		console.log(myCase.code + " " + $scope.cardPriorities[myCase.code] + " " + angular.toJson(myCase) + " " + myCase.solve2.length > 0);		
 		if (angular.isDefined($scope.cardPriorities[myCase.code])) {
-			console.log(myCase.code + " :   " +  myCase.solve2.length + " : " + (myCase.solve2.length > 0) + " ; " + $scope.cardPriorities[myCase.code] + " : " + (angular.isString($scope.cardPriorities[myCase.code])));
+//			console.log(myCase.code + " :   " +  myCase.solve2.length + " : " + (myCase.solve2.length > 0) + " ; " + $scope.cardPriorities[myCase.code] + " : " + (angular.isString($scope.cardPriorities[myCase.code])));
 			return($scope.showing.algorithmCol && angular.isNumber(parseInt($scope.cardPriorities[myCase.code])) && myCase.solve2.length > 0);
 		} else {
 			return(false);
