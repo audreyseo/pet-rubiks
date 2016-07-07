@@ -29,6 +29,12 @@ angular
   			}
   		}
   		
+  		if (angular.isUndefined(factory.data.practicing)) {
+  			factory.data.practicing = {};
+  			$cookies.putObject(factory.cookies.practicing, factory.data.practicing);
+  			console.log("Practicing: " + factory.data.practicing);
+  		}
+  		
   		for (var i in factory.data.practiceCards) {
   			factory.cards[factory.data.practiceCards[i].code] = factory.data.practiceCards[i];
   		}
@@ -46,8 +52,8 @@ angular
   	};
   	
   	factory.isPracticing = function(value) {
-  		if (factory.practicing[value] !== undefined) {
-  			return practicing[value];
+  		if (factory.data.practicing[value] !== undefined) {
+  			return factory.data.practicing[value];
   		}
   		return false;
   	};

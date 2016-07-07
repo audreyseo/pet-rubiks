@@ -258,7 +258,7 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 //			console.log("cardPriorities?: " + angular.toJson($scope.cardPriorities));
 			if (angular.isDefined($scope.cardPriorities)) {
 				if (angular.isDefined($scope.cardPriorities[myCase.code])) {
-					return($scope.showing.algorithmCol && angular.isNumber(parseInt($scope.cardPriorities[myCase.code])) && myCase.solve2.length > 0);
+					return($scope.showing.algorithmCol && $scope.practicing[myCase.code] && angular.isNumber(parseInt($scope.cardPriorities[myCase.code])) && myCase.solve2.length > 0);
 				} else {
 					return false;
 				}
@@ -345,11 +345,14 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 	});
 
 	
-	$scope.$watchCollection('$scope.practicing', function(newValue, oldValue) {
+	$scope.$watchCollection('practicing', function(newValue, oldValue) {
 		// Content, flashcards (mostly flashcards, but heavily dependent on cases)
 		
+		console.log(angular.toJson($scope.practicing));
+		
 		for (var i = 0; i < $scope.cases.length; i++) {
-			if ($scope.practicing[$scope.cases[i].code] !== undefined) {
+//			console.log($scope.cases[i].code);
+			if (angular.isDefined($scope.practicing[$scope.cases[i].code])) {
 				if ($scope.practicing[$scope.cases[i].code]) {
 					if ($scope.practiceCards.length == 0) {
 						$scope.practiceCards.push({});

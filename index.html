@@ -33,7 +33,6 @@
 								<th ng-if=showing.editCol>Know it?</th>
 								<th ng-if=showing.flashCardCol>Select Cases for Flashcards</th>
 								<th ng-if=showing.priorityCol>Select Priority</th>
-								<th>
 								<th ng-if=showing.algorithmCol>Select Preferred Algorithm</th>
 							</tr>
 							<tr id="editRow" ng-show=showing.editRow ng-cloak>
@@ -65,9 +64,9 @@
 								</td>
 								<td ng-if="pickAnAlgorithm(case)">
 									<select ng-model='cardOptions[case.code]'>
-										<option></option>
-										<option>1</option>
-										<option>2</option>
+										<option value=-1></option>
+										<option value=1>1</option>
+										<option value=2>2</option>
 									</select>
 								</td>
 							</tr>
@@ -120,104 +119,107 @@
 							<div id="timesRecord">
 								<div id="timesforeground">
 									<table id="timesTable">
-										<tr>
-											<th>#</th>
-											<th>Time</th>
-											<th>Del</th>
-										</tr>
-										<tr ng--repeat="record in records track by $index" class="timesTable">
-											<td>{{$index}}</td>
-											<td>{{record.time}}</td>
-											<td><input type="button" value="x" ng-click="deleteRecord($index)"></td>
-										</tr>
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>Time</th>
+												<th>Del</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng--repeat="record in records track by $index" class="timesTable">
+												<td>{{record.index}}</td>
+												<td>{{record.time}}</td>
+												<td><input type="button" value="x" ng-click="deleteRecord($index)"></td>
+											</tr>
+										</tbody>
 									</table>
 								</div>
 							</div>
+							<br>
+							<hr>
+							<br>
 							
 <!-- 							<ng-include src="included_stats.html"></ng-include>
 
- -->							<div class="myTimeStats">
-									<div class="timeStatsInner">
-<!-- 									Stats: {{myStats | json}}
- -->									<table class="timeStatsTable">
-											<!-- <tr ng--repeat="thisStat in stats.stats">
-												<td>MyStats: {{myStats.stats | json}}</td>
-												<td>{{thisStat | json}}: {{thisStat | millisToString}}</td>
-											</tr> -->
-											<tr>
-												<td class="left" align="left">
-													Best: {{myStats.stats.best | millisToString}}
-												</td>
-												<td class="right" align="right">
-													Worst: {{myStats.stats.worst | millisToString}}
-												</td>
-											</tr>
-											<tr>
-												<td class="left" align="left">
-													Mean: {{myStats.stats.mean | millisToString}}
-												</td>
-												<td class="right" align="right">
-													Median: {{myStats.stats.median | millisToString}}
-												</td>
-											</tr>
-											<tr>
-												<td class="left" align="left">
-													Q1: {{myStats.stats.q1 | millisToString}}
-												</td>
-												<td class="right" align="right">
-													Q3: {{myStats.stats.q3 | millisToString}}
-												</td>
-											</tr>
-											<tr>
-												<td class="left" align="left">
-													Last 5: {{myStats.stats.mean5 | millisToString}}
-												</td>
-												<td class="right" align="right">
-													3 of 5: {{myStats.stats.mean35 | millisToString}}
-												</td>
-											</tr>
-											<tr>
-												<td class="left" align="left">
-													Last 10: {{myStats.stats.mean10 | millisToString}}
-												</td>
-												<td class="right" align="right">
-													10 of 12: {{myStats.stats.mean1012 | millisToString}}
-												</td>
-											</tr>
-											<tr>
-												<td class="left" align="left">
-													Variance: {{myStats.stats.variance | millisToString}}
-												</td>
-												<td class="right" align="right">
-													StdDev: {{myStats.stats.stdDev | millisToString}}
-												</td>
-											</tr>
-											<tr>
-												<td class="left" align="left">
-													IQR: {{myStats.stats.iqr | millisToString}}
-												</td>
-												<td class="right" align="right">
-													Range: {{myStats.stats.range}}
-												</td>
-											</tr>
-									</table>
-								</div>
-								
-							</div><br>
+-->							<div class="myTimeStats">
+								<span class="title">Time Stats</span>
+								<div class="timeStatsInner">
+ 									<table class="timeStatsTable">
+										<tr>
+											<td class="left" align="left">
+												Best: {{myStats.stats.best | millisToString}}
+											</td>
+											<td class="right" align="right">
+												Worst: {{myStats.stats.worst | millisToString}}
+											</td>
+										</tr>
+										<tr>
+											<td class="left" align="left">
+												Mean: {{myStats.stats.mean | millisToString}}
+											</td>
+											<td class="right" align="right">
+												Median: {{myStats.stats.median | millisToString}}
+											</td>
+										</tr>
+										<tr>
+											<td class="left" align="left">
+												Q1: {{myStats.stats.q1 | millisToString}}
+											</td>
+											<td class="right" align="right">
+												Q3: {{myStats.stats.q3 | millisToString}}
+											</td>
+										</tr>
+										<tr>
+											<td class="left" align="left">
+												Last 5: {{myStats.stats.mean5 | millisToString}}
+											</td>
+											<td class="right" align="right">
+												3 of 5: {{myStats.stats.mean35 | millisToString}}
+											</td>
+										</tr>
+										<tr>
+											<td class="left" align="left">
+												Last 10: {{myStats.stats.mean10 | millisToString}}
+											</td>
+											<td class="right" align="right">
+												10 of 12: {{myStats.stats.mean1012 | millisToString}}
+											</td>
+										</tr>
+										<tr>
+											<td class="left" align="left">
+												Variance: {{myStats.stats.variance | millisToString}}
+											</td>
+											<td class="right" align="right">
+												StdDev: {{myStats.stats.stdDev | millisToString}}
+											</td>
+										</tr>
+										<tr>
+											<td class="left" align="left">
+												IQR: {{myStats.stats.iqr | millisToString}}
+											</td>
+											<td class="right" align="right">
+												Range: {{myStats.stats.range}}
+											</td>
+										</tr>
+								</table>
+							</div>
+							
+						</div>
 <!-- 							<br ng-repeat="stat in myStats.stats">
  -->						</div>
-						<br><br>
+						<br>
 						<hr>
 						<br>
 					</div>
 					
 					<span class="title">Controls</span>
 					<form id="controller">
-						<input type="radio" name="task" id="sort">
+						<!-- <input type="radio" name="task" id="sort">
 						<label for="sort">Sort</label><br>
 						<div class="controlBox" id="sortControl">
 							<label>Custom sorting: </label><input type="checkbox" ng-model="comparisons.custom">
-						</div><br>
+						</div><br> -->
 						<input type="radio" name="task" id="card">
 						<label for="card">Make Flashcards</label><br>
 						<div class="controlBox" id="cardControl">

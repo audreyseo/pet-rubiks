@@ -272,19 +272,19 @@ table#timesTable {
 	padding: 4px;
 }
 
-tr.timesTable:nth-child(even) {
+tr.timesTable:nth-child(odd) {
 	background-color: #728ca9;
 	color: white;
 }
 
-tr.timesTable:nth-child(even) td {
+tr.timesTable:nth-child(odd) td {
 	color: white;
 	padding: 0px;
 	padding-left: 4px;
 	padding-right: 4px;
 }
 
-tr.timesTable:nth-child(odd) {
+tr.timesTable:nth-child(even) {
 	background-color: white;
 }
 
@@ -298,6 +298,7 @@ table.timeStatsTable {
 	display: inline-flex;
 	position: relative;
 	text-align: left;
+	margin: 0px;
 /* 	justify-self: ;
  */}
 

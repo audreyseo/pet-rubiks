@@ -30,7 +30,7 @@ function colorCodeAlgorithms() {
 			}
 //			console.log("2: " + input + " | " + output);
 		} else {
-			output = "[N/A]"
+			output = ""
 		}
 		return(output);
 	};
