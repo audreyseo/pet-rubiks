@@ -18,4 +18,8 @@ describe("Controller: ContentController", function() {
 	it('Priority should be changed if the select box is changed', function(){
 		
 	});
+	
+	describe('$scope.addPriorityOptions', function() {});
+	descirbe('$scope.animationOpts', function() {});
+	
 });

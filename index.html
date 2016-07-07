@@ -97,17 +97,25 @@
 				</div>
 			<div id="leftBar">
 				<div id="controls" ng-controller="InfoController">
-					<div ng-controller="cubeScrambler as cs">
+					<div ng-controller="cubeScrambler">
 						<span class="title">Scramble</span>
-						<input id="scrambleButton" type="button" ng-click="cs.scramble()" value="Click to Scramble"><br><br>
-						<div class="scrambleCodeDiv" >{{cs.code}}</div>
+						<input id="scrambleButton" type="button" ng-click="scramble()" value="Click to Scramble"><br><br>
+						<div class="scrambleCodeDiv" >{{code}}</div>
 						<br><br>
 						<!--Some random text: <span>{{hiddenRows | json}}</span>-->
-						<div ng-controller="TimerController as tc" id="timerDiv">
+						<div ng-controller="TimerController" id="timerDiv">
+							<!-- <timestats times=myStats.stats>
+							</timestats> -->
+							
+							<!-- <ul>
+								<li ng--repeat="stat in myStats.stats">
+								{{stat | millisToString}}
+								</li>
+							</ul> -->
 							<div id="timer">
 								<span class="title">Timer</span>
-								<span class="stopwatch">{{tc.time.string}}</span><br>
-								<input type="button" id="timerButton" ng-click="tc.returnObjects()" tabindex="1" value={{tc.returnNames()}}>
+								<span class="stopwatch">{{time.string}}</span><br>
+								<input type="button" id="timerButton" ng-click="returnObjects()" tabindex="1" value={{returnNames()}}>
 							</div>
 							<div id="timesRecord">
 								<div id="timesforeground">
@@ -117,15 +125,87 @@
 											<th>Time</th>
 											<th>Del</th>
 										</tr>
-										<tr ng--repeat="record in tc.records track by $index" class="timesTable">
-											<td>{{record.index}}</td>
+										<tr ng--repeat="record in records track by $index" class="timesTable">
+											<td>{{$index}}</td>
 											<td>{{record.time}}</td>
-											<td><input type="button" value="x" ng-click="tc.deleteRecord($index)"></td>
+											<td><input type="button" value="x" ng-click="deleteRecord($index)"></td>
 										</tr>
 									</table>
 								</div>
 							</div>
-						</div>
+							
+<!-- 							<ng-include src="included_stats.html"></ng-include>
+
+ -->							<div class="myTimeStats">
+									<div class="timeStatsInner">
+<!-- 									Stats: {{myStats | json}}
+ -->									<table class="timeStatsTable">
+											<!-- <tr ng--repeat="thisStat in stats.stats">
+												<td>MyStats: {{myStats.stats | json}}</td>
+												<td>{{thisStat | json}}: {{thisStat | millisToString}}</td>
+											</tr> -->
+											<tr>
+												<td class="left" align="left">
+													Best: {{myStats.stats.best | millisToString}}
+												</td>
+												<td class="right" align="right">
+													Worst: {{myStats.stats.worst | millisToString}}
+												</td>
+											</tr>
+											<tr>
+												<td class="left" align="left">
+													Mean: {{myStats.stats.mean | millisToString}}
+												</td>
+												<td class="right" align="right">
+													Median: {{myStats.stats.median | millisToString}}
+												</td>
+											</tr>
+											<tr>
+												<td class="left" align="left">
+													Q1: {{myStats.stats.q1 | millisToString}}
+												</td>
+												<td class="right" align="right">
+													Q3: {{myStats.stats.q3 | millisToString}}
+												</td>
+											</tr>
+											<tr>
+												<td class="left" align="left">
+													Last 5: {{myStats.stats.mean5 | millisToString}}
+												</td>
+												<td class="right" align="right">
+													3 of 5: {{myStats.stats.mean35 | millisToString}}
+												</td>
+											</tr>
+											<tr>
+												<td class="left" align="left">
+													Last 10: {{myStats.stats.mean10 | millisToString}}
+												</td>
+												<td class="right" align="right">
+													10 of 12: {{myStats.stats.mean1012 | millisToString}}
+												</td>
+											</tr>
+											<tr>
+												<td class="left" align="left">
+													Variance: {{myStats.stats.variance | millisToString}}
+												</td>
+												<td class="right" align="right">
+													StdDev: {{myStats.stats.stdDev | millisToString}}
+												</td>
+											</tr>
+											<tr>
+												<td class="left" align="left">
+													IQR: {{myStats.stats.iqr | millisToString}}
+												</td>
+												<td class="right" align="right">
+													Range: {{myStats.stats.range}}
+												</td>
+											</tr>
+									</table>
+								</div>
+								
+							</div><br>
+<!-- 							<br ng-repeat="stat in myStats.stats">
+ -->						</div>
 						<br><br>
 						<hr>
 						<br>
@@ -179,6 +259,13 @@
 		<script type="text/javascript" src="/app/cookieStrings.value.js"></script>
 		<script type="text/javascript" src="/app/flashCard.directive.js"></script>
 		<script type="text/javascript" src="/app/hiddenRows.value.js"></script>
+		<script type="text/javascript" src="/app/timeConversion.factory.js"></script>
+		<script type="text/javascript" src="/app/stats.factory.js"></script>
+		<script type="text/javascript" src="/app/timesStatistics.filter.js"></script>
+		<script type="text/javascript" src="/app/timeStats.directive.js"></script>
+		
+		
+		
 		<script type="text/javascript" src="/app/cube-scrambler/cube-scrambler.module.js"></script>
 		<script type="text/javascript" src="/app/timer/timer.module.js"></script>
 		<script type="text/javascript" src="/app/flash-cards/flash-cards.module.js"></script>

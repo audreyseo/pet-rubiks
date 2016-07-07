@@ -349,8 +349,8 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 		// Content, flashcards (mostly flashcards, but heavily dependent on cases)
 		
 		for (var i = 0; i < $scope.cases.length; i++) {
-			if (newValue[$scope.cases[i].code] !== undefined) {
-				if (newValue[$scope.cases[i].code]) {
+			if ($scope.practicing[$scope.cases[i].code] !== undefined) {
+				if ($scope.practicing[$scope.cases[i].code]) {
 					if ($scope.practiceCards.length == 0) {
 						$scope.practiceCards.push({});
 						angular.copy($scope.cases[i], $scope.practiceCards[$scope.practiceCards.length - 1]);

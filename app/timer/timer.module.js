@@ -6,84 +6,91 @@ angular
 	.module('myApp')
 	.controller('TimerController',  TimerController);
 
-TimerController.$inject = ['$scope', '$interval', '$cookies', '$log'];
+TimerController.$inject = ['$scope', '$interval', '$cookies', '$log', 'statistics'];
 
-function TimerController($scope, $interval, $cookies, $log) {
-	var vm = this;
+function TimerController($scope, $interval, $cookies, $log, statistics) {
 	
-  vm.clock = 0;
-  vm.deleteRecord = deleteRecord;
-  vm.delta = delta;
-  vm.displayTimeString = "00:00.00";
-  vm.getCookies = getCookies;
-  vm.interval = null;
-  vm.offset;
-  vm.options = {delay: 5};
-  vm.records = [];
-  vm.recordsCookie = "TimeRecordsCookie";
-  vm.render = render;
-  vm.reset = reset;
-  vm.returnObjects = returnObjects;
-  vm.returnNames = returnNames;
-  vm.start = start;
-  vm.state = {running: false, stopped: false};
-  vm.stop = stop;
-  vm.time = {string: "00:00.00"};
-  vm.update = update;
-  vm.watchRecords = watchRecords;
+  $scope.clock = 0;
+  $scope.deleteRecord = deleteRecord;
+  $scope.delta = delta;
+  $scope.displayTimeString = "00:00.00";
+  $scope.getCookies = getCookies;
+  $scope.interval = null;
+  $scope.offset;
+  $scope.options = {delay: 5};
+  $scope.records = [];
+  $scope.recordsCookie = "TimeRecordsCookie";
+  $scope.render = render;
+  $scope.reset = reset;
+  $scope.returnObjects = returnObjects;
+  $scope.returnNames = returnNames;
+  $scope.start = start;
+  $scope.state = {running: false, stopped: false};
+  $scope.myStats = statistics;
+//  angular.copy(statistics, $scope.statistics);
+//  console.log(angular.toJson(statistics));
+  $scope.stop = stop;
+  $scope.time = {string: "00:00.00"};
+  $scope.update = update;
   
-  vm.getCookies();
-  vm.reset();
+//  for (thing in $scope.statistics) {
+//  	console.log(typeof $scope.statistics[thing]);
+//  }
+  
+  $scope.getCookies();
+  $scope.reset();
+  
+  $scope.myStats.loadData($scope.records);
   
   function deleteRecord(index) {
-  	if (index < vm.records.length && index >= 0) {
-  		vm.records.splice(index, 1);
+  	if (index < $scope.records.length && index >= 0) {
+  		$scope.records.splice(index, 1);
   	}
   }
   
   function delta() {
-  	vm.now = Date.now(),
-  	vm.d   = vm.now - vm.offset;
+  	$scope.now = Date.now(),
+  	$scope.d   = $scope.now - $scope.offset;
   	
-  	vm.offset = vm.now;
-  	if (isNaN(vm.d)) {
+  	$scope.offset = $scope.now;
+  	if (isNaN($scope.d)) {
   		return(0);
   	}
-  	return vm.d;
+  	return $scope.d;
   }
   
   function getCookies() {
   	try {
-  		vm.records = $cookies.getObject(vm.recordsCookie);
-  		console.log("Defined?: " + (typeof vm.records));
-  		console.log("Records: " + angular.toJson(vm.records));
-  		if (angular.isUndefined(vm.records)) {
+  		$scope.records = $cookies.getObject($scope.recordsCookie);
+  		console.log("Defined?: " + (typeof $scope.records));
+  		console.log("Records: " + angular.toJson($scope.records));
+  		if (angular.isUndefined($scope.records)) {
   			console.log("Caught #1");
-  			vm.records = [];
-  			$cookies.putObject(vm.recordsCookie, vm.records);
+  			$scope.records = [];
+  			$cookies.putObject($scope.recordsCookie, $scope.records);
   		}
   	} catch(e) {
   		console.log("Caught #2");
-  		vm.records = [];
-  		$cookies.putObject(vm.recordsCookie, vm.records);
+  		$scope.records = [];
+  		$cookies.putObject($scope.recordsCookie, $scope.records);
   	}
   }
   
   function render() {
-  	var minutes = ((vm.clock < 1000 * 60) ? "00" : ((vm.clock < 10 * 60 * 1000) ? "0" + Math.floor(vm.clock / 60000) : Math.floor(vm.clock / 60000)));
-  	var seconds = (((vm.clock % 60000) < 1000) ? ":00" : (((vm.clock % 60000) < 1000 * 10) ? ":0" + Math.floor((vm.clock % 60000) / 1000) : ":" + Math.floor((vm.clock % 60000) / 1000)));
-  	var milliseconds = (((vm.clock % 1000) < 10) ? ".00" + parseInt(vm.clock % 1000) : ((vm.clock % 1000) < 100) ? ".0" + (vm.clock % 1000) : "." + (vm.clock % 1000));
-  	vm.time['string'] = minutes + seconds + milliseconds;
+  	var minutes = (($scope.clock < 1000 * 60) ? "00" : (($scope.clock < 10 * 60 * 1000) ? "0" + Math.floor($scope.clock / 60000) : Math.floor($scope.clock / 60000)));
+  	var seconds = ((($scope.clock % 60000) < 1000) ? ":00" : ((($scope.clock % 60000) < 1000 * 10) ? ":0" + Math.floor(($scope.clock % 60000) / 1000) : ":" + Math.floor(($scope.clock % 60000) / 1000)));
+  	var milliseconds = ((($scope.clock % 1000) < 10) ? ".00" + parseInt($scope.clock % 1000) : (($scope.clock % 1000) < 100) ? ".0" + ($scope.clock % 1000) : "." + ($scope.clock % 1000));
+  	$scope.time['string'] = minutes + seconds + milliseconds;
   }
   
   function reset() {
-  	vm.state.stopped = false;
-  	vm.clock = 0;
-  	vm.render();
+  	$scope.state.stopped = false;
+  	$scope.clock = 0;
+  	$scope.render();
   }
   
   function returnNames() {
-  	if (vm.state.running) {
+  	if ($scope.state.running) {
   		return "Stop" ;
   	}
   		return "Start";
@@ -91,54 +98,60 @@ function TimerController($scope, $interval, $cookies, $log) {
   }
   
   function returnObjects() {
-  	if (vm.state.running) {
-  		console.log('please help me 1 ' + vm.time.string);
-  		return vm.stop();
+  	if ($scope.state.running) {
+  		console.log('please help me 1 ' + $scope.time.string);
+  		return $scope.stop();
   	}
-  		console.log('please help me 3 ' + vm.time.string);
-  		return vm.start();
+  		console.log('please help me 3 ' + $scope.time.string);
+  		return $scope.start();
   	
   }
   
   
   function start() {
-  		vm.reset();
+  		$scope.reset();
   		console.log("helllpppp");
-  		vm.state.running = true;
-  		vm.state.stopped = false;
-  	  vm.offset   = Date.now();
-  	  vm.interval = $interval(vm.update, vm.options.delay);
-  	  vm.render();
+  		$scope.state.running = true;
+  		$scope.state.stopped = false;
+  	  $scope.offset   = Date.now();
+  	  $scope.interval = $interval($scope.update, $scope.options.delay);
+  	  $scope.render();
   }
   
   function stop() {
-  	vm.state.running = false;
-  	vm.state.stopped = true;
-  	var timeRecordsObject = {time: "", index: (vm.records.length + 1)};
-  	timeRecordsObject.time = vm.time.string;
-  	vm.time.string = "";
-  	vm.records.push(timeRecordsObject);
-  	$interval.cancel(vm.interval);
-  	vm.interval = undefined;
-  	vm.render();
+  	$scope.state.running = false;
+  	$scope.state.stopped = true;
+  	var timeRecordsObject = {time: "", index: ($scope.records.length + 1)};
+  	timeRecordsObject.time = $scope.time.string;
+  	$scope.time.string = "";
+  	$scope.records.push(timeRecordsObject);
+  	$interval.cancel($scope.interval);
+  	$scope.interval = undefined;
+  	$scope.render();
   }
   
   
   function update() {
-  		vm.clock += vm.delta();
-    	vm.render();
-//    	return vm.display;
+  		$scope.clock += $scope.delta();
+    	$scope.render();
+//    	return $scope.display;
   }
   
   $scope.$watchCollection(
-  		"vm.records",
-  		vm.watchRecords
+  		"records",
+  		function(newValue, oldValue) {
+//  	  	$log.info("Filed!");
+//  	  	$log.info("Our records: \n" + angular.toJson($scope.records));
+  	  	$cookies.putObject($scope.recordsCookie, $scope.records);
+//  	  	$log.info("Cookie records: \n" + angular.toJson($cookies.getObject($scope.recordsCookie)));
+  	  	$log.info("Records: " + angular.toJson($scope.records));
+  	  	$scope.myStats.loadData($scope.records);
+  	  	$scope.myStats.calculate();
+  	  	$log.info("Stats Mean: " + $scope.myStats.stats.mean);
+  	    $log.info("Stats Mean Undefined?: " + angular.isUndefined($scope.myStats.stats.mean));	
+  	  	$log.info("Stats: " + angular.toJson($scope.myStats));
+  		}
   );
   
-  function watchRecords(newValue, oldValue) {
-  	$log.info("Filed!");
-  	$log.info("Our records: \n" + angular.toJson(vm.records));
-  	$cookies.putObject(vm.recordsCookie, vm.records);
-  	$log.info("Cookie records: \n" + angular.toJson($cookies.getObject(vm.recordsCookie)));
-  }
+  
 }

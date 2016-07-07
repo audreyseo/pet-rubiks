@@ -4,11 +4,10 @@
 
 angular.module('myApp').controller('cubeScrambler', CubeScrambler);
 
-function CubeScrambler() {
-	var vm = this;
+function CubeScrambler($scope) {
 	
-	vm.code = "";
-	vm.code333 = [
+	$scope.code = "";
+	$scope.code333 = [
 	          		    [
 	          		      "R", "R'", "R2"
 	          		    ]
@@ -28,9 +27,9 @@ function CubeScrambler() {
 	          		      "D", "D'", "D2"
 	          		    ]
 	          		  ];
-	vm.scramble = scramble;
+	$scope.scramble = scramble;
 	
-	vm.scramble();
+	$scope.scramble();
 	
 	
 	
@@ -38,28 +37,28 @@ function CubeScrambler() {
 		var indexX = [];
 		var indexY = [];
 		for (var i = 0; i < 25; i++) {
-			var n = Math.floor(Math.random() * vm.code333.length);
-			var m = Math.floor(Math.random() * vm.code333[0].length);
+			var n = Math.floor(Math.random() * $scope.code333.length);
+			var m = Math.floor(Math.random() * $scope.code333[0].length);
 			if (i >= 1 && i <= 24) {
 				if (m === indexY[i - 1] && n === indexX[i-1]) {
 					while (m === indexY[i-1]) {
-						m = Math.floor(Math.random() * vm.code333[0].length);
+						m = Math.floor(Math.random() * $scope.code333[0].length);
 					}
 				}
 				if (n === indexX[i-1]) {
 					while (n === indexX[i-1]) {
-						n = Math.floor(Math.random() * vm.code333.length);
+						n = Math.floor(Math.random() * $scope.code333.length);
 					}
 				}
 			}
   		indexX.push(n);
 			indexY.push(m);
 		}
-		vm.code = "";
+		$scope.code = "";
 		for (var i = 0; i < 25; i++) {
-			vm.code = vm.code.concat(vm.code333[indexX[i]][indexY[i]] + " ");
+			$scope.code = $scope.code.concat($scope.code333[indexX[i]][indexY[i]] + " ");
 		}
-		vm.code = vm.code.substring(0, vm.code.length - 1);
+		$scope.code = $scope.code.substring(0, $scope.code.length - 1);
 	};
 	
 };

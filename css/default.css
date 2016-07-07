@@ -294,6 +294,30 @@ tr.timesTable:nth-child(odd) td {
 	padding-right: 4px;
 }
 
+table.timeStatsTable {
+	display: inline-flex;
+	position: relative;
+	text-align: left;
+/* 	justify-self: ;
+ */}
+
+table.timeStatsTable tr td {
+	text-align: left;
+	position: relative;
+}
+
+td.right {
+	float: right;
+	text-align: left;
+	margin-right: -5px;
+	padding-left: 10px;
+}
+td.left {
+	float: left;
+	padding-right: 10px;
+	margin-left: -5px;
+}
+
 #controls {
 	
 	background-color: #FFFFFF;

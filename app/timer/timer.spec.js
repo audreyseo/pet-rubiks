@@ -11,14 +11,14 @@ describe('TimerController', function() {
 		$controller = _$controller_;
 	}));
 	
-	describe('vm.deleteRecord', function() {
+	describe('$scope.deleteRecord', function() {
 		beforeEach(function() {
 			var $scope = {};
 			var controller = $controller('timerController', {$scope: $scope});
 			$scope.records = [{time: "0:00.00", index: 1}, {time: "00:00.00", index: 2}];
 		});
 		
-		it('Deletes a record given an index that is smaller than vm.records.length', function() {
+		it('Deletes a record given an index that is smaller than $scope.records.length', function() {
 			var index=1;
 			$scope.deleteRecord(index);
 			expect($scope.records).toEqual([{time: "0:00.00", index:1}]);
@@ -31,14 +31,14 @@ describe('TimerController', function() {
 		});
 	});
 	
-	describe('vm.getCookies', function() {});
+	describe('$scope.getCookies', function() {});
 	
-	describe('vm.render', function() {});
+	describe('$scope.render', function() {});
 	
-	describe('vm.reset', function(){});
-	describe('vm.returnNames', function(){});
-	describe('vm.returnObjects', function(){});
-	describe('vm.start', function(){});
-	describe('vm.stop', function(){});
-	describe('vm.update', function(){});
+	describe('$scope.reset', function(){});
+	describe('$scope.returnNames', function(){});
+	describe('$scope.returnObjects', function(){});
+	describe('$scope.start', function(){});
+	describe('$scope.stop', function(){});
+	describe('$scope.update', function(){});
 });
