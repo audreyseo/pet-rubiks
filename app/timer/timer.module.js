@@ -121,11 +121,12 @@ function TimerController($scope, $interval, $cookies, $log, statistics) {
   function stop() {
   	$scope.state.running = false;
   	$scope.state.stopped = true;
-  	var timeRecordsObject = {time: "", index: ($scope.records.length + 1)};
-  	timeRecordsObject.time = $scope.time.string;
-  	$scope.time.string = "";
-  	$scope.records.push(timeRecordsObject);
   	$interval.cancel($scope.interval);
+		var date = new Date();
+		date.setDate(date.getDate());
+  	var timeRecordsObject = {time: "", millis: $scope.clock, index: ($scope.records.length + 1), timeStamp: date};
+  	timeRecordsObject.time = $scope.time.string;
+  	$scope.records.push(timeRecordsObject);
   	$scope.interval = undefined;
   	$scope.render();
   }

@@ -38,6 +38,11 @@ angular
 					return(converter.millisToString(Math.round(num)));
 				}
 				
+				factory.addData = function(value) {
+					factory.raw.push(value);
+					factory.data.push(converter.stringToMillis(value.time));
+				}
+				
 				factory.loadData = function(value) {
 					factory.raw = value;
 					console.log(angular.toJson(value));
