@@ -11,6 +11,7 @@ TimerController.$inject = ['$scope', '$interval', '$cookies', '$log', 'statistic
 function TimerController($scope, $interval, $cookies, $log, statistics) {
 	
   $scope.clock = 0;
+  $scope.deleteAll = deleteAll;
   $scope.deleteRecord = deleteRecord;
   $scope.delta = delta;
   $scope.displayTimeString = "00:00.00";
@@ -24,6 +25,7 @@ function TimerController($scope, $interval, $cookies, $log, statistics) {
   $scope.reset = reset;
   $scope.returnObjects = returnObjects;
   $scope.returnNames = returnNames;
+  $scope.save = save;
   $scope.start = start;
   $scope.state = {running: false, stopped: false};
   $scope.myStats = statistics;
@@ -41,6 +43,14 @@ function TimerController($scope, $interval, $cookies, $log, statistics) {
   $scope.reset();
   
   $scope.myStats.loadData($scope.records);
+  
+  function deleteAll() {
+  	var confirmed = window.confirm("This will delete all of your currently saved times. Do you really wish to proceed?");
+  	
+  	if (confirmed) {
+  		$scope.records = [];
+  	}
+  }
   
   function deleteRecord(index) {
   	if (index < $scope.records.length && index >= 0) {
@@ -107,6 +117,25 @@ function TimerController($scope, $interval, $cookies, $log, statistics) {
   	
   }
   
+  function save() {
+  	var csvContent = "data:text/csv;charset=utf-8,";
+  	$scope.records.forEach(function(infoArray, index){
+  		var dataString = "";
+			for (var str in infoArray) {
+				dataString += infoArray[str] + ",";
+			} 
+  		
+//  	   var dataString = infoArray.join(",");
+  	   csvContent += (index < $scope.records.length) ? dataString + "\n" : dataString;
+
+  	}); 
+  	var encodedUri = encodeURI(csvContent);
+  	var link = document.createElement("a");
+  	link.setAttribute("href", encodedUri);
+  	link.setAttribute("download", "my_data.csv");
+  	$("a").html("Download");
+  	$("#saveTimesButton").after(link);
+  }
   
   function start() {
   		$scope.reset();

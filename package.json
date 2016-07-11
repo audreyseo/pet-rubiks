@@ -1,0 +1,23 @@
+{
+  "name": "learnoll",
+  "version": "1.0.0",
+  "description": "Web app for learning the OLL cases",
+  "main": "karma.conf.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/audreyseo/pet-rubiks.git"
+  },
+  "author": "Audrey Seo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/audreyseo/pet-rubiks/issues"
+  },
+  "homepage": "https://github.com/audreyseo/pet-rubiks#readme"
+}

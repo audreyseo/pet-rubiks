@@ -4,9 +4,9 @@
 
 angular.module('myApp')
 	.factory('timerRecords',
-			['statistics', function(statistics) {
+			['statistics', '$cookies', function(statistics, $cookies) {
 				var recordsCookie = "TimeRecordsCookie";
-				var factory = {dates: {}, allData: [], dateKeys: []};
+				var factory = {dates: {}, allData: [], allStats: statistics, dateKeys: []};
 				var comparator = "";
 				
 				function getDayOnly(date) {
@@ -61,12 +61,20 @@ angular.module('myApp')
 							factory.dates[comparator].addData(factory.allData[i]);
 						}
 					}
-				}
+				};
 				
 				factory.update = function(newData) {
 					factory.loadData(newData);
+					factory.allStats.loadData(factory.allData);
+					factor.allStats.calculate();
 					for (var i = 0; i < factory.dateKeys.length; i++) {
-						factory.dates[factory.dateKeys[ilength]]
+						factory.dates[factory.dateKeys[i]].calculate();
 					}
-				}
+				};
+				
+				factory.save = function() {
+					for (var i = 0; i < factory.dateKeys.length; i++) {
+						$cookies.put(recordsCookie + factory.dateKeys[i], factory.dates[factory.dateKeys[i]]);
+					}
+				};
 			}]);

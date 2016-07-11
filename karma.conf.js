@@ -5,7 +5,7 @@ module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
+    basePath: '/Users/audrey/Personal/Programming/Workspace/LearnOLL/',
 
 
     // frameworks to use
@@ -18,7 +18,7 @@ module.exports = function(config) {
       'node_modules/angular/angular.js',
       'app/*.js',
       'app/**/*.js',
-      'app/*/*.js'
+      'app/*/*.js',
       'index.html'
     ],
 

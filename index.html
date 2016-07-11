@@ -5,79 +5,81 @@
 		<title>Learn the OLL Cases</title>
 		<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 		<link rel="stylesheet" type="text/css" href="/css/default.css">
+		<link rel="stylesheet" type="text/css" href="/css/tabs.css">
 	</head>
 	<body>
 		<div ng-controller="ContentController" id="everything">
-			<div id="content" class="content">
-				<div class="innerBox">
-					<div id="navBar"><span class="title big">OLL Cases</span>
-						<br>
-						<input type="button" id="edit" ng-cloak ng-bind=editString ng-click="editTable()" value={{editString}}>
-					</div>
-				
-					<input type="text" ng-model="filterString" placeholder="filter cases...">
-					<input type="button" ng-click="setFilter()" value="Filter"><br>
-					<br>
-					<br>
-					<div id="cases">
-						<table ng-cloak>
-							<tr>
-								<th><span></span></th>
-								<th class="num" ng-click="setSort('num')"><span>#</span></th>
-								<th class="code" ng-click="setSort('code')"><span>Code</span></th>
-								<th class="solve1" ng-click="setSort('solve1.alg')"><span>Solve #1 Algorithm</span></th>
-								<th class="length1" ng-click="setSort('solve1.length')"></span>Solve #1 Length</span></th>
-								<th class="solve2" ng-click="setSort('solve2.alg')"></span>Solve #2 Algorithm</span></th>
-								<th class="length2" ng-click="setSort('solve2.length')"><span>Solve #2 Length</span></th>
-								<th class="prob" ng-click="setSort('prob')"></span>Probability</span></th>
-								<th ng-if=showing.editCol>Know it?</th>
-								<th ng-if=showing.flashCardCol>Select Cases for Flashcards</th>
-								<th ng-if=showing.priorityCol>Select Priority</th>
-								<th ng-if=showing.algorithmCol>Select Preferred Algorithm</th>
-							</tr>
-							<tr id="editRow" ng-show=showing.editRow ng-cloak>
-								<th>Hidden</th>
-									<td ng--repeat="cClass in classes">
-										<input class="{{cClass}}" type="checkbox" ng-model="hidden[cClass]" ng-true-value=1 ng-false-value=0 ng-click="hide($event)">
-									</td>
-								<td ng-if=showing.editCol></td>
-							</tr>
-							
-							
-							<tr ng--repeat="case in filteredCases | orderBy:column:reverse" class="{{case.code}}">
-								<td ng-cloak><img class="icon" ng-src="{{case.src}}"></td>
-								<td class="num" >{{case.num}}</td>
-								<td class="code" >{{case.code}}</td>
-								<td class="solve1" ng-bind-html="case.solve1.alg | colorCodeAlgorithms"></td>
-								<td class="length1" >{{case.solve1.length}}</td>
-								<td class="solve2" ng-bind-html="case.solve2.alg | colorCodeAlgorithms"></td>
-								<td class="length2" >{{case.solve2.length}}</td>
-								<td class="prob" >{{case.prob | number: 5}}</td>
-								<td ng-if=showing.editCol> <!--class="known">-->
-									<input id="{{case.code}}" type="checkbox" ng-model="hiddenRows[case.code]" ng-true-value=1 ng-false-value=0> <!-- ng-click="cookiefy($event)">-->
-								</td>
-								<td ng-if=showing.flashCardCol><input id="{{case.code}}" type="checkbox" ng-model='practicing[case.code]'></td>
-								<td ng-if=showing.priorityCol>
-									<select ng-show='practicing[case.code]' class="priorities" ng-model=cardPriorities[case.code]>
-										<option ng-repeat="val in cards.options" value="{{val}}">{{val | number:0}}</option>
-									</select>
-								</td>
-								<td ng-if="pickAnAlgorithm(case)">
-									<select ng-model='cardOptions[case.code]'>
-										<option value=-1></option>
-										<option value=1>1</option>
-										<option value=2>2</option>
-									</select>
-								</td>
-							</tr>
-							
-						</table>
-					</div>
-
+		<my-tabs>
+			<my-pane title="OLL Cases">
+				<div id="content" class="content">
+					<div class="innerBox">
+						<div id="navBar"><span class="title big">OLL Cases</span>
+							<br>
+							<input type="button" id="edit" ng-cloak ng-bind=editString ng-click="editTable()" value={{editString}}>
+						</div>
 					
+						<input type="text" ng-model="filterString" placeholder="filter cases...">
+						<input type="button" ng-click="setFilter()" value="Filter"><br>
+						<br>
+						<br>
+						<div id="cases">
+							<table ng-cloak>
+								<tr>
+									<th><span></span></th>
+									<th class="num" ng-click="setSort('num')"><span>#</span></th>
+									<th class="code" ng-click="setSort('code')"><span>Code</span></th>
+									<th class="solve1" ng-click="setSort('solve1.alg')"><span>Solve #1 Algorithm</span></th>
+									<th class="length1" ng-click="setSort('solve1.length')"></span>Solve #1 Length</span></th>
+									<th class="solve2" ng-click="setSort('solve2.alg')"></span>Solve #2 Algorithm</span></th>
+									<th class="length2" ng-click="setSort('solve2.length')"><span>Solve #2 Length</span></th>
+									<th class="prob" ng-click="setSort('prob')"></span>Probability</span></th>
+									<th ng-if=showing.editCol>Know it?</th>
+									<th ng-if=showing.flashCardCol>Select Cases for Flashcards</th>
+									<th ng-if=showing.priorityCol>Select Priority</th>
+									<th ng-if=showing.algorithmCol>Select Preferred Algorithm</th>
+								</tr>
+								<tr id="editRow" ng-show=showing.editRow ng-cloak>
+									<th>Hidden</th>
+										<td ng--repeat="cClass in classes">
+											<input class="{{cClass}}" type="checkbox" ng-model="hidden[cClass]" ng-true-value=1 ng-false-value=0 ng-click="hide($event)">
+										</td>
+									<td ng-if=showing.editCol></td>
+								</tr>
+								
+								
+								<tr ng--repeat="case in filteredCases | orderBy:column:reverse" class="{{case.code}}">
+									<td ng-cloak><img class="icon" ng-src="{{case.src}}"></td>
+									<td class="num" >{{case.num}}</td>
+									<td class="code" >{{case.code}}</td>
+									<td class="solve1" ng-bind-html="case.solve1.alg | colorCodeAlgorithms"></td>
+									<td class="length1" >{{case.solve1.length}}</td>
+									<td class="solve2" ng-bind-html="case.solve2.alg | colorCodeAlgorithms"></td>
+									<td class="length2" >{{case.solve2.length}}</td>
+									<td class="prob" >{{case.prob | number: 5}}</td>
+									<td ng-if=showing.editCol> <!--class="known">-->
+										<input id="{{case.code}}" type="checkbox" ng-model="hiddenRows[case.code]" ng-true-value=1 ng-false-value=0> <!-- ng-click="cookiefy($event)">-->
+									</td>
+									<td ng-if=showing.flashCardCol><input id="{{case.code}}" type="checkbox" ng-model='practicing[case.code]'></td>
+									<td ng-if=showing.priorityCol>
+										<select ng-show='practicing[case.code]' class="priorities" ng-model=cardPriorities[case.code]>
+											<option ng-repeat="val in cards.options" value="{{val}}">{{val | number:0}}</option>
+										</select>
+									</td>
+									<td ng-if="pickAnAlgorithm(case)">
+										<select ng-model='cardOptions[case.code]'>
+											<option value=-1></option>
+											<option value=1>1</option>
+											<option value=2>2</option>
+										</select>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
 				</div>
-			</div>
-			<div id="flashCardDiv" class="content">
+			</my-pane>
+			<my-pane title="Flashcards">
+				<div id="flashCardDiv" class="content">
 					<div class="innerBox">
 						<span class="title big">Flashcards</span><br><br>
 						<div id="myFlashCards">
@@ -89,11 +91,11 @@
 								</tr>
 							</table>
 						</div>
-						<!--<ul>
-							<li ng--repeat="value in cardPriorities">{{value}}</li>
-						</ul>-->
 					</div>
 				</div>
+			</my-pane>
+		</my-tabs>
+			
 			<div id="leftBar">
 				<div id="controls" ng-controller="InfoController">
 					<div ng-controller="cubeScrambler">
@@ -131,12 +133,14 @@
 												<td>{{record.index}}</td>
 												<td>{{record.time}}</td>
 <!-- 												<td>{{record.timeStamp}}</td>
- -->												<td><input type="button" value="x" ng-click="deleteRecord($index)"></td>
+-->												<td><input type="button" value="x" ng-click="deleteRecord($index)"></td>
 											</tr>
 										</tbody>
 									</table>
 								</div>
 							</div>
+							<input id="deleteTimesButton" type="button" ng-click="deleteAll()" value="Delete Times"><br>
+							<input id="saveTimesButton" type="button" ng-click="save()" value="Save Times"><br>
 							<br>
 							<hr>
 							<br>
@@ -203,24 +207,17 @@
 												Range: {{myStats.stats.range}}
 											</td>
 										</tr>
-								</table>
+									</table>
+								</div>
 							</div>
-							
 						</div>
-<!-- 							<br ng-repeat="stat in myStats.stats">
- -->						</div>
 						<br>
 						<hr>
 						<br>
-					</div>
+					</div>	
 					
 					<span class="title">Controls</span>
 					<form id="controller">
-						<!-- <input type="radio" name="task" id="sort">
-						<label for="sort">Sort</label><br>
-						<div class="controlBox" id="sortControl">
-							<label>Custom sorting: </label><input type="checkbox" ng-model="comparisons.custom">
-						</div><br> -->
 						<input type="radio" name="task" id="card">
 						<label for="card">Make Flashcards</label><br>
 						<div class="controlBox" id="cardControl">
@@ -238,13 +235,10 @@
 					<hr>
 					<br>
 					
-							<span class="title">Stats</span>
-							<p>Number of known cases: {{number.knownCases}}</p>
-							<P>Percentage of Cases Learned: {{number.percent | number: 2}}%</p>
-							<p>Probability of Knowing a Randomly Chosen Case: {{number.prob | number: 2}}%</p>
-				</div>
-				<div>
-					
+					<span class="title">Stats</span>
+					<p>Number of known cases: {{number.knownCases}}</p>
+					<P>Percentage of Cases Learned: {{number.percent | number: 2}}%</p>
+					<p>Probability of Knowing a Randomly Chosen Case: {{number.prob | number: 2}}%</p>
 				</div>
 			</div>
 		</div>
@@ -266,6 +260,7 @@
 		<script type="text/javascript" src="/app/stats.factory.js"></script>
 		<script type="text/javascript" src="/app/timesStatistics.filter.js"></script>
 		<script type="text/javascript" src="/app/timeStats.directive.js"></script>
+		<script type="text/javascript" src="/app/tabs.directive.js"></script>
 		
 		
 		

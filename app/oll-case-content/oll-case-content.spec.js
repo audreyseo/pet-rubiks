@@ -20,6 +20,21 @@ describe("Controller: ContentController", function() {
 	});
 	
 	describe('$scope.addPriorityOptions', function() {});
-	descirbe('$scope.animationOpts', function() {});
-	
+	describe('$scope.countCases', function() {});
+	describe('$scope.editCardSelection', function() {});
+	describe('$socpe.editTable', function() {});
+	describe('$scope.flashCardsData', function() {});
+	describe('$scope.hiddenColsData', function() {});
+	describe('$scope.hiddenRowsData', function() {});
+	describe('$scope.hideHiddenCols', function() {});
+	describe('$scope.hideHiddenRows', function() {});
+	describe('$scope.initialize', function() {});
+	describe('$scope.modifyKnownCases', function() {});
+	describe('$scope.pickAnAlgorithm', function() {});
+	describe('$scope.returnSolve', function() {});
+	describe('$scope.setFilter', function() {});
+	describe('$scope.setSort', function() {});
+	describe('$scope.showHiddenCols', function() {});
+	describe('$scope.showHiddenRows', function() {});
+	describe('$scope.useCookieInfo', function() {});
 });
