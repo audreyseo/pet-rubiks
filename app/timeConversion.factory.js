@@ -19,8 +19,12 @@ angular
 			return(Math.floor((mil % 60000) / 1000));
 		};
 		
+		factory.getHours = function(mil) {
+			return(Math.floor((mil % (24 * 3600 * 1000)) / (3600 * 1000)));
+		}
+		
 		factory.getMinutes = function(mil) {
-			return(Math.floor(mil / 60000));
+			return(Math.floor((mil % (60 * 60000)) / 60000));
 		};
 		
 		factory.getMillis = function(mil) {

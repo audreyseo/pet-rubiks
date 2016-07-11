@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "karma start",
     "start": "node server.js"
   },
   "repository": {
@@ -19,5 +19,22 @@
   "bugs": {
     "url": "https://github.com/audreyseo/pet-rubiks/issues"
   },
-  "homepage": "https://github.com/audreyseo/pet-rubiks#readme"
+  "homepage": "https://github.com/audreyseo/pet-rubiks#readme",
+  "dependencies": {
+    "angular": "^1.5.7",
+    "angular-mocks": "^1.5.7",
+    "jasmine": "^2.4.1",
+    "jasmine-core": "^2.4.1",
+    "karma": "^1.1.1"
+  },
+  "devDependencies": {
+    "karma": "^1.1.1",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-coverage": "^1.1.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-ng-html2js-preprocessor": "^1.0.0",
+    "karma-phantomjs-launcher": "^1.0.1",
+    "karma-safari-launcher": "^1.0.0",
+    "ng-html2js": "^2.0.0"
+  }
 }

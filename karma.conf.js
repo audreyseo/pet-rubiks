@@ -17,6 +17,7 @@ module.exports = function(config) {
     files: [
       'node_modules/angular/angular.js',
       'app/*.js',
+      'js/*.js',
       'app/**/*.js',
       'app/*/*.js',
       'index.html'
@@ -42,6 +43,10 @@ module.exports = function(config) {
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: ['progress', 'coverage'],
 
+    coverageReporter: {
+      type: 'html',
+      dir: 'coverage/'
+    },
 
     // web server port
     port: 9876,
