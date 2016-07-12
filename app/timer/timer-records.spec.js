@@ -2,7 +2,7 @@
  * http://usejsdoc.org/
  */
 describe('Factory: timerRecords', function() {
-	describe('factory.loadData', function() {});
-	describe('factory.update', function() {});
-	describe('factory.save', function() {});
+	describe('loadData', function() {});
+	describe('update', function() {});
+	describe('save', function() {});
 });

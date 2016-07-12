@@ -38,7 +38,7 @@ describe('Factory: flashCardData', function() {
 		expect(angular.isDefined(flashCardData.getCardOptions)).toBe(true);
 	});
 	
-	describe('flashCardData.initialize', function() {
+	describe('initialize', function() {
 		beforeEach(function() {
 			flashCardData.initialize();
 		});
@@ -47,25 +47,25 @@ describe('Factory: flashCardData', function() {
 			
 		});
 	});
-	describe('flashCardData.isPracticing', function() {});
-	describe('flashCardData.setPracticing', function() {});
-	describe('flashCardData.removePracticing', function() {});
-	describe('flashCardData.savePracticing', function() {});
-	describe('flashCardData.getPracticing', function() {});
-	describe('flashCardData.getPriority', function() {});
-	describe('flashCardData.setPriority', function() {});
-	describe('flashCardData.removePriority', function() {});
-	describe('flashCardData.saveCardPriorities', function() {});
-	describe('flashCardData.getCardPriorities', function() {});
-	describe('flashCardData.getCard', function() {});
-	describe('flashCardData.setCard', function() {});
-	describe('flashCardData.savePracticeCards', function() {});
-	describe('flashCardData.getPracticeCards', function() {});
-	describe('flashCardData.saveCards', function() {});
-	describe('flashCardData.getCards', function() {});
-	describe('flashCardData.getAlgorithmOption', function() {});
-	describe('flashCardData.setAlgorithmOption', function() {});
-	describe('flashCardData.removeAlgorithmOption', function() {});
-	describe('flashCardData.saveCardOptions', function() {});
-	describe('flashCardData.getCardOptions', function() {});
+	describe('isPracticing', function() {});
+	describe('setPracticing', function() {});
+	describe('removePracticing', function() {});
+	describe('savePracticing', function() {});
+	describe('getPracticing', function() {});
+	describe('getPriority', function() {});
+	describe('setPriority', function() {});
+	describe('removePriority', function() {});
+	describe('saveCardPriorities', function() {});
+	describe('getCardPriorities', function() {});
+	describe('getCard', function() {});
+	describe('setCard', function() {});
+	describe('savePracticeCards', function() {});
+	describe('getPracticeCards', function() {});
+	describe('saveCards', function() {});
+	describe('getCards', function() {});
+	describe('getAlgorithmOption', function() {});
+	describe('setAlgorithmOption', function() {});
+	describe('removeAlgorithmOption', function() {});
+	describe('saveCardOptions', function() {});
+	describe('getCardOptions', function() {});
 });

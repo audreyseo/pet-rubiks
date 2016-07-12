@@ -11,7 +11,7 @@ describe('Factory: TimeConversion', function() {
 		converter = _timeConversion_;
 	}));
 	
-	describe('TimeConversion.milliToSecond', function() {
+	describe('milliToSecond', function() {
 		// Purpose is to convert millis to a # of seconds
 		it("should be able to handle positive integers and round them", function() {
 			// 3000 == 3
@@ -25,7 +25,7 @@ describe('Factory: TimeConversion', function() {
 		
 		// Need to think about what other cases there are for this
 	});
-	describe('TimeConversion.milliToMinute', function() {
+	describe('milliToMinute', function() {
 		// Purpose is to convert milliseconds to minutes
 		it("should be able to handle positive integers and round", function() {
 			expect(converter.milliToMinute(5 * 60 * 1000)).toEqual(5);
@@ -35,7 +35,7 @@ describe('Factory: TimeConversion', function() {
 		
 		// Need to think about what other cases there are for this
 	});
-	describe('TimeConversion.getSeconds', function() {
+	describe('getSeconds', function() {
 		// Instead of merely converting seconds, this function actually
 		// gets the number of seconds, out of sixty, that have elapsed since
 		// the last time the second hand, so to speak, passed the 12, or its
@@ -53,7 +53,7 @@ describe('Factory: TimeConversion', function() {
 		});
 	});
 	
-	describe('TimeConversion.getHours', function() {
+	describe('getHours', function() {
 		// Converts milliseconds to hours. Did not originally have this function until I started unit testing
 		// this factory, and I really don't think that there's a real use case for it in this particular context, because unless we're talking someone
 		// other than myself, who is a speedcuber who hasn't been above 1 minute for about...a year? now, so yeah. But I'm just making it for completeness
@@ -68,7 +68,7 @@ describe('Factory: TimeConversion', function() {
 		});
 	});
 	
-	describe('TimeConversion.getMinutes', function() {
+	describe('getMinutes', function() {
 		// Instead of converting to minutes, this function gets the number of minutes that have elapsed
 		// when counting the time in milliseconds
 		it("should be able to handle positive integers", function() {
@@ -81,7 +81,7 @@ describe('Factory: TimeConversion', function() {
 			expect(converter.getMinutes((1 * 60 * 1000) + (59 * 1000) + 999)).toEqual(1);
 		});
 	});
-	describe('TimeConversion.getMillis', function() {
+	describe('getMillis', function() {
 		// Grabs the last however so milliseconds that have elapsed since the last second passed
 		it("should be able to handle positive integers", function() {
 			expect(converter.getMillis((60 * 1000 * 60) + (4 * 1000) + 200)).toEqual(200);
@@ -94,7 +94,7 @@ describe('Factory: TimeConversion', function() {
 			expect(converter.getMillis(100001)).toEqual(1);
 		});
 	});
-	describe('TimeConversion.secondToMilli', function() {
+	describe('secondToMilli', function() {
 		// Converts seconds back to milliseconds
 		it("should handle any positive integer", function() {
 			expect(converter.secondToMilli(1)).toEqual(1000);
@@ -104,14 +104,14 @@ describe('Factory: TimeConversion', function() {
 		
 		// What else does this need to do??? Do backflips???
 	});
-	describe('TimeConversion.minuteToMilli', function() {
+	describe('minuteToMilli', function() {
 		it("should handle any positive integer", function() {
 			expect(converter.minuteToMilli(100)).toEqual(100 * 60 * 1000);
 			expect(converter.minuteToMilli(2)).toEqual(2 * 60 * 1000);
 			expect(converter.minuteToMilli(3.5)).toEqual(3.5 * 60 * 1000);
 		});
 	});
-	describe('TimeConversion.stringToMillis', function() {
+	describe('stringToMillis', function() {
 		// Converts a time string back to milliseconds
 		it("Turn a regular time string in mm:ss.mmm into a number of milliseconds", function() {
 			// 00:00.300
@@ -142,7 +142,7 @@ describe('Factory: TimeConversion', function() {
 			expect(converter.stringToMillis("14:300:22.000")).toEqual(68422000);
 		});
 	});
-	describe('TimeConversion.millisToString', function() {
+	describe('millisToString', function() {
 		// Converts a given amount in milliseconds into a time string of the format that we expect, loosely, mm:ss.mmm
 		it("Should be able to handle positive integers including and below 59 * 60000 + 59 * 1000 + 999", function() {
 			expect(converter.millisToString(3599999)).toEqual("59:59.999");

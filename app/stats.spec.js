@@ -3,21 +3,28 @@
  */
 
 describe('Factory: statistics', function() {
-	describe('factory.addData', function() {});
-	describe('factory.loadData', function() {});
-	describe('factory.mean', function() {});
-	describe('factory.variance', function() {});
-	describe('factory.stdDev', function() {});
-	describe('factory.mean5', function() {});
-	describe('factory.mean35', function() {});
-	describe('factory.mean10', function() {});
-	describe('factory.mean1012', function() {});
-	describe('factory.mean100', function() {});
-	describe('factory.q1', function() {});
-	describe('factory.median', function() {});
-	describe('factory.q3', function() {});
-	describe('factory.best', function() {});
-	describe('factory.worst', function() {});
-	describe('factory.iqr', function() {});
-	describe('factory.calculate', function() {});
+	var statistics;
+	
+	beforeEach(module('myApp'));
+	beforeEach(inject(function(_statistics_) {
+		statistics = _statistics_;
+	}));
+	
+	describe('addData', function() {});
+	describe('loadData', function() {});
+	describe('mean', function() {});
+	describe('variance', function() {});
+	describe('stdDev', function() {});
+	describe('mean5', function() {});
+	describe('mean35', function() {});
+	describe('mean10', function() {});
+	describe('mean1012', function() {});
+	describe('mean100', function() {});
+	describe('q1', function() {});
+	describe('median', function() {});
+	describe('q3', function() {});
+	describe('best', function() {});
+	describe('worst', function() {});
+	describe('iqr', function() {});
+	describe('calculate', function() {});
 });

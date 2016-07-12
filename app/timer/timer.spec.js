@@ -11,7 +11,7 @@ describe('TimerController', function() {
 		$controller = _$controller_;
 	}));
 	
-	describe('$scope.deleteRecord', function() {
+	describe('deleteRecord', function() {
 		beforeEach(function() {
 			var $scope = {};
 			var controller = $controller('timerController', {$scope: $scope});
@@ -31,14 +31,14 @@ describe('TimerController', function() {
 		});
 	});
 	
-	describe('$scope.getCookies', function() {});
+	describe('getCookies', function() {});
 	
-	describe('$scope.render', function() {});
+	describe('render', function() {});
 	
-	describe('$scope.reset', function(){});
-	describe('$scope.returnNames', function(){});
-	describe('$scope.returnObjects', function(){});
-	describe('$scope.start', function(){});
-	describe('$scope.stop', function(){});
-	describe('$scope.update', function(){});
+	describe('reset', function(){});
+	describe('returnNames', function(){});
+	describe('returnObjects', function(){});
+	describe('start', function(){});
+	describe('stop', function(){});
+	describe('update', function(){});
 });

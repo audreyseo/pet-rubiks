@@ -52,6 +52,9 @@ module.exports = function(config) {
     coverageReporter: {
       type: 'html',
       dir: 'coverage/'
+      instrumenterOptions: {
+        istanbul: { noCompact: true }
+      }
     },
 
     // web server port
