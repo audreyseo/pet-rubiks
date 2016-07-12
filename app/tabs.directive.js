@@ -13,7 +13,7 @@ app.directive('myTabs', function() {
 			var panes = $scope.panes = [];
 			$scope.select = function(pane) {
 				angular.forEach(panes, function(pane) {
-					console.log("pane selected " + pane.selected);
+					//console.log("pane selected " + pane.selected);
 					pane.selected = false;
 				});
 				pane.selected = true;
@@ -38,7 +38,7 @@ app.directive('myPane', function() {
 		transclude: true,
 		scope: {title: '@'},
 		link: function(scope, element, attrs, tabsCtrl) {
-			console.log(angular.toJson(scope));
+			//console.log(angular.toJson(scope));
 			tabsCtrl.addPane(scope);
 		}
 	

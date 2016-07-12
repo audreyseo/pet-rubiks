@@ -6,7 +6,6 @@ $(window).load(function() {
 //	console.log("hi");
 //	$("#sortControl").prop("opacity", 0);
 //	$("#sortControl").prop("height", "0px")
-	
 	$(".controlBox").each(function() {
 		$(this).slideUp(200);
 	});

@@ -10,7 +10,7 @@ angular
 //				console.log("int: " + parseInt(input) + " " + input);
 				return converter.millisToString(Math.round(parseInt(input)));
 			} else if (String(input).indexOf(":") < 0){
-				return 0;
+				return converter.millisToString(0);
 			}
 			return input;
 		};

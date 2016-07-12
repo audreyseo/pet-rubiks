@@ -55,8 +55,8 @@ angular
 						factory.data.push(converter.stringToMillis(factory.raw[i].time));
 						times2 = times2 + factory.data[i] + " ";
 					}
-					console.log(times);
-					console.log(times2);
+					//console.log(times);
+					//console.log(times2);
 				};
 				
 				function getSum(total, newValue) {
@@ -69,9 +69,9 @@ angular
 					var length = factory.data.length;
 					if (length > 5) {
 						total = factory.data.reduce(getSum);
-						console.log("Total: " + total + " Length: " + length);
+						//console.log("Total: " + total + " Length: " + length);
 						factory.stats.mean = total / length;
-						console.log("Mean: " + factory.stats.mean);
+						//console.log("Mean: " + factory.stats.mean);
 					}
 					
 					return factory.stats.mean;

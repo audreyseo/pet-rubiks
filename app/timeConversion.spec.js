@@ -5,10 +5,12 @@
 describe('Factory: TimeConversion', function() {
 	var converter;
 	
-	beforeEach(inject(function(_converter_) {
-		converter = _converter_;
+	beforeEach(module('myApp'));
+	
+	beforeEach(inject(function(_timeConversion_) {
+		converter = _timeConversion_;
 	}));
-	o
+	
 	describe('TimeConversion.milliToSecond', function() {
 		// Purpose is to convert millis to a # of seconds
 		it("should be able to handle positive integers and round them", function() {
@@ -70,7 +72,7 @@ describe('Factory: TimeConversion', function() {
 		// Instead of converting to minutes, this function gets the number of minutes that have elapsed
 		// when counting the time in milliseconds
 		it("should be able to handle positive integers", function() {
-			expect(converter.getMinutes(( 100 * 60 * 1000 ))).toEqual(100);
+			expect(converter.getMinutes(( 100 * 60 * 1000 ))).toEqual(40);
 			expect(converter.getMinutes(( 20 * 60 * 1000 ) + (90 * 1000) + 300)).toEqual(21);
 		});
 		
@@ -111,7 +113,7 @@ describe('Factory: TimeConversion', function() {
 	});
 	describe('TimeConversion.stringToMillis', function() {
 		// Converts a time string back to milliseconds
-		it("Turn a regular time string in hh:ss.mmm into a number of milliseconds", function() {
+		it("Turn a regular time string in mm:ss.mmm into a number of milliseconds", function() {
 			// 00:00.300
 			expect(converter.stringToMillis("00:00.300")).toEqual(300);
 			// 00:23.504
@@ -143,9 +145,9 @@ describe('Factory: TimeConversion', function() {
 	describe('TimeConversion.millisToString', function() {
 		// Converts a given amount in milliseconds into a time string of the format that we expect, loosely, mm:ss.mmm
 		it("Should be able to handle positive integers including and below 59 * 60000 + 59 * 1000 + 999", function() {
-			expect(converter.stringToMillis("59:59.999")).toEqual(3599999);
-			expect(converter.stringToMillis("00:00.000")).toEqual(0);
-			expect(converter.stringToMillis("10:25:105")).toEqual(625105);
+			expect(converter.millisToString(3599999)).toEqual("59:59.999");
+			expect(converter.millisToString(0)).toEqual("00:00.000");
+			expect(converter.millisToString(625105)).toEqual("10:25.105");
 		});
 		
 		// Support for hours?

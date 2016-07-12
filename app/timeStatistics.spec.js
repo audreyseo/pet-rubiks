@@ -22,7 +22,8 @@ describe("Filter: millisToString", function() {
 	});
 	
 	it("Should return 0 if it's anything but a number or a time string", function() {
-		expect(millisToStringFilter({object1: {object3: "fake fake"}, object9: "mocking"})).toEqual(0);
-		expect(millisToStringFilter(undefined)).toEqual(0);
+		expect(millisToStringFilter({object1: {object3: "fake fake"}, object9: "mocking"})).toEqual("00:00.000");
+		expect(millisToStringFilter(undefined)).toEqual("00:00.000");
+		console.log(millisToStringFilter(undefined));
 	});
 });

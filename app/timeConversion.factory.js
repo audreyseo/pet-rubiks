@@ -39,22 +39,54 @@ angular
 			return(min * 60 * 1000);
 		};
 		
+		factory.hourToMilli = function(hour) {
+			return(hour * 60 * 60 * 1000);
+		}
+		
 		factory.stringToMillis = function(time) {
 //			console.log(time.time);
 			var string = time;
 //			console.log(string);
 			if (string.length > 0) {
-				var a = string.indexOf(":");
-				var b = string.indexOf(".");
-				var c = string.length;
+				var a, a1, b, c;
+				
+				var splits = string.split(':');
+				
+				if (splits.length === 3) {
+					a1 = string.indexOf(":");
+//					console.log("A1: " + a1);
+//					console.log(string);
+					a = string.indexOf(":", a1 + 1);
+				} else {
+					a = string.indexOf(":");
+				}
+				b = string.indexOf(".", a);
+				c = string.length;
 //				
 //				console.log(string.substring(0, a));
 //				console.log(string.substring(a, b));
 //				console.log(string.substring(b, c));
+				var hour = 0;
+				if (splits.length === 3) {
+					hour = parseInt(string.substring(0, a1));
+					hour = factory.hourToMilli(hour);
+				}
+				var min, sec, mil;
 				
-				var min = parseInt(string.substring(0, a));
-				var sec = parseInt(string.substring(a + 1, b));
-				var mil = parseInt(string.substring(b + 1, c));
+				if (splits.length === 3) {
+					min = parseInt(string.substring(a1 + 1, a));
+				} else {
+					min = parseInt(string.substring(0, a));
+				}
+				sec = parseInt(string.substring(a + 1, b));
+				mil = string.substring(b + 1, c);
+				
+				if (mil.length < 2) {
+					mil = mil + '0';
+					mil = parseInt(mil);
+				} else {
+					mil = parseInt(mil);
+				}
 				
 				var minM = factory.minuteToMilli(min);
 				var secM = factory.secondToMilli(sec);
@@ -66,7 +98,7 @@ angular
 //						minM + " " + secM + " " + mil);
 //				console.log('Type of Mil: ' + (typeof mil));
 //				console.log(min + " " + sec + " " + mil);
-				return (minM + secM + mil);
+				return (hour + minM + secM + mil);
 			}
 			return(0);
 		};
