@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "cp -R app/*.spec.js tests/ ; cp -R app/**/*.spec.js tests/ ; karma start",
+    "full-test": "cp -R app/*.spec.js tests/ ; cp -R app/**/*.spec.js tests/ ; NODE_ENV=test karma start karma.conf.js",
     "start": "node server.js"
   },
   "repository": {

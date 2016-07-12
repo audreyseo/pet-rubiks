@@ -39,7 +39,13 @@ describe('Factory: flashCardData', function() {
 	});
 	
 	describe('flashCardData.initialize', function() {
+		beforeEach(function() {
+			flashCardData.initialize();
+		});
 		
+		it("After initialization, flashCards' objects should be initialized", function() {
+			
+		});
 	});
 	describe('flashCardData.isPracticing', function() {});
 	describe('flashCardData.setPracticing', function() {});
