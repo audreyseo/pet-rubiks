@@ -37,8 +37,8 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
 		'index.html':['ng-html2js'],
-		'app/*.js':['coverage'],
-                'app/**/*.js':['coverage'],
+		//'app/*.js':['coverage'],
+                //'app/**/*.js':['coverage'],
                 'app/**/!(*.mock|*.spec).js':['coverage'],
                 'app/!(*.mock|*.spec).js':['coverage']
     },
@@ -51,7 +51,7 @@ module.exports = function(config) {
 
     coverageReporter: {
       type: 'html',
-      dir: 'coverage/'
+      dir: 'coverage/',
       instrumenterOptions: {
         istanbul: { noCompact: true }
       }

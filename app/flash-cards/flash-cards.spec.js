@@ -44,7 +44,9 @@ describe('Factory: flashCardData', function() {
 		});
 		
 		it("After initialization, flashCards' objects should be initialized", function() {
-			
+			expect(angular.isDefined(flashCardData.data)).toBe(true);
+			expect(angular.isDefined(flashCardData.cookies)).toBe(true);
+			expect(angular.isDefined(flashCardData.cards)).toBe(true);
 		});
 	});
 	describe('isPracticing', function() {});

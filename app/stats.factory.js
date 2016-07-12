@@ -169,7 +169,7 @@ angular
 				
 				factory.median = function() {
 					var length = factory.data.length;
-					if (length > 10) {
+					if (length > 3) {
 						var sorted = (factory.data.slice(0, length)).sort(compareNums);
 						if (length % 2 == 1) {
 							var q = Math.round(length * .5);
@@ -201,7 +201,7 @@ angular
 				
 				factory.best = function() {
 					var length = factory.data.length;
-					if (length > 10) {
+					if (length > 3) {
 						var sorted = (factory.data.slice(0, factory.data.length)).sort(compareNums);
 						factory.stats.best = sorted[0];
 					}
@@ -209,7 +209,7 @@ angular
 			
 				factory.worst = function() {
 					var length = factory.data.length;
-          if (length > 10) {
+          if (length > 3) {
           	var sorted = (factory.data.slice(0, factory.data.length)).sort(compareNums);
           	factory.stats.worst = sorted[sorted.length - 1];
 					}
@@ -224,7 +224,7 @@ angular
 				
 				factory.range = function() {
 					var length = factory.data.length;
-					if (length > 10) {
+					if (length > 3) {
 						factory.stats.range = "(" + convert(factory.stats.best) + ", " + convert(factory.stats.worst) + ")";
 					}
 					
