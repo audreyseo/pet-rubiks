@@ -10,7 +10,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
+    frameworks: [/*'mocha',*/'jasmine'],
 
 
     // list of files / patterns to load in the browser
@@ -22,9 +22,12 @@ module.exports = function(config) {
       'node_modules/angular-sanitize/angular-sanitize.js',
       'app/app.module.js',
       'app/app.config.js',
-      'app/*.js',
-      'app/**/*.js',
-      'tests/*.js'
+      'app/*.js', {
+            pattern: '*.spec.js', included: false},
+      'app/**/*.js', {
+               pattern: '**.spec.js', included: false},
+      'tests/*.js', {
+            pattern: '*.spec.js', included: false}
     ],
 
 

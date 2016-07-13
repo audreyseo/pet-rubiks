@@ -2,7 +2,7 @@
  * http://usejsdoc.org/
  */
 
-describe('Test:	', function() {
+describe('	Test:	', function() {
   describe('Factory: Statistics', function() {
   	var statistics, timeConversion;
   	
