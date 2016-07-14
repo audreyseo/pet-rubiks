@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+    <title>Jasmine Spec Runner</title>
+    <link rel="stylesheet" type="text/css" href="node-modules/jasmine-core/lib/jasmine-core/jasmine.css">
+    <noscript>No fun without JavaScript</noscript>
+    <script type="text/javascript" src="node-modules/jasmine-core/lib/jasmine-core/jasmine.js"></script>
+    <script type="text/javascript" src="node-modules/jasmine-core/lib/jasmine-core/jasmine-html.js"></script>
+    <script type="text/javascript" src="node-modules/jasmine-core/lib/jasmine-core/boot.js"></script>
+    <script src="system.js"></script>
+    <script>var imports = ['tests/colorCodeAlgorithms.spec.js','tests/cube-scrambler.spec.js','tests/flash-cards.spec.js','tests/oll-case-content.spec.js','tests/stats.spec.js','tests/timeConversion.spec.js','tests/timer-records.spec.js','tests/timer.spec.js','tests/timeStatistics.spec.js'];</script>
+    <script>
+        var DEBUG = true;
+        System.config({
+            'baseURL': './',
+            'defaultJSExtensions': true
+        });
+        var importPromises = [];
+        for (i = 0; i < imports.length; i++)
+            importPromises.push(System.import(imports[i]));
+
+        Promise.all(importPromises)
+                .then(function (modules) {
+                    console.log(modules);
+                    window.onload();
+                });
+    </script>
+</head>
+<body>
+</body>
+</html>

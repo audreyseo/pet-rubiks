@@ -16,7 +16,8 @@ module.exports = function(config) {
       'karma-jasmine',
       'karma-coverage',
       'karma-ng-html2js-preprocessor',
-      'karma-phantomjs-launcher'
+      'karma-phantomjs-launcher',
+      'karma-jasmine-spec-runner-reporter'
     ],
 
     // list of files / patterns to load in the browser
@@ -28,12 +29,13 @@ module.exports = function(config) {
       'node_modules/angular-sanitize/angular-sanitize.js',
       'app/app.module.js',
       'app/app.config.js',
-      'app/*.js', {
-            pattern: 'app/*.spec.js', included: false},
+      'app/*.js', /*{
+            pattern: 'app/*.spec.js', included: false},*/
       'app/**/*.js', {
                pattern: 'app/**/*.spec.js', included: false},
       'tests/*.js', {
-            pattern: 'tests/*.spec.js', included: true}
+            pattern: 'tests/*.spec.js', included: true},
+	  'spec-runner-template.html'
     ],
 
 
@@ -45,7 +47,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-		'index.html':['ng-html2js'],
+		'spec-runner-template.html':['ng-html2js'],
 		//'app/*.js':['coverage'],
                 //'app/**/*.js':['coverage'],
                 'app/**/!(*.mock|*.spec).js':'coverage',
@@ -56,7 +58,15 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['coverage', 'progress'],
+    reporters: [
+      'coverage', 
+      'progress',
+      'jasmine-spec-runner'
+    ],
+
+    jasmineSpecRunnerReporter: {
+      jasmineCoreDir: 'node-modules/jasmine-core'
+    },
 
     coverageReporter: {
       type: 'lcov',

@@ -6,11 +6,34 @@ describe('	Test:	', function() {
   describe('Factory: Statistics', function() {
   	var statistics, timeConversion;
   	
+  	var data = [];
+  	var myRawData = [];
+  	
   	beforeEach(module('myApp'));
   	beforeEach(inject(function(_statistics_, _timeConversion_) {
   		statistics = _statistics_;
   		timeConversion = _timeConversion_;
   	}));
+  	
+  	beforeEach(function() {
+  		var max = parseInt(Math.random(20, 30));
+  		
+  		for (var i = 0; i < max; i++) {
+  			var millis = parseInt(Math.random(1000, 100000));
+  			var date = new Date();
+  			date.setTime(millis);
+  			var min = parseInt(millis / (60 * 60 * 1000));
+  			var sec = parseInt((millis % (60 * 60 * 1000)) / 1000);
+  			var mil = millis % 1000;
+  			var date2 = new Date();
+  			date2.setTime(0);
+  			
+  			var template = "a:b.c";
+  			var thisTime = template.replace(/([a])/, min).replace(/([b])/, sec).replace(/([c])/, mil);
+  			var timeObject = {index: i + 1, time: thisTime, date: date2};
+  			myRawData.push(timeObject);
+  		}
+  	});
   	
   	it('TimeConversion should be defined', function() {
   		expect(angular.isDefined(timeConversion)).toBe(true);
@@ -90,22 +113,31 @@ describe('	Test:	', function() {
   	});
   	
   	describe('addData', function() {
-  		it('data should be appended when this function is called', function() {
+  		var timeObject;
+  		
+  		beforeEach(function() {
+  			timeObject = {index: 0, time: "00:00.00", date: (new Date()).setDate(0)};
+  		});
+  		it('data should be appended when this function is called with proper args', function() {
   			var oldRawLength = statistics.raw.length;
   			var oldDataLength = statistics.data.length;
-  			var timeObject = {time: "00:00.00"};
+  			
   			statistics.addData(timeObject);
   			expect(statistics.raw.length).toBe(oldRawLength + 1);
   			expect(statistics.data.length).toBe(oldDataLength + 1);
+  			expect(statistics.raw[statistics.raw.length - 1]).toEqual(timeObject);
   		});
-  		it("data should be a longer array after this function is called", function() {expect(true).toBe(false)});
   		it("data that doesn't have a date object and/or a times string should not be appended", function () {expect(true).toBe(false)});
   		it("data should be added to the end of the array", function() {expect(true).toBe(false)});
   	});
   	describe('loadData', function() {
   		it("data should change in some way when function is called", function() {expect(true).toBe(false)});
-  		it("stats.data should contain integers", function() {expect(true).toBe(false)});
-  		it("stats.data should be defined still", function() {expect(true).toBe(false)});
+  		it("stats.data should contain integers", function() {
+				var index = random(statistics.data.length);
+  		});
+  		it("stats.data should be defined still", function() {
+  			expect(statistics.data).not.toBe(undefined);
+  		});
   	});
   	describe('mean', function() {
   		it("stats.mean should change if mean() is called", function() {expect(true).toBe(false)});
