@@ -12,13 +12,13 @@ module.exports = function(config) {
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: [/*'mocha',*/'jasmine'],
 
-    plugins: [
+    /*plugins: [
       'karma-jasmine',
       'karma-coverage',
       'karma-ng-html2js-preprocessor',
       'karma-phantomjs-launcher',
       'karma-jasmine-spec-runner-reporter'
-    ],
+    ],*/
 
     // list of files / patterns to load in the browser
     files: [
@@ -61,8 +61,19 @@ module.exports = function(config) {
     reporters: [
       'coverage', 
       'progress',
+      'junit',
       'jasmine-spec-runner'
     ],
+    
+    junitReporter: {
+      outputDir: 'junit', // results will be saved as $outputDir/$browserName.xml
+      outputFile: (new Date()).toTimeString(), // if included, results will be saved as $outputDir/$browserName/$outputFile
+      suite: '', // suite will become the package name attribute in xml testsuite element
+      useBrowserName: true, // add browser name to report and classes names
+      nameFormatter: undefined, // function (browser, result) to customize the name attribute in xml testcase element
+      classNameFormatter: undefined, // function (browser, result) to customize the classname attribute in xml testcase element
+      properties: {} // key value pair of properties to add to the <properties> section of the report
+    },
 
     jasmineSpecRunnerReporter: {
       jasmineCoreDir: 'node-modules/jasmine-core'
