@@ -383,8 +383,9 @@ describe('	Test:	', function() {
 					});
 					
 					describe('if value is defined', function() {
+						var value;
 						beforeEach(function() {
-							var value = {maxNumber: 6, options: [0, 1, 2, 3, 4, 5]};
+							value = {maxNumber: 6, options: [0, 1, 2, 3, 4, 5]};
 						});
 						it("should save by calling $cookies.putObject", function() {
 							spyOn($cookies, 'putObject');
@@ -412,13 +413,18 @@ describe('	Test:	', function() {
   					});
 					});
 					describe('cards is not defined', function() {
+						beforeEach(function() {
+							flashCardData.data.cards = undefined;
+							cookieData.cards = {maxNumber: 6, options: [0, 1, 2, 3, 4, 5]};
+						});
 						it("should assign it to a default value and save", function() {
-							spyOn($cookies, 'putObject'	);
+							spyOn($cookies, 'putObject');
 							flashCardData.saveCards();
+							console.log("cookieData.cards: " + angular.toJson(cookieData.cards));
 							expect($cookies.putObject).toHaveBeenCalledWith(cookieStrings.dataCards, cookieData.cards);
 						});
 						it("should be able to retrieve the saved value through $cookies.getObject", function() {
-							spyOn($cookies, 'putObject'	);
+							spyOn($cookies, 'putObject').and.callThrough();
 							flashCardData.saveCards();
 							expect($cookies.getObject(cookieStrings.dataCards)).toEqual(cookieData.cards);
 						});

@@ -175,13 +175,28 @@ angular
   	}
   	
   	factory.saveCards = function(newValue) {
-  		$cookies.putObject(factory.cookies.dataCards, newValue);
+			if (arguments.length === 1) {
+				if (newValue !== undefined) {
+  				$cookies.putObject(factory.cookies.dataCards, newValue);
+				}
+  		} else {
+  			if (angular.isDefined(factory.data.cards)) {
+  				console.log("Defined.");
+  				$cookies.putObject(factory.cookies.dataCards, factory.data.cards);
+  			} else {
+  				console.log("factory.data.cards: " + angular.toJson(factory.data.cards));
+  				factory.data.cards = angular.copy(cookieData.cards, factory.data.cards);
+  				console.log("factory.data.cards: " + angular.toJson(factory.data.cards));
+  				$cookies.putObject(factory.cookies.dataCards, cookieData.cards);
+  			}
+  		}
   	}
   	
   	factory.getCards = function() {
   		if (angular.isDefined(factory.data.cards)) {
   			return(factory.data.cards);
   		}
+  		factory.data.cards = cookieData.cards;
   		return cookieData.cards;
   	}
   	

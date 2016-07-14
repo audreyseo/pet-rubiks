@@ -90,7 +90,14 @@ describe('	Test:	', function() {
   	});
   	
   	describe('addData', function() {
-  		it('data should be appended when this function is called', function() {expect(true).toBe(false)});
+  		it('data should be appended when this function is called', function() {
+  			var oldRawLength = statistics.raw.length;
+  			var oldDataLength = statistics.data.length;
+  			var timeObject = {time: "00:00.00"};
+  			statistics.addData(timeObject);
+  			expect(statistics.raw.length).toBe(oldRawLength + 1);
+  			expect(statistics.data.length).toBe(oldDataLength + 1);
+  		});
   		it("data should be a longer array after this function is called", function() {expect(true).toBe(false)});
   		it("data that doesn't have a date object and/or a times string should not be appended", function () {expect(true).toBe(false)});
   		it("data should be added to the end of the array", function() {expect(true).toBe(false)});
