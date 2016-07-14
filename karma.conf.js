@@ -12,6 +12,12 @@ module.exports = function(config) {
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: [/*'mocha',*/'jasmine'],
 
+    plugins: [
+      'karma-jasmine',
+      'karma-coverage',
+      'karma-ng-html2js-preprocessor',
+      'karma-phantomjs-launcher'
+    ],
 
     // list of files / patterns to load in the browser
     files: [
@@ -23,11 +29,11 @@ module.exports = function(config) {
       'app/app.module.js',
       'app/app.config.js',
       'app/*.js', {
-            pattern: '*.spec.js', included: false},
+            pattern: 'app/*.spec.js', included: false},
       'app/**/*.js', {
-               pattern: '**.spec.js', included: false},
+               pattern: 'app/**/*.spec.js', included: false},
       'tests/*.js', {
-            pattern: '*.spec.js', included: false}
+            pattern: 'tests/*.spec.js', included: true}
     ],
 
 
@@ -42,8 +48,8 @@ module.exports = function(config) {
 		'index.html':['ng-html2js'],
 		//'app/*.js':['coverage'],
                 //'app/**/*.js':['coverage'],
-                'app/**/!(*.mock|*.spec).js':['coverage'],
-                'app/!(*.mock|*.spec).js':['coverage']
+                'app/**/!(*.mock|*.spec).js':'coverage',
+                'app/!(*.mock|*.spec).js':'coverage'
     },
 
 
@@ -53,8 +59,10 @@ module.exports = function(config) {
     reporters: ['progress', 'coverage'],
 
     coverageReporter: {
-      type: 'html',
+      type: 'lcov',
+      //type: 'text',
       dir: 'coverage/',
+      //file: '',
       instrumenterOptions: {
         istanbul: { noCompact: true }
       }
@@ -75,7 +83,7 @@ module.exports = function(config) {
 
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: false,
-
+    //autoWatch: true,
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
@@ -98,6 +106,7 @@ module.exports = function(config) {
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: true,
+    //singleRun: false,
 
     // Concurrency level
     // how many browser should be started simultaneous

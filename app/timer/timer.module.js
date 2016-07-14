@@ -118,6 +118,7 @@ function TimerController($scope, $interval, $cookies, $log, statistics) {
   }
   
   function save() {
+        $("#downloadLink").remove();
   	var csvContent = "data:text/csv;charset=utf-8,";
   	$scope.records.forEach(function(infoArray, index){
   		var dataString = "";
@@ -126,15 +127,17 @@ function TimerController($scope, $interval, $cookies, $log, statistics) {
 			} 
   		
 //  	   var dataString = infoArray.join(",");
+//  	   dataString = dataString.substring(0, dataString.length - 1);
   	   csvContent += (index < $scope.records.length) ? dataString + "\n" : dataString;
 
   	}); 
   	var encodedUri = encodeURI(csvContent);
-  	var link = document.createElement("a");
+        var link = document.createElement("a");
+        link.setAttribute("id", "downloadLink");
   	link.setAttribute("href", encodedUri);
   	link.setAttribute("download", "my_data.csv");
-  	$("a").html("Download");
-  	$("#saveTimesButton").after(link);
+  	$(link).html("Download");
+  	$("#saveTimesButton").after('<br>').after(link);
   }
   
   function start() {
@@ -153,7 +156,7 @@ function TimerController($scope, $interval, $cookies, $log, statistics) {
   	$interval.cancel($scope.interval);
 		var date = new Date();
 		date.setDate(date.getDate());
-  	var timeRecordsObject = {time: "", millis: $scope.clock, index: ($scope.records.length + 1), timeStamp: date};
+  	var timeRecordsObject = {index: ($scope.records.length + 1), time: "", millis: $scope.clock, timeStamp: date};
   	timeRecordsObject.time = $scope.time.string;
   	$scope.records.push(timeRecordsObject);
   	$scope.interval = undefined;

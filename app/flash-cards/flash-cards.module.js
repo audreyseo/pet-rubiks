@@ -8,16 +8,16 @@ angular
 	.factory('flashCardData', ['cookieStrings', '$cookies', 'cookieData', function(cookieStringData, $cookies, cookieData) {
   	var factory = {data: cookieData, cookies: cookieStringData, cards: {}};
   //	angular.copy(cookieData, factory.data);
-  	console.log(angular.toJson(cookieData));
+//  	console.log(angular.toJson(cookieData));
   	factory.initialize = function() {
   		for (var ind in factory.data) {
   			if (!angular.isString(factory.data[ind])) {
   				try {
   				 factory.data[ind] = $cookies.getObject(factory.cookies[ind]);
 //  				 console.log("CookieData[ind] Defined?: " + ind + ": " + angular.isDefined(cookieData[ind]));
-  				 console.log("factory.data[" + ind + "] defined: " + (angular.isDefined(factary.data[ind])));
+//  				 console.log("factory.data[" + ind + "] defined: " + (angular.isDefined(factary.data[ind])));
   				 if (angular.isUndefined(factary.data[ind])) {
-  					 console.log("Redefining");
+//  					 console.log("Redefining");
   					 factory.data[ind] = cookieData[ind];
   					 $cookies.putObject(factory.cookies[ind], factory.data[ind]);
   				 }
@@ -25,14 +25,14 @@ angular
   					factory.data[ind] = cookieData[ind];
   					$cookies.putObject(factory.cookies[ind], factory.data[ind]);
   				}
-  				console.log(ind + ": " + angular.toJson(factory.data[ind]) + "  |  " + angular.isDefined(factory.data[ind]));
+//  				console.log(ind + ": " + angular.toJson(factory.data[ind]) + "  |  " + angular.isDefined(factory.data[ind]));
   			}
   		}
   		
   		if (angular.isUndefined(factory.data.practicing)) {
   			factory.data.practicing = {};
   			$cookies.putObject(factory.cookies.practicing, factory.data.practicing);
-  			console.log("Practicing: " + factory.data.practicing);
+//  			console.log("Practicing: " + factory.data.practicing);
   		}
   		
   		for (var i in factory.data.practiceCards) {
@@ -63,11 +63,19 @@ angular
   	};
   	
   	factory.removePracticing = function(caseCode ) {
-  		factory.setPracticing(caseCode, undefined);
+  		if (angular.isDefined(caseCode)) {
+  			if (angular.isDefined(factory.data.practicing[caseCode])) {
+  				factory.setPracticing(caseCode, undefined);
+  			}
+  		}
   	};
   	
   	factory.savePracticing = function(newValue) {
-  		$cookies.putObject(factory.cookies.practicing, newValue);
+  		if (arguments.length === 1) {
+  			$cookies.putObject(factory.cookies.practicing, newValue);
+  		} else {
+  			$cookies.putObject(factory.cookies.practicing, factory.data.practicing);
+  		}
   	};
   	
   	factory.getPracticing = function() {
@@ -86,15 +94,23 @@ angular
   	};
   	
   	factory.setPriority = function(caseCode, value) {
-  		factory.data.cardPriorities[caseCode] = value;
+  		if (caseCode !== undefined && !(caseCode === undefined && value===undefined)) {
+  			factory.data.cardPriorities[caseCode] = value;
+  		}
   	};
   	
   	factory.removePriority = function(caseCode) {
-  		factory.setPriority(caseCode, undefined);
+  		if (caseCode !== undefined) {
+  			factory.setPriority(caseCode, undefined);
+  		}
   	};
   	
   	factory.saveCardPriorities = function(newValue) {
-  		$cookies.putObject(factory.cookies.cardPriorities, newValue);
+  		if (arguments.length === 1) {
+  			$cookies.putObject(factory.cookies.cardPriorities, newValue);
+  		} else {
+  			$cookies.putObject(factory.cookies.cardPriorities, factory.data.cardPriorities);
+  		}
   	};
   	
   	factory.getCardPriorities = function() {
@@ -112,28 +128,30 @@ angular
   	};
   	
   	factory.setCard = function(caseCode, cardValue) {
-  		if (isUndefined(factory.cards[caseCode])) {
-  			factory.cards[caseCode] = cardValue;
-  			factory.data.practiceCards.push(cardValue);
-  		} else {
-  			factory.cards[caseCode] = cardValue;
-  			for (var ind in factory.data.practiceCards) {
-  				if (factory.data.practiceCards[ind].code === caseCode) {
-  					factory.data.practiceCards.splice(ind, 1);
-  					factory.data.practiceCards.push(caseCode, cardValue);
-  					break;
-  				}
-  			}
+  		if (!angular.isUndefined(caseCode)) {
+  			if (angular.isUndefined(factory.cards[caseCode])) {
+    			factory.cards[caseCode] = cardValue;
+    			factory.data.practiceCards.push(cardValue);
+    		} else {
+    			factory.cards[caseCode] = cardValue;
+    			for (var ind in factory.data.practiceCards) {
+    				if (factory.data.practiceCards[ind].code === caseCode) {
+    					factory.data.practiceCards.splice(ind, 1);
+    					factory.data.practiceCards.push(caseCode, cardValue);
+    					break;
+    				}
+    			}
+    		}
   		}
   	};
   	
   	factory.removeCard = function(caseCode) {
-  		if (isUndefined(factory.cards[caseCode])) {
+  		if (angular.isUndefined(factory.cards[caseCode])) {
   			return;
   		} else {
   			factory.cards[caseCode] = undefined;
   			for (var ind in factory.data.practiceCards) {
-  				if (factory.data.practiceCards[ind.code] == caseCode) {
+  				if (factory.data.practiceCards[ind].code === caseCode) {
   					factory.data.practiceCards.splice(ind, 1);
   					break;
   				}
@@ -142,7 +160,11 @@ angular
   	};
   	
   	factory.savePracticeCards = function(newValue) {
-  		$cookies.putObject(factory.cookies.practiceCards, newValue)
+  		if (arguments.length === 1) {
+  			$cookies.putObject(factory.cookies.practiceCards, newValue)
+  		} else {
+  			$cookies.putObject(factory.cookies.practiceCards, factory.data.practiceCards);
+  		}
   	}
   	
   	factory.getPracticeCards = function() {
