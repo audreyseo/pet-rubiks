@@ -127,7 +127,12 @@ describe('	Test:	', function() {
   			expect(statistics.data.length).toBe(oldDataLength + 1);
   			expect(statistics.raw[statistics.raw.length - 1]).toEqual(timeObject);
   		});
-  		it("data that doesn't have a date object and/or a times string should not be appended", function () {expect(true).toBe(false)});
+  		it("data that doesn't have a date object and/or a times string should not be appended", function () {
+  			timeObject = {index: 33};
+  			var oldRawLength = statistics.raw.length;
+  			statistics.addData(timeObject);
+  			expect(statistics.raw.length).toBe(oldRawLength);
+  		});
   		it("data should be added to the end of the array", function() {expect(true).toBe(false)});
   	});
   	describe('loadData', function() {
