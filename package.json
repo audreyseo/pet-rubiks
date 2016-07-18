@@ -7,6 +7,7 @@
     "test": "tests"
   },
   "scripts": {
+    "copy": "cp -R app/*.spec.js tests/ ; cp -R app/**/*.spec.js tests/ ;",
     "test": "cp -R app/*.spec.js tests/ ; cp -R app/**/*.spec.js tests/ ; karma start karma.conf.js",
     "full-test": "cp -R app/*.spec.js tests/ ; cp -R app/**/*.spec.js tests/ ; NODE_ENV=test karma start karma.conf.js",
     "start": "node server.js",
@@ -25,15 +26,24 @@
   "dependencies": {
     "angular": "^1.5.7",
     "angular-mocks": "^1.5.7",
+    "grunt-contrib-watch": "^1.0.0",
     "jasmine": "^2.4.1",
     "jasmine-core": "^2.4.1",
     "karma": "^1.1.1",
-    "mocha": "^2.5.3"
+    "mocha": "^2.5.3",
+    "phantomjs": "^2.1.7"
   },
   "devDependencies": {
     "angular-cookies": "^1.5.7",
     "angular-sanitize": "^1.5.7",
+    "grunt": "^1.0.1",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-exec": "^1.0.0",
+    "grunt-execute": "^0.2.2",
+    "grunt-karma": "^2.0.0",
     "jquery": "^3.1.0",
+    "jshint-stylish": "^2.2.0",
     "karma": "^1.1.1",
     "karma-chrome-launcher": "^1.0.1",
     "karma-coverage": "^1.1.0",

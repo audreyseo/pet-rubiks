@@ -83,7 +83,11 @@ describe('	Test:	', function() {
 					newObject = flashCardData.data.practicing;
 					expect(oldObject).toEqual(newObject);
 				});
-				it("after setting a case code to the its same value, objects should be the same", function() {expect(true).toBe(false)});
+				it("after setting a case code to the its same value, objects should be the same", function() {
+					var old = angular.copy(flashCardData.data.practicing);
+					flashCardData.setPracticing("OLL8", true);
+					expect(flashCardData.data.practicing).toEqual(old);
+				});
 				it("if caseCode is undefined, should not attempt to change data.practicing", function() {
 					flashCardData.setPracticing(undefined, true);
 					expect(flashCardData.getPracticing('undefined')).not.toBe(true);
@@ -420,7 +424,7 @@ describe('	Test:	', function() {
 						it("should assign it to a default value and save", function() {
 							spyOn($cookies, 'putObject');
 							flashCardData.saveCards();
-							console.log("cookieData.cards: " + angular.toJson(cookieData.cards));
+//							console.log("cookieData.cards: " + angular.toJson(cookieData.cards));
 							expect($cookies.putObject).toHaveBeenCalledWith(cookieStrings.dataCards, cookieData.cards);
 						});
 						it("should be able to retrieve the saved value through $cookies.getObject", function() {

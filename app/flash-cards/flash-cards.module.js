@@ -83,7 +83,7 @@ angular
   			return factory.data.practicing;
   		}
   		return cookieData.practicing;
-  	}
+  	};
   	
   	factory.getPriority = function(caseCode) {
   		if (angular.isDefined(factory.data.cardPriorities[caseCode])) {
@@ -118,7 +118,7 @@ angular
   			return(factory.data.cardPriorities);
   		}
   		return(cookieData["cardPriorities"]);
-  	}
+  	};
   	
   	factory.getCard = function(caseCode) {
   		if (angular.isDefined(factory.cards[caseCode])) {
@@ -165,14 +165,14 @@ angular
   		} else {
   			$cookies.putObject(factory.cookies.practiceCards, factory.data.practiceCards);
   		}
-  	}
+  	};
   	
   	factory.getPracticeCards = function() {
   		if (angular.isDefined(factory.data.practiceCards)) {
   			return factory.data.practiceCards;
   		}
   		return cookieData.practiceCards;
-  	}
+  	};
   	
   	factory.saveCards = function(newValue) {
 			if (arguments.length === 1) {
@@ -190,7 +190,7 @@ angular
   				$cookies.putObject(factory.cookies.dataCards, cookieData.cards);
   			}
   		}
-  	}
+  	};
   	
   	factory.getCards = function() {
   		if (angular.isDefined(factory.data.cards)) {
@@ -198,7 +198,7 @@ angular
   		}
   		factory.data.cards = cookieData.cards;
   		return cookieData.cards;
-  	}
+  	};
   	
   	factory.getAlgorithmOption = function(caseCode) {
   		if (angular.isDefined(factory.data.cardOptions[caseCode])) {
@@ -209,22 +209,22 @@ angular
   	
   	factory.setAlgorithmOption = function(caseCode, value) {
   		factory.data.cardOptions[caseCode] = value;
-  	}
+  	};
   	
   	factory.removeAlgorithmOption = function(caseCode) {
   		factory.setAlgorithmOption(caseCode, undefined);
-  	}
+  	};
   	
   	factory.saveCardOptions = function(newValue) {
   		$cookies.putObject(factory.cookies.cardOptions, newValue);
-  	}
+  	};
   	
   	factory.getCardOptions = function() {
   		if (angular.isDefined(factory.data.cardOptions)) {
   			return factory.data.cardOptions;
   		}
   		return cookieData.cardOptions;
-  	}
+  	};
   	
   	return(factory);
 }]);

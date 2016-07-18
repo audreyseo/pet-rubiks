@@ -1,5 +1,5 @@
 [
-	{"img": "/img/num.png", "num": "num", "code": "code", "solve1": {"alg": first_alg, "length": "f_length"}, "solve2": {"alg": second_alg, "length": "s_length"}, "prob": "prob"},
+	{"img": "src", "num": "num", "code": "code", "solve1": {"alg": "first_alg", "length": "f_length"}, "solve2": {"alg": "second_alg", "length": "s_length"}, "prob": "prob"},
 	{"img": "/img/27.png", "num": "27", "code": "OCLL1", "solve1": {"alg": "(R U R' U) R U2 R'", "length": "7"}, "solve2": {"alg": "", "length": "0"}, "prob": "1/54"},
 	{"img": "/img/26.png", "num": "26", "code": "OCLL2", "solve1": {"alg": "R U2 R' U' R U' R'", "length": "7"}, "solve2": {"alg": "", "length": "0"}, "prob": "1/54"},
 	{"img": "/img/22.png", "num": "22", "code": "OCLL3", "solve1": {"alg": "[f (R U R' U') f'][F (R U R' U') F']", "length": "12"}, "solve2": {"alg": "R U2' R2' U' R2 U' R2' U2 R2", "length": "9"}, "prob": "1/54"},

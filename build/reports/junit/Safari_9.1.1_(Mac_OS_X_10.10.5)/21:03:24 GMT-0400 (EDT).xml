@@ -1,0 +1,673 @@
+<?xml version="1.0"?>
+<testsuite name="Safari 9.1.1 (Mac OS X 10.10.5)" package="" timestamp="2016-07-15T01:03:25" id="0" hostname="Audrey.local" tests="141" errors="0" failures="36" time="0.366">
+  <properties>
+    <property name="browser.fullName" value="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/601.6.17 (KHTML, like Gecko) Version/9.1.1 Safari/601.6.17"/>
+  </properties>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.cardPriority functions setPriority if assigning a different value, should be different" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.cardPriority functions setPriority if caseCode is undefined, does not modify data.cardPriorities" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.cardPriority functions setPriority if caseCode and value are both undefined, does not modify cardPriorities" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.cardPriority functions removePriority after called with legit code, data.cardPriorities should be smaller" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.cardPriority functions removePriority after called, and caseCode=undefined, data.cardPriorities should be the same" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.cardPriority functions removePriority should not call setPriority when the caseCode is undefined" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.cardPriority functions saveCardPriorities if called with arguments, then calls $cookies.putObject with that arg" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.cardPriority functions saveCardPriorities once called w/o args, $cookies.putObject should also be called" time="0.008" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.cardPriority functions saveCardPriorities once called w/o args, $cookies.getObject(cookieStrings.cardPriorities) should be the same as cardPriorities" time="0.003" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.cardPriority functions getCardPriorities should return an object" time="0.006" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.cardPriority functions getCardPriorities should return a defined object" time="0.003" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.cardPriority functions getCardPriorities if cardPriorities is undefined should still return an defined object if cookieData['cardPriorities'] is defined" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.cardPriority functions getCardPriorities if cardPriorities is undefined should return cookieData[cardPriorities]" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData cards functions getCard should return an object if this is one of the cards" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData cards functions getCard should return -1 if the object is not one of the cards" time="0.004" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData cards functions getCard should return -1 if caseCode is undefined" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData cards functions setCard if the card is the same card as before, flashCardData.cards should be the same" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData cards functions setCard if a different card is added, flashCardData.cards should be different" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData cards functions setCard if caseCode is undefined, shouldn't do anything to either cards or practiceCards" time="0.003" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData cards functions removeCard if caseCode is undefined, should not modify cards" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData cards functions removeCard if caseCode is undefined, should not modify practiceCards" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.practiceCards functions savePracticeCards when called with args once called, $cookies.putObject should also be called" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.practiceCards functions savePracticeCards when called with args after called, $cookies.getObject(practiceCards) should be the same as fakeData" time="0.003" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.practiceCards functions savePracticeCards when called without args once called, $cookies.putObject should also be called" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.practiceCards functions savePracticeCards when called without args after called, $cookies.getObject(practiceCards) should be the same as practiceCards" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.practiceCards functions getPracticeCards once called, returns practiceCards" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.practiceCards functions getPracticeCards if called and practiceCards is undefined, returns cookieData.practiceCards" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.cards functions saveCards called with args if value is undefined, does not save" time="0.005" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.cards functions saveCards called with args if value is defined should save by calling $cookies.putObject" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.cards functions saveCards called with args if value is defined if saved in cookies, getting it from $cookies.getObject should be the same" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.cards functions saveCards called without args cards is defined save it to the dataCards string" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.cards functions saveCards called without args cards is defined should be able to call the same object through $cookies.getObject" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.cards functions saveCards called without args cards is not defined should assign it to a default value and save" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.cards functions saveCards called without args cards is not defined should be able to retrieve the saved value through $cookies.getObject" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.cards functions getCards cards is defined should return same value as cards" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.cards functions getCards cards is undefined should assign it to default value and return the default value" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Controller: ContentController Should have access to cases" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Controller: ContentController Priority should be changed if the select box is changed" time="0" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics TimeConversion should be defined" time="0.005" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics Statistics' stats should be defined" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics methods should be defined" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics stats' variable mean should be defined" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics stats' variable stdDev should be defined" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics stats' variable variance should be defined" time="0" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics stats' variable mean5 should be defined" time="0" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics stats' variable mean35 should be defined" time="0" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics stats' variable mean10 should be defined" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics stats' variable mean1012 should be defined" time="0.005" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics stats' variable median should be defined" time="0.005" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics stats' variable best should be defined" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics stats' variable worst should be defined" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics stats' variable q1 should be defined" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics stats' variable q3 should be defined" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics stats' variable iqr should be defined" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics stats' variable mean100 should be defined" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics stats' variable range should be defined" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics addData data should be appended when this function is called with proper args" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics addData data that doesn't have a date object and/or a times string should not be appended" time="0.01" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics addData data should be added to the end of the array" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics loadData data should change in some way when function is called" time="0.003" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics loadData stats.data should contain integers" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics loadData stats.data should be defined still" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics calculate once called, the variables of stats should change" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:162:90
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics calculate should be called after loadData is called" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:163:82
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics calculate should be called after addData is called" time="0.006" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:164:81
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions mean stats.mean should change if mean() is called" time="0.008" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions mean mean should be for the entire array" time="0.003" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:187:78
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions mean mean should be 0 if the array is too small" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:188:85
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions mean mean should not be negative" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:189:70
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions variance variance should be for the entire array" time="0.003" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:192:82
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions variance variance should be the standard deviation squared" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:193:92
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions stdDev if the variance is negative, somehow, standard deviation should be 0" time="0.003" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:196:111
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions stdDev standard deviation should be the square root of variance" time="0.012" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:197:99
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions stdDev different sets of numbers should give different standard deviations" time="0.003" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:198:110
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions mean5 after called, and data length ≥ to 5, stats.mean5 should not be the same" time="0.004" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:201:115
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions mean5 different sets of data should give different means of the last 5" time="0.004" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:202:107
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions mean5 after called, and data length &lt; 5, stats.mean5 should be the same" time="0.005" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:203:108
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions mean35 after called, and data length ≥ 5, stats.mean35 should not be the same" time="0.004" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:206:113
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions mean35 after called, and data length &lt; 5, stats.mean35 should be the same" time="0.004" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:207:109
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions mean35 after called, and data is different, stats.mean35 should not be the same" time="0.007" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:208:115
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions mean10 when called, stats.mean10 should only change if the length of the data array is greater than/equal to 10" time="0.006" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:211:147
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions mean1012 encountered a declaration exception" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Error: 'expect' was used when there was no current spec, this could be because an asynchronous test timed out in node_modules/jasmine-core/lib/jasmine-core/jasmine.js (line 938)
+tests/stats.spec.js:213:45
+tests/stats.spec.js:213:14
+tests/stats.spec.js:167:12
+tests/stats.spec.js:20:11
+global code@tests/stats.spec.js:19:9
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions mean100 if the size of the data array is less than 100, mean100 should be zero when this is called" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:215:132
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions q1 after called, q1 should be smaller than q3" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:218:85
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions median after called, and data length greater than 3, median should not be 0" time="0.003" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:221:111
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions median after called, stats.median should change" time="0.003" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:222:83
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions median after called, stats.median should be different for different data" time="0.003" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:223:108
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions q3 after called, and data.length greater han 10, should be greater than q1" time="0.003" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:226:114
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions best after called, and data.length ≥ 3, stats.best should be &lt; stats.worst" time="0.003" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:229:112
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions worst after called, and data.length ≥ 3, stats.worst should be > stats.best" time="0.003" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:232:113
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions iqr after called, stats.iqr should be smaller than the entire range's value" time="0.021" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:235:114
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions range after called, stats.range should be a string if data.length > 3" time="0.006" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:238:106
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: Statistics statistical functions range after called, stats.range should be 0 if data.length ≤ 3" time="0.003" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/stats.spec.js:239:99
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: TimeConversion milliToSecond should be able to handle positive integers and round them" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: TimeConversion milliToMinute should be able to handle positive integers and round" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: TimeConversion getSeconds should be able to handle positive integers and floor them" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: TimeConversion getHours should be able to handle positive integers" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: TimeConversion getHours should be able to handle special, very unlikely cases" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: TimeConversion getMinutes should be able to handle positive integers" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: TimeConversion getMinutes should be able to floor the positive integers properly" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: TimeConversion getMillis should be able to handle positive integers" time="0.013" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: TimeConversion getMillis should be able to handle overflow" time="0.005" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: TimeConversion secondToMilli should handle any positive integer" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: TimeConversion minuteToMilli should handle any positive integer" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: TimeConversion stringToMillis Turn a regular time string in mm:ss.mmm into a number of milliseconds" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: TimeConversion stringToMillis Should be able to handle an abnormal time string in an odd format" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: TimeConversion stringToMillis Should be able to handle cases where the units are not what we're used to" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: TimeConversion stringToMillis Should be able to also handle cases where both the units and the formatting are unfamiliar" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: TimeConversion millisToString Should be able to handle positive integers including and below 59 * 60000 + 59 * 1000 + 999" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="Filter: millisToString Should be able to handle normal, sub-3599999, quantities of milliseconds for formatting" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).Filter: millisToString"/>
+  <testcase name="Filter: millisToString Should be able to handle time strings and return as-is" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).Filter: millisToString"/>
+  <testcase name="Filter: millisToString Should return 0 if it's anything but a number or a time string" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).Filter: millisToString"/>
+  <testcase name="TimerController deleteRecord Deletes a record given an index that is smaller than $scope.records.length" time="0.006" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).TimerController">
+    <failure type="">Error: [ng:areq] Argument 'timerController' is not a function, got undefined
+http://errors.angularjs.org/1.5.7/ng/areq?p0=timerController&amp;p1=not%20a%20function%2C%20got%20undefined in node_modules/angular/angular.js (line 68)
+node_modules/angular/angular.js:68:32
+assertArg@node_modules/angular/angular.js:1885:19
+assertArgFn@node_modules/angular/angular.js:1895:12
+$controller@node_modules/angular/angular.js:10210:20
+node_modules/angular-mocks/angular-mocks.js:2214:21
+tests/timer.spec.js:17:32
+</failure>
+    <failure type="">ReferenceError: Can't find variable: $scope in tests/timer.spec.js (line 23)
+tests/timer.spec.js:23:10
+</failure>
+  </testcase>
+  <testcase name="TimerController deleteRecord Does not delete a record that has a negative index" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).TimerController">
+    <failure type="">Error: [ng:areq] Argument 'timerController' is not a function, got undefined
+http://errors.angularjs.org/1.5.7/ng/areq?p0=timerController&amp;p1=not%20a%20function%2C%20got%20undefined in node_modules/angular/angular.js (line 68)
+node_modules/angular/angular.js:68:32
+assertArg@node_modules/angular/angular.js:1885:19
+assertArgFn@node_modules/angular/angular.js:1895:12
+$controller@node_modules/angular/angular.js:10210:20
+node_modules/angular-mocks/angular-mocks.js:2214:21
+tests/timer.spec.js:17:32
+</failure>
+    <failure type="">ReferenceError: Can't find variable: $scope in tests/timer.spec.js (line 29)
+tests/timer.spec.js:29:10
+</failure>
+  </testcase>
+  <testcase name="Filter: colorCodeAlgorithms should be able to recognize all 9 sequences" time="0.004" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).Filter: colorCodeAlgorithms"/>
+  <testcase name="Filter: colorCodeAlgorithms should return blanks for blank sequences" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).Filter: colorCodeAlgorithms"/>
+  <testcase name="Filter: colorCodeAlgorithms inputs without the 9 sequences should be returned as-is" time="0.003" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).Filter: colorCodeAlgorithms"/>
+  <testcase name="&#x9;Test:&#x9; Controller: CubeScrambler scramble When CubeScrambler is instantiated, it already has a scrambling code initialized" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/cube-scrambler.spec.js:8:120
+loaded@http://127.0.0.1:9876/context.js:151:17
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Controller: CubeScrambler scramble When $scope.scramble is called, $scope.code should change" time="0" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/cube-scrambler.spec.js:9:97
+loaded@http://127.0.0.1:9876/context.js:151:17
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Controller: CubeScrambler scramble When $scope.scramble is not called, $scope.code should not change" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/cube-scrambler.spec.js:10:105
+loaded@http://127.0.0.1:9876/context.js:151:17
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData both the module and its functions should be defined" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData its dependencies should be defined" time="0.003" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData initialize After initialization, flashCards' objects should be initialized" time="0.006" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.practicing functions isPracticing should return the correct boolean value given a proper case code" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.practicing functions isPracticing should return false if given a case code results in undefined" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.practicing functions isPracticing should return false if given an undefined case code" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.practicing functions setPracticing even after setting a case code to the opposite value, the refs to the objects should be the same" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.practicing functions setPracticing after setting a case code to the its same value, objects should be the same" time="0.014" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;">
+    <failure type="">Expected true to be false.
+tests/flash-cards.spec.js:86:116
+loaded@http://127.0.0.1:9876/context.js:151:17
+</failure>
+  </testcase>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.practicing functions setPracticing if caseCode is undefined, should not attempt to change data.practicing" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.practicing functions removePracticing once called with legit data, setPracticing should be called" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.practicing functions removePracticing if called with caseCode=undefined, should not attempt to do anything" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.practicing functions removePracticing if called and data.practicing[caseCode] is undefined, should not do anything" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.practicing functions savePracticing when called w/o arguments, $cookies.putObject() should be called but with data.practicing" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.practicing functions savePracticing when called w/ argument, $cookies.putObject() should be called but with our data" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.practicing functions savePracticing after called w/o args, $cookies.getObject(cookies.practicing) should be the same as data.practicing" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.practicing functions getPracticing if data.practicing is defined, should return" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.practicing functions getPracticing if data.practicing is undefined, should return cookieData.practicing" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.cardPriority functions getPriority if data.cardPriorities[caseCode] is defined, returns a value ≥ 0" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.cardPriority functions getPriority if data.cardPriorities[caseCode] is undefined, returns -1" time="0.002" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.cardPriority functions getPriority if caseCode is undefined, returns a -1" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <testcase name="&#x9;Test:&#x9; Factory: FlashCardData data.cardPriority functions setPriority if cardPriorities[caseCode] was undefined before, and a defined value is passed through, should be defined now" time="0.001" classname="Safari_9_1_1_(Mac_OS_X_10_10_5).&#x9;Test:&#x9;"/>
+  <system-out>
+    <![CDATA[Safari 9.1.1 (Mac OS X 10.10.5) LOG: 'Defined.'
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 'Defined.'
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 'Defined.'
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 'cookieData.cards: {"maxNumber":6,"options":[0,1,2,3,4,5]}'
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 'Defined.'
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 33724
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 86690
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 23634
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 3030
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 2562
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 41582
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 20828
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 22405
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 39319
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 32422
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 88749
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 2496
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 19207
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 25268
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 28206
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 2101
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 93456
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 37380
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 94154
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [32422, 88749, 2496, 19207, 25268, 28206, 2101, 93456, 37380, 94154]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:32.422', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:88.749', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:2.496', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:19.207', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:25.268', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:28.206', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:2.101', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:93.456', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:37.380', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:94.154', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 80663
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 59886
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 47626
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 44674
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 97709
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 22448
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 55941
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 6678
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 12700
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 42331
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [80663, 59886, 47626, 44674, 97709, 22448, 55941, 6678, 12700, 42331]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:80.663', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:59.886', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:47.626', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:44.674', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:97.709', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:22.448', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:55.941', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:6.678', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:12.700', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:42.331', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 74808
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 54517
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 22680
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 20887
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 82280
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 76619
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 41539
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 93625
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 79926
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 33365
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [74808, 54517, 22680, 20887, 82280, 76619, 41539, 93625, 79926, 33365]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:74.808', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:54.517', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:22.680', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:20.887', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:82.280', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:76.619', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:41.539', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:93.625', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:79.926', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:33.365', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 48969
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 30558
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 89521
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 2838
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 31638
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 70554
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 72150
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 17496
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 45064
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 55022
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [48969, 30558, 89521, 2838, 31638, 70554, 72150, 17496, 45064, 55022]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:48.969', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:30.558', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:89.521', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:2.838', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:31.638', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:70.554', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:72.150', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:17.496', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:45.64', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:55.22', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 23052
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 55511
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 88910
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 99023
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 42391
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 51182
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 69424
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 39389
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 90309
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 56404
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [23052, 55511, 88910, 99023, 42391, 51182, 69424, 39389, 90309, 56404]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:23.52', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:55.511', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:88.910', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:99.23', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:42.391', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:51.182', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:69.424', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:39.389', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:90.309', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:56.404', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 46332
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 75888
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 43056
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 9297
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 3579
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 77201
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 23527
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 65641
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 42163
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 2873
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [46332, 75888, 43056, 9297, 3579, 77201, 23527, 65641, 42163, 2873]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:46.332', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:75.888', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:43.56', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:9.297', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:3.579', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:77.201', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:23.527', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:65.641', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:42.163', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:2.873', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 78246
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 86682
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 49406
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 84956
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 97492
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 23966
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 83883
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 54606
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 17332
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 62711
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [78246, 86682, 49406, 84956, 97492, 23966, 83883, 54606, 17332, 62711]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:78.246', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:86.682', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:49.406', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:84.956', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:97.492', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:23.966', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:83.883', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:54.606', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:17.332', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:62.711', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 74520
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 30886
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 92893
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 93588
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 9417
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 3002
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 90477
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 28656
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 47602
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 27487
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [74520, 30886, 92893, 93588, 9417, 3020, 90477, 28656, 47602, 27487]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:74.520', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:30.886', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:92.893', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:93.588', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:9.417', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:3.2', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:90.477', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:28.656', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:47.602', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:27.487', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 1308
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 57223
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 18596
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 28585
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 46413
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 20929
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 6902
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 1578
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 91160
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 68034
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [1308, 57223, 18596, 28585, 46413, 20929, 6902, 1578, 91160, 68034]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:1.308', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:57.223', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:18.596', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:28.585', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:46.413', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:20.929', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:6.902', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:1.578', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:91.160', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:68.34', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 3398
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 29747
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 64888
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 32549
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 80433
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 25059
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 59726
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 36409
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 97772
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 88472
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [3398, 29747, 64888, 32549, 80433, 25059, 59726, 36409, 97772, 88472]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:3.398', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:29.747', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:64.888', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:32.549', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:80.433', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:25.59', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:59.726', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:36.409', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:97.772', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:88.472', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 48474
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 70341
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 57776
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 12601
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 85869
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 61466
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 21825
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 44765
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 77523
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 94613
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [48474, 70341, 57776, 12601, 85869, 61466, 21825, 44765, 77523, 94613]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:48.474', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:70.341', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:57.776', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:12.601', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:85.869', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:61.466', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:21.825', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:44.765', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:77.523', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:94.613', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 79175
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 23580
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 46090
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 50886
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 98287
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 72890
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 42016
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 4704
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 46275
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 60847
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [79175, 23580, 46090, 50886, 98287, 72890, 42016, 4704, 46275, 60847]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:79.175', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:23.580', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:46.90', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:50.886', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:98.287', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:72.890', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:42.16', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:4.704', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:46.275', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:60.847', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 38168
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 83285
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 44219
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 12524
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 90041
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 18439
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 23801
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 73330
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 76083
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 56174
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [38168, 83285, 44219, 12524, 90041, 18439, 23801, 73330, 76083, 56174]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:38.168', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:83.285', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:44.219', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:12.524', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:90.41', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:18.439', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:23.801', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:73.330', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:76.83', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:56.174', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 74588
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 51997
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 48955
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 47826
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 16035
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 75747
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 9185
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 26254
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 43001
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 51620
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [74588, 51997, 48955, 47826, 16035, 75747, 9185, 26254, 43010, 51620]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:74.588', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:51.997', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:48.955', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:47.826', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:16.35', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:75.747', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:9.185', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:26.254', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:43.1', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:51.620', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 35153
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 27003
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 43316
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 74567
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 50464
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 19525
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 21893
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 3632
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 61264
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 10902
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [35153, 27030, 43316, 74567, 50464, 19525, 21893, 3632, 61264, 10902]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:35.153', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:27.3', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:43.316', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:74.567', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:50.464', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:19.525', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:21.893', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:3.632', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:61.264', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:10.902', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 75439
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 51158
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 18772
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 82637
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 48359
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 60136
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 49965
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 6369
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 4668
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 60771
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [75439, 51158, 18772, 82637, 48359, 60136, 49965, 6369, 4668, 60771]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:75.439', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:51.158', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:18.772', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:82.637', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:48.359', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:60.136', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:49.965', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:6.369', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:4.668', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:60.771', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 67309
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 84950
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 22002
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 60307
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 73634
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 55558
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 3719
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 62239
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 1320
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 67677
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [67309, 84950, 22020, 60307, 73634, 55558, 3719, 62239, 1320, 67677]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:67.309', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:84.950', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:22.2', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:60.307', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:73.634', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:55.558', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:3.719', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:62.239', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:1.320', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:67.677', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 46992
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 45533
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 8124
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 70589
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 14910
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 78154
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 35838
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 50655
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 54708
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 74343
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [46992, 45533, 8124, 70589, 14910, 78154, 35838, 50655, 54708, 74343]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:46.992', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:45.533', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:8.124', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:70.589', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:14.910', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:78.154', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:35.838', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:50.655', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:54.708', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:74.343', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 68776
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 94313
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 77945
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 66632
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 13842
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 94895
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 83738
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 90212
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 34684
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 96519
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [68776, 94313, 77945, 66632, 13842, 94895, 83738, 90212, 34684, 96519]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:68.776', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:94.313', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:77.945', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:66.632', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:13.842', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:94.895', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:83.738', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:90.212', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:34.684', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:96.519', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 86338
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 77638
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 94184
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 68666
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 24170
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 80952
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 9151
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 15074
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 96111
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 2870
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [86338, 77638, 94184, 68666, 24170, 80952, 9151, 15074, 96111, 2870]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:86.338', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:77.638', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:94.184', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:68.666', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:24.170', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:80.952', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:9.151', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:15.74', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:96.111', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:2.870', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 3147
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 27832
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 93255
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 87102
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 17124
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 49510
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 66721
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 72208
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 7769
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 31518
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [3147, 27832, 93255, 87102, 17124, 49510, 66721, 72208, 7769, 31518]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:3.147', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:27.832', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:93.255', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:87.102', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:17.124', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:49.510', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:66.721', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:72.208', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:7.769', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:31.518', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 26074
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 67411
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 37153
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 26747
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 87782
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 64994
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 81283
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 82336
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 44285
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 33562
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [26074, 67411, 37153, 26747, 87782, 64994, 81283, 82336, 44285, 33562]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:26.74', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:67.411', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:37.153', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:26.747', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:87.782', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:64.994', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:81.283', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:82.336', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:44.285', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:33.562', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 19005
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 70096
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 1532
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 92392
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 44784
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 69987
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 63349
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 47254
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 4780
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 21645
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [19050, 70096, 1532, 92392, 44784, 69987, 63349, 47254, 4780, 21645]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:19.5', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:70.96', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:1.532', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:92.392', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:44.784', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:69.987', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:63.349', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:47.254', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:4.780', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:21.645', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 42084
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 42093
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 4610
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 30637
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 67617
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 12427
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 91190
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 23886
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 65733
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 22321
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [42084, 42093, 4610, 30637, 67617, 12427, 91190, 23886, 65733, 22321]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:42.84', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:42.93', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:4.610', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:30.637', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:67.617', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:12.427', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:91.190', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:23.886', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:65.733', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:22.321', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 36504
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 72475
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 2476
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 42789
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 56285
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 65295
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 10220
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 76217
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 100904
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 20817
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [36504, 72475, 2476, 42789, 56285, 65295, 10220, 76217, 100904, 20817]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:36.504', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:72.475', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:2.476', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:42.789', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:56.285', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:65.295', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:10.220', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:76.217', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:100.904', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:20.817', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 39340
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 70318
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 23522
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 26270
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 34218
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 82337
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 98677
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 6526
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 100614
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 68867
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [39340, 70318, 23522, 26270, 34218, 82337, 98677, 6526, 100614, 68867]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:39.340', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:70.318', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:23.522', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:26.270', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:34.218', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:82.337', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:98.677', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:6.526', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:100.614', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:68.867', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 60247
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 40687
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 45884
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 10849
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 85617
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 59842
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 7698
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 91879
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 11359
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 15241
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [60247, 40687, 45884, 10849, 85617, 59842, 7698, 91879, 11359, 15241]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:60.247', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:40.687', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:45.884', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:10.849', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:85.617', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:59.842', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:7.698', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:91.879', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:11.359', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:15.241', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 51827
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 31748
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 53386
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 30885
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 52712
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 44170
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 11161
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 38593
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 86263
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: 52120
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [51827, 31748, 53386, 30885, 52712, 44170, 11161, 38593, 86263, 52120]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: [Object{index: 1, time: '0:51.827', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 2, time: '0:31.748', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 3, time: '0:53.386', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 4, time: '0:30.885', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 5, time: '0:52.712', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 6, time: '0:44.170', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 7, time: '0:11.161', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 8, time: '0:38.593', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 9, time: '0:86.263', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}, Object{index: 10, time: '0:52.120', timeStamp: Wed Dec 31 1969 19:00:00 GMT-0500 (EST)}]
+,Safari 9.1.1 (Mac OS X 10.10.5) LOG: '00:00.000'
+
+]]>
+  </system-out>
+  <system-err/>
+</testsuite>

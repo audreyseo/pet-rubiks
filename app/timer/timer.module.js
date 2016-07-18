@@ -38,8 +38,8 @@ function TimerController($scope, $interval, $cookies, $log, statistics) {
 //  for (thing in $scope.statistics) {
 //  	console.log(typeof $scope.statistics[thing]);
 //  }
-  
   $scope.getCookies();
+  
   $scope.reset();
   
   $scope.myStats.loadData($scope.records);

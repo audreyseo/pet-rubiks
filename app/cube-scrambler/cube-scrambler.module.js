@@ -4,8 +4,7 @@
 
 angular.module('myApp').controller('cubeScrambler', CubeScrambler);
 
-function CubeScrambler($scope) {
-	
+function CubeScrambler($scope) {	
 	$scope.code = "";
 	$scope.code333 = [
 	          		    [

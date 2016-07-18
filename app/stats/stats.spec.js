@@ -2,38 +2,36 @@
  * http://usejsdoc.org/
  */
 
+function randomTimeObject(i) {
+	var millis = parseInt(Math.random() * 100000) + 1000;
+	var min = parseInt(millis / (60 * 60 * 1000));
+	var sec = parseInt((millis % (60 * 60 * 1000)) / 1000);
+	var mil = millis % 1000;
+	var date2 = new Date();
+	date2.setTime(0);
+	var template = "aa:bb.ccc";
+	var thisTime = template.replace(/(aa)/, min).replace(/(bb)/, sec).replace(/(ccc)/, mil);
+	var timeObject = {index: i + 1, time: thisTime, timeStamp: date2};
+	return timeObject;
+}
+
+function generateTimeArray(max) {
+	var data = [];
+	for (var i = 0; i < max; i++) {
+		data.push(randomTimeObject(i))
+	}
+	return(data);
+}
+
 describe('	Test:	', function() {
   describe('Factory: Statistics', function() {
   	var statistics, timeConversion;
-  	
-  	var data = [];
-  	var myRawData = [];
-  	
+  	  	
   	beforeEach(module('myApp'));
   	beforeEach(inject(function(_statistics_, _timeConversion_) {
   		statistics = _statistics_;
   		timeConversion = _timeConversion_;
   	}));
-  	
-  	beforeEach(function() {
-  		var max = parseInt(Math.random(20, 30));
-  		
-  		for (var i = 0; i < max; i++) {
-  			var millis = parseInt(Math.random(1000, 100000));
-  			var date = new Date();
-  			date.setTime(millis);
-  			var min = parseInt(millis / (60 * 60 * 1000));
-  			var sec = parseInt((millis % (60 * 60 * 1000)) / 1000);
-  			var mil = millis % 1000;
-  			var date2 = new Date();
-  			date2.setTime(0);
-  			
-  			var template = "a:b.c";
-  			var thisTime = template.replace(/([a])/, min).replace(/([b])/, sec).replace(/([c])/, mil);
-  			var timeObject = {index: i + 1, time: thisTime, date: date2};
-  			myRawData.push(timeObject);
-  		}
-  	});
   	
   	it('TimeConversion should be defined', function() {
   		expect(angular.isDefined(timeConversion)).toBe(true);
@@ -116,7 +114,7 @@ describe('	Test:	', function() {
   		var timeObject;
   		
   		beforeEach(function() {
-  			timeObject = {index: 0, time: "00:00.00", date: (new Date()).setDate(0)};
+  			timeObject = {index: 0, time: "00:00.00", timeStamp: (new Date()).setDate(0)};
   		});
   		it('data should be appended when this function is called with proper args', function() {
   			var oldRawLength = statistics.raw.length;
@@ -133,77 +131,406 @@ describe('	Test:	', function() {
   			statistics.addData(timeObject);
   			expect(statistics.raw.length).toBe(oldRawLength);
   		});
-  		it("data should be added to the end of the array", function() {expect(true).toBe(false)});
+  		it("data should be added to the end of the array", function() {
+  			statistics.addData(timeObject);
+  			var length = statistics.raw.length;
+  			expect(statistics.raw[length - 1]).toEqual(timeObject);
+  			expect(statistics.data[length - 1]).toEqual(timeConversion.stringToMillis(timeObject.time));
+  		});
   	});
+  	
   	describe('loadData', function() {
-  		it("data should change in some way when function is called", function() {expect(true).toBe(false)});
+  		beforeEach(function() {
+    		myRawData = [];
+    		for (var i = 0; i < 3; i++) {
+    			myRawData.push(randomTimeObject(i));
+    		}
+    	});
+  		it("data should change in some way when function is called", function() {
+  			var oldData;
+  			oldData = angular.copy(statistics.data, oldData);
+  			statistics.loadData(myRawData);
+  			expect(statistics.raw).toEqual(myRawData);
+  			expect(statistics.data).not.toEqual(oldData);
+  		});
   		it("stats.data should contain integers", function() {
-				var index = random(statistics.data.length);
+  			statistics.loadData(myRawData);
+				var index = parseInt(Math.random(statistics.data.length));
+				expect(Number.isInteger(statistics.data[index])).toBe(true);
+				index = (index + parseInt(Math.random(1000))) % statistics.data.length;
+				expect(Number.isInteger(statistics.data[index])).toBe(true);
   		});
   		it("stats.data should be defined still", function() {
   			expect(statistics.data).not.toBe(undefined);
   		});
   	});
-  	describe('mean', function() {
-  		it("stats.mean should change if mean() is called", function() {expect(true).toBe(false)});
-  		it("mean should be for the entire array", function() {expect(true).toBe(false)});
-  		it("mean should be 0 if the array is too small", function() {expect(true).toBe(false)});
-  		it("mean should not be negative", function() {expect(true).toBe(false)});
-  	});
-  	describe('variance', function() {
-  		it("variance should be for the entire array", function() {expect(true).toBe(false)});
-  		it("variance should be the standard deviation squared", function() {expect(true).toBe(false)});
-  	});
-  	describe('stdDev', function() {
-  		it("if the variance is negative, somehow, standard deviation should be 0", function() {expect(true).toBe(false)});
-  		it("standard deviation should be the square root of variance", function() {expect(true).toBe(false)});
-  		it("different sets of numbers should give different standard deviations", function() {expect(true).toBe(false)});
-  	});
-  	describe('mean5', function() {
-  		it("after called, and data length ≥ to 5, stats.mean5 should not be the same", function() {expect(true).toBe(false)});
-  		it("different sets of data should give different means of the last 5", function() {expect(true).toBe(false)});
-  		it("after called, and data length < 5, stats.mean5 should be the same", function() {expect(true).toBe(false)});
-  	});
-  	describe('mean35', function() {
-  		it("after called, and data length ≥ 5, stats.mean35 should not be the same", function() {expect(true).toBe(false)});
-  		it("after called, and data length < 5, stats.mean35 should be the same", function() {expect(true).toBe(false)});
-  		it("after called, and data is different, stats.mean35 should not be the same", function() {expect(true).toBe(false)});
-  	});
-  	describe('mean10', function() {
-  		it("when called, stats.mean10 should only change if the length of the data array is greater than/equal to 10", function() {expect(true).toBe(false)});
-  	});
-  	describe('mean1012', function() {expect(true).toBe(false)});
-  	describe('mean100', function() {
-			it("if the size of the data array is less than 100, mean100 should be zero when this is called", function() {expect(true).toBe(false)});
-  	});
-  	describe('q1', function() {
-  		it("after called, q1 should be smaller than q3", function() {expect(true).toBe(false)});
-  	});
-  	describe('median', function() {
-  		it("after called, and data length greater than 3, median should not be 0", function() {expect(true).toBe(false)});
-  		it("after called, stats.median should change", function() {expect(true).toBe(false)});
-  		it("after called, stats.median should be different for different data", function() {expect(true).toBe(false)});
-  	});
-  	describe('q3', function() {
-  		it("after called, and data.length greater han 10, should be greater than q1", function() {expect(true).toBe(false)});
-  	});
-  	describe('best', function() {
-  		it("after called, and data.length ≥ 3, stats.best should be < stats.worst", function() {expect(true).toBe(false)});
-  	});
-  	describe('worst', function() {
-  		it("after called, and data.length ≥ 3, stats.worst should be > stats.best", function () {expect(true).toBe(false)});
-  	});
-  	describe('iqr', function() {
-  		it("after called, stats.iqr should be smaller than the entire range's value", function() {expect(true).toBe(false)});
-  	});
-  	describe('range', function() {
-  		it("after called, stats.range should be a string if data.length > 3", function() {expect(true).toBe(false)});
-  		it("after called, stats.range should be 0 if data.length ≤ 3", function() {expect(true).toBe(false)});
-  	});
+  	
   	describe('calculate', function() {
-  		it("once called, the variables of stats should change", function() {expect(true).toBe(false)});
-  		it("should be called after loadData is called", function() {expect(true).toBe(false)});
-  		it("should be called after addData is called", function() {expect(true).toBe(false)});
+  		var myRawData;
+  		beforeEach(function() {
+    		myRawData = generateTimeArray(10);
+    		statistics.loadData(myRawData);
+    		statistics.calculate();
+    	});
+  		it("once called, the variables of stats should change", function() {
+  			var stats1 = angular.copy(statistics.stats);
+  			myRawData = generateTimeArray(11);
+  			statistics.loadData(myRawData);
+  			statistics.calculate();
+  			expect(stats1).not.toEqual(statistics.stats);
+  		});
+  		it("should be called after loadData is called", function() {
+  			spyOn(statistics, 'calculate');
+  			statistics.loadData(myRawData);
+  			expect(statistics.calculate).toHaveBeenCalled();
+  		});
+  		it("should be called after addData is called", function() {
+  			spyOn(statistics, 'calculate');
+  			statistics.addData(myRawData[1]);
+  			expect(statistics.calculate).toHaveBeenCalled();
+  		});
+  	});
+  	
+  	describe('statistical functions', function() {
+  		var myRawData;
+  		beforeEach(function() {
+    		myRawData = generateTimeArray(20);
+    		statistics.loadData(myRawData);
+//    		statistics.calculate();
+    	});
+    	
+    	describe('mean', function() {
+    		it("stats.mean should change if mean() is called", function() {
+    			var oldMean = statistics.stats.mean;
+    			statistics.mean();
+    			statistics.loadData(generateTimeArray(20));
+    			expect(statistics.stats.mean).not.toEqual(oldMean);
+    		});
+    		it("mean should be -1 if the array is too small", function() {
+    			var randomData = myRawData.slice(1, 5);
+    			statistics.loadData(randomData);
+    			statistics.mean();
+    			expect(statistics.stats.mean).toEqual(-1);
+    		});
+    		it("mean should not be negative", function() {
+    			statistics.loadData(myRawData);
+    			statistics.mean();
+    			expect(statistics.stats.mean < 0).toBe(false);
+    		});
+    	});
+    	describe('stdDev', function() {
+    		it("if the variance is negative, somehow, standard deviation should be -1", function() {
+    			statistics.stats.variance = Math.random() * 1000 * -1;
+    			statistics.stdDev();
+    			expect(statistics.stats.stdDev).toEqual(-1);
+    		});
+    		it("standard deviation should be the square root of variance", function() {
+    			expect(statistics.stats.stdDev).toEqual(Math.pow(statistics.stats.variance, 0.5));
+    			statistics.loadData(myRawData);
+    			statistics.mean();
+    			statistics.variance();
+    			statistics.stdDev();
+    			expect(statistics.stats.stdDev).toEqual(Math.pow(statistics.stats.variance, 0.5));
+    		});
+    		it("different sets of numbers should give different standard deviations", function() {
+    			statistics.loadData(myRawData);
+    			statistics.mean();
+    			statistics.variance();
+    			statistics.stdDev();
+    			var sd1 = statistics.stats.stdDev;
+    			myRawData = [];
+    			for (var i = 0; i < 14; i++) {
+    				myRawData.push(randomTimeObject(i));
+    			}
+    			statistics.loadData(myRawData);
+    			statistics.mean();
+    			statistics.variance();
+    			statistics.stdDev();
+    			var sd2 = statistics.stats.stdDev;
+    			expect(sd1).not.toBe(sd2);
+    		});
+    		it("if the length of data ≤ 5, stddev should be -1", function() {
+    			var randomData = myRawData.slice(3, 5);
+    			statistics.loadData(randomData);
+    			statistics.mean();
+    			statistics.variance();
+    			statistics.stdDev();
+    			expect(statistics.stats.stdDev).toBe(-1);
+    		});
+//    		it("if data.length > -1 and mean = -1, should call mean() and variance() before calculating", function() {
+//    			statistics.loadData(myRawData);
+//    			spyOn(statistics, 'mean').and.callThrough();
+//    			spyOn(statistics, 'variance').and.callThrough();
+//    			statistics.stdDev();
+//    			expect(statistics.mean).toHaveBeenCalled();
+//    			expect(statistics.variance).toHaveBeenCalled();
+//    		});
+    	});
+    	describe('variance', function() {
+    		it("if mean is -1, calls mean()", function() {
+    			statistics.loadData(myRawData);
+    			statistics.stats.mean = -1;
+    			spyOn(statistics, 'mean').and.callThrough();
+    			statistics.variance();
+    			expect(statistics.mean).toHaveBeenCalled();
+    		});
+    		it("if the length of data ≤ 5, variance should be -1", function() {
+    			var randData = myRawData.slice(2, 5);
+    			statistics.loadData(randData);
+    			statistics.mean();
+    			statistics.variance();
+    			expect(statistics.stats.variance).toBe(-1);
+    		});
+    		it("if the length of data is suddenly ≤ 5, and recalculated, variance should be -1", function() {
+    			statistics.loadData(myRawData);
+    			statistics.variance();
+    			var oldVariance = statistics.stats.variance;
+    			var randData = myRawData.slice(4, 5);
+    			statistics.loadData(randData);
+    			statistics.variance();
+    			expect(statistics.stats.variance).not.toEqual(oldVariance);
+    			expect(statistics.stats.variance).toEqual(-1);
+    		});
+    		it("variance should be the standard deviation squared", function() {
+    			statistics.loadData(myRawData);
+    			statistics.variance();
+    			statistics.stdDev();
+    			expect((statistics.stats.variance).toFixed(2)).toEqual((Math.pow(statistics.stats.stdDev, 2)).toFixed(2));
+    		});
+    	});
+    	describe('mean5', function() {
+    		beforeEach(function() {
+    			statistics.loadData(myRawData);
+    		});
+    		it("after called, and data length ≥ 5, avg() should be called", function() {
+    			spyOn(statistics, 'avg');
+    			statistics.mean5();
+    			expect(statistics.avg).toHaveBeenCalled();
+    		});
+    		it("after called, and data length < 5, avg() shouldn't be called", function() {
+    			spyOn(statistics, 'avg');
+    			statistics.loadData(generateTimeArray(4));  				
+    			statistics.mean5();
+    			expect(statistics.avg).not.toHaveBeenCalled();
+    		});
+    		it("after called, and data length ≥ to 5, stats.mean5 should not be the same", function() {
+    			var oldMean5 = statistics.stats.mean5;
+    			var newData = generateTimeArray(13);
+    			statistics.loadData(newData);
+    			expect(statistics.stats.mean5).not.toBe(oldMean5);
+    		});
+    		it("after called, and data length < 5, stats.mean5 should be -1", function() {
+    			var randData = myRawData.slice(1, 4);
+    			statistics.loadData(randData);
+    			statistics.mean5();
+    			expect(statistics.stats.mean5).toBe(-1);
+    		});
+    	});
+    	describe('mean35', function() {
+    		beforeEach(function() {
+    			statistics.loadData(myRawData);
+    		});
+    		it("length > 5, avg() should be called when it is called", function() {
+    			spyOn(statistics, 'avg');
+    			statistics.mean35();
+    			expect(statistics.avg).toHaveBeenCalled();
+    		});
+    		it("length < 5, avg() should not be called when it is called", function() {
+    			var randData = myRawData.slice(3, 4);
+    			statistics.loadData(randData);
+    			spyOn(statistics, 'avg');
+    			statistics.mean35();
+    			expect(statistics.avg).not.toHaveBeenCalled();
+    		});
+    		it("after called, and data length ≥ 5, with different data, stats.mean35 should not be the same", function() {
+    			var oldMean35 = statistics.stats.mean35;
+    			var newData = generateTimeArray(17);
+    			statistics.loadData(newData);
+    			statistics.mean35();
+    			expect(statistics.stats.mean35).not.toBe(oldMean35);
+    		});
+    		it("after called, and data length < 5, stats.mean35 should be -1", function() {
+    			var data = myRawData.slice(2, 5);
+    			statistics.loadData(data);
+    			statistics.mean35();
+    			expect(statistics.stats.mean35).toBe(-1);
+    		});
+    	});
+    	describe('mean10', function() {
+    		it("when called, stats.mean10 should only change if the length of the data array is greater than/equal to 10", function() {
+    			statistics.mean10();
+    			var oldMean10 = statistics.stats.mean10;
+    			var randData = generateTimeArray(10);
+    			statistics.loadData(randData);
+    			statistics.mean10();
+    			expect(statistics.stats.mean10).not.toEqual(oldMean10);
+    		});
+    		it("if length of data ≤ 10, should be -1", function() {
+    			var randData = generateTimeArray(9);
+    			statistics.loadData(randData);
+    			expect(statistics.stats.mean10).toEqual(-1);
+    		});
+    		it("if the length of data becomes ≤ 10, should become -1", function() {
+    			var oldMean10 = statistics.stats.mean10;
+    			var data = generateTimeArray(9);
+    			statistics.loadData(data);
+    			expect(statistics.stats.mean10).not.toEqual(oldMean10);
+    			expect(oldMean10).not.toEqual(-1);
+    			expect(statistics.stats.mean10).toEqual(-1);
+    		});
+    	});
+    	describe('mean1012', function() {
+    		it("when called, it should only change if length of the data is greater than/equal to 12", function() {
+    			var mean1012 = statistics.stats.mean1012;
+    			var data = generateTimeArray(13);
+    			statistics.loadData(data);
+    			expect(statistics.stats.mean1012).not.toEqual(mean1012);
+    			expect(statistics.stats.mean1012).not.toEqual(-1);
+    		});
+    		it("if length of data ≤ 12, should be -1", function() {
+    			var data = generateTimeArray(11);
+    			statistics.loadData(data);
+    			var mean1012 = statistics.stats.mean1012;
+    			expect(mean1012).toEqual(-1);
+    		});
+    		it("if length of data becomes ≤ 12, should become -1", function() {
+    			var oldMean1012 = statistics.stats.mean1012;
+    			var data = generateTimeArray(11);
+    			statistics.loadData(data);
+    			var mean1012 = statistics.stats.mean1012;
+    			expect(mean1012).not.toEqual(oldMean1012);
+    			expect(oldMean1012).not.toEqual(-1);
+    			expect(mean1012).toEqual(-1);
+    		});
+    	});
+    	
+    	describe('mean100', function() {
+  			it("if the size of the data array is less than 100, mean100 should be -1 when this is called", function() {
+  				var data = generateTimeArray(10);
+  				statistics.loadData(data);
+  				var mean100 = statistics.stats.mean100;
+  				expect(mean100).toEqual(-1);
+  			});
+  			
+  			beforeEach(function() {
+  				var data = generateTimeArray(100);
+  				statistics.loadData(data);
+  			});
+  			
+  			it("size of data ≥ 100, should not be -1", function() {
+  				var mean100 = statistics.mean100;
+  				expect(mean100).not.toEqual(-1);
+  			});
+  			it("it should be positive if size of data ≥ 100", function() {
+  				statistics.mean100();
+  				var mean100 = statistics.stats.mean100;
+  				expect(mean100 >= 0).toBe(true);
+  			});
+  			it("if data length becomes < 100, should be -1", function() {
+  				var data = generateTimeArray(99);
+  				statistics.loadData(data);
+  				statistics.mean100();
+  				var mean100 = statistics.stats.mean100;
+  				expect(mean100).toEqual(-1);
+  			});
+    	});
+    	
+    	describe('q1', function() {
+    		it("after called, data length > 10, q1 should be smaller than q3", function() {
+    			var q1 = statistics.stats.q1;
+    			var q3 = statistics.stats.q3;
+    			expect(q1 < q3).toBe(true);
+    		});
+    		it("after called, data length < 10, q1 should be -1", function() {
+    			var data = generateTimeArray(9);
+    			statistics.loadData(data);
+    			expect(statistics.stats.q1).toBe(-1);
+    		});
+    	});
+    	
+    	describe('median', function() {
+    		it("after called, and data length greater than 3, median should not be -1", function() {
+    			var median = statistics.stats.median;
+    			expect(median).not.toBe(-1);
+    			expect(median > 0).toBe(true);
+    		});
+    		it("after called, stats.median should change", function() {
+    			var oldMedian = statistics.stats.median;
+    			var data = generateTimeArray(10);
+    			statistics.loadData(data);
+    			var median = statistics.stats.median;
+    			expect(median).not.toEqual(-1);
+    			expect(median).not.toEqual(oldMedian);
+    		});
+    		it("if data length becomes < 2 should be -1", function() {
+    			var oldMedian = statistics.stats.median;
+    			var data = generateTimeArray(2);
+    			statistics.loadData(data);
+    			statistics.median();
+    			var median = statistics.stats.median;
+    			expect(oldMedian).not.toEqual(-1);
+    			expect(median).toEqual(-1);
+    			expect(median).not.toEqual(oldMedian);
+    		});
+    	});
+    	
+    	describe('q3', function() {
+    		it("after called, and data.length greater han 10, should be greater than q1", function() {
+    			var q3 = statistics.stats.q3;
+    			var q1 = statistics.stats.q1;
+    			expect(q3).not.toEqual(q1);
+    			expect(q3 > q1).toBe(true);
+    		});
+    	});
+    	describe('best', function() {
+    		it("after called, and data.length ≥ 3, stats.best should be < stats.worst", function() {
+    			var best = statistics.stats.best;
+    			var worst = statistics.stats.worst;
+    			expect(worst > best).toBe(true);
+    		});
+    		it("if data length < 3, should be -1", function() {
+    			var data = generateTimeArray(2);
+    			statistics.loadData(data);
+    			expect(statistics.stats.best).toBe(-1);
+    		});
+    	});
+    	describe('worst', function() {
+    		it("after called, and data.length ≥ 3, stats.worst should be > stats.best", function () {
+    			var best = statistics.stats.best;
+    			var worst = statistics.stats.worst;
+    			expect(best < worst).toBe(true);
+    		});
+    		it("if data length < 3, worst should be -1", function() {
+    			var data = generateTimeArray(2);
+    			statistics.loadData(data);
+    			expect(statistics.stats.worst).toBe(-1);
+    		});
+    	});
+    	describe('iqr', function() {
+    		it("after called, stats.iqr should be smaller than the entire range's value", function() {
+    			var range = statistics.stats.range;
+    			var iqr = statistics.stats.iqr;
+    			var index = range.indexOf(", ");
+    			var a = timeConversion.stringToMillis(range.substring(1, index));
+    			var b = timeConversion.stringToMillis(range.substring(index + 2, range.length));
+    			expect(iqr < (b - a)).toBe(true);
+    		});
+    		it("data length <= 10, should be -1", function() {
+    			var data = generateTimeArray(10);
+    			statistics.loadData(data);
+    			expect(statistics.stats.iqr).toBe(-1);
+    		});
+    	});
+    	describe('range', function() {
+    		it("after called, range should be a string if data.length > 3", function() {
+    			expect(typeof statistics.stats.range).toEqual('string');
+    		});
+    		it("after called, range should be -1 if data.length ≤ 3", function() {
+    			var data = generateTimeArray(2);
+    			statistics.loadData(data);
+    			expect(statistics.stats.range).toBe(-1);
+    		});
+    	});
   	});
   });
 });

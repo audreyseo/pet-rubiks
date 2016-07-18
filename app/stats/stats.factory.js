@@ -30,6 +30,31 @@ angular
 						}
 				};
 				
+				factory.addData = addData;
+				factory.avg = avg;
+				factory.best = best;
+				factory.calculate = calculate;
+				factory.compareNums = compareNums;
+				factory.convert = convert;
+				factory.getSum = getSum;
+				factory.getVariance = getVariance;
+				factory.iqr = iqr;
+				factory.loadData = loadData;
+				factory.mean = mean;
+				factory.mean10 = mean10;
+				factory.mean100 = mean100;
+				factory.mean1012 = mean1012;
+				factory.mean35 = mean35;
+				factory.mean5 = mean5;
+				factory.median = median;
+				factory.q1 = q1;
+				factory.q3 = q3;
+				factory.range = range;
+				factory.stdDev = stdDev;
+				factory.variance = variance;
+				factory.worst = worst;
+
+				
 				function compareNums(a, b) {
 					return a - b;
 				}
@@ -38,14 +63,17 @@ angular
 					return(converter.millisToString(Math.round(num)));
 				}
 				
-				factory.addData = function(value) {
-					factory.raw.push(value);
-					factory.data.push(converter.stringToMillis(value.time));
+				function addData(value) {
+					if (angular.isDefined(value.time) && angular.isDefined(value.timeStamp)) {
+						factory.raw.push(value);
+						factory.data.push(converter.stringToMillis(value.time));
+					}
+					factory.calculate();
 				}
 				
-				factory.loadData = function(value) {
+				function loadData(value) {
 					factory.raw = value;
-					console.log(angular.toJson(value));
+//					console.log(angular.toJson(value));
 					factory.data = [];
 					
 					var times = "";
@@ -55,26 +83,31 @@ angular
 						factory.data.push(converter.stringToMillis(factory.raw[i].time));
 						times2 = times2 + factory.data[i] + " ";
 					}
+					factory.calculate();
 					//console.log(times);
 					//console.log(times2);
-				};
+				}
 				
 				function getSum(total, newValue) {
 					return total + newValue;
 				}
+				factory.avg = avg;
+				function avg(data, length) {
+					return(data.reduce(getSum) / length);
+				}
 				
-				factory.mean = function() {
+				function mean() {
 					
-					var total = 0;
+//					var total = 0;
 					var length = factory.data.length;
 					if (length > 5) {
-						total = factory.data.reduce(getSum);
+//						total = factory.data.reduce(getSum);
 						//console.log("Total: " + total + " Length: " + length);
-						factory.stats.mean = total / length;
+						factory.stats.mean = factory.avg(factory.data, length);
 						//console.log("Mean: " + factory.stats.mean);
+					} else {
+						factory.stats.mean = -1;
 					}
-					
-					return factory.stats.mean;
 				}
 				
 				function getVariance(total, newValue) {
@@ -83,154 +116,191 @@ angular
 					return total;
 				}
 				
-				factory.variance = function() {
+				function variance() {
 					var total = 0;
 					var length = factory.data.length;
 					if (length > 5) {
-						var mean = factory.data.mean;
+						var mean = factory.stats.mean;
+						if (mean <= 0) {
+							factory.mean();
+						}
 						total = factory.data.reduce(getVariance);
 						factory.stats.variance = (total / length);
+					} else {
+						factory.stats.variance = -1;
 					}
 					
-				};
+				}
 				
-				factory.stdDev = function() {
-					if (factory.data.length > 5) {
-						factory.stats.stdDev = (Math.pow(factory.stats.variance, .5));
+				function stdDev() {
+					if (factory.data.length > 5 && factory.stats.variance >= 0) {
+						var mean = factory.stats.mean;
+						var variance = factory.stats.variance;
+						if (mean <= 0 || variance <= 0) {
+							factory.mean();
+							factory.variance();
+						}
+						factory.stats.stdDev = (Math.pow(factory.stats.variance, 0.5));
+					} else {
+						factory.stats.stdDev = -1;
 					}
 					
-				};
+				}
 				
-				factory.mean5 = function() {
+				function mean5() {
 					var length = factory.data.length;
 					if (length >= 5) {
 						var last5 = factory.data.slice(length - 5, length);
-						var total = last5.reduce(getSum);
-						factory.stats.mean5 = (total / 5);
+//						var total = last5.reduce(getSum);
+						factory.stats.mean5 = factory.avg(last5, 5); //(total / 5);
+					} else {
+						factory.stats.mean5 = -1;
 					}
-				};
+				}
 				
-				factory.mean35 = function() {
+				function mean35() {
 					var length = factory.data.length;
 					if (length >= 5) {
 						var last5 = factory.data.slice(length - 5, length);
 						last5.sort(compareNums);
 						var middle = last5.slice(1, 4);
-						var total = middle.reduce(getSum);
-						factory.stats.mean35 = (total / 3);
+//						var total = middle.reduce(getSum);
+						factory.stats.mean35 = factory.avg(middle, 3); //(total / 3);
+					} else {
+						factory.stats.mean35 = -1;
 					}
-				};
+				}
 				
-				factory.mean10 = function() {
+				function mean10() {
 					var length = factory.data.length;
 					if (length >= 10) {
 						var last10 = factory.data.slice(length - 10, length);
-						var total = last10.reduce(getSum);
-						factory.stats.mean10 = (total / 10);
+//						var total = last10.reduce(getSum);
+						factory.stats.mean10 = factory.avg(last10, 10); //(total / 10);
+					} else {
+						factory.stats.mean10 = -1;
 					}
-				};
+				}
 				
-				factory.mean1012 = function() {
+				function mean1012() {
 					var length = factory.data.length;
 					if (length >= 12) {
 						var last12 = factory.data.slice(length - 12, length);
 						last12.sort(compareNums);
 						var middle = last12.slice(1, 11);
 						var total = middle.reduce(getSum);
-						factory.stats.mean1012 = (total / 10);
+						factory.stats.mean1012 = factory.avg(middle, 10); //(total / 10);
+					} else {
+						factory.stats.mean1012 = -1;
 					}
-				};
+				}
 				
-				factory.mean100 = function() {
+				function mean100() {
 					var length = factory.data.length;
 					if (length >= 100) {
 						var last100 = factory.data.slice(length-100, length);
-						var total = last100.reduce(getSum);
-						factory.stats.mean100 = (total / 100);
+//						var total = last100.reduce(getSum);
+						factory.stats.mean100 = factory.avg(last100, 100); //(total / 100);
+					} else {
+						factory.stats.mean100 = -1;
 					}
-				};
+				}
 				
-				factory.q1 = function() {
+				function q1() {
 					var length = factory.data.length;
 					if (length > 10) {
 						var sorted = (factory.data.slice(0, length)).sort(compareNums);
 						if (length % 4 === 0 || length % 4 == 3) {
 							// Splits perfectly into 4 segments
-							var qB = Math.ceil(length * .25);
+							var qB = Math.ceil(length * 0.25);
 							var qA = qB - 1;
 							var avg = (sorted[qB] + sorted[qA]) / 2;
 							factory.stats.q1 = (avg);
 						} else if (length % 4 === 1 || length % 4 == 2) {
-							var q = Math.floor(length * .25);
+							var q = Math.floor(length * 0.25);
 							factory.stats.q1 = (sorted[q]);
 						}
+					} else {
+						factory.stats.q1 = -1;
 					}
-				};
+				}
 				
-				factory.median = function() {
+				function median() {
 					var length = factory.data.length;
 					if (length > 3) {
 						var sorted = (factory.data.slice(0, length)).sort(compareNums);
 						if (length % 2 == 1) {
-							var q = Math.round(length * .5);
+							var q = Math.round(length * 0.5);
 							factory.stats.median = (sorted[q]);
 						} else {
-							var qB = Math.ceil(length * .5);
+							var qB = Math.ceil(length * 0.5);
 							var qA = qB - 1;
 							var avg = (sorted[qB] + sorted[qA]) / 2;
 							factory.stats.median = (avg);
 						}
+					} else {
+						factory.stats.median = -1;
 					}
-				};
+				}
 				
-				factory.q3 = function() {
+				function q3() {
 					var length = factory.data.length;
 					if (length > 10) {
 						var sorted = (factory.data.slice(0, length)).sort(compareNums);
 						if (length % 4 == 1 || length % 4 == 2) {
-							var q = Math.round((length - 1) * .75);
+							var q = Math.round((length - 1) * 0.75);
 							factory.stats.q3 = (sorted[q]);
-						} else if (length % 4 == 3 || length % 4 == 0) {
-							var qB = Math.ceil(length * .75);
+						} else if (length % 4 == 3 || length % 4 === 0) {
+							var qB = Math.ceil(length * 0.75);
 							var qA = qB - 1;
 							var avg = (sorted[qB] + sorted[qA]) / 2;
 							factory.stats.q3 = avg;
 						}
+					} else {
+						factory.stats.q3 = -1;
 					}
-				};
+				}
 				
-				factory.best = function() {
+				function best() {
 					var length = factory.data.length;
 					if (length > 3) {
 						var sorted = (factory.data.slice(0, factory.data.length)).sort(compareNums);
 						factory.stats.best = sorted[0];
+					} else {
+						factory.stats.best = -1;
 					}
-				};
+				}
 			
-				factory.worst = function() {
+				function worst() {
 					var length = factory.data.length;
           if (length > 3) {
           	var sorted = (factory.data.slice(0, factory.data.length)).sort(compareNums);
           	factory.stats.worst = sorted[sorted.length - 1];
+					} else {
+						factory.stats.worst = -1;
 					}
-				};
+				}
 				
-				factory.iqr = function() {
+				function iqr() {
 					var length = factory.data.length;
 					if (length > 10) {
 						factory.stats.iqr = factory.stats.q3 - factory.stats.q1;
+					} else {
+						factory.stats.iqr = -1;
 					}
-				};
+				}
 				
-				factory.range = function() {
+				function range() {
 					var length = factory.data.length;
 					if (length > 3) {
 						factory.stats.range = "(" + convert(factory.stats.best) + ", " + convert(factory.stats.worst) + ")";
+					} else {
+						factory.stats.range = -1;
 					}
 					
-				};
+				}
 				
-				factory.calculate = function() {
+				function calculate() {
 					factory.mean();
 					factory.variance();
 					factory.stdDev();
@@ -246,7 +316,7 @@ angular
 					factory.worst();
 					factory.iqr();
 					factory.range();
-				};
+				}
 				
 				return factory;
 			}]);

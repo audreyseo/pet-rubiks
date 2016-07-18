@@ -74,15 +74,17 @@ $(window).load(function() {
 		selectCards.append("<option>" + i + "</option>");
 	}
 	
-	$("td.prob").each(function() {
-		if ($(this).html() == 0.01852) {
-			$(this).css("color", "#0022FF");
-		} else if ($(this).html() == 0.00926) {
-			$(this).css("color", "#00BB22");
-		} else {
-			$(this).css("color", "#FF0022")
+	$("td.prob").each(
+		function() {
+			if ($(this).html() == 0.01852) {
+				$(this).css("color", "#0022FF");
+			} else if ($(this).html() == 0.00926) {
+				$(this).css("color", "#00BB22");
+			} else {
+				$(this).css("color", "#FF0022");
+			}
 		}
-	});
+	);
 	
 //	$('tr:even').css('background-color', '#EEEEEE');
 });

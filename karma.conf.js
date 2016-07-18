@@ -1,6 +1,11 @@
 // Karma configuration
 // Generated on Tue Jul 05 2016 16:21:32 GMT-0400 (EDT)
 
+var today = new Date();
+today.setDate(today.getDate());
+
+today = today.toLocaleString().replace(":", ".");
+
 module.exports = function(config) {
   config.set({
 
@@ -11,14 +16,6 @@ module.exports = function(config) {
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: [/*'mocha',*/'jasmine'],
-
-    /*plugins: [
-      'karma-jasmine',
-      'karma-coverage',
-      'karma-ng-html2js-preprocessor',
-      'karma-phantomjs-launcher',
-      'karma-jasmine-spec-runner-reporter'
-    ],*/
 
     // list of files / patterns to load in the browser
     files: [
@@ -34,9 +31,7 @@ module.exports = function(config) {
       'app/**/*.js', {
                pattern: 'app/**/*.spec.js', included: false},
       'tests/*.js', {
-            pattern: 'tests/*.spec.js', included: true},
-	  'spec-runner-template.html'
-    ],
+            pattern: 'tests/*.spec.js', included: true} ],
 
 
     // list of files to exclude
@@ -61,32 +56,31 @@ module.exports = function(config) {
     reporters: [
       'coverage', 
       'progress',
-      'junit',
-      'jasmine-spec-runner'
+      'junit'
     ],
+
+    coverageReporter: {
+      dir: 'build/reports/coverage',
+      reporters: [
+        {type: 'lcov', subdir: ('report-lcov/' + today)},
+        {type: 'html', subdir: ('report-html/' + today)},
+        {type: 'clover', subdir: 'report-clover', file: (today + '-clover.xml')},
+        {type: 'text-summary'}
+      //file: '',
+      ],
+      instrumenterOptions: {
+        istanbul: { noCompact: true }
+      }
+    },
     
     junitReporter: {
-      outputDir: 'junit', // results will be saved as $outputDir/$browserName.xml
-      outputFile: (new Date()).toTimeString() + ".xml", // if included, results will be saved as $outputDir/$browserName/$outputFile
+      outputDir: 'build/reports/junit', // results will be saved as $outputDir/$browserName.xml
+      outputFile: today + ".xml", // if included, results will be saved as $outputDir/$browserName/$outputFile
       suite: '', // suite will become the package name attribute in xml testsuite element
       useBrowserName: true, // add browser name to report and classes names
       nameFormatter: undefined, // function (browser, result) to customize the name attribute in xml testcase element
       classNameFormatter: undefined, // function (browser, result) to customize the classname attribute in xml testcase element
       properties: {} // key value pair of properties to add to the <properties> section of the report
-    },
-
-    jasmineSpecRunnerReporter: {
-      jasmineCoreDir: 'node-modules/jasmine-core'
-    },
-
-    coverageReporter: {
-      type: 'lcov',
-      //type: 'text',
-      dir: 'coverage/lcov/',
-      //file: '',
-      instrumenterOptions: {
-        istanbul: { noCompact: true }
-      }
     },
 
     // web server port
@@ -110,27 +104,15 @@ module.exports = function(config) {
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['PhantomJS'],// 'PhantomJS_Custom'],
     
-   /* customLaunchers: {
-      'PhantomJS_Custom': {
-        base: 'PhantomJS',
-        options: {
-          windowName: 'my-window',
-          settings: {
-            webSecurityEnabled: false
-          }
-        },
-        flags: ['--load-images=true'],
-        debug: false
-      }
-    },*/
+
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true,
+    singleRun: true//,
     //singleRun: false,
 
     // Concurrency level
     // how many browser should be started simultaneous
     //concurrency: Infinity
-  })
+  });
 }
