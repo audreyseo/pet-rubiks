@@ -5,6 +5,7 @@
 describe("Filter: millisToString", function() {
 	var millisToStringFilter;
 	beforeEach(module('myApp'));
+	
 	beforeEach(inject(function(_millisToStringFilter_) {
 		millisToStringFilter = _millisToStringFilter_;
 	}));

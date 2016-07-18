@@ -14,11 +14,11 @@ module.exports = function(grunt) {
       },
       move: {
         cmd: function() {
-          var string1 = 'cp -R app/*.module.js src/ ; cp -R app/**/*.module.js src/ ';
-          var endings = ['.filter', '.service', '.value', '.controller', '.factory'];
+          var string1 = 'cp -R app/*.js src/; cp -R app/**/*.module.js src/ ';
+          var endings = ['.filter', /*'.service',*/ '.value', '.controller', '.factory'];
           for (end in endings) {
             string1 = string1 + '; cp -R app/**/*' + endings[end] + '.js src/';
-            string1 = string1 + '; cp -R app/*' + endings[end] + '.js src/ ';
+//            string1 = string1 + '; cp -R app/*' + endings[end] + '.js src/ ';
           }
           return string1;
         }

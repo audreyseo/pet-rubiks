@@ -1,11 +1,32 @@
 // Karma configuration
 // Generated on Tue Jul 05 2016 16:21:32 GMT-0400 (EDT)
-
+replaceAll = function(search, replacement, look) {
+      var target = look;
+      return target.replace(new RegExp(search, 'g'), replacement);
+};
 var today = new Date();
 today.setDate(today.getDate());
 
-today = today.toLocaleString().replace(":", ".");
+var day = today.getDate();
+var month = 1 + today.getMonth();
 
+var dateOptions = {weekday: 'short', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'EDT', hour: '2-digit', minute: '2-digit', second: '2-digit'};
+//today = today.toLocaleFormat("%a %e %B %Y %I.%M.%S %p %Z");
+today = replaceAll(':', '.', today.toLocaleString(dateOptions));
+//console.log("Today: " + today);
+today = replaceAll('/', ' ', today);
+//console.log('Month: ' + month.toString());
+today = today.replace(month.toString(), "DAY");
+today = today.replace(day.toString(), "MONTH");
+//console.log("Today: " + today);
+
+var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+today = today.replace("MONTH", months[month - 1]);
+today = today.replace("DAY", day.toString());
+
+
+//console.log("Today: " + today)
 module.exports = function(config) {
   config.set({
 
@@ -30,7 +51,7 @@ module.exports = function(config) {
             pattern: 'app/*.spec.js', included: false},*/
       'app/**/*.js', {
                pattern: 'app/**/*.spec.js', included: false},
-      'tests/*.js', {
+      'tests/*.spec.js', {
             pattern: 'tests/*.spec.js', included: true} ],
 
 
@@ -42,11 +63,11 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-		'spec-runner-template.html':['ng-html2js'],
+//		'spec-runner-template.html':['ng-html2js'],
 		//'app/*.js':['coverage'],
                 //'app/**/*.js':['coverage'],
-                'app/**/!(*.mock|*.spec).js':'coverage',
-                'app/!(*.mock|*.spec).js':'coverage'
+    	'app/**/!(*.mock|*.spec).js':'coverage',
+      'app/!(*.mock|*.spec).js':'coverage'
     },
 
 

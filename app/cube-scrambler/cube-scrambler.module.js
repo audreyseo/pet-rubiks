@@ -2,7 +2,7 @@
  * http://usejsdoc.org/
  */
 
-angular.module('myApp').controller('cubeScrambler', CubeScrambler);
+angular.module('myApp').controller('CubeScrambler', CubeScrambler);
 
 function CubeScrambler($scope) {	
 	$scope.code = "";

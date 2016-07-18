@@ -181,12 +181,12 @@ angular
 				}
   		} else {
   			if (angular.isDefined(factory.data.cards)) {
-  				console.log("Defined.");
+//  				console.log("Defined.");
   				$cookies.putObject(factory.cookies.dataCards, factory.data.cards);
   			} else {
-  				console.log("factory.data.cards: " + angular.toJson(factory.data.cards));
+//  				console.log("factory.data.cards: " + angular.toJson(factory.data.cards));
   				factory.data.cards = angular.copy(cookieData.cards, factory.data.cards);
-  				console.log("factory.data.cards: " + angular.toJson(factory.data.cards));
+//  				console.log("factory.data.cards: " + angular.toJson(factory.data.cards));
   				$cookies.putObject(factory.cookies.dataCards, cookieData.cards);
   			}
   		}

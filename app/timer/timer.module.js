@@ -72,25 +72,29 @@ function TimerController($scope, $interval, $cookies, $log, statistics) {
   function getCookies() {
   	try {
   		$scope.records = $cookies.getObject($scope.recordsCookie);
-  		console.log("Defined?: " + (typeof $scope.records));
-  		console.log("Records: " + angular.toJson($scope.records));
+//  		console.log("Defined?: " + (typeof $scope.records));
+//  		console.log("Records: " + angular.toJson($scope.records));
   		if (angular.isUndefined($scope.records)) {
-  			console.log("Caught #1");
+//  			console.log("Caught #1");
   			$scope.records = [];
   			$cookies.putObject($scope.recordsCookie, $scope.records);
   		}
   	} catch(e) {
-  		console.log("Caught #2");
+//  		console.log("Caught #2");
   		$scope.records = [];
   		$cookies.putObject($scope.recordsCookie, $scope.records);
   	}
   }
   
   function render() {
-  	var minutes = (($scope.clock < 1000 * 60) ? "00" : (($scope.clock < 10 * 60 * 1000) ? "0" + Math.floor($scope.clock / 60000) : Math.floor($scope.clock / 60000)));
-  	var seconds = ((($scope.clock % 60000) < 1000) ? ":00" : ((($scope.clock % 60000) < 1000 * 10) ? ":0" + Math.floor(($scope.clock % 60000) / 1000) : ":" + Math.floor(($scope.clock % 60000) / 1000)));
-  	var milliseconds = ((($scope.clock % 1000) < 10) ? ".00" + parseInt($scope.clock % 1000) : (($scope.clock % 1000) < 100) ? ".0" + ($scope.clock % 1000) : "." + ($scope.clock % 1000));
-  	$scope.time['string'] = minutes + seconds + milliseconds;
+  	if ((typeof $scope.clock) !== 'undefined' && !isNaN($scope.clock)) {
+  		var minutes = (($scope.clock < 1000 * 60) ? "00" : (($scope.clock < 10 * 60 * 1000) ? "0" + Math.floor($scope.clock / 60000) : Math.floor($scope.clock / 60000)));
+    	var seconds = ((($scope.clock % 60000) < 1000) ? ":00" : ((($scope.clock % 60000) < 1000 * 10) ? ":0" + Math.floor(($scope.clock % 60000) / 1000) : ":" + Math.floor(($scope.clock % 60000) / 1000)));
+    	var milliseconds = ((($scope.clock % 1000) < 10) ? ".00" + parseInt($scope.clock % 1000) : (($scope.clock % 1000) < 100) ? ".0" + ($scope.clock % 1000) : "." + ($scope.clock % 1000));
+    	$scope.time['string'] = minutes + seconds + milliseconds;
+  	} else {
+  		$scope.time['string'] = "00:00.000";
+  	}
   }
   
   function reset() {

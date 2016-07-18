@@ -1,7 +1,7 @@
 /**
  * http://usejsdoc.org/
  */
-describe('	Test:	', function() {
+xdescribe('	Test:	', function() {
 	describe('Factory: TimerRecords', function() {
 		describe('loadData', function() {});
 		describe('update', function() {});

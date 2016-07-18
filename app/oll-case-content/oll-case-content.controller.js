@@ -5,9 +5,9 @@ angular
 	.module('myApp')
 	.controller('ContentController', ContentController);
 
-ContentController.$inject = ['$scope', 'cases', 'hiddenRowsY', 'cookieStrings', 'flashCardData', '$cookies',  'orderByFilter', 'filterFilter'];
+ContentController.$inject = ['$scope', 'cases', 'hiddenRowsY', 'cookieStrings', 'flashCardData', '$cookies', 'filterFilter'];
 
-function ContentController($scope, cases, hiddenRows, cookieString, flashData, $cookies, orderBy, filterFilter) {
+function ContentController($scope, cases, hiddenRows, cookieString, flashData, $cookies, filterFilter) {
 	
 	$scope.addPriorityOptions = addPriorityOptions;
 	$scope.animationOpts = {duration: 1000};
