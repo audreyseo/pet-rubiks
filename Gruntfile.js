@@ -36,6 +36,7 @@ module.exports = function(grunt) {
         browsers: ['Chrome']
       },
       chromeTest: {
+        logLevel: config.LOG_DEBUG,
         //autoWatch: true,
         //singleRun: false,
         //concurrency: Infinity,
