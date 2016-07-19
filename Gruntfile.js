@@ -35,6 +35,12 @@ module.exports = function(grunt) {
         concurrency: Infinity,
         browsers: ['Chrome']
       },
+      chromeTest: {
+        //autoWatch: true,
+        //singleRun: false,
+        //concurrency: Infinity,
+        browsers: ['Chrome']
+      },
       dev: {
         coverageReporter: {
           type: 'text-summary'
@@ -70,6 +76,7 @@ module.exports = function(grunt) {
   grunt.registerTask('copy', ['exec:update_tests']);
   grunt.registerTask('move', ['exec:move']);
   grunt.registerTask('test', ['copy', 'move', 'karma:chrome']);
+  grunt.registerTask('buildTest', ['copy', 'move', 'karma:chromeTest']);
   grunt.registerTask('production', 'initiates production testing', function() {
     var paths = grunt.file.expand({}, ['app/+([a-zA-Z])+(.+([a-zA-Z]))/*([a-zA-Z.])!(.mock|.spec).js', 'app/+([a-zA-Z.]).js']);
     
