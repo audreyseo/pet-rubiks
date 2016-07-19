@@ -55,6 +55,10 @@ angular
 				factory.worst = worst;
 
 				
+				function timeObject(value, i) {
+					return {index: value.index[i], time: value.time[i], millis: value.millis[i], timeStamp: value.timeStamp[i]};
+				}
+				
 				function compareNums(a, b) {
 					return a - b;
 				}
@@ -72,20 +76,30 @@ angular
 				}
 				
 				function loadData(value) {
-					factory.raw = value;
-//					console.log(angular.toJson(value));
-					factory.data = [];
-					
-					var times = "";
-					var times2 = "";
-					for (var i = 0; i < factory.raw.length; i++) {
-						times = times + factory.raw[i].time + " ";
-						factory.data.push(converter.stringToMillis(factory.raw[i].time));
-						times2 = times2 + factory.data[i] + " ";
+					var data = [];
+					console.log("Type of value: " + typeof value);
+					if ((typeof value) === 'object') {
+
+						for (var i = 0; i < value.index.length; i++) {
+							var timeObj = timeObject(value, i);
+							data.push(timeObj);
+						}
+						
+						factory.raw = data;
+//						console.log(angular.toJson(value));
+						factory.data = [];
+						
+						var times = "";
+						var times2 = "";
+						for (var i = 0; i < factory.raw.length; i++) {
+							times = times + factory.raw[i].time + " ";
+							factory.data.push(converter.stringToMillis(factory.raw[i].time));
+							times2 = times2 + factory.data[i] + " ";
+						}
+						factory.calculate();
+						//console.log(times);
+						//console.log(times2);
 					}
-					factory.calculate();
-					//console.log(times);
-					//console.log(times2);
 				}
 				
 				function getSum(total, newValue) {

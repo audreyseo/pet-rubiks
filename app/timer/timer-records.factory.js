@@ -38,8 +38,15 @@ angular.module('myApp')
 				}
 				
 				factory.loadData = function(newData) {
+					var data = [];
+					
+					for (var i = 0; i < newData.index.length; i++) {
+						var timeObj = {index: newData.index[i], time: newData.time[i], millis: newData.millis[i], timeStamp: newData.timeStamp[i]};
+						data.push(timeObj);
+					}
+					
 					var oldLength = factory.allData.length;
-					var newLength = newData.length;
+					var newLength = data.length;
 					factory.allData = factory.allData.concat(newData.slice(oldLength, newLength - oldLength));
 					for (var i = oldLength; i < newLength; i++) {
 						var index = null;
