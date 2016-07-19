@@ -97,7 +97,7 @@ module.exports = function(grunt) {
   grunt.registerTask('copy', ['exec:updatetests']);
   grunt.registerTask('move', ['exec:move']);
 
-  grunt.registerTask('test', ['copy', 'move', 'karma:chrome']);
+  grunt.registerTask('test', ['clean', 'copy', 'move', 'karma:chrome']);
   grunt.registerTask('buildtest', ['copy', 'move', 'karma:chrometest']);
   
   
