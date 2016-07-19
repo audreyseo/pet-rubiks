@@ -11,14 +11,10 @@ var day = today.getDate();
 var month = 1 + today.getMonth();
 
 var dateOptions = {weekday: 'short', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'EDT', hour: '2-digit', minute: '2-digit', second: '2-digit'};
-//today = today.toLocaleFormat("%a %e %B %Y %I.%M.%S %p %Z");
 today = replaceAll(':', '.', today.toLocaleString(dateOptions));
-//console.log("Today: " + today);
 today = replaceAll('/', ' ', today);
-//console.log('Month: ' + month.toString());
 today = today.replace(month.toString(), "DAY");
 today = today.replace(day.toString(), "MONTH");
-//console.log("Today: " + today);
 
 var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -26,7 +22,6 @@ today = today.replace("MONTH", months[month - 1]);
 today = today.replace("DAY", day.toString());
 
 
-//console.log("Today: " + today)
 module.exports = function(config) {
   config.set({
 
@@ -98,7 +93,7 @@ module.exports = function(config) {
       outputDir: 'build/reports/junit', // results will be saved as $outputDir/$browserName.xml
       outputFile: today + ".xml", // if included, results will be saved as $outputDir/$browserName/$outputFile
       suite: '', // suite will become the package name attribute in xml testsuite element
-      useBrowserName: true, // add browser name to report and classes names
+      useBrowserName: false, //true, // add browser name to report and classes names
       nameFormatter: undefined, // function (browser, result) to customize the name attribute in xml testcase element
       classNameFormatter: undefined, // function (browser, result) to customize the classname attribute in xml testcase element
       properties: {} // key value pair of properties to add to the <properties> section of the report
@@ -136,4 +131,4 @@ module.exports = function(config) {
     // how many browser should be started simultaneous
     //concurrency: Infinity
   });
-}
+};

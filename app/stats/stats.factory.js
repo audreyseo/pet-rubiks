@@ -39,6 +39,7 @@ angular
 				factory.getSum = getSum;
 				factory.getVariance = getVariance;
 				factory.iqr = iqr;
+				factory.length = length;
 				factory.loadData = loadData;
 				factory.mean = mean;
 				factory.mean10 = mean10;
@@ -75,10 +76,17 @@ angular
 					factory.calculate();
 				}
 				
+				function length() {
+					return factory.data.length;
+				}
+				
 				function loadData(value) {
+					var times = "";
+					var times2 = "";
+					
 					var data = [];
-					console.log("Type of value: " + typeof value);
-					if ((typeof value) === 'object') {
+//					console.log("Type of value: " + typeof value);
+					if ((typeof value.index) !== 'undefined') {
 
 						for (var i = 0; i < value.index.length; i++) {
 							var timeObj = timeObject(value, i);
@@ -89,9 +97,7 @@ angular
 //						console.log(angular.toJson(value));
 						factory.data = [];
 						
-						var times = "";
-						var times2 = "";
-						for (var i = 0; i < factory.raw.length; i++) {
+						for (i = 0; i < factory.raw.length; i++) {
 							times = times + factory.raw[i].time + " ";
 							factory.data.push(converter.stringToMillis(factory.raw[i].time));
 							times2 = times2 + factory.data[i] + " ";
@@ -99,6 +105,16 @@ angular
 						factory.calculate();
 						//console.log(times);
 						//console.log(times2);
+					} else {
+						factory.raw = value;
+//					console.log(angular.toJson(value));
+						factory.data = [];
+					
+						for (var i = 0; i < factory.raw.length; i++) {
+  						times = times + factory.raw[i].time + " ";
+  						factory.data.push(converter.stringToMillis(factory.raw[i].time));
+  						times2 = times2 + factory.data[i] + " ";
+  					}
 					}
 				}
 				

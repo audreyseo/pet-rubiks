@@ -18,7 +18,7 @@ function randomTimeObject(i) {
 function generateTimeArray(max) {
 	var data = [];
 	for (var i = 0; i < max; i++) {
-		data.push(randomTimeObject(i))
+		data.push(randomTimeObject(i));
 	}
 	return(data);
 }
