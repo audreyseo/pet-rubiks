@@ -80,7 +80,7 @@ module.exports = function(config) {
       reporters: [
         {type: 'lcov', subdir: ('report-lcov/' + today)},
         {type: 'html', subdir: ('report-html/' + today)},
-        {type: 'clover', subdir: 'report-clover', file: (today + '-clover.xml')},
+        {type: 'clover', subdir: 'report-clover', file: (today + '-clover.html')},
         {type: 'text-summary'}
       //file: '',
       ],
