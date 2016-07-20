@@ -102,7 +102,6 @@ angular
 							factory.data.push(converter.stringToMillis(factory.raw[i].time));
 							times2 = times2 + factory.data[i] + " ";
 						}
-						factory.calculate();
 						//console.log(times);
 						//console.log(times2);
 					} else {
@@ -116,6 +115,7 @@ angular
   						times2 = times2 + factory.data[i] + " ";
   					}
 					}
+					factory.calculate();
 				}
 				
 				function getSum(total, newValue) {

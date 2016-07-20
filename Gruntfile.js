@@ -52,6 +52,7 @@ module.exports = function(grunt) {
         configFile: 'karma.conf.js'
       },
       chrome: {
+        logLevel: "config.LOG_INFO",
         autoWatch: true,
         singleRun: false,
         concurrency: "Infinity",
