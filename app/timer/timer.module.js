@@ -12,6 +12,7 @@ function TimerController($scope, $interval, $cookies, $log, statistics) {
 	$scope.cookieOpts = {time: ".time", timeStamp: '.date', index: ".index", millis: ".millis"};
   $scope.clock = 0;
   $scope.deleteAll = deleteAll;
+  $scope.deleteIndex = deleteIndex;
   $scope.deleteRecord = deleteRecord;
   $scope.delta = delta;
   $scope.displayTimeString = "00:00.00";
@@ -89,21 +90,31 @@ function TimerController($scope, $interval, $cookies, $log, statistics) {
   	}
   }
   
-  function deleteRecord(index) {
-  	if (angular.isDefined($scope.records.index)) {
-  		if (index < $scope.records.index.length && index >= 0) {
-    		for (str in $scope.records) {
-    			$scope.records[str].splice(index, 1);
+  function deleteIndex(index) {
+  	if (index >= 0) {
+  		if (angular.isDefined($scope.records.index)) {
+    		if (index < $scope.records.index.length) {
+      		for (var str in $scope.records) {
+      			console.log(str);
+      			$scope.records[str].splice(index, 1);
+      		}
+      	}
+    	} else {
+    		if (index < $scope.records.length) {
+    			$scope.records.splice(index, 1);
     		}
-    		$scope.numRecords --;
     	}
-  	} else {
-  		if (index < $scope.records.length && index >= 0) {
-  			$scope.records.splice(index, 1);
-  		}
   		$scope.numRecords --;
   	}
-  	$scope.saveRecords();
+  }
+  
+  function deleteRecord(index) {
+  	console.log("Index: " + index);
+  	console.log("Boolean: " + (angular.isDefined(index) && !isNaN(index)));
+  	if (angular.isDefined(index) && !isNaN(index)) {
+  		$scope.deleteIndex(index);
+  		$scope.saveRecords();
+  	}
   }
   
   function delta() {
@@ -268,9 +279,13 @@ function TimerController($scope, $interval, $cookies, $log, statistics) {
   }
   
   function saveRecords() {
-  	for (str in $scope.records) {
-			$cookies.putObject($scope.recordsCookie + $scope.cookieOpts[str], $scope.records[str]);
-		}
+  	if (angular.isDefined($scope.records.index)) {
+  		for (str in $scope.records) {
+  			$cookies.putObject($scope.recordsCookie + $scope.cookieOpts[str], $scope.records[str]);
+  		}
+  	} else {
+  		$cookies.putObject($scope.recordsCookie, $scope.records[str]);
+  	}
   	$scope.myStats.loadData($scope.records);
   }
   

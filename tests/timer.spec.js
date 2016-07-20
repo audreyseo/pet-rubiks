@@ -2,6 +2,10 @@
  * http://usejsdoc.org/
  */
 
+function returnNaN() {
+	return (Math.sqrt(-1));
+}
+
 describe('	Test:	', function() {
 	describe('Controller: TimerController', function() {
 		
@@ -26,7 +30,13 @@ describe('	Test:	', function() {
   	      });
     	  };
 			}
-		));	
+		));
+		
+		describe("Variables", function() {
+			it("variables should be defined", function() {
+				
+			});
+		});
 		
 		describe('Functions', function() {
 			beforeEach(function() {
@@ -34,21 +44,65 @@ describe('	Test:	', function() {
 			});
 			
 			describe('deleteRecord', function() {
-  			beforeEach(function() {
-  				scope.records = [{time: "00:00.000", index: 1}, {time: "00:00.000", index: 2}];
+  			describe('with normal data', function() {
+  				beforeEach(function() {
+    				scope.records = [{time: "00:00.000", index: 1}, {time: "00:00.000", index: 2}];
+    			});
+    			
+    			it('Deletes a record given an index that is smaller than $scope.records.length', function() {
+    				var index=1;
+    				scope.deleteRecord(index);
+    				var newObject = [{time: "00:00.000", index:1}];
+    				expect(scope.records).toEqual(newObject);
+    			});
+    			
+    			it('Does not delete a record that has a negative index', function() {
+    				var index = -1;
+    				scope.deleteRecord(index);
+    				expect(scope.records).toEqual([{time: "00:00.000", index: 1}, {time: "00:00.000", index: 2}]);
+    			});
+    			
+    			it("Does not attempt to delete if index is NaN or undefined", function() {
+    				spyOn(scope, 'deleteIndex');
+    				spyOn(scope, 'saveRecords');
+    				var index = Math.sqrt(-1);
+    				scope.deleteRecord(index);
+    				expect(scope.deleteIndex).not.toHaveBeenCalled();
+    				expect(scope.saveRecords).not.toHaveBeenCalled();
+    				index = undefined;
+    				scope.deleteRecord(index);
+    				expect(scope.deleteIndex).not.toHaveBeenCalled();
+    				expect(scope.saveRecords).not.toHaveBeenCalled();
+    			});
   			});
-  			
-  			it('Deletes a record given an index that is smaller than $scope.records.length', function() {
-  				var index=1;
-  				scope.deleteRecord(index);
-  				var newObject = [{time: "00:00.000", index:1}];
-  				expect(scope.records).toEqual(newObject);
-  			});
-  			
-  			it('Does not delete a record that has a negative index', function() {
-  				var index = -1;
-  				scope.deleteRecord(index);
-  				expect(scope.records).toEqual([{time: "00:00.000", index: 1}, {time: "00:00.000", index: 2}]);
+  			describe('with version 2.0 data, an object with arrays', function() {
+  				beforeEach(function() {
+    				scope.records = {time: ["00:00.000", "00:00.00"], index: [1, 2], timeStamp: ["00:00.000", "00:00.00"], millis: [0, 0]};
+    			});
+    			
+    			it('Deletes a record given an index that is smaller than $scope.records.length', function() {
+    				var index=1;
+    				scope.deleteRecord(index);
+    				var newObject = {time: ["00:00.000"], index: [1], timeStamp: ["00:00.000"], millis: [0]};
+    				expect(scope.records).toEqual(newObject);
+    			});
+    			
+    			it('Does not delete a record that has a negative index', function() {
+    				var index = -1;
+    				scope.deleteRecord(index);
+    				expect(scope.records).toEqual({time: ["00:00.000", "00:00.00"], index: [1, 2], timeStamp: ["00:00.000", "00:00.00"], millis: [0, 0]});
+    			});
+    			
+    			it("Does not attempt to delete if index is NaN or undefined", function() {
+    				var index = Math.sqrt(-1);
+    				spyOn(scope, 'deleteIndex');
+    				scope.deleteRecord(index);
+    				expect(scope.deleteIndex).not.toHaveBeenCalled();
+    				index = undefined;
+    				expect(index).not.toBeDefined();
+    				scope.deleteRecord(index);
+    				expect(scope.deleteIndex).not.toHaveBeenCalled();
+    			});
   			});
   		});
 		

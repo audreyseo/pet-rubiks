@@ -23,8 +23,8 @@ today = today.replace("DAY", day.toString());
 
 
 module.exports = function(config) {
-  console.log('DEBUG: ' + typeof config.LOG_DEBUG);
-  console.log("INFO: " + typeof config.LOG_INFO);
+//  console.log('DEBUG: ' + typeof config.LOG_DEBUG);
+//  console.log("INFO: " + typeof config.LOG_INFO);
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
