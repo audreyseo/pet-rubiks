@@ -238,11 +238,12 @@ describe('	Test:	', function() {
   			describe('syncronous testing', function() {
   				beforeEach(function() {
   					ctrl = createController();
+  					spyOn(scope, 'update').and.callThrough();
   					scope.start();
   				});
     			xit("offset should now be very close to the current time", function() {
     				var today = new Date();
-    				today.setDate(today.getDate());
+    				today.setTime(today.getTime());
     				var oldDate = angular.copy(today);
     				scope.start();
     				console.log("Offset1: " + scope.offset);
@@ -250,7 +251,8 @@ describe('	Test:	', function() {
     				console.log(today - scope.offset);
     				expect(today - scope.offset).toBe(0);
     				$interval.flush(5);
-    				today.setDate(today.getDate());
+    				scope.update();
+    				today.setTime(today.getTime());
     				expect(today - scope.offset).toBe(0);
     				var todayOffset = today - oldOffset;
     				console.log("Offset2: " + scope.offset);
@@ -258,7 +260,6 @@ describe('	Test:	', function() {
     				expect(todayOffset).toBe(5);
     			});
     			it("update should be called - but only after 5 milliseconds", function() {
-    				spyOn(scope, 'update');
     				scope.start();
     				expect(scope.update).not.toHaveBeenCalled();
     				$interval.flush(5);
@@ -312,7 +313,27 @@ describe('	Test:	', function() {
   			  expect($intervalSpy.cancel.calls.argsFor(1)[0].$$intervalId).toBe(1);
   			});
   		});
-  		describe('update', function(){});
+  		describe('update', function(){
+  			var localClock;
+  			beforeEach(function() {
+  				spyOn(scope, 'delta').and.callFake(function() {
+  					return 5;
+  				});
+  				spyOn(scope, 'render');
+  				spyOn(scope, 'start').and.callThrough();
+  				scope.clock = 0;
+  				localClock = scope.clock;
+  				scope.start();
+  				$interval.flush(5);
+  			});
+  			it("uses the delta function and updates clock", function() {
+  				expect(localClock).toBeLessThan(scope.clock);
+  				expect(scope.delta).toHaveBeenCalled();
+  			});
+  			it("renders the new data string", function() {
+  				expect(scope.delta).toHaveBeenCalled();
+  			});
+  		});
 		});
 	});
 });
