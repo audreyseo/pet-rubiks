@@ -9,7 +9,7 @@ function returnNaN() {
 describe('	Test:	', function() {
 	describe('Controller: TimerController', function() {
 		
-		var ctrl, createController, scope, $interval, $cookies, $log, statistics;
+		var ctrl, createController, scope, $interval, $cookies, $log, statistics, $intervalSpy;
 		
 		beforeEach(module('myApp', 'ngCookies'));		
 		
@@ -17,13 +17,14 @@ describe('	Test:	', function() {
 			function ($rootScope, _$interval_, _$cookies_, _$log_, _statistics_, $controller) {
   	    scope = $rootScope.$new();
   			$interval = _$interval_;
+  			$intervalSpy = jasmine.createSpy('$interval', _$interval_).and.callThrough();
   			$cookies = _$cookies_;
   			$log = _$log_;
   			statistics = _statistics_;
-  	    createController = function() {
+  	    createController = function(myInt) {
 	        return $controller('TimerController', {
 	            '$scope': scope,
-	            '$interval': $interval,
+	            '$interval': (arguments.length == 1) ? myInt : $interval,
 	            '$cookies': $cookies,
 	            '$log': $log,
 	            'statistics': statistics
@@ -33,16 +34,66 @@ describe('	Test:	', function() {
 		));
 		
 		describe("Variables", function() {
-			it("variables should be defined", function() {
-				
-			});
-		});
-		
-		describe('Functions', function() {
 			beforeEach(function() {
 				ctrl = createController();
 			});
 			
+			it("variables should be defined", function() {
+				expect(scope.cookieOpts).toBeDefined();
+				expect(scope.clock).toBeDefined();
+				expect(scope.displayTimeString).toBeDefined();
+				expect(scope.encodedUri).toBeDefined();
+				expect(scope.interval).toBe(null);
+				expect(scope.offset).toBe(undefined);
+				expect(scope.options).toBeDefined();
+				expect(scope.options.delay).toBeDefined();
+				expect(scope.options.delay).toBe(5);
+				expect(scope.records).toBeDefined();
+				expect(scope.numRecords).toBeDefined();
+				expect(scope.pairs).toBeDefined();
+				expect(scope.pairNames).toBeDefined();
+				expect(scope.recordsCookie).toBeDefined();
+				expect(scope.state).toBeDefined();
+				expect(scope.state.running).toBe(false);
+				expect(scope.state.stopped).toBe(false);
+				expect(scope.myStats).toBeDefined();
+				expect(scope.time).toBeDefined();
+			});
+		});
+		
+		
+		
+		describe('Function', function() {
+			beforeEach(function() {
+				ctrl = createController();
+			});
+			
+			it("all functions should be defined", function() {
+				expect(scope.deleteRecord).toBeDefined();
+				expect(scope.deleteAll).toBeDefined();
+				expect(scope.deleteRecord).toBeDefined();
+				expect(scope.delta).toBeDefined();
+				expect(scope.downloadClicked).toBeDefined();
+				expect(scope.isEncoded).toBeDefined();
+				expect(scope.getCookies).toBeDefined();
+				expect(scope.render).toBeDefined();
+				expect(scope.reset).toBeDefined();
+				expect(scope.returnObjects).toBeDefined();
+				expect(scope.returnNames).toBeDefined();
+				expect(scope.save).toBeDefined();
+				expect(scope.saveRecords).toBeDefined();
+				expect(scope.start).toBeDefined();
+				expect(scope.stop).toBeDefined();
+				expect(scope.update).toBeDefined();
+			});
+			describe('deleteIndex', function() {
+				it("if called with negative index, length should be the same", function() {
+					var length1 = scope.numRecords;
+					scope.deleteIndex(-1);
+					var length2 = scope.numRecords;
+					expect(length1).toEqual(length2);
+				});
+			});
 			describe('deleteRecord', function() {
   			describe('with normal data', function() {
   				beforeEach(function() {
@@ -137,11 +188,130 @@ describe('	Test:	', function() {
   			});
   		});
   		
-  		describe('reset', function(){});
-  		describe('returnNames', function(){});
-  		describe('returnObjects', function(){});
-  		describe('start', function(){});
-  		describe('stop', function(){});
+  		describe('reset', function(){
+  			beforeEach(function() {
+  				scope.state.stopped = true;
+  				spyOn(scope, 'render').and.callThrough();
+  				scope.reset();
+  			});
+  			it("Once called, state.stopped should be false", function() {
+  				expect(scope.state.stopped).toBe(false);
+  			});
+  			it("Once called, render should also be called", function() {
+  				expect(scope.render).toHaveBeenCalled();
+  			});
+  			it("afterwards, $scope.clock should be 0", function() {
+  				expect(scope.clock).toBe(0);
+  			});
+  			it("time should also be 00:00.000", function() {
+  				expect(scope.time.string).toEqual("00:00.000");
+  			});
+  		});
+  		describe('returnNames', function(){
+  			it("should return Stop if we're timing", function() {
+  				scope.state.running = true;
+  				expect(scope.returnNames()).toEqual("Stop");
+  			});
+  			it("should return Start if not currently timing", function() {
+  				scope.state.running = false;
+  				expect(scope.returnNames()).toEqual("Start");
+  			});
+  		});
+  		describe('returnObjects', function(){
+  			it("should return stop() if we're timing", function() {
+  				scope.state.running = true;
+  				expect(scope.returnObjects()).toEqual(scope.stop())
+  			});
+  			it("should return start() if we're not timing", function() {
+  				scope.state.running = false;
+  				expect(scope.returnObjects()).toEqual(scope.start())
+  			});
+  		});
+  		describe('start', function(){
+  			var done, time;
+  			beforeEach(function() {
+  				spyOn(scope, 'start').and.callThrough();
+  				spyOn(scope, 'reset');
+  				spyOn(scope, 'render');
+  			});
+  			
+  			describe('syncronous testing', function() {
+  				beforeEach(function() {
+  					ctrl = createController();
+  					scope.start();
+  				});
+    			it("offset should now be very close to the current time", function() {
+    				var today = new Date();
+    				today.setDate(today.getDate());
+    				var oldDate = angular.copy(today);
+    				scope.start();
+    				console.log("Offset1: " + scope.offset);
+    				var oldOffset = angular.copy(scope.offset);
+    				console.log(today - scope.offset);
+    				expect(today - scope.offset).toBe(0);
+    				$interval.flush(5);
+    				today.setDate(today.getDate());
+    				expect(today - scope.offset).toBe(0);
+    				var todayOffset = today - oldOffset;
+    				console.log("Offset2: " + scope.offset);
+    				console.log("Offset2 - Offset1: " + (scope.offset - oldOffset));
+    				expect(todayOffset).toBe(5);
+    			});
+    			it("update should be called - but only after 5 milliseconds", function() {
+    				spyOn(scope, 'update');
+    				scope.start();
+    				expect(scope.update).not.toHaveBeenCalled();
+    				$interval.flush(5);
+    				expect(scope.update).toHaveBeenCalled();
+    			});
+  			});
+  			
+  			beforeEach(function() {
+  				ctrl = createController($intervalSpy);
+  				spyOn(scope, 'start').and.callThrough();
+  				spyOn(scope, 'update');
+  				spyOn(scope, 'reset');
+  				spyOn(scope, 'render');
+  				scope.start();
+  			});
+  			
+  			it("once called, should call reset() and render()", function() {
+  				expect(scope.reset).toHaveBeenCalled();
+  				expect(scope.render).toHaveBeenCalled();
+  			});
+  			it("$interval should have been called", function() {
+  				expect($intervalSpy).toHaveBeenCalledWith(scope.update, scope.options.delay);
+  			});
+  			it("interval should no longer be null or undefined", function() {
+  				expect(scope.interval).toBeDefined();
+  				expect(scope.interval).not.toBe(null);
+  			});
+  		});
+  		describe('stop', function(){
+  			var oldNumRecords;
+  			beforeEach(function() {
+  				spyOn($intervalSpy, 'cancel');
+  				ctrl = createController($intervalSpy);
+  				scope.records = {time: ["00:00.000", "00:00.00"], index: [1, 2], timeStamp: ["00:00.000", "00:00.00"], millis: [0, 0]};
+  				oldNumRecords = scope.numRecords;
+  				spyOn(scope, 'render');
+  				spyOn(scope, 'stop').and.callThrough();
+  				scope.stop();
+  			});
+  			it("once called, should call and render()", function() {
+  				expect(scope.render).toHaveBeenCalled();
+  			});
+  			it("num records should have increased", function() {
+  				expect(scope.numRecords).toBeGreaterThan(oldNumRecords);
+  			});
+  			it("interval should have been canceled correctly", function() {
+  				expect($intervalSpy.cancel).toHaveBeenCalledWith(scope.interval);
+  				expect(scope.interval).not.toBeDefined();
+  				expect(scope.interval).not.toBe(null);
+  				expect($intervalSpy.cancel.calls.argsFor(0)[0].$$intervalId).toBe(0);
+  			  expect($intervalSpy.cancel.calls.argsFor(1)[0].$$intervalId).toBe(1);
+  			});
+  		});
   		describe('update', function(){});
 		});
 	});

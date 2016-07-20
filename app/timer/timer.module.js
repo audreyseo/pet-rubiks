@@ -95,7 +95,7 @@ function TimerController($scope, $interval, $cookies, $log, statistics) {
   		if (angular.isDefined($scope.records.index)) {
     		if (index < $scope.records.index.length) {
       		for (var str in $scope.records) {
-      			console.log(str);
+//      			console.log(str);
       			$scope.records[str].splice(index, 1);
       		}
       	}
@@ -109,8 +109,8 @@ function TimerController($scope, $interval, $cookies, $log, statistics) {
   }
   
   function deleteRecord(index) {
-  	console.log("Index: " + index);
-  	console.log("Boolean: " + (angular.isDefined(index) && !isNaN(index)));
+//  	console.log("Index: " + index);
+//  	console.log("Boolean: " + (angular.isDefined(index) && !isNaN(index)));
   	if (angular.isDefined(index) && !isNaN(index)) {
   		$scope.deleteIndex(index);
   		$scope.saveRecords();
@@ -217,10 +217,10 @@ function TimerController($scope, $interval, $cookies, $log, statistics) {
   
   function returnObjects() {
   	if ($scope.state.running) {
-  		console.log('please help me 1 ' + $scope.time.string);
+//  		console.log('please help me 1 ' + $scope.time.string);
   		return $scope.stop();
   	}
-  		console.log('please help me 3 ' + $scope.time.string);
+//  		console.log('please help me 3 ' + $scope.time.string);
   		return $scope.start();
   }
   
@@ -291,7 +291,6 @@ function TimerController($scope, $interval, $cookies, $log, statistics) {
   
   function start() {
 		$scope.reset();
-//  		console.log("helllpppp");
 		$scope.state.running = true;
 		$scope.state.stopped = false;
 	  $scope.offset   = Date.now();
@@ -318,7 +317,7 @@ function TimerController($scope, $interval, $cookies, $log, statistics) {
   function saveTimeObject(value) {
   	console.log(angular.toJson($scope.records));
   	for (str in value) {
-  		console.log("Str: " + str);
+//  		console.log("Str: " + str);
   		$scope.records[str].push(value[str])
   	}
 //		return {index: value.index[i], time: value.time[i], millis: value.millis[i], timeStamp: value.timeStamp[i]};
