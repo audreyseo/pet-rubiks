@@ -77,7 +77,7 @@ angular
 				}
 				
 				function length() {
-					return factory.data.length;
+					return parseInt(factory.data.length);
 				}
 				
 				function loadData(value) {
@@ -86,34 +86,36 @@ angular
 					
 					var data = [];
 //					console.log("Type of value: " + typeof value);
-					if ((typeof value.index) !== 'undefined') {
+					if (angular.isDefined(value)) {
+						if (angular.isDefined(value.index)) {
 
-						for (var i = 0; i < value.index.length; i++) {
-							var timeObj = timeObject(value, i);
-							data.push(timeObj);
-						}
-						
-						factory.raw = data;
+							for (var i = 0; i < value.index.length; i++) {
+								var timeObj = timeObject(value, i);
+								data.push(timeObj);
+							}
+							
+							factory.raw = data;
+//							console.log(angular.toJson(value));
+							factory.data = [];
+							
+							for (i = 0; i < factory.raw.length; i++) {
+								times = times + factory.raw[i].time + " ";
+								factory.data.push(converter.stringToMillis(factory.raw[i].time));
+								times2 = times2 + factory.data[i] + " ";
+							}
+							//console.log(times);
+							//console.log(times2);
+						} else {
+							factory.raw = value;
 //						console.log(angular.toJson(value));
-						factory.data = [];
+							factory.data = [];
 						
-						for (i = 0; i < factory.raw.length; i++) {
-							times = times + factory.raw[i].time + " ";
-							factory.data.push(converter.stringToMillis(factory.raw[i].time));
-							times2 = times2 + factory.data[i] + " ";
+							for (var i = 0; i < factory.raw.length; i++) {
+	  						times = times + factory.raw[i].time + " ";
+	  						factory.data.push(converter.stringToMillis(factory.raw[i].time));
+	  						times2 = times2 + factory.data[i] + " ";
+	  					}
 						}
-						//console.log(times);
-						//console.log(times2);
-					} else {
-						factory.raw = value;
-//					console.log(angular.toJson(value));
-						factory.data = [];
-					
-						for (var i = 0; i < factory.raw.length; i++) {
-  						times = times + factory.raw[i].time + " ";
-  						factory.data.push(converter.stringToMillis(factory.raw[i].time));
-  						times2 = times2 + factory.data[i] + " ";
-  					}
 					}
 					factory.calculate();
 				}

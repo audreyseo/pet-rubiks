@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for app/flash-cards/flash-cards.module.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">app/flash-cards/</a> flash-cards.module.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">78.81% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>93/118</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">70% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>42/60</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">79.17% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>19/24</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">78.81% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>93/118</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * http://usejsdoc.org/
+ */
+&nbsp;
+&nbsp;
+angular
+	.module('myApp')
+	.factory('flashCardData', ['cookieStrings', '$cookies', 'cookieData', function(cookieStringData, $cookies, cookieData) {
+  	var factory = {data: cookieData, cookies: cookieStringData, cards: {}};
+  //	angular.copy(cookieData, factory.data);
+//  	console.log(angular.toJson(cookieData));
+  	factory.initialize = function() {
+  		for (var ind in factory.data) {
+  			if (!angular.isString(factory.data[ind])) {
+  				try {
+  				 factory.data[ind] = $cookies.getObject(factory.cookies[ind]);
+//  				 console.log("CookieData[ind] Defined?: " + ind + ": " + angular.isDefined(cookieData[ind]));
+//  				 console.log("factory.data[" + ind + "] defined: " + (angular.isDefined(factary.data[ind])));
+  				 if (angular.isUndefined(factary.data[ind])) {
+//  					 console.log("Redefining");
+<span class="cstat-no" title="statement not covered" >  					 factory.data[ind] = cookieData[ind];</span>
+<span class="cstat-no" title="statement not covered" >  					 $cookies.putObject(factory.cookies[ind], factory.data[ind]);</span>
+  				 }
+  				} catch(e) {
+  					factory.data[ind] = cookieData[ind];
+  					$cookies.putObject(factory.cookies[ind], factory.data[ind]);
+  				}
+//  				console.log(ind + ": " + angular.toJson(factory.data[ind]) + "  |  " + angular.isDefined(factory.data[ind]));
+  			}
+  		}
+  		
+  		<span class="missing-if-branch" title="else path not taken" >E</span>if (angular.isUndefined(factory.data.practicing)) {
+  			factory.data.practicing = {};
+  			$cookies.putObject(factory.cookies.practicing, factory.data.practicing);
+//  			console.log("Practicing: " + factory.data.practicing);
+  		}
+  		
+  		for (var i in factory.data.practiceCards) {
+<span class="cstat-no" title="statement not covered" >  			factory.cards[factory.data.practiceCards[i].code] = factory.data.practiceCards[i];</span>
+  		}
+  		try {
+  			if (!angular.isNumber(factory.data.cards.maxNumber)) {
+  			  //		$scope.cards = {maxNumber: 0, options: []};
+<span class="cstat-no" title="statement not covered" >  			  			factory.data.cards.maxNumber = parseInt(factory.data.cards.maxNumber);</span>
+<span class="cstat-no" title="statement not covered" >  			  			$cookies.putObject(factory.cookies.cards, factory.data.cards);</span>
+  			  		}
+  		} catch (e) {
+  			factory.data.cards = {maxNumber: 0, options: []};
+  			$cookies.putObject(factory.cookies.cards, factory.data.cards);
+  		}
+  		
+  	};
+  	
+  	factory.isPracticing = function(value) {
+  		if (factory.data.practicing[value] !== undefined) {
+  			return factory.data.practicing[value];
+  		}
+  		return false;
+  	};
+  	
+  	factory.setPracticing = function(caseCode, value) {
+  		factory.data.practicing[caseCode] = value;
+  	};
+  	
+  	factory.removePracticing = function(caseCode ) {
+  		if (angular.isDefined(caseCode)) {
+  			<span class="missing-if-branch" title="if path not taken" >I</span>if (angular.isDefined(factory.data.practicing[caseCode])) {
+<span class="cstat-no" title="statement not covered" >  				factory.setPracticing(caseCode, undefined);</span>
+  			}
+  		}
+  	};
+  	
+  	factory.savePracticing = function(newValue) {
+  		if (arguments.length === 1) {
+  			$cookies.putObject(factory.cookies.practicing, newValue);
+  		} else {
+  			$cookies.putObject(factory.cookies.practicing, factory.data.practicing);
+  		}
+  	};
+  	
+  	factory.getPracticing = function() {
+  		if (angular.isDefined(factory.data.practicing)) {
+  			return factory.data.practicing;
+  		}
+  		return cookieData.practicing;
+  	};
+  	
+  	factory.getPriority = function(caseCode) {
+  		if (angular.isDefined(factory.data.cardPriorities[caseCode])) {
+  			return factory.data.cardPriorities[caseCode];
+  		} else {
+  			return(-1);
+  		}
+  	};
+  	
+  	factory.setPriority = function(caseCode, value) {
+  		if (caseCode !== undefined &amp;&amp; !(caseCode === undefined &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >value===undefined)</span>) {
+  			factory.data.cardPriorities[caseCode] = value;
+  		}
+  	};
+  	
+  	factory.removePriority = function(caseCode) {
+  		if (caseCode !== undefined) {
+  			factory.setPriority(caseCode, undefined);
+  		}
+  	};
+  	
+  	factory.saveCardPriorities = function(newValue) {
+  		if (arguments.length === 1) {
+  			$cookies.putObject(factory.cookies.cardPriorities, newValue);
+  		} else {
+  			$cookies.putObject(factory.cookies.cardPriorities, factory.data.cardPriorities);
+  		}
+  	};
+  	
+  	factory.getCardPriorities = function() {
+  		<span class="missing-if-branch" title="else path not taken" >E</span>if (angular.isDefined(factory.data.cardPriorities)) {
+  			return(factory.data.cardPriorities);
+  		}
+<span class="cstat-no" title="statement not covered" >  		return(cookieData["cardPriorities"]);</span>
+  	};
+  	
+  	factory.getCard = function(caseCode) {
+  		if (angular.isDefined(factory.cards[caseCode])) {
+  			return(factory.cards[caseCode]);
+  		}
+  		return -1;
+  	};
+  	
+  	factory.setCard = function(caseCode, cardValue) {
+  		if (!angular.isUndefined(caseCode)) {
+  			if (angular.isUndefined(factory.cards[caseCode])) {
+    			factory.cards[caseCode] = cardValue;
+    			factory.data.practiceCards.push(cardValue);
+    		} else {
+    			factory.cards[caseCode] = cardValue;
+    			for (var ind in factory.data.practiceCards) {
+    				<span class="missing-if-branch" title="else path not taken" >E</span>if (factory.data.practiceCards[ind].code === caseCode) {
+    					factory.data.practiceCards.splice(ind, 1);
+    					factory.data.practiceCards.push(caseCode, cardValue);
+    					break;
+    				}
+    			}
+    		}
+  		}
+  	};
+  	
+  	factory.removeCard = function(caseCode) {
+  		<span class="missing-if-branch" title="else path not taken" >E</span>if (angular.isUndefined(factory.cards[caseCode])) {
+  			return;
+  		} else {
+<span class="cstat-no" title="statement not covered" >  			factory.cards[caseCode] = undefined;</span>
+<span class="cstat-no" title="statement not covered" >  			for (var ind in factory.data.practiceCards) {</span>
+<span class="cstat-no" title="statement not covered" >  				if (factory.data.practiceCards[ind].code === caseCode) {</span>
+<span class="cstat-no" title="statement not covered" >  					factory.data.practiceCards.splice(ind, 1);</span>
+<span class="cstat-no" title="statement not covered" >  					break;</span>
+  				}
+  			}
+  		}
+  	};
+  	
+  	factory.savePracticeCards = function(newValue) {
+  		if (arguments.length === 1) {
+  			$cookies.putObject(factory.cookies.practiceCards, newValue)
+  		} else {
+  			$cookies.putObject(factory.cookies.practiceCards, factory.data.practiceCards);
+  		}
+  	};
+  	
+  	factory.getPracticeCards = function() {
+  		if (angular.isDefined(factory.data.practiceCards)) {
+  			return factory.data.practiceCards;
+  		}
+  		return cookieData.practiceCards;
+  	};
+  	
+  	factory.saveCards = function(newValue) {
+			if (arguments.length === 1) {
+				if (newValue !== undefined) {
+  				$cookies.putObject(factory.cookies.dataCards, newValue);
+				}
+  		} else {
+  			<span class="missing-if-branch" title="else path not taken" >E</span>if (angular.isDefined(factory.data.cards)) {
+//  				console.log("Defined.");
+  				$cookies.putObject(factory.cookies.dataCards, factory.data.cards);
+  			} else {
+//  				console.log("factory.data.cards: " + angular.toJson(factory.data.cards));
+<span class="cstat-no" title="statement not covered" >  				factory.data.cards = angular.copy(cookieData.cards, factory.data.cards);</span>
+//  				console.log("factory.data.cards: " + angular.toJson(factory.data.cards));
+<span class="cstat-no" title="statement not covered" >  				$cookies.putObject(factory.cookies.dataCards, cookieData.cards);</span>
+  			}
+  		}
+  	};
+  	
+  	factory.getCards = function() {
+  		<span class="missing-if-branch" title="else path not taken" >E</span>if (angular.isDefined(factory.data.cards)) {
+  			return(factory.data.cards);
+  		}
+<span class="cstat-no" title="statement not covered" >  		factory.data.cards = cookieData.cards;</span>
+<span class="cstat-no" title="statement not covered" >  		return cookieData.cards;</span>
+  	};
+  	
+  	factory.getAlgorithmOption = <span class="fstat-no" title="function not covered" >function(caseCode) {</span>
+<span class="cstat-no" title="statement not covered" >  		if (angular.isDefined(factory.data.cardOptions[caseCode])) {</span>
+<span class="cstat-no" title="statement not covered" >  			return factory.data.cardOptions[caseCode];</span>
+  		}
+<span class="cstat-no" title="statement not covered" >  		return -1;</span>
+  	};
+  	
+  	factory.setAlgorithmOption = <span class="fstat-no" title="function not covered" >function(caseCode, value) {</span>
+<span class="cstat-no" title="statement not covered" >  		factory.data.cardOptions[caseCode] = value;</span>
+  	};
+  	
+  	factory.removeAlgorithmOption = <span class="fstat-no" title="function not covered" >function(caseCode) {</span>
+<span class="cstat-no" title="statement not covered" >  		factory.setAlgorithmOption(caseCode, undefined);</span>
+  	};
+  	
+  	factory.saveCardOptions = <span class="fstat-no" title="function not covered" >function(newValue) {</span>
+<span class="cstat-no" title="statement not covered" >  		$cookies.putObject(factory.cookies.cardOptions, newValue);</span>
+  	};
+  	
+  	factory.getCardOptions = <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >  		if (angular.isDefined(factory.data.cardOptions)) {</span>
+<span class="cstat-no" title="statement not covered" >  			return factory.data.cardOptions;</span>
+  		}
+<span class="cstat-no" title="statement not covered" >  		return cookieData.cardOptions;</span>
+  	};
+  	
+  	return(factory);
+}]);
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Jul 20 2016 10:40:16 GMT-0400 (EDT)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

@@ -5,7 +5,10 @@ module.exports = function(grunt) {
     
     srcs: {src: ['app/app.module.js', 'app/app.config.js', 'app/*!(.mocks|.spec).js', 'app/**/*(!(.mocks|.spec)).js'], 
            test: 'app/**/*.spec.js'},
-    
+    config: {
+      LOG_DEBUG: "DEBUG",
+      LOG_INFO: "INFO"
+    },
     exec: {
       updatetests: {
         cmd: function() {
@@ -52,14 +55,14 @@ module.exports = function(grunt) {
         configFile: 'karma.conf.js'
       },
       chrome: {
-        logLevel: "config.LOG_INFO",
+      logLevel: this.config.LOG_INFO,
         autoWatch: true,
         singleRun: false,
         concurrency: "Infinity",
         browsers: ['Chrome']
       },
       chrometest: {
-        logLevel: "config.LOG_DEBUG",
+        logLevel: this.config.LOG_DEBUG,
         browsers: ['Chrome']
       },
       dev: {

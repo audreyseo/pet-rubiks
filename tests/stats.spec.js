@@ -23,6 +23,17 @@ function generateTimeArray(max) {
 	return(data);
 }
 
+function generateNewArray(max) {
+	var data = {time: [], index: [], timeStamp: [], millis: []};
+	for (var i = 0; i < max; i++) {
+		var obj = randomTimeObject(i);
+		data.time.push(obj.time);
+		data.index.push(obj.index);
+		data.timeStamp.push(obj.timeStamp);
+		data.millis.push(obj.millis);
+	}
+}
+
 describe('	Test:	', function() {
   describe('Factory: Statistics', function() {
   	var statistics, timeConversion;
@@ -136,6 +147,32 @@ describe('	Test:	', function() {
   			var length = statistics.raw.length;
   			expect(statistics.raw[length - 1]).toEqual(timeObject);
   			expect(statistics.data[length - 1]).toEqual(timeConversion.stringToMillis(timeObject.time));
+  		});
+  	});
+  	
+  	describe('length', function() {
+  		var myRawData;
+			it("length should be the correct length even if we load different data", function() {
+  			myRawData = generateNewArray(15);
+  			statistics.loadData(myRawData);
+  			expect((typeof statistics.length())).not.toEqual('undefined');
+  			expect(typeof statistics.length()).toEqual('number');
+  		});
+  		beforeEach(function() {
+  			myRawData = generateTimeArray(14);
+  			statistics.loadData(myRawData);
+  		});
+  		it("length should change if new data array is loaded", function() {
+  			var length = statistics.length();
+  			myRawData = generateTimeArray(15);
+  			statistics.loadData(myRawData);
+  			var length2 = statistics.length();
+  			expect(length2 > length).toBe(true);
+  			expect(length2).not.toEqual(length);
+  		});
+  		it("length should be a number", function() {
+  			var length = statistics.length();
+  			expect(typeof length).toEqual('number');
   		});
   	});
   	

@@ -90,9 +90,16 @@ function TimerController($scope, $interval, $cookies, $log, statistics) {
   }
   
   function deleteRecord(index) {
-  	if (index < $scope.records.index.length && index >= 0) {
-  		for (str in $scope.records) {
-  			$scope.records[str].splice(index, 1);
+  	if (angular.isDefined($scope.records.index)) {
+  		if (index < $scope.records.index.length && index >= 0) {
+    		for (str in $scope.records) {
+    			$scope.records[str].splice(index, 1);
+    		}
+    		$scope.numRecords --;
+    	}
+  	} else {
+  		if (index < $scope.records.length && index >= 0) {
+  			$scope.records.splice(index, 1);
   		}
   		$scope.numRecords --;
   	}
