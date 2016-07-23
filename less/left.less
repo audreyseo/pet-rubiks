@@ -1,4 +1,7 @@
-@CHARSET "UTF-8";
+//@CHARSET "UTF-8";
+@originalBlue: #728ca9;
+@normPad: 10px;
+@fullWidth: 205px;
 
 #leftBar {
 	float: right;
@@ -6,12 +9,13 @@
 	align-items: center;
 	position: relative;
 	top: 40px;
+	width: 205px + 20;
 }
 
 .controlBox {
 	border: 3px dotted black;
 	border-radius: 3px;
-	padding: 10px;
+	padding: @normPad;
 	font-family: Arial;
 	font-size: 13px;
 	width: 205px;
@@ -22,8 +26,8 @@
 }
 
 .scrambleCodeDiv {
-	background-color: #728ca9;
-	padding: 10px;
+	background-color: @originalBlue;
+	padding: @normPad;
 	border-radius: 3px;
 	color: #F4F4F4;
 	cursor: pointer;
@@ -69,10 +73,10 @@ td.right {
 	float: right;
 	text-align: left;
 	margin-right: -5px;
-	padding-left: 10px;
+	padding-left: @normPad;
 }
 td.left {
 	float: left;
-	padding-right: 10px;
+	padding-right: @normPad;
 	margin-left: -5px;
 }

@@ -1,0 +1,68 @@
+//@CHARSET "UTF-8";
+@alignment: center;
+@originalBlue: #728ca9;
+@cellPadding: 4px;
+@timesTableH: 140px;
+@timesTableW: 131px;
+@whiteBG: white;
+
+#timesRecord {
+	height: @timesTableH;
+	width: @timesTableW;
+	border: 3px solid @originalBlue;
+	border-radius: 6px;
+	background-color: @originalBlue;
+	align-items: center;
+	margin-left: 4px;
+}
+
+#timesforeground {
+	position: relative;
+	background-color: @whiteBG;
+	overflow-y: scroll;
+	height: 93%;
+	width: 90%;
+	border-radius: 4px;
+	align-items: @alignment;
+	text-align: @alignment;
+	margin-top: 4px;
+}
+
+table#timesTable {
+	text-align: center;
+	padding: 2px;
+	margin-left: 6px;
+	margin-right: 6px;
+}
+
+#timeforeground table th, #timeforeground table tr {
+	padding: 4px;
+}
+
+.deleteButton {
+	cursor: pointer;
+	font-size: 10px;
+	color: #206a96;
+}
+
+tr.timesTable:nth-child(odd) {
+	background-color: #92acc9;
+	color: white;
+}
+
+tr.timesTable:nth-child(odd) td {
+	color: white;
+	padding: 0px;
+	padding-left: @cellPadding;
+	padding-right: @cellPadding;
+}
+
+tr.timesTable:nth-child(even) {
+	background-color: @whiteBG;
+}
+
+tr.timesTable:nth-child(odd) td {
+	padding: 0px;
+	padding-left: @cellPadding;
+	padding-right: @cellPadding;
+}
