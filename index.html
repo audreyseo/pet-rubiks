@@ -3,9 +3,16 @@
   <head>
     <title>Learn the OLL Cases</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" type="text/css" href="/css/default.css">
+    <!-- <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css"> -->
+    <link rel="stylesheet" type="text/css" href="/lib/jquery-ui-1.11.4-2.custom/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/basic.css">
+    <link rel="stylesheet" type="text/css" href="/css/jquery_overriding.css">
     <link rel="stylesheet" type="text/css" href="/css/tabs.css">
+    <link rel="stylesheet" type="text/css" href="/css/left.css">
+    <link rel="stylesheet" type="text/css" href="/css/flashCard.css">
+    <link rel="stylesheet" type="text/css" href="/css/timeRecordsTable.css">
+    <link rel="stylesheet" type="text/css" href="/css/colorCodingAlgorithms.css">
+    <link rel="stylesheet" type="text/css" href="/css/casesTable.css">
   </head>
   <body>
     <div ng-controller="ContentController" id="everything">
@@ -168,14 +175,14 @@
           <span class="title">Controls</span>
           <!-- <form id="controller"> -->
             <div id="accordion">
-              <h3>Make Flashcards</h3>
+              <h5>Make Flashcards</h3>
               <div class="controlBox" id="cardControl">
                 <input type='button' value="Select cases to practice" ng-click="editCardSelection()"><br>
                 <p>Max Number of Cards: {{cards.maxNumber}}</p>
                 <label>Change Max # of Cards: </label>
                 <select name="numCards" ng-model=cards.maxNumber></select>
               </div>
-              <h3>Check Off Known Cases</h3>
+              <h5>Check Off Known Cases</h3>
               <div class="controlBox" id="caseControl"> 
                 <input type="button" value="{{knownCases.editMessage}}" ng-click="modifyKnownCases()">
               <!--<span ng-click="toggleCases()">{{toggle}} Show Known Cases</span>-->
@@ -226,7 +233,8 @@
       $( function() {
         $( "#accordion" ).accordion({
           collapsible: true,
-          heightStyle: "content"
+          heightStyle: "content",
+          animate: 100
         });
       } );
     </script>

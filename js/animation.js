@@ -10,45 +10,45 @@ $(window).load(function() {
 		$(this).slideUp(200);
 	});
 	
-	$("#sort").change(function() {
-		if ($(this).is(":checked")) {
-			$(".controlBox").each(function() {
-				if ($(this).attr("id") != "sortControl") {
-					$(this).slideUp(200);
-				}
-			});
-			$("#sortControl").stop(true).slideDown(200);
-		} else {
-			$("#sortControl").stop(true).slideUp(200);
-		}
-	});
+//	$("#sort").change(function() {
+//		if ($(this).is(":checked")) {
+//			$(".controlBox").each(function() {
+//				if ($(this).attr("id") != "sortControl") {
+//					$(this).slideUp(200);
+//				}
+//			});
+//			$("#sortControl").stop(true).slideDown(200);
+//		} else {
+//			$("#sortControl").stop(true).slideUp(200);
+//		}
+//	});
+//	
+//	$("#card").change(function() {
+//		if ($(this).is(":checked")) {
+//			$(".controlBox").each(function() {
+//				if ($(this).attr("id") != "cardControl") {
+//					$(this).slideUp(200);
+//				}
+//			});
+//			$("#cardControl").stop(true).slideDown(200);
+//		} else {
+//			$("#cardControl").stop(true).slideUp(200);
+//		}
+//	});
 	
-	$("#card").change(function() {
-		if ($(this).is(":checked")) {
-			$(".controlBox").each(function() {
-				if ($(this).attr("id") != "cardControl") {
-					$(this).slideUp(200);
-				}
-			});
-			$("#cardControl").stop(true).slideDown(200);
-		} else {
-			$("#cardControl").stop(true).slideUp(200);
-		}
-	});
-	
-	$("#known").change(function() {
-		if ($(this).is(":checked")) {
-			$(".controlBox").each(function() {
-				if ($(this).attr("id") != "caseControl") {
-					$(this).slideUp(200);
-//					$(this).show(1000);
-				}
-			});
-			$("#caseControl").stop(true).slideDown(200);
-		} else {
-			$("#caseControl").stop(true).slideUp(200);
-		}
-	});
+//	$("#known").change(function() {
+//		if ($(this).is(":checked")) {
+//			$(".controlBox").each(function() {
+//				if ($(this).attr("id") != "caseControl") {
+//					$(this).slideUp(200);
+////					$(this).show(1000);
+//				}
+//			});
+//			$("#caseControl").stop(true).slideDown(200);
+//		} else {
+//			$("#caseControl").stop(true).slideUp(200);
+//		}
+//	});
 	
 	
 	$("body").keydown(function(event) {

@@ -1,0 +1,56 @@
+@CHARSET "UTF-8";
+
+#timesRecord {
+	height: 100px;
+	width: 131px;
+	border: 3px solid #728ca9;
+	border-radius: 6px;
+	background-color: #728ca9;
+	align-items: center;
+	margin-left: 4px;
+}
+
+#timesforeground {
+	position: relative;
+	background-color: white;
+	overflow-y: scroll;
+	height: 90%;
+	width: 90%;
+	border-radius: 4px;
+	align-items: center;
+	text-align: center;
+	margin-top: 4px;
+}
+
+table#timesTable {
+	text-align: center;
+	padding: 2px;
+	margin-left: 6px;
+	margin-right: 6px;
+}
+
+#timeforeground table th, #timeforeground table tr {
+	padding: 4px;
+}
+
+tr.timesTable:nth-child(odd) {
+	background-color: #728ca9;
+	color: white;
+}
+
+tr.timesTable:nth-child(odd) td {
+	color: white;
+	padding: 0px;
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+tr.timesTable:nth-child(even) {
+	background-color: white;
+}
+
+tr.timesTable:nth-child(odd) td {
+	padding: 0px;
+	padding-left: 4px;
+	padding-right: 4px;
+}

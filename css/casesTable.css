@@ -1,0 +1,40 @@
+@CHARSET "UTF-8";
+
+td.solve1, td.solve2 {
+	font: 12px bold Arial,sans-serif,Helvetica;
+	color: #333333;
+}
+
+td.num, td.length1, td.length2 {
+	color: grey;
+}
+
+.scrambleCodeDiv {
+	background-color: #728ca9;
+	padding: 10px;
+	border-radius: 3px;
+	color: #F4F4F4;
+}
+
+.icon {
+	width: 60px;
+}
+
+th {
+	cursor: pointer;
+}
+table {
+	margin: 20px;
+	font-family: Arial;
+	border: 0px;
+	border-collapse: collapse;
+}
+table, th, td {
+	/*border: 1px solid black;*/
+	border: 0px;
+	color: #333333;
+}
+
+th, td {
+	font-size: 10px;
+}
