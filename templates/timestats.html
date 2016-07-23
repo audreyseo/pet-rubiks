@@ -1,0 +1,13 @@
+<div class="myTimeStats">
+	<div class="timeStatsInner">
+<!-- 		Stats: {{times | json}}-->
+      <table class="timeStatsTable">
+        <tr ng-repeat="pair in timePairs">
+          <td class="left" align="left">{{timeNames[pair.a]}}:
+            {{times.stats[pair.a] | millisToString}}</td>
+          <td class="right" align="left">{{pairNames[pair.b]}}:
+            {{times.stats[pair.b] | millisToString}}</td>
+        </tr>
+      </table>
+	</div>
+</div><br>

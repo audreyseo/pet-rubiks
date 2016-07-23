@@ -15,9 +15,32 @@
 	font-family: Arial;
 	font-size: 13px;
 	width: 205px;
+	height: 100%;
 	/*opacity: 0;
 	height: 0px;
 	width: 100%;*/
+}
+
+.scrambleCodeDiv {
+	background-color: #728ca9;
+	padding: 10px;
+	border-radius: 3px;
+	color: #F4F4F4;
+	cursor: pointer;
+}
+
+input[type=button] {
+	cursor: pointer;
+}
+
+button {
+	cursor: pointer;
+}
+
+#scrambleButton {
+	cursor: pointer;
+	opacity: 0;
+	display: inline-block;
 }
 
 #timerDiv {
