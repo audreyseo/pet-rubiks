@@ -1,0 +1,63 @@
+<div id="cases">
+  <table ng-cloak>
+    <tr>
+      <th><span></span></th>
+      <th class="num" ng-click="setSort('num')"><span>#</span></th>
+      <th class="code" ng-click="setSort('code')"><span>Code</span></th>
+      <th class="solve1" ng-click="setSort('solve1.alg')">
+        <span>Solve #1 Algorithm</span></th>
+      <th class="length1" ng-click="setSort('solve1.length')"><span>Solve
+          #1 Length</span></th>
+      <th class="solve2" ng-click="setSort('solve2.alg')"></span>Solve
+        #2 Algorithm</span></th>
+      <th class="length2" ng-click="setSort('solve2.length')"><span>Solve
+          #2 Length</span></th>
+      <th class="prob" ng-click="setSort('prob')"><span>Probability</span></th>
+      <th ng-if=showing.editCol>Know it?</th>
+      <th ng-if=showing.flashCardCol>Select Cases for
+        Flashcards</th>
+      <th ng-if=showing.priorityCol>Select Priority</th>
+      <th ng-if=showing.algorithmCol>Select Preferred
+        Algorithm</th>
+    </tr>
+    <tr id="editRow" ng-show=showing.editRow ng-cloak>
+      <th>Hidden</th>
+      <td ng--repeat="cClass in classes"><input
+        class="{{cClass}}" type="checkbox"
+        ng-model="hidden[cClass]" ng-true-value=1
+        ng-false-value=0 ng-click="hide($event)"></td>
+      <td ng-if=showing.editCol></td>
+    </tr>
+
+
+    <tr ng--repeat="case in filteredCases | orderBy:column:reverse" class="{{case.code}}">
+      <td ng-cloak><img class="icon" ng-src="{{case.src}}"></td>
+      <td class="num">{{::case.num}}</td>
+      <td class="code">{{::case.code}}</td>
+      <td class="solve1" ng-bind-html="::case.solve1.alg | colorCodeAlgorithms"></td>
+      <td class="length1">{{::case.solve1.length}}</td>
+      <td class="solve2"
+        ng-bind-html="case.solve2.alg | colorCodeAlgorithms"></td>
+      <td class="length2">{{::case.solve2.length}}</td>
+      <td class="prob">{{::case.prob | number: 5}}</td>
+      <td ng-if=showing.editCol>
+        <input id="{{::case.code}}" type="checkbox" ng-model="hiddenRows[case.code]" ng-true-value=1 ng-false-value=0>
+      </td>
+      <td ng-if=showing.flashCardCol>
+        <input id="{{::case.code}}" type="checkbox" ng-model='practicing[case.code]'>
+      </td>
+      <td ng-if=showing.priorityCol>
+        <select ng-show='practicing[case.code]' class="priorities" ng-model=cardPriorities[case.code]>
+          <option ng-repeat="val in cards.options" value="{{val}}">
+            {{val | number:0}}
+          </option>
+        </select></td>
+      <td ng-if="pickAnAlgorithm(case)"><select
+        ng-model='cardOptions[case.code]'>
+          <option value=-1></option>
+          <option value=1>1</option>
+          <option value=2>2</option>
+      </select></td>
+    </tr>
+  </table>
+</div>

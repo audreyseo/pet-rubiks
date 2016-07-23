@@ -1,7 +1,7 @@
 /**
  * http://usejsdoc.org/
  */
-var app = angular.module('myApp', ['ngCookies', 'ngSanitize', 'ngMock']);
+var app = angular.module('myApp', ['ngCookies', 'ngSanitize']); //, 'ngMock']);
 
 
 	

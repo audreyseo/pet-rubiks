@@ -1,0 +1,234 @@
+
+
+
+.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
+.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
+===============================================================================
+= = = = = = = = = = = = = = = BEGIN COMPILING FILES = = = = = = = = = = = = = =
+===============================================================================
+
+app.mock.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+cases.mocks.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+cookieDataTypes.value.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+hiddenRows.value.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+timeConversion.factory.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- stringToMillis  secondToMilli  getMinutes                                   -
+- millisToString  minuteToMilli  getMillis                                    -
+- milliToSecond   hourToMilli    getHours                                     -
+- milliToMinute   getSeconds                                                  -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+tabs.directive.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- addPane                                                                     -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+timesStatistics.filter.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+mknames.py
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+timeStats.directive.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+timer.module.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- downloadClicked  returnNames  isEncoded  start                              -
+- saveTimeObject   convertDate  render     save                               -
+- returnObjects    saveRecords  update     stop                               -
+- deleteRecord     getCookies   delta                                         -
+- deleteIndex      deleteAll    reset                                         -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+app.config.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+app.module.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+stats.factory.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- compareNums  variance  length  median  best                                 -
+- getVariance  mean1012  getSum  mean5   avg                                  -
+- timeObject   convert   stdDev  worst   iqr                                  -
+- calculate    addData   mean35  range   q1                                   -
+- loadData     mean100   mean10  mean    q3                                   -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+cube-scrambler.module.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- scramble                                                                    -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+flash-cards.module.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- removeAlgorithmOption  removePracticing  setPracticing  removeCard          -
+- saveCardPriorities     getPracticeCards  getPracticing  saveCards           -
+- getAlgorithmOption     saveCardOptions   isPracticing   getCards            -
+- setAlgorithmOption     savePracticing    getPriority    getCard             -
+- getCardPriorities      removePriority    setPriority    setCard             -
+- savePracticeCards      getCardOptions    initialize                         -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+cases.value.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+flashCard.directive.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+timer-records.factory.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- getDayOnly  findSame  loadData  update  save                                -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+cookieData.value.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- range                                                                       -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+colorCodeAlgorithms.filter.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- colorCodeAlgorithms                                                         -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+cookieStrings.value.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+oll-case-content.controller.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- checkFlashCardData  hiddenColsData  useCookieInfo  initialize               -
+- addPriorityOptions  hiddenRowsData  returnAddress  editTable                -
+- editCardSelection   hideHiddenCols  returnSolve    setFilter                -
+- modifyKnownCases    hideHiddenRows  addOptions     setSort                  -
+- pickAnAlgorithm     showHiddenCols  countCases                              -
+- flashCardsData      showHiddenRows  declassify                              -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+
+
+
+
+flash-cards.spec.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+timeConversion.spec.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+stats.spec.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- calculate  length  median  range  iqr                                       -
+- mean1012   mean35  mean5   mean   q1                                        -
+- mean100    mean10  worst   best   q3                                        -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+oll-case-content.spec.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+timeStatistics.spec.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+timer-records.spec.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+timer.spec.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- render  update  reset  start  stop                                          -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+cube-scrambler.spec.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- scramble                                                                    -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+colorCodeAlgorithms.spec.js
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+mknames.py
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- printtemplate.formatfile  fromosimportlistdir                               -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+===============================================================================
+= = = = = = = = = = = = = = COMPLETED COMPILING FILES = = = = = = = = = = = = =
+===============================================================================
+
+
+
+
+.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
+.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
+===============================================================================
+= = = = = = = = = = = = = = = BEGIN COMPARING FILES = = = = = = = = = = = = = =
+===============================================================================
+
+oll-case-content.controller.js 22
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- checkFlashCardData  hiddenColsData  useCookieInfo  initialize               -
+- addPriorityOptions  hiddenRowsData  returnAddress  editTable                -
+- editCardSelection   hideHiddenCols  returnSolve    setFilter                -
+- modifyKnownCases    hideHiddenRows  addOptions     setSort                  -
+- pickAnAlgorithm     showHiddenCols  countCases                              -
+- flashCardsData      showHiddenRows  declassify                              -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+timer.module.js 18
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- downloadClicked  returnNames  isEncoded  start                              -
+- saveTimeObject   convertDate  render     save                               -
+- returnObjects    saveRecords  update     stop                               -
+- deleteRecord     getCookies   delta                                         -
+- deleteIndex      deleteAll    reset                                         -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+stats.factory.js 25
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- compareNums  variance  length  median  best                                 -
+- getVariance  mean1012  getSum  mean5   avg                                  -
+- timeObject   convert   stdDev  worst   iqr                                  -
+- calculate    addData   mean35  range   q1                                   -
+- loadData     mean100   mean10  mean    q3                                   -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+timer-records.factory.js 5
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- getDayOnly  findSame  loadData  update  save                                -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+cube-scrambler.module.js 1
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- scramble                                                                    -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+flash-cards.module.js 23
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- removeAlgorithmOption  removePracticing  setPracticing  removeCard          -
+- saveCardPriorities     getPracticeCards  getPracticing  saveCards           -
+- getAlgorithmOption     saveCardOptions   isPracticing   getCards            -
+- setAlgorithmOption     savePracticing    getPriority    getCard             -
+- getCardPriorities      removePriority    setPriority    setCard             -
+- savePracticeCards      getCardOptions    initialize                         -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+cookieData.value.js 1
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- range                                                                       -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+colorCodeAlgorithms.filter.js 1
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- colorCodeAlgorithms                                                         -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+tabs.directive.js 1
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- addPane                                                                     -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+timeConversion.factory.js 11
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- stringToMillis  secondToMilli  getMinutes                                   -
+- millisToString  minuteToMilli  getMillis                                    -
+- milliToSecond   hourToMilli    getHours                                     -
+- milliToMinute   getSeconds                                                  -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+===============================================================================
+= = = = = = = = = = = = = = COMPLETED COMPARING FILES = = = = = = = = = = = = =
+===============================================================================
+

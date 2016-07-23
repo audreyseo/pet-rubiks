@@ -255,10 +255,15 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 	
 	function pickAnAlgorithm(myCase) {
 		if (angular.isDefined(myCase.code)) {
-//			console.log("cardPriorities?: " + angular.toJson($scope.cardPriorities));
+			console.log("cardPriorities?: " + angular.toJson($scope.cardPriorities));
 			if (angular.isDefined($scope.cardPriorities)) {
-				if (angular.isDefined($scope.cardPriorities[myCase.code])) {
-					return($scope.showing.algorithmCol && $scope.practicing[myCase.code] && angular.isNumber(parseInt($scope.cardPriorities[myCase.code])) && myCase.solve2.length > 0);
+				if (angular.isDefined($scope.cardPriorities[myCase.code]) && $scope.showing.algorithmCol && $scope.practicing[myCase.code]) {
+					if (angular.isNumber(parseInt($scope.cardPriorities[myCase.code]))) {
+						console.log("Is a number: " + angular.isNumber(parseInt($scope.cardPriorities[myCase.code])));
+						console.log("This case: " + angular.toJson(myCase));
+						return(myCase.solve2.length > 0);
+					}
+					return false;
 				} else {
 					return false;
 				}

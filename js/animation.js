@@ -86,5 +86,17 @@ $(window).load(function() {
 		}
 	);
 	
+	sideBar = $("#leftBar");
+	sideBarH = sideBar.height();
+	sideBarOffset = sideBar.offset();
+	sideBarOffL = sideBarOffset.left;
+	h = $(document).height();
+	h2 = h * .5;
+	sideBarH2 = sideBarH * .5;
+	newOffset = {left: sideBarOffL, top: h2 - sideBarH2};
+	sideBar.offset(newOffset);
+	$("#everything").offset().top = newOffset.top;
+	
+	
 //	$('tr:even').css('background-color', '#EEEEEE');
 });

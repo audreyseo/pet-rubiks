@@ -1,78 +1,42 @@
-#Finds all of the functions in all of my specs that do not currently have any unit tests.
-import math
-import random as r
-import re
-from os import listdir
-from os.path import isfile, join
-typeA = re.compile('function (\w{2,})')
-typeB = re.compile('(\w{2,})\.(\w{2,}) = function')
-def isTypeA(str):
-  if (typeA.match(str)):
-    return True
-  else:
-    return False
-
-def isTypeB(str):
-  if (typeB.match(str)):
-    return True
-  else:
-    return False
-
-def trim(str):
-  str = re.sub("^([ ]+)", "", str)
-  str = re.sub("([ ]+)$", "", str)
-  return str
-
-def findAll(myStrArray):
-  lines = []
-  for str in myStrArray:
-    str = trim(str)
-    if isTypeA(str) or isTypeB(str):
-      lines.append(str)
-  return lines
-
-def splitLines(myStr):
-  return myStr.split("\n")
-
-path = "src/"
-onlyFiles = [f for f in listdir(path) if isfile(join(path, f))]
-fileText = []
-factories = []
-r.seed()
-for file in onlyFiles:
-  f = path + file
-  if (re.match('^.*\.js$', file) and not re.match('^.*\.factory\.js', file)):
-    newFile = open(f, 'r')
-    fileText.append(newFile.read())
-  if re.match('^.*\.factory\.js$', file) and not re.match('^stats\.factory', file):
-    newFile = open(f, 'r')
-    factories.append(newFile.read())
-  elif re.match('^stats\.factory', file):
-    fileText.append(newFile.read())
-print(fileText[int(math.floor(r.random() * len(fileText)))])
-fileSplits = []
+# Finds all of the functions in all of my specs that do not currently have any unit tests.
+import findFunctionsWithoutSpecsLib as cleaner
 
 
+# Beginning of the actual program
 
-finder = re.compile('.*LOOK HERE (.+) LOOK HERE.*', re.MULTILINE)
+cleaner.border("Begin Compiling Files", True)
 
+sourcePath = "src/"
+testsPath = "tests/"
 
+sourceFunctions = cleaner.getFunctions(sourcePath, cleaner.findAll, cleaner.prune)
+print("\n" * 5)
 
-for file in fileText:
-  newFiles = re.sub(r'function (\w{2,})', 'LOOK HERE \1 LOOK HERE', file)
-  for f in newFiles:
-    print(f)
-    fileSplits.append(finder.findall(f))
+testFunctions = cleaner.getFunctions(testsPath, cleaner.findSpecs, cleaner.pruneSpecs)
 
+cleaner.border("Completed Compiling Files", False)
 
-for file in factories:
-  newFiles = re.sub(r'factory\.(\w{2,}) = function\(', 'LOOK HERE \1 LOOK HERE', file)
-  for f in newFiles:
-    fileSplits.append(finder.findall(f))
+# At this point, we should have a list of PURELY function names
+# Well at least for each key in myFiles.keys()
 
+cleaner.border("Begin Comparing Files", True)
 
-#fileSplits = [f for f in fileSplits for g in f if g != '']
+notInTests = cleaner.mapUniqueFunctions(sourceFunctions, testFunctions)
 
-for i in range(0, len(fileSplits[0])):
-  for j in range(0, len(fileSplits)):
-    print(fileSplits[j][i])
+for fx in notInTests.keys():
+  print(fx, len(notInTests[fx]))
+  cleaner.box(notInTests[fx])
+
+counter = 0.0
+for fx in notInTests:
+  counter = counter + len(notInTests[fx])
+
+total = 0.0
+for fx in sourceFunctions:
+  total = total + len(sourceFunctions[fx])
+
+template = "# of Functions to Go: {0}\nTotal # of Functions: {1}\nTotal Percentage of Completed Functions: {2}%\n# of Functions Completed: {3}"
+
+print(template.format(int(counter), int(total), round(((total - counter) / total) * 100, 2), int(total - counter)))
+
+cleaner.border("Completed Comparing Files", False)
