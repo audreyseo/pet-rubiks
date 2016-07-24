@@ -2,7 +2,40 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    
+    banner: {ownership: '/*\n Web App <%= pkg.name %> by <%= pkg.author %> on <%= grunt.template.today("yyyy-mm-dd") %> \n*/\n'},
+
+    uglify: {
+      options: {
+        banner: "<%= banner.ownership $>"
+      },
+      dev:
+      {
+        files:
+        {
+          "build/js/app.min.js":["app/app.module.js", "app/app.config.js", "app/dividingBox.directive.js", "app/flashCard.directive.js", "app/hiddenRows.value.js", "app/**/!(*.mock|*.spec)*.js"],
+        "build/js/animation.min.js": "js/animation.js"
+        }
+      }
+    },
+    less: {
+      dev: {
+        files: {
+          "build/css/pretty.css": "less/*.less"
+        }
+      }
+    },
+    cssmin:
+    {
+      options: {banner: "<%= banner.ownership %>"
+},
+      dev:
+      {
+        files:
+        {
+          "build/css/pretty.min.css": "build/css/pretty.css"
+        }
+      }
+    },
     srcs: {src: ['app/app.module.js', 'app/app.config.js', 'app/*!(.mocks|.spec).js', 'app/**/*(!(.mocks|.spec)).js'], 
            test: 'app/**/*.spec.js'},
     config: {
@@ -10,6 +43,16 @@ module.exports = function(grunt) {
       LOG_INFO: "INFO"
     },
     exec: {
+      copyPages: {
+        cmd: function() {
+          return 'cp templates/*.html build/templates/* ; cp server.js build/';
+        }
+      },
+      serve: {
+        cmd: function() {
+          return 'node $myProjectPath/build/server.js'
+        }
+      },
       updatetests: {
         cmd: function() {
           return 'npm run copy';
@@ -92,7 +135,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  
+  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+
+  // MY TASKS:
 
   grunt.registerTask('clean', ['exec:movereports']);
   grunt.registerTask('proofread', ['jshint']);
@@ -103,6 +150,11 @@ module.exports = function(grunt) {
 
   grunt.registerTask('test', ['clean', 'copy', 'move', 'karma:chrome']);
   grunt.registerTask('buildtest', ['clean', 'copy', 'move', 'karma:chrometest']);
+  
+  grunt.registerTask('build', ['less:dev', 'uglify:dev', 'cssmin:dev', 'exec:copyPages']);
+  grunt.registerTask('builds', ['build', 'exec:serve']); 
+  
+  
   
   
   

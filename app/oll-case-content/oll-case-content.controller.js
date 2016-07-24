@@ -5,7 +5,7 @@ angular
 	.module('myApp')
 	.controller('ContentController', ContentController);
 
-ContentController.$inject = ['$scope', 'cases', 'hiddenRowsY', 'cookieStrings', 'flashCardData', '$cookies', 'filterFilter'];
+ContentController.$inject = ['$scope', 'ollCases', 'hiddenRowsY', 'cookieStrings', 'flashCardData', '$cookies', 'filterFilter'];
 
 function ContentController($scope, cases, hiddenRows, cookieString, flashData, $cookies, filterFilter) {
 	

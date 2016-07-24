@@ -42,14 +42,16 @@ module.exports = function(config) {
       'node_modules/angular-mocks/angular-mocks.js',
       'node_modules/angular-cookies/angular-cookies.js',
       'node_modules/angular-sanitize/angular-sanitize.js',
+      'templates/*.html',
       'app/app.module.js',
       'app/app.config.js',
       'app/*.js', /*{
             pattern: 'app/*.spec.js', included: false},*/
       'app/**/*.js', {
-               pattern: 'app/**/*.spec.js', included: false},
-      'tests/*.spec.js', {
-            pattern: 'tests/*.spec.js', included: true} ],
+               pattern: 'app/**/*.spec.js', included: true}
+     // 'tests/*.spec.js', {
+           // pattern: 'tests/*.spec.js', included: true} 
+    ],
 
 
     // list of files to exclude
@@ -60,14 +62,21 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-//		'spec-runner-template.html':['ng-html2js'],
+      'templates/*.html':['ng-html2js'],
 		//'app/*.js':['coverage'],
                 //'app/**/*.js':['coverage'],
-    	'app/**/!(*.mock|*.spec).js':'coverage',
+      'app/**/!(*.mock|*.spec).js':'coverage',
       'app/!(*.mock|*.spec).js':'coverage'
     },
-
-
+    
+    ngHtml2JsPreprocessor: 
+    {
+      'moduleName': 'Templates',
+      cacheIdFromPath: function(filePath) {
+        return filePath.match(/\/templates\/.*\.html/);
+      }
+    },
+    
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
