@@ -62,17 +62,18 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'templates/*.html':['ng-html2js'],
+      'templates/*.html':['html2js', 'ng-html2js'],
 		//'app/*.js':['coverage'],
                 //'app/**/*.js':['coverage'],
       'app/**/!(*.mock|*.spec).js':'coverage',
       'app/!(*.mock|*.spec).js':'coverage'
     },
     
-    ngHtml2JsPreprocessor: 
-    {
-      'moduleName': 'Templates',
+    ngHtml2JsPreprocessor: {
+      moduleName: 'Templates',
+      stripPrefix: '.*/Workspace/LearnOLL/',
       cacheIdFromPath: function(filePath) {
+        console.log("Path: " + filePath);
         return filePath.match(/\/templates\/.*\.html/);
       }
     },
