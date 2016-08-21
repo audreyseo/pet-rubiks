@@ -37,6 +37,10 @@
     "angular-cookies": "^1.5.7",
     "angular-mocks": "^1.5.7",
     "angular-sanitize": "^1.5.7",
+    "crypto": "0.0.3",
+    "etag": "^1.7.0",
+    "etagify": "0.0.2",
+    "fs": "0.0.2",
     "grunt": "^1.0.1",
     "grunt-contrib-cssmin": "latest",
     "grunt-contrib-jshint": "^1.0.0",
@@ -60,6 +64,8 @@
     "karma-phantomjs-launcher": "^1.0.1",
     "karma-safari-launcher": "^1.0.0",
     "mocha": "^2.5.3",
-    "ng-html2js": "^2.0.0"
+    "mongodb": "^2.2.4",
+    "ng-html2js": "^2.0.0",
+    "url": "^0.11.0"
   }
 }

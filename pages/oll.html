@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <title>Learn the OLL Cases</title>
+    <meta charset="UTF-8">
+    <!-- <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css"> -->
+    <link rel="stylesheet" type="text/css" href="/lib/jquery-ui-1.11.4-2.custom/jquery-ui.min.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/basic.css">
+    <link rel="stylesheet" type="text/css" href="/css/jquery_overriding.css">
+    <link rel="stylesheet" type="text/css" href="/css/tabs.css">
+    <link rel="stylesheet" type="text/css" href="/css/left.css">
+    <link rel="stylesheet" type="text/css" href="/css/flashCard.css">
+    <link rel="stylesheet" type="text/css" href="/css/timeRecordsTable.css">
+    <link rel="stylesheet" type="text/css" href="/css/colorCodingAlgorithms.css">
+    <link rel="stylesheet" type="text/css" href="/css/casesTable.css">
+  </head>
+  <body>
+    <div ng-controller="ContentController" id="everything">
+      <!-- <my-tabs>
+        <my-pane title="OLL Cases"> -->
+        <div id="content" class="content">
+          <div class="innerBox">
+            <div id="navBar">
+              <span class="title big">OLL Cases</span><br>
+              <input type="button" id="edit" ng-cloak ng-bind=editString ng-click="editTable()" value={{editString}}>
+            </div>
+
+            <input type="text" ng-model="filterString" placeholder="filter cases..."> <input type="button" ng-click="setFilter()" value="Filter"><br> <br>
+            <br>
+            <div id="cases">
+              <table ng-cloak>
+                <tr>
+                  <th><span></span></th>
+                  <th class="num" ng-click="setSort('num')"><span>#</span></th>
+                  <th class="code" ng-click="setSort('code')"><span>Code</span></th>
+                  <th class="solve1" ng-click="setSort('solve1.alg')">
+                    <span>Solve #1 Algorithm</span></th>
+                  <th class="length1" ng-click="setSort('solve1.length')"><span>Solve
+                      #1 Length</span></th>
+                  <th class="solve2" ng-click="setSort('solve2.alg')"></span>Solve
+                    #2 Algorithm</span></th>
+                  <th class="length2" ng-click="setSort('solve2.length')"><span>Solve
+                      #2 Length</span></th>
+                  <th class="prob" ng-click="setSort('prob')"><span>Probability</span></th>
+                  <th ng-if=showing.editCol>Know it?</th>
+                  <th ng-if=showing.flashCardCol>Select Cases for
+                    Flashcards</th>
+                  <th ng-if=showing.priorityCol>Select Priority</th>
+                  <th ng-if=showing.algorithmCol>Select Preferred
+                    Algorithm</th>
+                </tr>
+                <tr id="editRow" ng-show=showing.editRow ng-cloak>
+                  <th>Hidden</th>
+                  <td ng--repeat="cClass in classes"><input
+                    class="{{cClass}}" type="checkbox"
+                    ng-model="hidden[cClass]" ng-true-value=1
+                    ng-false-value=0 ng-click="hide($event)"></td>
+                  <td ng-if=showing.editCol></td>
+                </tr>
+
+
+                <tr
+                  ng--repeat="case in filteredCases | orderBy:column:reverse"
+                  class="{{case.code}}">
+                  <td ng-cloak><img class="icon" ng-src="{{case.src}}"></td>
+                  <td class="num">{{::case.num}}</td>
+                  <td class="code">{{::case.code}}</td>
+                  <td class="solve1" ng-bind-html="::case.solve1.alg | colorCodeAlgorithms"></td>
+                  <td class="length1">{{::case.solve1.length}}</td>
+                  <td class="solve2"
+                    ng-bind-html="case.solve2.alg | colorCodeAlgorithms"></td>
+                  <td class="length2">{{::case.solve2.length}}</td>
+                  <td class="prob">{{::case.prob | number: 5}}</td>
+                  <td ng-if=showing.editCol>
+                    <input id="{{::case.code}}" type="checkbox" ng-model="hiddenRows[case.code]" ng-true-value=1 ng-false-value=0>
+                  </td>
+                  <td ng-if=showing.flashCardCol>
+                    <input id="{{case.code}}" type="checkbox" ng-model='practicing[case.code]'>
+                  </td>
+                  <td ng-if=showing.priorityCol>
+                    <select ng-show='practicing[case.code]' class="priorities" ng-model=cardPriorities[case.code]>
+                      <option ng-repeat="val in cards.options" value="{{val}}">
+                        {{val | number:0}}
+                      </option>
+                    </select></td>
+                  <td>
+                    {{cardPriorities[case.code]}}
+                  </td>
+                  <td ng-if="pickAnAlgorithm(case)">
+                    <select ng-model='cardOptions[case.code]'>
+                      <option value=-1></option>
+                      <option value=1>1</option>
+                      <option value=2>2</option>
+                    </select>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      <!-- </my-pane>
+      <my-pane title="Flashcards"> -->
+        <div id="flashCardDiv" class="content">
+          <div class="innerBox">
+            <span class="title big">Flashcards</span><br>
+            <br>
+            <div id="myFlashCards">
+              <table>
+                <tr ng--repeat="card in practiceCards | orderBy:'priority'">
+                  <td>
+                    <flash-card cardsrc="{{card.src}}" cardcode="{{card.code}}" cardprob="{{card.prob}}" cardalg="{{returnSolve(card)}}"></flash-card>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      <!-- </my-pane>
+     </my-tabs> -->
+
+      <div id="leftBar">
+        <div id="controls" ng-controller="InfoController">
+          <div ng-controller="CubeScrambler">
+            <dividing-box divider-id="scramble" divider-title="Scramble">
+              <div class="scrambleCodeDiv" data-toggle="tooltip" ng-click="scramble()" title="Click to Scramble">{{code}}</div><br><br>
+              <div ng-controller="TimerController" id="timerDiv">
+                <div id="timer">
+                  <span class="title">Timer</span>
+                  <span class="stopwatch">{{time.string}}</span><br>
+                  <input type="button" id="timerButton" ng-click="returnObjects()" tabindex="1" value={{returnNames()}}>
+                  <br><br>
+                  <div id="saveButtonDiv" style="display: block">
+                    <button id="deleteTimesButton" type="button" ng-click="deleteAll()" value="Delete Times">Delete Times</button><br>
+                    <button id="saveTimesButton" type="button" ng-click="save()" value="Save Times">Save Times</button>
+                  </div>
+                </div>
+                <div id="timesRecord">
+                  <div id="timesforeground">
+                    <table id="timesTable">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Time</th>
+                          <th>Del</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng--repeat="record in records.index track by $index" class="timesTable">
+                          <td>{{records.index[$index]}}</td>
+                          <td>{{records.time[$index]}}</td>
+                          <td>
+                            <button class="deleteButton" type="button" ng-click="deleteRecord($index)" value="x" name="deleteButton">X</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div><!-- <br> -->
+
+              <input id="scrambleButton" type="button" ng-click="scramble()" value="Click to Scramble">
+               	<!-- <br> --><hr><br>
+                <dividing-box divider-id="timeStatsDivider" divider-title="Time Stats">
+                  <div class="myTimeStats">
+                    <div class="timeStatsInner">
+                      <table class="timeStatsTable">
+                        <tr ng-repeat="pair in pairs">
+                          <td class="left" align="left">{{pairNames[pair.a]}}:
+                            {{myStats.stats[pair.a] | millisToString}}</td>
+                          <td class="right" align="left">{{pairNames[pair.b]}}:
+                            {{myStats.stats[pair.b] | millisToString}}</td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </dividing-box>
+              </div>
+            </dividing-box>
+          </div>
+          <br><hr><br>
+
+          <!-- <dividing-box divider-id="controls" divider-title="Controls"> -->
+          <dividing-box divider-id="controlsDivider" divider-title="Controls">
+          <!-- <div class="title" id="controlTitle">Controls</div> -->
+            <div class="controlBox" id="cardControl">
+
+              <input type='button' value="Select cases to practice" ng-click="editCardSelection()">
+              <br>
+              <p>Max Number of Cards: {{cards.maxNumber}}</p>
+              <label>Change Max # of Cards: </label>
+              <select name="numCards" ng-model=cards.maxNumber></select>
+            </div>
+            <div class="controlBox" id="caseControl">
+              <input type="button" value="{{knownCases.editMessage}}" ng-click="modifyKnownCases()">
+            </div>
+            </dividing-box>
+          <!-- </dividing-box> --><hr><br>
+          <dividing-box divider-id="stats" divider-title="Stats">
+<!--             <span class="title">Stats</span>
+ -->        <p>Number of known cases: {{number.knownCases}}</p>
+            <p>Percentage of Cases Learned: {{number.percent | number:2}}%</p>
+            <p>Probability of Knowing a Randomly Chosen Case: {{number.prob | number: 2}}%</p>
+          </dividing-box>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://code.angularjs.org/1.4.12/angular.min.js"></script>
+    <script type="text/javascript" src="http://code.angularjs.org/1.4.12/angular-cookies.min.js"></script>
+    <script type="text/javascript" src="http://code.angularjs.org/1.4.12/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="/lib/bootstrap-3.3.6/js/tooltip.js"></script>
+
+    <script type="text/javascript" src="/app/app.module.js"></script>
+    <script type="text/javascript" src="/app/cases/ollCases.value.js"></script>
+    <script type="text/javascript" src="/app/app.config.js"></script>
+    <script type="text/javascript" src="/app/colorCodeAlgorithms/colorCodeAlgorithms.filter.js"></script>
+    <script type="text/javascript" src="/app/cookies/cookieData.value.js"></script>
+    <script type="text/javascript" src="/app/cookies/cookieDataTypes.value.js"></script>
+    <script type="text/javascript" src="/app/cookies/cookieStrings.value.js"></script>
+    <script type="text/javascript" src="/app/flashCard.directive.js"></script>
+    <script type="text/javascript" src="/app/hiddenRows.value.js"></script>
+    <script type="text/javascript" src="/app/time/timeConversion.factory.js"></script>
+    <script type="text/javascript" src="/app/stats/stats.factory.js"></script>
+    <script type="text/javascript" src="/app/time/timesStatistics.filter.js"></script>
+    <script type="text/javascript" src="/app/time/timeStats.directive.js"></script>
+    <script type="text/javascript" src="/app/dividingBox/dividingBox.directive.js"></script>
+    <script type="text/javascript" src="/app/cube-scrambler/cube-scrambler.module.js"></script>
+    <script type="text/javascript" src="/app/timer/timer.controller.js"></script>
+    <script type="text/javascript" src="/app/flash-cards/flash-cards.module.js"></script>
+    <script type="text/javascript" src="/app/oll-case-content/oll-case-content.controller.js"></script>
+
+    <script type="text/javascript" src="/js/animation.js"></script>
+   <!--  <script>
+      $( function() {
+        $( "#accordion" ).accordion({
+          collapsible: true,
+          heightStyle: "content",
+          animate: 100
+        });
+      } );
+    </script> -->
+
+    <!--<script type="text/javascript" src="js/controllers.js"></script>
+  		<script type="text/javascript" src="/js/timer.js"></script>
+  		<script type="text/javascript" src="js/scrambler.js"></script>
+  		<script type="text/javascript" src="http://code.angualarjs.org/1.3.8/angular-sanitize.min.js"></script>
+
+  		 </script>
+  		<script type="text/javascript" src="js/app_mod.js"></script>
+  		-->
+  </body>
+</html>

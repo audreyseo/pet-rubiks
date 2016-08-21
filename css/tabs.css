@@ -1,29 +1,26 @@
-@CHARSET "UTF-8";
-
 .tab {
-	display: inline-block;
-	width: 100px;
-	border: 2px solid #EEEEEE;
-	border-radius: .5em .5em 0 0;
-	text-align: center;
-	font: 15px/28px Helvetica, sans-serif;
-	background-image: linear-gradient(#CCCCCC, #EEEEEE);
-	cursor: pointer;
-	margin: 0;
-	align-self: flex-start;
+  display: inline-block;
+  width: 100px;
+  border: 2px solid #EEEEEE;
+  border-radius: .5em .5em 0 0;
+  text-align: center;
+  font: 15px/28px Helvetica, sans-serif;
+  background-image: linear-gradient(#CCCCCC, #EEEEEE);
+  cursor: pointer;
+  margin: 0;
+  align-self: flex-start;
 }
-	
 .activeTab {
-	border: 2px solid #CCFFFF;
-	/* border-bottom: none; */
-	background-image: linear-gradient(#66CCFF, #CCFFFF);
+  border: 2px solid #CCFFFF;
+  /* border-bottom: none; */
+  background-image: linear-gradient(#66CCFF, #CCFFFF);
 }
 .pane {
-	background-color: #CCFFFF;
-	height: auto;
-	width: auto;
-	padding: 3px;
-	morgin-top: -4px;
-	overflow: scroll;
-	margin-right: 40px;
+  background-color: #CCFFFF;
+  height: auto;
+  width: auto;
+  padding: 3px;
+  morgin-top: -4px;
+  overflow: scroll;
+  margin-right: 40px;
 }

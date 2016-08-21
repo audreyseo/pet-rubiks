@@ -1,78 +1,71 @@
-@CHARSET "UTF-8";
-
 #leftBar {
-	float: right;
-	justify-content: flex-end;
-	align-items: center;
-	position: relative;
-	top: 40px;
+  float: right;
+  justify-content: flex-end;
+  align-items: center;
+  position: static;
+  margin-left: 40px;
+  top: 40px;
+  width: 225px;
 }
-
 .controlBox {
-	border: 3px dotted black;
-	border-radius: 3px;
-	padding: 10px;
-	font-family: Arial;
-	font-size: 13px;
-	width: 205px;
-	height: 100%;
-	/*opacity: 0;
+  border: 3px dotted black;
+  border-radius: 3px;
+  padding: 10px;
+  font-family: Arial;
+  font-size: 13px;
+  width: 205px;
+  height: 100%;
+  /*opacity: 0;
 	height: 0px;
 	width: 100%;*/
 }
-
 .scrambleCodeDiv {
-	background-color: #728ca9;
-	padding: 10px;
-	border-radius: 3px;
-	color: #F4F4F4;
-	cursor: pointer;
+  background-color: #728ca9;
+  padding: 10px;
+  border-radius: 3px;
+  color: #F4F4F4;
+  cursor: pointer;
 }
-
-input[type=button], button {
-	cursor: pointer;
+input[type=button],
+button {
+  cursor: pointer;
 }
-
 #scrambleButton {
-	cursor: pointer;
-	opacity: 0;
-	display: inline-block;
+  cursor: pointer;
+  opacity: 0;
+  display: inline-block;
 }
-
 #timerDiv {
-	width: 100%;
-	justify-content: center;
+  width: 100%;
+  justify-content: center;
 }
-
 #timer {
-	width: auto;
-	text-align: center;
-	justify-content: center;
-	padding: 3px;
-	margin: 5px;
+  width: auto;
+  text-align: center;
+  justify-content: center;
+  padding: 3px;
+  margin: 5px;
 }
-
 table.timeStatsTable {
-	display: inline-flex;
-	position: relative;
-	text-align: left;
-	margin: 0px;
-/* 	justify-self: ;
- */}
-
-table.timeStatsTable tr td {
-	text-align: left;
-	position: relative;
+  display: inline-flex;
+  position: relative;
+  text-align: left;
+  margin: 0px;
+  /* 	justify-self: ;
+ */
 }
-
+table.timeStatsTable tr td {
+  text-align: left;
+  position: relative;
+}
 td.right {
-	float: right;
-	text-align: left;
-	margin-right: -5px;
-	padding-left: 10px;
+  float: right;
+  text-align: left;
+  margin-right: -5px;
+  padding-left: 10px;
 }
 td.left {
-	float: left;
-	padding-right: 10px;
-	margin-left: -5px;
+  float: left;
+  padding-right: 10px;
+  margin-left: -5px;
 }

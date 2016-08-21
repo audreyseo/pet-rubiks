@@ -9,7 +9,7 @@ angular
 			transclude: true,
 			restrict: 'E',
 			scope: {title: '@title', cardsrc: '@cardsrc', cardcode: '@cardcode', cardprob: '@cardprob', cardalg: '@cardalg'},
-			templateUrl: 'flashcard.html',
+			templateUrl: '../flashcard.html',
 			link: function(scope, elem, atr, controller, transclude) {
 			}
 		};

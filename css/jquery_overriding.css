@@ -1,11 +1,8 @@
-@CHARSET "UTF-8";
-
 .ui-accordion {
-	width: 100%;
+  width: 100%;
 }
-
 .ui-accordion-header {
-	height: 10px;
-	font-size: 8px;
-	text-align: top;
+  height: 10px;
+  font-size: 8px;
+  text-align: top;
 }

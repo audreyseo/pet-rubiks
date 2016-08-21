@@ -5,17 +5,17 @@
 var heightDiffs = {};
 
 $(document).ready(function(){
-  $('[data-toggle="tooltip"]').tooltip(); 
+  $('[data-toggle="tooltip"]').tooltip();
 });
 
 $(window).load(function() {
-	console.log("hi");
+//	console.log("hi");
 //	$("#sortControl").prop("opacity", 0);
 //	$("#sortControl").prop("height", "0px")
 //	$(".controlBox").each(function() {
 //		$(this).slideUp(200);
 //	});
-	
+
 	$("#sort").change(function() {
 		if ($(this).is(":checked")) {
 			$(".controlBox").each(function() {
@@ -28,7 +28,7 @@ $(window).load(function() {
 			$("#sortControl").stop(true).slideUp(200);
 		}
 	});
-	
+
 	$("#card").change(function() {
 		if ($(this).is(":checked")) {
 			$(".controlBox").each(function() {
@@ -41,7 +41,7 @@ $(window).load(function() {
 			$("#cardControl").stop(true).slideUp(200);
 		}
 	});
-	
+
 	$("#known").change(function() {
 		if ($(this).is(":checked")) {
 			$(".controlBox").each(function() {
@@ -55,12 +55,12 @@ $(window).load(function() {
 			$("#caseControl").stop(true).slideUp(200);
 		}
 	});
-	
+
 	$("div.title.divider").click(function(event) {
 		event.preventDefault();
 	  var next = $(this).next();
 //	  console.log($(next).attr("style"));
-	  console.log(angular.toJson(heightDiffs));
+//  console.log(angular.toJson(heightDiffs));
 		if ($(this).next().attr("style") == "display: none;") {
 			$("#leftBar").animate({top: "-=" + heightDiffs[$($(this).parent()).attr("id")] + "px"}, 100);
 			$(this).next().slideDown(100);
@@ -77,9 +77,9 @@ $(window).load(function() {
 			$(this).animate({opacity: .5}, 100);
 		}
 	});
-	
+
 	$("body").keydown(function(event) {
-		
+
 		if (event.which == 32) {
 			$("#timerButton").trigger('click');
 			event.preventDefault();
@@ -93,15 +93,15 @@ $(window).load(function() {
 			}
 		}
 	});
-	
+
 	$("#edit").trigger('click');
-	
-	
+
+
 	var selectCards = $("select[name='numCards']");
 	for (var i = 1; i < 11; i++) {
 		selectCards.append("<option>" + i + "</option>");
 	}
-	
+
 	$("td.prob").each(
 		function() {
 			if ($(this).html() == 0.01852) {
@@ -113,7 +113,7 @@ $(window).load(function() {
 			}
 		}
 	);
-	
+
 	sideBar = $("#leftBar");
 	sideBarH = sideBar.height();
 	sideBarOffset = sideBar.offset();
@@ -123,8 +123,8 @@ $(window).load(function() {
 	sideBarH2 = sideBarH * .5;
 	newOffset = {left: sideBarOffL, top: h2 - sideBarH2};
 	sideBar.offset(newOffset);
-	$("#everything").offset().top = newOffset.top;
-	
-	
+	// $("#everything").offset().top = newOffset.top;
+
+
 //	$('tr:even').css('background-color', '#EEEEEE');
 });

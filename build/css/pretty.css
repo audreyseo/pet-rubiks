@@ -46,16 +46,13 @@ div {
   justify-content: flex-start;
   position: relative;
   max-width: 700px;
-  /* 	margin: 40px;
- */
-  margin-left: 50px;
   /* margin-bottom: 20px; */
   /*width: auto;
 	height: 720px;
 	border: 3px solid @myBlueBG;
 	border-radius: 20px;
 	text-align: center;
-	
+
 	overflow-y: scroll;
 	background-color: @myBlueBG;*/
 }
@@ -189,7 +186,7 @@ div.divider {
   float: initial;
   position: static;
   width: 450px;
-  margin-left: 0px;
+  margin-right: 100px;
 }
 div.myFlashCard {
   float: left;
@@ -245,6 +242,39 @@ div.solve {
   font-style: bold;
 }
 
+body {
+  background-color: #9999BB;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+div.button {
+  background-color: rgba(210, 220, 230, 0.9);
+  display: inline-block;
+  width: 300px;
+  height: 80px;
+  font-size: 60px;
+  border-radius: 20px;
+  border: 1px solid rgba(210, 220, 230, 0.9);
+  font-family: monospace;
+  margin-top: 20px;
+}
+#buttonContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -182px;
+  margin-left: -232px;
+  height: 300px;
+  width: 400px;
+  border-radius: 40px;
+  padding: 30px;
+  border: 1px solid white;
+  background-color: white;
+  font-size: 45px;
+  font-family: Georgia, Serif;
+}
+
 .ui-accordion {
   width: 100%;
 }
@@ -258,7 +288,8 @@ div.solve {
   float: right;
   justify-content: flex-end;
   align-items: center;
-  position: relative;
+  position: static;
+  margin-left: 40px;
   top: 40px;
   width: 225px;
 }
@@ -404,4 +435,7 @@ tr.timesTable:nth-child(odd) td {
   padding: 0px;
   padding-left: 4px;
   padding-right: 4px;
+}
+.myTimeSTats {
+  width: 100%;
 }

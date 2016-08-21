@@ -161,7 +161,7 @@ angular
   	
   	factory.savePracticeCards = function(newValue) {
   		if (arguments.length === 1) {
-  			$cookies.putObject(factory.cookies.practiceCards, newValue)
+  			$cookies.putObject(factory.cookies.practiceCards, newValue);
   		} else {
   			$cookies.putObject(factory.cookies.practiceCards, factory.data.practiceCards);
   		}

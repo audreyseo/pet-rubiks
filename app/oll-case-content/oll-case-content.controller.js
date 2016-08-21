@@ -1,6 +1,13 @@
 /**
  * http://usejsdoc.org/
  */
+
+// Useful to turn off all of you console.logs audrey:
+/* Find: ^[^/]([\s]+)(console\.log)
+ * Replace with: //\1\2
+ */
+
+
 angular
 	.module('myApp')
 	.controller('ContentController', ContentController);
@@ -8,7 +15,7 @@ angular
 ContentController.$inject = ['$scope', 'ollCases', 'hiddenRowsY', 'cookieStrings', 'flashCardData', '$cookies', 'filterFilter'];
 
 function ContentController($scope, cases, hiddenRows, cookieString, flashData, $cookies, filterFilter) {
-	
+
 	$scope.addPriorityOptions = addPriorityOptions;
 	$scope.animationOpts = {duration: 1000};
 	$scope.cardOptions = flashData.getCardOptions();
@@ -31,7 +38,7 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 	$scope.modifyKnownCases = modifyKnownCases;
 	$scope.number = {knownCases: 0, cases: 58, percent: 0, prob: 0};
 	$scope.pickAnAlgorithm = pickAnAlgorithm;
-	$scope.practiceCards = flashData.getPracticeCards();
+	$scope.practiceCards = flashData.getPracticeCards() || [];
 	$scope.practicing = flashData.getPracticing();
 	$scope.returnSolve = returnSolve;
 	$scope.setFilter = setFilter;
@@ -39,17 +46,18 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 	$scope.showHiddenCols = showHiddenCols;
 	$scope.showHiddenRows = showHiddenRows;
 	$scope.useCookieInfo = useCookieInfo;
+	$scope.practiceCasesButtonValue = "Select cases to practices";
 
 	$scope.initialize();
 	checkFlashCardData();
-	
-	
+
+
 	function checkFlashCardData() {
 		for (var data in $scope.cardData) {
 			console.log(data + " is Defined?: " + angular.isDefined($scope.cardData[data]) + "  " + angular.toJson($scope.cardData[data]));
 		}
 	}
-	
+
 	function addOptions(max) {
 		// most likely obsolete
 		var priorities = $("select .priorities");
@@ -60,7 +68,7 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 			}
 		});
 	}
-	
+
 	function addPriorityOptions() {
 		// Content, flashcards, info
 		$scope.cards.options = [];
@@ -68,7 +76,7 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 			$scope.cards.options.push(i);
 		}
 	}
-	
+
 	function countCases() {
   		// Content, info
   //	console.log("Tried to count cases");
@@ -81,40 +89,40 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
   //			console.log("Count incremented");
   		}
   	}
-  	
+
   	$scope.number.knownCases = count;
   	$scope.number.percent = 100 * ($scope.number.knownCases / $scope.number.cases);
   	$scope.number.prob = prob * 100;
   }
-	
+
 	function declassify(event) {
 		var str = $(event.target).attr("id");
 //		str = str.substring(1, str.length);
 		return str;
 	}
-	
+
 	function flashCardsData(){
 //		console.log("Practicing: " + angular.toJson($scope.practicing));
-		
+
 		flashData.initialize();
-		
+
 //		console.log("Practicing: " + angular.toJson(flashData.data.practicing));
 //		console.log("New Practicing: " + angular.toJson($scope.practicing));
-		
+
 		$scope.practicing = flashData.data.practicing;
 		$scope.practiceCards = flashData.data.practiceCards;
 		$scope.cardOptions = flashData.data.cardOptions;
 		$scope.cardPriorities = flashData.data.cardPriorities;
 		$scope.cards = flashData.data.cards;
-		
+
 //		console.log("Practicing: " + angular.toJson($scope.practicing));
-		
+
 		$scope.addPriorityOptions();
 //		addOptions($scope.cards.maxNumber);
 	}
-	
+
 	function editCardSelection() {
-		if ($scope.practiceButton !== "Selecting..." || $scope.practiceCards.length === $scope.cards.maxNumber) {
+//		if ($scope.practiceButton !== "Selecting..." || $scope.practiceCards.length === $scope.cards.maxNumber) {
 			$scope.showing.flashCardCol = !$scope.showing.flashCardCol;
 			$scope.showing.priorityCol = !$scope.showing.priorityCol;
 			$scope.showing.algorithmCol = !$scope.showing.algorithmCol;
@@ -123,10 +131,10 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 //			if ($scope.showing.priorityCol) {
 ////				addOptions($scope.cards.maxNumber);
 //			}
-			$scope.addPriorityOptions();
-		}
+//			$scope.addPriorityOptions();
+//		}
 	}
-	
+
 	function editTable() {
 		$scope.editString = ($scope.editString == "Edit Shown Columns and Rows") ? "Save Table Configuration" : "Edit Shown Columns and Rows";
 		var editingRow = $("#editRow");
@@ -146,7 +154,7 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 			$scope.showHiddenCols();
 		}
 	}
-	
+
 	function hiddenColsData() {
 		// Content mostly
   	try {
@@ -156,19 +164,19 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
   		} else {
   			$scope.hidden = {};
   		}
-  		
+
   		for (var ind = 0; ind < $scope.classes.length; ind++) {
   			if (equals($scope.hidden[$scope.classes[ind]], 1)) {
   				$($scope.colClasses[ind]).hide();
   			}
   		}
-  		
+
   		$cookies.putObject($scope.cookieString.hiddenCols, $scope.hidden);
   	} catch(e) {
   		$cookies.putObject($scope.cookieString.hiddenCols, $scope.hidden);
   	}
 	}
-	
+
 	function hiddenRowsData() {
 	// Content, info
 		// Attempt to reload the data from the OLLCookie
@@ -181,14 +189,14 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 				// Else, instantiate hiddenRows
 				$scope.hiddenRows = {};
 			}
-			
+
 			$cookies.putObject($scope.cookieString.hiddenRows, $scope.hiddenRows);
 		} catch(e) {
 			// Need to put in the object
 			$cookies.putObject($scope.cookieString.hiddenRows, $scope.hiddenRows);
 		}
 	}
-	
+
 	function hideHiddenCols() {
 		for (var ind = 0; ind < $scope.classes.length; ind++) {
 			if ($scope.hidden[$scope.classes[ind]] == 1) {
@@ -196,7 +204,7 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 			}
 		}
 	}
-	
+
 	function hideHiddenRows() {
 	// Useful...
 		for (id in $scope.hiddenRows) {
@@ -206,13 +214,13 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 			}
 		}
 	}
-	
+
 	function initialize() {
 		$scope.cols = ["num", "code", "solve1.alg", "solve1.length", "solve2.alg", "solve2.length", "prob"];
 		$scope.hidden = {num: 0, code: 0, solve1:0, length1:0, solve2:0, length2:0, prob:0};
 		$scope.colClasses = [".num", ".code", ".solve1", ".length1", ".solve2", ".length2", ".prob"];
 		$scope.classes = ["num", "code", "solve1", "length1", "solve2", "length2", "prob"];
-		
+
 		// More Table row/column info
 		// Content, settings
 		$scope.filteredCases = $scope.cases;
@@ -220,54 +228,56 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 		$scope.column = 'num'
 		$scope.comparisons = {custom: false};
 		$scope.countCases();
-		
+
 	// Content, info
 		$scope.prob = {};
+
 		for (var i = 0; i < $scope.cases.length; i++) {
 			$scope.cases[i].src = "/img/" + $scope.cases[i].num + ".png";
 			$scope.prob[$scope.cases[i].code] = $scope.cases[i].prob;
 		}
-		
+
 		// Content, flashcards
 		$scope.showing = {
-				editRow:true, 
-				editCol:true, 
-				flashCardCol: false, 
-				priorityCol: false, 
-				algorithmCol: false};
-		
+				editRow:true,
+				editCol:true,
+				flashCardCol: false,
+				priorityCol: false,
+				algorithmCol: false
+		};
+
 		// Editing helper - content, info/controls
 		$scope.editString = "Save Table Configuration";
-		
+
 		// Stores the strings for the cookies
 		// Content, flashcards
-		
+
 		$scope.useCookieInfo();
 		// Content, info
 		$scope.knownCases = {editMessage: ($scope.showing.editCol === true) ? "Save Known Cases" : "Select Known Cases to Hide"};
-		
+
 	// Temporary stuff that I'm just trying out
 	}
 
 	function modifyKnownCases() {
 		$scope.showing.editCol = !$scope.showing.editCol;
 	}
-	
+
 	function pickAnAlgorithm(myCase) {
 		if (angular.isDefined(myCase.code)) {
-			console.log("cardPriorities?: " + angular.toJson($scope.cardPriorities));
+		// console.log("cardPriorities?: " + angular.toJson($scope.cardPriorities));
 			if (angular.isDefined($scope.cardPriorities)) {
 				if (angular.isDefined($scope.cardPriorities[myCase.code]) && $scope.showing.algorithmCol && $scope.practicing[myCase.code]) {
 					if (angular.isNumber(parseInt($scope.cardPriorities[myCase.code]))) {
-						console.log("Is a number: " + angular.isNumber(parseInt($scope.cardPriorities[myCase.code])));
-						console.log("This case: " + angular.toJson(myCase));
+//					console.log("Is a number: " + angular.isNumber(parseInt($scope.cardPriorities[myCase.code])));
+//					console.log("This case: " + angular.toJson(myCase));
 						return(myCase.solve2.length > 0);
 					}
 					return false;
 				} else {
 					return false;
 				}
-	  		
+
 	  	} else {
 	  		return(false);
 	  	}
@@ -289,7 +299,7 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 			}
 		}
 	}
-	
+
 	function showHiddenRows() {
 		for (id in $scope.hiddenRows) {
 			if ($scope.hiddenRows[id] == 1) {
@@ -297,36 +307,36 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 			}
 		}
 	}
-	
+
 	function setFilter(){
 		// Content only
 		$scope.filteredCases = filterFilter($scope.cases, $scope.filterString);
 	}
-	
-	
+
+
 	function setSort(column) {
 	// Content only
 		$scope.column = column;
 		$scope.reverse = !$scope.reverse;
 	}
-	
+
 	function useCookieInfo() {
 		// Content, Info
 		$scope.hiddenRowsData();
 		$scope.hiddenColsData();
 		$scope.flashCardsData();
 	};
-	
+
 	function returnAddress(value) {
 		var string = "img/" + value + ".png";
-		console.log(string);
+//	console.log(string);
 		return string;
 	}
 
 	$scope.$watchCollection('practiceCards', function(newValue, oldValue) {
 		flashData.savePracticeCards(newValue);
 	});
-	
+
 	$scope.$watchCollection('cardPriorities', function(newValue, oldValue){
 		for (var i = 0; i < $scope.practiceCards.length; i++) {
 			for (var ind in newValue) {
@@ -337,7 +347,7 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 		}
 		flashData.saveCardPriorities(newValue);
 	});
-	
+
 	$scope.$watchCollection('cardOptions', function(newValue, oldValue){
 		for (var i = 0; i < $scope.practiceCards.length; i++) {
 			for (var ind in newValue) {
@@ -349,12 +359,12 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 		flashData.saveCardOptions(newValue);
 	});
 
-	
+
 	$scope.$watchCollection('practicing', function(newValue, oldValue) {
 		// Content, flashcards (mostly flashcards, but heavily dependent on cases)
-		
-		console.log(angular.toJson($scope.practicing));
-		
+//
+//	console.log(angular.toJson($scope.practicing));
+
 		for (var i = 0; i < $scope.cases.length; i++) {
 //			console.log($scope.cases[i].code);
 			if (angular.isDefined($scope.practicing[$scope.cases[i].code])) {
@@ -386,7 +396,7 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 		}
 		flashData.savePracticing(newValue);
 	});
-	
+
 	$scope.$watchCollection('cards', function(newValue, oldValue) {
 		$cookies.putObject($scope.cookieString.cards, newValue);
 
@@ -394,27 +404,27 @@ function ContentController($scope, cases, hiddenRows, cookieString, flashData, $
 			$scope.addPriorityOptions();
 		}
 	});
-	
+
 	$scope.$watch('showing.editCol', function(newValue, oldValue) {
 		// Content, flashcards, controls
-		console.log("Watched knownCases.editMessage");
+//	console.log("Watched knownCases.editMessage");
 		$scope.knownCases.editMessage = (newValue) ? "Save Known Cases" : "Select Known Cases to Hide";
-		
+
 		if (newValue) {
 			$scope.showHiddenRows();
 		} else {
 			$scope.hideHiddenRows();
 		}
 	});
-	
-	
+
+
 	$scope.$watchCollection('hiddenRows', function(newValue, oldValue) {
 		// Content, floashcards, controls, cookies
 		$cookies.putObject($scope.cookieString.hiddenRows, newValue);
 		$scope.countCases();
 	});
-	
-	
+
+
 	$scope.$watchCollection('hidden', function(newValue, oldValue) {
 		// Cookies, content
 		$cookies.putObject($scope.cookieString.hiddenCols, newValue);

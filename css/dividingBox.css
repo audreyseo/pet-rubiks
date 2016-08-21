@@ -1,15 +1,12 @@
-@CHARSET "UTF-8";
-
 div.divider {
-	width: 100%;
-	display: block;
-	position: relative;
-	margin: 0px;
-	padding: 0px;
+  width: 205px;
+  display: block;
+  position: relative;
+  margin: 0px;
+  padding: 0px;
 }
-
 .divider.title {
-	cursor: pointer;
-	display: block;
-	width: 205px;
+  cursor: pointer;
+  display: block;
+  width: 205px;
 }

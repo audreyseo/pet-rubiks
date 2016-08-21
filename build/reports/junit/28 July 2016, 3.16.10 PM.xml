@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<testsuite name="Chrome 51.0.2704 (Mac OS X 10.10.5)" package="" timestamp="2016-07-28T19:16:11" id="0" hostname="Audrey" tests="0" errors="1" failures="0" time="0">
+  <properties>
+    <property name="browser.fullName" value="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"/>
+  </properties>
+  <system-out>
+    <![CDATA[Chrome 51.0.2704 (Mac OS X 10.10.5) ERROR
+  Uncaught ReferenceError: angular is not defined
+  at app/app.module.js:10
+
+]]>
+  </system-out>
+  <system-err/>
+</testsuite>

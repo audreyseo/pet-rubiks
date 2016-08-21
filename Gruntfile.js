@@ -22,6 +22,20 @@ module.exports = function(grunt) {
         files: {
           "build/css/pretty.css": "less/*.less"
         }
+      },
+      loose: {
+        files: {
+          "css/basic.css": "less/basic.less",
+          "css/casesTable.css": "less/casesTable.less",
+          "css/colorCodingAlgorithms.css": "less/colorCodingAlgorithms.less",
+          "css/dividingBox.css": "less/dividingBox.less",
+          "css/flashCard.css": "less/flashCard.less",
+          "css/home.css": "less/home.less",
+          "css/jquery_overriding.css": "less/jquery_overriding.less",
+          "css/left.css": "less/left.less",
+          "css/tabs.css": "less/tabs.less",
+          "css/timeRecordsTable.css": "less/timeRecordsTable.less"
+        }
       }
     },
     cssmin:
@@ -43,6 +57,17 @@ module.exports = function(grunt) {
       LOG_INFO: "INFO"
     },
     exec: {
+      sayTasks: {
+        cmd: function() {
+          var tasks = ['clean', 'proofread', 'dev', 'copy', 'move', 'test', 'buildtest', 'build', 'builds', 'help (this task)'];
+          var string = "";
+          for (var i = 0; i < tasks.length; i++) {
+            string += "\n  (" +  (i + 1) + "):\t\t" + tasks[i];
+          }
+          string += "\n\n";
+          return "GRUNT_TASKS=\"" + string + "\"; printf \"$GRUNT_TASKS\"";
+        }
+      },
       copyPages: {
         cmd: function() {
           return 'cp templates/*.html build/templates/* ; cp server.js build/';
@@ -140,9 +165,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
   // MY TASKS:
+  
 
   grunt.registerTask('clean', ['exec:movereports']);
   grunt.registerTask('proofread', ['jshint']);
+  grunt.registerTask('help', ['exec:sayTasks']);
   grunt.registerTask('default', ['jshint', 'karma']);
   grunt.registerTask('dev', ['jshint', 'karma:dev']);
   grunt.registerTask('copy', ['exec:updatetests']);

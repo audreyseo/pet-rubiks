@@ -12,13 +12,9 @@ app.directive('myTabs', function() {
 		controller: function($scope) {
 			var panes = $scope.panes = [];
 			$scope.select = function(pane) {
-				angular.forEach(panes, function(pane) {
-					//console.log("pane selected " + pane.selected);
-					pane.selected = false;
-				});
-				pane.selected = true;
+				pane.selected = !pane.selected;
 			};
-			
+
 			this.addPane = function(pane) {
 				if (panes.length === 0) {
 					$scope.select(pane);
@@ -41,6 +37,6 @@ app.directive('myPane', function() {
 			//console.log(angular.toJson(scope));
 			tabsCtrl.addPane(scope);
 		}
-	
+
 	};
 });

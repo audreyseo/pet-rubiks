@@ -1,33 +1,33 @@
-@CHARSET "UTF-8";
-
-td.solve1, td.solve2 {
-	font: 12px bold Arial,sans-serif,Helvetica;
-	color: #333333;
+td.solve1,
+td.solve2 {
+  font: 12px bold Arial, sans-serif, Helvetica;
+  color: #333333;
 }
-
-td.num, td.length1, td.length2 {
-	color: grey;
+td.num,
+td.length1,
+td.length2 {
+  color: grey;
 }
-
 .icon {
-	width: 60px;
+  width: 60px;
 }
-
 th {
-	cursor: pointer;
+  cursor: pointer;
 }
 table {
-	margin: 20px;
-	font-family: Arial;
-	border: 0px;
-	border-collapse: collapse;
+  margin: 20px;
+  font-family: Arial;
+  border: 0px;
+  border-collapse: collapse;
 }
-table, th, td {
-	/*border: 1px solid black;*/
-	border: 0px;
-	color: #333333;
+table,
+th,
+td {
+  /*border: 1px solid black;*/
+  border: 0px;
+  color: #333333;
 }
-
-th, td {
-	font-size: 10px;
+th,
+td {
+  font-size: 10px;
 }
