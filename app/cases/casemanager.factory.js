@@ -10,32 +10,40 @@ CaseManager.$inject = ['ollCases', 'pllCases'];
 function CaseManager(ollCases, pllCases) {
 	var factory = {oll: ollCases, pll: pllCases};
 
+	factory.fetchCase = fetchCase;
 	factory.fetchImage = fetchImage;
 	factory.isOLL = isOLL;
 	factory.isOLLCase = isOLLCase;
-	factory.makeImages = makeImages;
+	factory.isPLL = isPLL;
 	factory.mapCaseToNumber = mapCaseToNumber;
 	factory.setStage = setStage;
 	factory.stage = "";
 	factory.type = type;
 
-	factory.makeImages();
 	factory.mapCaseToNumber();
 
-	function fetchImage(code) {
+	function fetchCase(code) {
 		if (angular.isNumber(code)) {
 			if (factory.isPLL()) {
-				return(factory.pll.img[i]);
+				return(factory.pll[code]);
 			} else if (factory.isOLL()){
-				return(factory.oll.img[i]);
+				return(factory.oll[code]);
 			}
 		} else {
 			if (factory.isOLLCase(code)) {
-
-			} else {
-
+				if (factory.isOLL()) {
+					return factory.oll[factory.ollMap[code]];
+				}
+			} else if (fatory.isPLLCase(code)) {
+				if (factory.isPLL()) {
+					return factory.pll[factory.pllMap[code]];
+				}
 			}
 		}
+	}
+
+	function fetchImage(code) {
+		return factory.fetchCase(code).src;
 	}
 
 	function isOLL() {
@@ -50,13 +58,13 @@ function CaseManager(ollCases, pllCases) {
 		return factory.stage === "PLL";
 	}
 
-	function makeImages() {
-		for (var i = 0; i < factory.oll.length; i++) {
-			factory.oll[i].img = "/img/" + factory.oll[i].code + ".png";
+	function isPLLCase(string) {
+		if (string.match(/[A-Z][a-z]/)) {
+			return true;
+		} else if (string.match(/[A-Z]/)) {
+			return true;
 		}
-		for (i = 0; i < factory.pll.length; i++) {
-			factory.pll[i].img = "/img/" + factory.pll[i].code + ".png";
-		}
+		return false;
 	}
 
 	function mapCaseToNumber() {
