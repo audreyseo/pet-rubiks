@@ -1,10 +1,10 @@
 angular.module('myApp')
-  .controller('OLLController', OLLController);
+  .controller('PLLController', PLLController);
 
-OLLController.$inject = ['$scope', 'ContentControl'];
+PLLController.$inject = ['$scope', 'ContentControl'];
 
-function OLLController($scope, ContentControl) {
-  ContentControl.initialize("OLL");
+function PLLController($scope, ContentControl) {
+  ContentControl.initialize("PLL");
   $scope.addPriorityOptions = ContentControl.addPriorityOptions;
 	$scope.animationOpts = {duration: 1000};
 	$scope.cardOptions = ContentControl.cardOptions;

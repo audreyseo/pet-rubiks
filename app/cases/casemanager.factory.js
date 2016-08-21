@@ -12,9 +12,11 @@ function CaseManager(ollCases, pllCases) {
 
 	factory.fetchCase = fetchCase;
 	factory.fetchImage = fetchImage;
+	factory.getCases = getCases;
 	factory.isOLL = isOLL;
 	factory.isOLLCase = isOLLCase;
 	factory.isPLL = isPLL;
+	factory.isSelected = isSelected;
 	factory.mapCaseToNumber = mapCaseToNumber;
 	factory.setStage = setStage;
 	factory.stage = "";
@@ -46,6 +48,16 @@ function CaseManager(ollCases, pllCases) {
 		return factory.fetchCase(code).src;
 	}
 
+	function getCases() {
+		if (factory.setStage !== "") {
+			if (factory.isOLL()) {
+				return factory.oll;
+			} else if (factory.isPLL()) {
+				return factory.pll;
+			}
+		}
+	}
+
 	function isOLL() {
 		return factory.stage === "OLL";
 	}
@@ -65,6 +77,10 @@ function CaseManager(ollCases, pllCases) {
 			return true;
 		}
 		return false;
+	}
+
+	function isSelected(index) {
+		return factory.fetchCase(index).selected;
 	}
 
 	function mapCaseToNumber() {
