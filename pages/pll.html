@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="/css/casesTable.css">
   </head>
   <body>
+    <div><a href="http://0.0.0.0:5555/index.html">Home</a></div>
     <div ng-controller="PLLController" id="everything">
       <!-- <my-tabs>
         <my-pane title="OLL Cases"> -->
@@ -71,7 +72,7 @@
                   <td class="solve2"
                     ng-bind-html="case.solve2.alg | colorCodeAlgorithms"></td>
                   <td class="length2">{{::case.solve2.length}}</td>
-                  <td class="prob">{{::case.prob | number: 5}}</td>
+                  <td class="prob" ng-bind-html="::case.prob | colorCodeProbability"></td>
                   <td ng-if=showing.editCol>
                     <input id="{{::case.code}}" type="checkbox" ng-model="hiddenRows[case.code]" ng-true-value=1 ng-false-value=0>
                   </td>
@@ -216,6 +217,7 @@
     <script type="text/javascript" src="/app/cases/pllCases.value.js"></script>
     <script type="text/javascript" src="/app/cases/casemanager.factory.js"></script>
     <script type="text/javascript" src="/app/app.config.js"></script>
+    <script type="text/javascript" src="/app/colorCodeProbability.filter.js"></script>
     <script type="text/javascript" src="/app/colorCodeAlgorithms/colorCodeAlgorithms.filter.js"></script>
     <script type="text/javascript" src="/app/cookies/cookieData.value.js"></script>
     <script type="text/javascript" src="/app/cookies/cookieDataTypes.value.js"></script>
@@ -230,6 +232,7 @@
     <script type="text/javascript" src="/app/cube-scrambler/cube-scrambler.module.js"></script>
     <script type="text/javascript" src="/app/timer/timer.controller.js"></script>
     <script type="text/javascript" src="/app/flash-cards/flash-cards.module.js"></script>
+    <script type="text/javascript" src="/app/content/content-control.factory.js"></script>
     <script type="text/javascript" src="/app/content/pll-controller.controller.js"></script>
 
     <script type="text/javascript" src="/js/animation.js"></script>

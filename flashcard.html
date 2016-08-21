@@ -2,13 +2,13 @@
 	<!-- Icon -->
 	<div class="cardContent">
 		<div class="cardimg">
-			<span class="header"><span class='code' >{{cardcode}}</span> | <span class='prob'>{{cardprob | number: 5}}</span></span>
+			<span class="header"><span class='code' >{{cardcode}}</span> | <span class='card-prob'>{{cardprob | number: 5}}</span></span>
 			<br>
 			<img class="flashcardIcon" ng-src="{{cardsrc}}" alt="Icon for the flash card">
 			<br>
 		</div>
 		<div class="solve" ng-bind-html="cardalg | colorCodeAlgorithms"></div>
-		
+
 	</div>
-	
+
 </div>

@@ -36,10 +36,11 @@ function returnRequestedFile(response, fileName) {
 
 app.use(bodyParser.text({type: "text/csv"}));
 
-app.get('img/*.png',function(request, response) {
+app.get('/pages/img/*.png',function(request, response) {
 	response.append('cache-control', 'max-age=1000000000');
-	var fileName = request.url;
-//	console.log(fileName);
+	var fileName = request.path;
+	console.log(fileName);
+	fileName = fileName.replace('pages/', "");
 	response.etagify();
 
 	var reqTag = request.get("etag");
@@ -109,4 +110,12 @@ app.get('/data.csv', function(req, res) {
 	res.download("data.csv");
 });
 app.use('/', express.static('./'));
-app.listen(3000, '0.0.0.0');
+var serverRegular = app.listen(3000, '0.0.0.0', function() {
+	var addr = serverRegular.address();
+	console.log("Listening @ http://%s:%d", addr.address, addr.port);
+});
+
+var serverDebug = app.listen(5555, 'localhost', function() {
+  var addr = serverDebug.address();
+  console.log("Debug server listening @ http://%s:%d", addr.address, addr.port);
+});

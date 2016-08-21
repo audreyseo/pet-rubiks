@@ -18,7 +18,7 @@ angular
 		pll: {
 			hiddenRows: "PLLHiddenRowsCookie",
 			hiddenCols: "PLLHiddenCookie",
-			cardsr: "PLLMaxNumCardrs",
+			cards: "PLLMaxNumCardrs",
 			practicing: "PLLPracticing",
 			practiceCards: "PLLPracticeCards",
 			cardOptions: "PLLCardOptions",

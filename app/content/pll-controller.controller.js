@@ -1,9 +1,9 @@
 angular.module('myApp')
   .controller('PLLController', PLLController);
 
-PLLController.$inject = ['$scope', 'ContentControl'];
+PLLController.$inject = ['$scope', 'ContentControl', '$cookies'];
 
-function PLLController($scope, ContentControl) {
+function PLLController($scope, ContentControl, $cookies) {
   ContentControl.initialize("PLL");
   $scope.addPriorityOptions = ContentControl.addPriorityOptions;
 	$scope.animationOpts = {duration: 1000};
@@ -11,11 +11,19 @@ function PLLController($scope, ContentControl) {
 	$scope.cardPriorities = ContentControl.cardPriorities;
 	$scope.cards = ContentControl.cards;
 	$scope.cases = ContentControl.cases;
-	$scope.cookieString = ContentControl.cookieString;
+  $scope.cols = ContentControl.cols;
+  $scope.classes = ContentControl.classes;
+  $scope.colClasses = ContentControl.colClasses;
+  $scope.hidden = ContentControl.hidden;
+
+
+
+	$scope.cookieString = ContentControl.cookieString["pll"];
 	$scope.countCases = ContentControl.countCases;
-	$scope.cardData = flashData.data;
+	$scope.cardData = ContentControl.flashData.data;
 	$scope.editCardSelection = ContentControl.editCardSelection;
 	$scope.editTable = ContentControl.editTable;
+  $scope.filteredCases = ContentControl.filteredCases;
 	$scope.filterString = '';
 	$scope.flashCardsData = ContentControl.flashCardsData;
 	$scope.hiddenColsData = ContentControl.hiddenColsData;
@@ -24,19 +32,22 @@ function PLLController($scope, ContentControl) {
 	$scope.hideHiddenCols = ContentControl.hideHiddenCols;
 	$scope.hideHiddenRows = ContentControl.hideHiddenRows;
 	$scope.initialize = ContentControl.initialize;
+  $scope.knownCases = ContentControl.knownCases;
 	$scope.modifyKnownCases = ContentControl.modifyKnownCases;
 	$scope.number = ContentControl.number;
 	$scope.pickAnAlgorithm = ContentControl.pickAnAlgorithm;
-	$scope.practiceCards = ContentControl.practiceCards;
+	$scope.practiceCards = ContentControl.practiceCards || [];
 	$scope.practicing = ContentControl.practicing;
 	$scope.returnSolve = ContentControl.returnSolve;
 	$scope.setFilter = ContentControl.setFilter;
 	$scope.setSort = ContentControl.setSort;
+  $scope.showing = ContentControl.showing;
 	$scope.showHiddenCols = ContentControl.showHiddenCols;
 	$scope.showHiddenRows = ContentControl.showHiddenRows;
 	$scope.useCookieInfo = ContentControl.useCookieInfo;
 
 	checkFlashCardData();
+  console.log("PLLController Cases: %s", angular.toJson($scope.cases));
 
 
   function checkFlashCardData() {
@@ -49,7 +60,7 @@ function PLLController($scope, ContentControl) {
 
 
   $scope.$watchCollection('practiceCards', function(newValue, oldValue) {
-		flashData.savePracticeCards(newValue);
+		ContentControl.flashData.savePracticeCards(newValue);
 	});
 
 	$scope.$watchCollection('cardPriorities', function(newValue, oldValue){
@@ -60,7 +71,7 @@ function PLLController($scope, ContentControl) {
 				}
 			}
 		}
-		flashData.saveCardPriorities(newValue);
+		ContentControl.flashData.saveCardPriorities(newValue);
 	});
 
 	$scope.$watchCollection('cardOptions', function(newValue, oldValue){
@@ -71,7 +82,7 @@ function PLLController($scope, ContentControl) {
 				}
 			}
 		}
-		flashData.saveCardOptions(newValue);
+		ContentControl.flashData.saveCardOptions(newValue);
 	});
 
 
@@ -109,7 +120,7 @@ function PLLController($scope, ContentControl) {
 				}
 			}
 		}
-		flashData.savePracticing(newValue);
+		ContentControl.flashData.savePracticing(newValue);
 	});
 
 	$scope.$watchCollection('cards', function(newValue, oldValue) {
@@ -135,6 +146,7 @@ function PLLController($scope, ContentControl) {
 
 	$scope.$watchCollection('hiddenRows', function(newValue, oldValue) {
 		// Content, floashcards, controls, cookies
+    console.log("Saving hidden rows here: %s", $scope.cookieString.hiddenRows);
 		$cookies.putObject($scope.cookieString.hiddenRows, newValue);
 		$scope.countCases();
 	});

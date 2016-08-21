@@ -200,13 +200,13 @@ function ContentControl(manager, hiddenRows, cookieString, flashData, $cookies, 
 	}
 
 	function initialize(type) {
-		flashCardData.setType(type);
+		flashData.setType(type);
 		factory.cardOptions = flashData.getCardOptions();
 		factory.cardPriorities = flashData.getCardPriorities();
 		factory.cards = flashData.getCards();
 		factory.practiceCards = flashData.getPracticeCards() || [];
 		factory.practicing = flashData.getPracticing();
-		manager.setStage(type);
+		factory.manager.setStage(type);
 		factory.cols = ["num", "code", "solve1.alg", "solve1.length", "solve2.alg", "solve2.length", "prob"];
 		factory.hidden = {num: 0, code: 0, solve1:0, length1:0, solve2:0, length2:0, prob:0};
 		factory.colClasses = [".num", ".code", ".solve1", ".length1", ".solve2", ".length2", ".prob"];
@@ -225,7 +225,6 @@ function ContentControl(manager, hiddenRows, cookieString, flashData, $cookies, 
 		factory.prob = {};
 
 		for (var i = 0; i < factory.cases.length; i++) {
-			factory.cases[i].src = "/img/" + factory.cases[i].num + ".png";
 			factory.prob[factory.cases[i].code] = factory.cases[i].prob;
 		}
 
