@@ -35,7 +35,7 @@ function OLLController($scope, ContentControl, $cookies) {
   $scope.pickAnAlgorithm = ContentControl.pickAnAlgorithm;
   $scope.practiceCards = ContentControl.practiceCards || [];
   $scope.practicing = ContentControl.practicing;
-  $scope.returnSolve = ContentControl.returnSolve;
+  $scope.returnSolve = returnSolve;
   $scope.setFilter = ContentControl.setFilter;
   $scope.setSort = ContentControl.setSort;
   $scope.showing = ContentControl.showing;
@@ -53,6 +53,13 @@ function OLLController($scope, ContentControl, $cookies) {
     }
   }
 
+  function returnSolve(card) {
+		if (card.solve2.length > 0) {
+			return (card.option == 1) ? card.solve1.alg : card.solve2.alg;
+		} else {
+			return(card.solve1.alg);
+		}
+	}
 
 
 
@@ -146,11 +153,15 @@ function OLLController($scope, ContentControl, $cookies) {
     console.log("Saving hidden rows here: %s", $scope.cookieString.hiddenRows);
     $cookies.putObject($scope.cookieString.hiddenRows, newValue);
     $scope.countCases();
+    $scope.number = ContentControl.number;
   });
-
 
   $scope.$watchCollection('hidden', function(newValue, oldValue) {
-    // Cookies, content
-    $cookies.putObject($scope.cookieString.hiddenCols, newValue);
+    ContentControl.watchHidden(newValue, oldValue);
   });
+
+  // $scope.$watchCollection('hidden', function(newValue, oldValue) {
+  //   // Cookies, content
+  //   $cookies.putObject($scope.cookieString.hiddenCols, newValue);
+  // });
 }

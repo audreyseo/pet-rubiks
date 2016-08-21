@@ -34,7 +34,6 @@ function ContentControl(manager, hiddenRows, cookieString, flashData, $cookies, 
 	factory.modifyKnownCases = modifyKnownCases;
 	factory.number = {knownCases: 0, cases: 58, percent: 0, prob: 0};
 	factory.pickAnAlgorithm = pickAnAlgorithm;
-	factory.returnSolve = returnSolve;
 	factory.setCaseType = setCaseType;
 	factory.setFilter = setFilter;
 	factory.setSort = setSort;
@@ -43,6 +42,13 @@ function ContentControl(manager, hiddenRows, cookieString, flashData, $cookies, 
 	factory.useCookieInfo = useCookieInfo;
 	factory.practiceCasesButtonValue = "Select cases to practices";
 	factory.type = "";
+	factory.watchCards = watchCards;
+	factory.watchPracticing = watchPracticing;
+	factory.watchPracticeCards = watchPracticeCards;
+	factory.watchHidden = watchHidden;
+	factory.watchHiddenRows = watchHiddenRows;
+	factory.watchCardOptions = watchCardOptions;
+	factory.watchCardPriorities = watchCardPriorities;
 
 	function addOptions(max) {
 		// most likely obsolete
@@ -122,7 +128,7 @@ function ContentControl(manager, hiddenRows, cookieString, flashData, $cookies, 
 	}
 
 	function editTable() {
-		factory.editString = (factory.editString == "Edit Shown Columns and Rows") ? "Save Table Configuration" : "Edit Shown Columns and Rows";
+		factory.editString = (factory.editString === "Edit Shown Columns and Rows") ? "Save Table Configuration" : "Edit Shown Columns and Rows";
 		var editingRow = $("#editRow");
 		if (factory.showing.editRow) {
 			// Hide away edit rows
@@ -280,14 +286,6 @@ function ContentControl(manager, hiddenRows, cookieString, flashData, $cookies, 
 		}
 	}
 
-	function returnSolve(card) {
-		if (card.solve2.length > 0) {
-			return (card.option == 1) ? card.solve1.alg : card.solve2.alg;
-		} else {
-			return(card.solve1.alg);
-		}
-	}
-
 	function showHiddenCols() {
 		for (var ind = 0; ind < factory.cols.length; ind++) {
 			if (factory.hidden[factory.classes[ind]] == 1) {
@@ -335,6 +333,84 @@ function ContentControl(manager, hiddenRows, cookieString, flashData, $cookies, 
 		var string = "img/" + value + ".png";
 //	console.log(string);
 		return string;
+	}
+
+	function watchPracticeCards(newValue, oldValue) {
+		factory.flashData.savePracticeCards(newValue);
+	}
+
+	function watchCardPriorities(newValue, oldValue) {
+		for (var i = 0; i < factory.practiceCards.length; i++) {
+      for (var ind in newValue) {
+        if (ind == factory.practiceCards[i].code) {
+          factory.practiceCards[i].priority = parseInt(newValue[ind]);
+        }
+      }
+    }
+    factory.flashData.saveCardPriorities(newValue);
+	}
+
+	function watchCardOptions(newValue, oldValue) {
+		for (var i = 0; i < factory.practiceCards.length; i++) {
+      for (var ind in newValue) {
+        if (ind == factory.practiceCards[i].code) {
+          factory.practiceCards[i].option = newValue[ind];
+        }
+      }
+    }
+    factory.flashData.saveCardOptions(newValue);
+	}
+
+	function watchPracticing(newValue, oldValue) {
+		for (var i = 0; i < factory.cases.length; i++) {
+//			console.log(factory.cases[i].code);
+      if (angular.isDefined(factory.practicing[factory.cases[i].code])) {
+        if (factory.practicing[factory.cases[i].code]) {
+          if (factory.practiceCards.length == 0) {
+            factory.practiceCards.push({});
+            angular.copy(factory.cases[i], factory.practiceCards[factory.practiceCards.length - 1]);
+            factory.practiceCards[factory.practiceCards.length - 1].priority = 0;
+          } else {
+            for (var j = 0; j < factory.practiceCards.length; j++) {
+              if (factory.practiceCards[j].code == factory.cases[i].code) {
+                break;
+              } else if (j + 1 == factory.practiceCards.length) {
+                factory.practiceCards.push({});
+                angular.copy(factory.cases[i], factory.practiceCards[factory.practiceCards.length - 1]);
+                factory.practiceCards[factory.practiceCards.length - 1].priority = 0;
+              }
+            }
+          }
+        } else {
+          for (var j = 0; j < factory.practiceCards.length; j++) {
+            if (factory.practiceCards[j].code == factory.cases[i].code) {
+              factory.practiceCards.splice(j, 1);
+              break;
+            }
+          }
+        }
+      }
+    }
+    factory.flashData.savePracticing(newValue);
+	}
+
+	function watchCards(newValue, oldValue) {
+		$cookies.putObject(factory.cookieString[factory.type].cards, newValue);
+
+    if (newValue.maxNumber !== oldValue.maxNumber) {
+      factory.addPriorityOptions();
+    }
+	}
+
+	function watchHiddenRows(newValue, oldValue) {
+		console.log("Saving hidden rows here: %s", factory.cookiesString[factory.type].hiddenRows);
+		$cookies.putObject(factory.cookieString[factory.type].hiddenRows, newValue);
+		factory.countCases();
+	}
+
+	function watchHidden(newValue, oldValue) {
+		console.log("Watched hidden.");
+		$cookies.putObject(factory.cookieString[factory.type].hiddenCols, newValue);
 	}
 
 	return factory;

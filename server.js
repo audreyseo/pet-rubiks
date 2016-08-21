@@ -60,6 +60,12 @@ app.get('/pages/img/*.png',function(request, response) {
 	}
 });
 
+app.get('*/node_modules/*.min.*', function(request, response) {
+	var path = request.path;
+	path = path.replace('/pages/', "");
+	returnRequestedFile(response, path);
+});
+
 app.get('css/*.css', function(request, response) {
 	var path = request.path;
 	returnRequestedFile(response, path);

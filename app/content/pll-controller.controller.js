@@ -7,8 +7,8 @@ function PLLController($scope, ContentControl, $cookies) {
   ContentControl.initialize("PLL");
   $scope.addPriorityOptions = ContentControl.addPriorityOptions;
 	$scope.animationOpts = {duration: 1000};
-	$scope.cardOptions = ContentControl.cardOptions;
-	$scope.cardPriorities = ContentControl.cardPriorities;
+	$scope.cardOptions = ContentControl.cardOptions || {};
+	$scope.cardPriorities = ContentControl.cardPriorities || {};
 	$scope.cards = ContentControl.cards;
 	$scope.cases = ContentControl.cases;
   $scope.cols = ContentControl.cols;
@@ -38,7 +38,7 @@ function PLLController($scope, ContentControl, $cookies) {
 	$scope.pickAnAlgorithm = ContentControl.pickAnAlgorithm;
 	$scope.practiceCards = ContentControl.practiceCards || [];
 	$scope.practicing = ContentControl.practicing;
-	$scope.returnSolve = ContentControl.returnSolve;
+	$scope.returnSolve = returnSolve;
 	$scope.setFilter = ContentControl.setFilter;
 	$scope.setSort = ContentControl.setSort;
   $scope.showing = ContentControl.showing;
@@ -56,6 +56,14 @@ function PLLController($scope, ContentControl, $cookies) {
 		}
 	}
 
+  function returnSolve(card) {
+		if (card.solve2.length > 0) {
+      console.log('Card option: %d', card.option);
+			return (card.option == 1) ? card.solve1.alg : card.solve2.alg;
+		} else {
+			return(card.solve1.alg);
+		}
+	}
 
 
 
@@ -64,6 +72,7 @@ function PLLController($scope, ContentControl, $cookies) {
 	});
 
 	$scope.$watchCollection('cardPriorities', function(newValue, oldValue){
+    console.log('Card priorities: %s', angular.toJson(newValue));
 		for (var i = 0; i < $scope.practiceCards.length; i++) {
 			for (var ind in newValue) {
 				if (ind == $scope.practiceCards[i].code) {
@@ -75,10 +84,11 @@ function PLLController($scope, ContentControl, $cookies) {
 	});
 
 	$scope.$watchCollection('cardOptions', function(newValue, oldValue){
+    console.log("Card options: %s", angular.toJson(newValue));
 		for (var i = 0; i < $scope.practiceCards.length; i++) {
 			for (var ind in newValue) {
 				if (ind == $scope.practiceCards[i].code) {
-					$scope.practiceCards[i].option = newValue[ind];
+					$scope.practiceCards[i].option = parseInt(newValue[ind]);
 				}
 			}
 		}
@@ -89,7 +99,7 @@ function PLLController($scope, ContentControl, $cookies) {
 	$scope.$watchCollection('practicing', function(newValue, oldValue) {
 		// Content, flashcards (mostly flashcards, but heavily dependent on cases)
 //
-//	console.log(angular.toJson($scope.practicing));
+	// console.log(angular.toJson($scope.practicing));
 
 		for (var i = 0; i < $scope.cases.length; i++) {
 //			console.log($scope.cases[i].code);

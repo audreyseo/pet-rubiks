@@ -22,6 +22,18 @@ div.myFlashCard {
 	color: #FFFFFF;
 }
 
+div.myPLLFlashCard {
+	float: left;
+	background-color: @originalBlue;
+	border: 3px solid @originalBlue;
+	padding: 4px;
+	margin: 2px;
+	width: 340px;
+	height: 80px;
+	border-radius: 8px;
+	color: #FFFFFF;
+}
+
 #myFlashCards {
 	height: 560px;
 	overflow-y: scroll;
@@ -37,7 +49,12 @@ div.myFlashCard {
 	border-radius: 5px; */
 }
 
-div.cadimg span.header {
+.pll-flashcardIcon {
+	margin: 0px;
+	width: 50px;
+}
+
+div.cardimg span.header {
 	font-size: 11px;
 	font-stretch: extra-condensed;
 }
@@ -50,7 +67,7 @@ div.cardimg {
 	position: relative;
 	vertical-align: baseline;
 	text-align: center;
-	width: 90px;
+	width: 80px;
 	top: 15px;
 	justify-content: flex-start;
 	margin: -8px;

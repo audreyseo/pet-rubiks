@@ -82,6 +82,7 @@ angular
 
   	factory.savePracticing = function(newValue) {
   		if (arguments.length === 1) {
+				factory.data.practicing = newValue;
   			$cookies.putObject(factory.cookies[type].practicing, newValue);
   		} else {
   			$cookies.putObject(factory.cookies[type].practicing, factory.data.practicing);

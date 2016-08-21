@@ -80,7 +80,7 @@
                     <input id="{{case.code}}" type="checkbox" ng-model='practicing[case.code]'>
                   </td>
                   <td ng-if=showing.priorityCol>
-                    <select ng-show='practicing[case.code]' class="priorities" ng-model=cardPriorities[case.code]>
+                    <select ng-show='practicing[case.code]' class="priorities" ng-model='cardPriorities[case.code]'>
                       <option ng-repeat="val in cards.options" value="{{val}}">
                         {{val | number:0}}
                       </option>
@@ -102,21 +102,21 @@
         </div>
       <!-- </my-pane>
       <my-pane title="Flashcards"> -->
-        <div id="flashCardDiv" class="content">
-          <div class="innerBox">
-            <span class="title big">Flashcards</span><br>
-            <br>
-            <div id="myFlashCards">
-              <table>
-                <tr ng--repeat="card in practiceCards | orderBy:'priority'">
-                  <td>
-                    <flash-card cardsrc="{{card.src}}" cardcode="{{card.code}}" cardprob="{{card.prob}}" cardalg="{{returnSolve(card)}}"></flash-card>
-                  </td>
-                </tr>
-              </table>
-            </div>
+      <div id="flashCardDiv" class="content">
+        <div class="innerBox">
+          <span class="title big">Flashcards</span><br>
+          <br>
+          <div id="myFlashCards">
+            <table>
+              <tr ng--repeat="card in practiceCards | orderBy:'priority'">
+                <td>
+                  <pll-flash-card cardsrc="{{card.src}}" cardcode="{{card.code}}" cardprob="{{card.prob}}" cardalg="{{returnSolve(card)}}"></pll-flash-card>
+                </td>
+              </tr>
+            </table>
           </div>
         </div>
+      </div>
       <!-- </my-pane>
      </my-tabs> -->
 
@@ -205,11 +205,11 @@
         </div>
       </div>
     </div>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="http://code.angularjs.org/1.4.12/angular.min.js"></script>
-    <script type="text/javascript" src="http://code.angularjs.org/1.4.12/angular-cookies.min.js"></script>
-    <script type="text/javascript" src="http://code.angularjs.org/1.4.12/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="http://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script> -->
+    <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+    <script type="text/javascript" src="node_modules/angular-cookies/angular-cookies.min.js"></script>
+    <script type="text/javascript" src="node_modules/angular-sanitize/angular-sanitize.min.js"></script>
     <script type="text/javascript" src="/lib/bootstrap-3.3.6/js/tooltip.js"></script>
 
     <script type="text/javascript" src="/app/app.module.js"></script>
@@ -222,7 +222,7 @@
     <script type="text/javascript" src="/app/cookies/cookieData.value.js"></script>
     <script type="text/javascript" src="/app/cookies/cookieDataTypes.value.js"></script>
     <script type="text/javascript" src="/app/cookies/cookieStrings.value.js"></script>
-    <script type="text/javascript" src="/app/flashCard.directive.js"></script>
+    <script type="text/javascript" src="/app/pllFlashCard.directive.js"></script>
     <script type="text/javascript" src="/app/hiddenRows.value.js"></script>
     <script type="text/javascript" src="/app/time/timeConversion.factory.js"></script>
     <script type="text/javascript" src="/app/stats/stats.factory.js"></script>
