@@ -21,8 +21,9 @@ function PLLController($scope, ContentControl, $cookies) {
 	$scope.cookieString = ContentControl.cookieString["pll"];
 	$scope.countCases = ContentControl.countCases;
 	$scope.cardData = ContentControl.flashData.data;
+  $scope.editString = ContentControl.editString;
 	$scope.editCardSelection = ContentControl.editCardSelection;
-	$scope.editTable = ContentControl.editTable;
+	$scope.editTable = editTable;
   $scope.filteredCases = ContentControl.filteredCases;
 	$scope.filterString = '';
 	$scope.flashCardsData = ContentControl.flashCardsData;
@@ -55,6 +56,11 @@ function PLLController($scope, ContentControl, $cookies) {
 			console.log(data + " is Defined?: " + angular.isDefined($scope.cardData[data]) + "  " + angular.toJson($scope.cardData[data]));
 		}
 	}
+
+  function editTable() {
+    ContentControl.editTable();
+    $scope.editString = ContentControl.editString;
+  }
 
   function returnSolve(card) {
 		if (card.solve2.length > 0) {

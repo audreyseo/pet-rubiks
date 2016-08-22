@@ -66,6 +66,43 @@ app.get('*/node_modules/*.min.*', function(request, response) {
 	returnRequestedFile(response, path);
 });
 
+app.get('*/pages/js/*', function(request, response) {
+	var path = request.path;
+	path = path.replace(/.*\/pages\//, "/public/");
+	console.log("Requested js: %s", path);
+	returnRequestedFile(response, path);
+});
+
+app.get('*/pages/css/*', function(request, response) {
+	var path = request.path;
+	path = path.replace(/.*\/pages\//, "/public/");
+	console.log("Requested CSS: %s", path);
+	returnRequestedFile(response, path);
+});
+
+app.get('*/pages/scripts/*.min.*', function(request, response) {
+	var dict = {
+		'angular.min.': 'node_modules/angular/',
+		'jquery.min.': 'node_modules/jquery/dist/',
+		'angular-sanitize.min.': 'node_modules/angular-sanitize/',
+		'angular-cookies.min.': 'node_modules/angular-cookies/',
+		'tooltip.js': '/lib/bootstrap-3.3.6/js/'
+	};
+	var path = request.path;
+	path = path.replace('*/pages/', "");
+	var name = path;
+	name = name.replace(/(.*\/)+((\w+.)+\w+)/, "$2");
+	console.log('name: %s', name);
+	for (var key in dict) {
+		if (name.match(key)) {
+			path = dict[key] + name;
+		}
+	}
+	returnRequestedFile(response, path);
+});
+
+app.get('*/jquery-ui*')
+
 app.get('css/*.css', function(request, response) {
 	var path = request.path;
 	returnRequestedFile(response, path);

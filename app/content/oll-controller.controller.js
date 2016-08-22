@@ -19,7 +19,7 @@ function OLLController($scope, ContentControl, $cookies) {
   $scope.countCases = ContentControl.countCases;
   $scope.cardData = ContentControl.flashData.data;
   $scope.editCardSelection = ContentControl.editCardSelection;
-  $scope.editTable = ContentControl.editTable;
+  $scope.editTable = editTable;
   $scope.filteredCases = ContentControl.filteredCases;
   $scope.filterString = '';
   $scope.flashCardsData = ContentControl.flashCardsData;
@@ -51,6 +51,11 @@ function OLLController($scope, ContentControl, $cookies) {
     for (var data in $scope.cardData) {
       console.log(data + " is Defined?: " + angular.isDefined($scope.cardData[data]) + "  " + angular.toJson($scope.cardData[data]));
     }
+  }
+
+  function editTable() {
+    ContentControl.editTable();
+    $scope.editString = ContentControl.editString;
   }
 
   function returnSolve(card) {

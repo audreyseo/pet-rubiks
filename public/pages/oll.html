@@ -7,19 +7,8 @@
     <link rel="stylesheet" type="text/css" href="/lib/jquery-ui-1.11.4-2.custom/jquery-ui.min.css">
 
 
-    <!-- build:css:build css/pretty.min.css --><!-- /build -->
-    <!-- build:css:dev css/pretty.css --><!-- /build -->
-    <!-- build:remove:build,dev -->
-    <link rel="stylesheet" type="text/css" href="/css/jquery_overriding.css">
-    <link rel="stylesheet" type="text/css" href="/css/tabs.css">
-    <link rel="stylesheet" type="text/css" href="/css/left.css">
-    <link rel="stylesheet" type="text/css" href="/css/flashCard.css">
-    <link rel="stylesheet" type="text/css" href="/css/timeRecordsTable.css">
-    <link rel="stylesheet" type="text/css" href="/css/colorCodingAlgorithms.css">
-    <link rel="stylesheet" type="text/css" href="/css/casesTable.css">
-    <link rel="stylesheet" type="text/css" href="/css/basic.css">
-    <!-- /build -->
-  </head>
+
+    <link rel="stylesheet" href="css/pretty.css"/>  </head>
   <body>
     <div ng-controller="OLLController" id="everything">
       <!-- <my-tabs>
@@ -31,7 +20,8 @@
               <input type="button" id="edit" ng-cloak ng-bind=editString ng-click="editTable()" value={{editString}}>
             </div>
 
-            <input type="text" ng-model="filterString" placeholder="filter cases..."> <input type="button" ng-click="setFilter()" value="Filter"><br>
+            <input type="text" ng-model="filterString" placeholder="filter cases..."> <input type="button" ng-click="setFilter()" value="Filter"><br> <br>
+            <br>
             <div id="cases">
               <table ng-cloak>
                 <tr>
@@ -210,49 +200,21 @@
     </div>
     <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
     <!-- <script type="text/javascript" src="http://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script> -->
-    <!-- build:[src]:build,dev scripts/ -->
-    <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
-    <script type="text/javascript" src="node_modules/angular-cookies/angular-cookies.min.js"></script>
-    <script type="text/javascript" src="node_modules/angular-sanitize/angular-sanitize.min.js"></script>
-    <!-- /build -->
+    <script type="text/javascript" src="scripts/angular.min.js"></script>
+    <script type="text/javascript" src="scripts/angular-cookies.min.js"></script>
+    <script type="text/javascript" src="scripts/angular-sanitize.min.js"></script>
 
-    <!-- build:remove:dev,build -->
-    <script type="text/javascript" src="/app/app.module.js"></script>
-    <script type="text/javascript" src="/app/cases/ollCases.value.js"></script>
-    <script type="text/javascript" src="/app/cases/pllCases.value.js"></script>
-    <script type="text/javascript" src="/app/cases/casemanager.factory.js"></script>
-    <script type="text/javascript" src="/app/app.config.js"></script>
-    <script type="text/javascript" src="/app/colorCodeAlgorithms/colorCodeAlgorithms.filter.js"></script>
-    <script type="text/javascript" src="/app/cookies/cookieData.value.js"></script>
-    <script type="text/javascript" src="/app/cookies/cookieDataTypes.value.js"></script>
-    <script type="text/javascript" src="/app/cookies/cookieStrings.value.js"></script>
-    <script type="text/javascript" src="/app/flashCard.directive.js"></script>
-    <script type="text/javascript" src="/app/hiddenRows.value.js"></script>
-    <script type="text/javascript" src="/app/time/timeConversion.factory.js"></script>
-    <script type="text/javascript" src="/app/stats/stats.factory.js"></script>
-    <script type="text/javascript" src="/app/time/timesStatistics.filter.js"></script>
-    <script type="text/javascript" src="/app/time/timeStats.directive.js"></script>
-    <script type="text/javascript" src="/app/dividingBox/dividingBox.directive.js"></script>
-    <script type="text/javascript" src="/app/cube-scrambler/cube-scrambler.module.js"></script>
-    <script type="text/javascript" src="/app/timer/timer.controller.js"></script>
-    <script type="text/javascript" src="/app/flash-cards/flash-cards.module.js"></script>
-    <script type="text/javascript" src="/app/content/content-control.factory.js"></script>
-    <script type="text/javascript" src="/app/content/oll-controller.controller.js"></script>
-    <!-- /build -->
+    <script src="js/module.js"></script>
+    <script src="js/directive.js"></script>
+    <script src="js/service.js"></script>
+    <script src="js/factory.js"></script>
+    <script src="js/controller.js"></script>
+    <script src="js/filter.js"></script>
+    <script src="js/value.js"></script>
 
-    <!-- build:js:dev js/module.js --><!-- /build -->
-    <!-- build:js:dev js/directive.js --><!-- /build -->
-    <!-- build:js:dev js/service.js --><!-- /build -->
-    <!-- build:js:dev js/factory.js --><!-- /build -->
-    <!-- build:js:dev js/controller.js --><!-- /build -->
-    <!-- build:js:dev js/filter.js --><!-- /build -->
-    <!-- build:js:dev js/value.js --><!-- /build -->
 
-    <!-- build:js:build js/app.min.js --><!-- /build -->
-    <!-- build:js:build js/animation.min.js --><!-- /build -->
 
-    <!-- build:remove:build -->
+
     <script type="text/javascript" src="/js/animation.js"></script>
-    <!-- /build -->
   </body>
 </html>

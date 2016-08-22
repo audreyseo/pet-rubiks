@@ -14,7 +14,7 @@ function pllCases() {
         	{num:4,code:"H",src:"img/pll/H.png",solve1:{alg:"M2 U M2 U2 M U M2",length:7},solve2:{alg:"",length:0},prob:1/72,descript:"EdgesOrCorners"},
         	{num:5,code:"Aa",src:"img/pll/Aa.png",solve1:{alg:"x [(R' U R') D2][(R U' R') D2] R2",length:10},solve2:{alg:"",length:0},prob:1/18,descript:"EdgesOrCorners"},
         	{num:6,code:"Ab",src:"img/pll/Ab.png",solve1:{alg:"x' [(R U' R) D2][(R' U R) D2] R2",length:10},solve2:{alg:"",length:0},prob:1/18,descript:"EdgesOrCorners"},
-        	{num:7,code:"E",src:"img/pll/E.png",solve1:{alg:"x'[(R U' R')D(R U R')] D' [(R U R')G(R U' R')]D'",length:17},solve2:{alg:"x'[(R U' R') D (R U R')] u2 [(R' U R) D (R' U' R)]",length:16},prob:1/36,descript:"EdgesOrCorners"},
+        	{num:7,code:"E",src:"img/pll/E.png",solve1:{alg:"x'[(R U' R')D(R U R')] D' [(R U R')D(R U' R')]D'",length:17},solve2:{alg:"x'[(R U' R') D (R U R')] u2 [(R' U R) D (R' U' R)]",length:16},prob:1/36,descript:"EdgesOrCorners"},
         	{num:8,code:"Solved",src:"img/pll/Solved.png",solve1:{alg:"",length:0},solve2:{alg:"",length:0},prob:1/72,descript:"EdgesOrCorners"},
         	{num:9,code:"Ra",src:"img/pll/Ra.png",solve1:{alg:"(L U2' L' U2')(L F')(L' U' L U)(L F) L2' U",length:14},solve2:{alg:"",length:0},prob:1/18,descript:"SwapAdjacentCorners"},
         	{num:10,code:"Rb",src:"img/pll/Rb.png",solve1:{alg:"(R' U2 R U2)(R' F)(R U R' U')(R' F') R2 U'",length:14},solve2:{alg:"",length:0},prob:1/18,descript:"SwapAdjacentCorners"},

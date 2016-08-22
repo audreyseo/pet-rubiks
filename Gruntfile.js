@@ -4,6 +4,53 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     banner: {ownership: '/*\n Web App <%= pkg.name %> by <%= pkg.author %> on <%= grunt.template.today("yyyy-mm-dd") %> \n*/\n'},
 
+    processhtml: {
+      dev: {
+        options: {
+          process: true,
+          strip: true
+        },
+        files: {
+          'public/index.html': ['index.html'],
+          'public/pages/pll.html': ['pages/pll.html'],
+          'public/pages/oll.html': ['pages/oll.html'],
+          'public/templates/dividingBox.html': ['templates/dividingBox.html']
+        }
+      },
+      build: {
+        options: {
+          process: true,
+          strip: true
+        },
+        files: {
+          'public/index.html': ['index.html'],
+          'public/pages/pll.html': 'pages/pll.html',
+          'public/pages/oll.html': 'pages/oll.html'
+        }
+      }
+    },
+    concat: {
+      options: {
+
+      },
+      dev: {
+        files: {
+          "public/js/module.js": ["app/app.module.js", "app/app.config.js"],
+          "public/js/directive.js": ["app/**/*.directive.js"],
+          "public/js/service.js": ["app/**/*.service.js"],
+          "public/js/factory.js": ["app/**/*.factory.js"],
+          "public/js/controller.js": ["app/**/*.controller.js"],
+          "public/js/filter.js": ["app/**/*.filter.js"],
+          "public/js/value.js": ["app/**/*.value.js"],
+          "public/js/animation.js": ["js/animation.js"]
+        }
+      },
+      build: {
+        files: {
+          "public/js/app.js": ["app/app.module.js", "app/app.config.js", "app/**/!(*.mock|*.spec).js"]
+        }
+      }
+    },
     uglify: {
       options: {
         banner: "<%= banner.ownership $>"
@@ -12,15 +59,23 @@ module.exports = function(grunt) {
       {
         files:
         {
-          "build/js/app.min.js":["app/app.module.js", "app/app.config.js", "app/dividingBox.directive.js", "app/flashCard.directive.js", "app/hiddenRows.value.js", "app/**/!(*.mock|*.spec)*.js"],
-        "build/js/animation.min.js": "js/animation.js"
+          "public/js/app.min.js": "public/js/app.js",
+          "public/js/animation.min.js": "js/animation.js"
+        }
+      },
+      build:
+      {
+        files:
+        {
+          "public/js/app.min.js": "public/js/app.js",
+          "public/js/animation.min.js": "js/animation.js"
         }
       }
     },
     less: {
       dev: {
         files: {
-          "build/css/pretty.css": "less/*.less"
+          "public/css/pretty.css": "less/*.less"
         }
       },
       loose: {
@@ -46,11 +101,11 @@ module.exports = function(grunt) {
       {
         files:
         {
-          "build/css/pretty.min.css": "build/css/pretty.css"
+          "public/css/pretty.min.css": "public/css/pretty.css"
         }
       }
     },
-    srcs: {src: ['app/app.module.js', 'app/app.config.js', 'app/*!(.mocks|.spec).js', 'app/**/*(!(.mocks|.spec)).js'], 
+    srcs: {src: ['app/app.module.js', 'app/app.config.js', 'app/*!(.mocks|.spec).js', 'app/**/*(!(.mocks|.spec)).js'],
            test: 'app/**/*.spec.js'},
     config: {
       LOG_DEBUG: "DEBUG",
@@ -75,7 +130,7 @@ module.exports = function(grunt) {
       },
       serve: {
         cmd: function() {
-          return 'node $myProjectPath/build/server.js'
+          return 'node server.js'
         }
       },
       updatetests: {
@@ -123,7 +178,7 @@ module.exports = function(grunt) {
         configFile: 'karma.conf.js'
       },
       chrome: {
-      logLevel: this.config.LOG_INFO,
+        logLevel: this.config.LOG_INFO,
         autoWatch: true,
         singleRun: false,
         concurrency: "Infinity",
@@ -139,7 +194,6 @@ module.exports = function(grunt) {
         }
       }
     },
-
     jshint: {
       files: ['Gruntfile.js', 'app/**/*.js', 'tests/**/*.js'],
       options: {
@@ -163,38 +217,42 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks("grunt-processhtml");
+  grunt.loadNpmTasks("grunt-contrib-concat");
 
   // MY TASKS:
-  
+
 
   grunt.registerTask('clean', ['exec:movereports']);
   grunt.registerTask('proofread', ['jshint']);
   grunt.registerTask('help', ['exec:sayTasks']);
   grunt.registerTask('default', ['jshint', 'karma']);
-  grunt.registerTask('dev', ['jshint', 'karma:dev']);
   grunt.registerTask('copy', ['exec:updatetests']);
   grunt.registerTask('move', ['exec:move']);
 
   grunt.registerTask('test', ['clean', 'copy', 'move', 'karma:chrome']);
   grunt.registerTask('buildtest', ['clean', 'copy', 'move', 'karma:chrometest']);
-  
-  grunt.registerTask('build', ['less:dev', 'uglify:dev', 'cssmin:dev', 'exec:copyPages']);
-  grunt.registerTask('builds', ['build', 'exec:serve']); 
-  
-  
-  
-  
-  
+
+
+  grunt.registerTask('dev', ['less:dev', 'concat:dev', 'cssmin:dev', 'processhtml:dev']);
+  grunt.registerTask("devs", ["dev", "exec:serve"]);
+  grunt.registerTask('build', ['less:dev', 'concat:build', 'uglify:dev', 'cssmin:dev']);
+  grunt.registerTask('builds', ['build', 'exec:serve']);
+
+
+
+
+
   grunt.registerTask('production', 'initiates production testing', function() {
     var paths = grunt.file.expand({}, ['app/+([a-zA-Z])+(.+([a-zA-Z]))/*([a-zA-Z.])!(.mock|.spec).js', 'app/+([a-zA-Z.]).js']);
-    
+
     grunt.log.ok(paths);
     for (var path in paths) {
       var pathSplit = paths[path].split('/');
       var name = pathSplit[pathSplit.length - 1];
-      
+
       name = 'src/' + name;
-      
+
       grunt.log.ok('Source Path: ' + name);
       grunt.file.copy(paths[path], name);
     }
@@ -232,9 +290,9 @@ function todaysDate() {
             today = today.replace(month.toString(), "DAY");
             today = today.replace(day.toString(), "MONTH");
             ////console.log("Today: " + today);
-            
+
             var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-            
+
             today = today.replace("MONTH", months[month - 1]);
             today = today.replace("DAY", day.toString());
 }

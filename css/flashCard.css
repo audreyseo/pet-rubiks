@@ -32,6 +32,7 @@ div.myPLLFlashCard {
   overflow-y: scroll;
   border-radius: 10px;
   background-color: #FFFFFF;
+  padding: 10px;
 }
 .flashcardIcon {
   margin: -5px;
@@ -70,5 +71,6 @@ div.solve {
   vertical-align: 100%;
   justify-content: flex-end;
   font-size: 13px;
+  font-family: Helvetica, Arial;
   font-style: bold;
 }

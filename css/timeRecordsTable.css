@@ -23,6 +23,7 @@ table#timesTable {
   padding: 2px;
   margin-left: 6px;
   margin-right: 6px;
+  font-size: 9px;
 }
 #timeforeground table th,
 #timeforeground table tr {
@@ -30,7 +31,7 @@ table#timesTable {
 }
 .deleteButton {
   cursor: pointer;
-  font-size: 10px;
+  font-size: 9px;
   color: #206a96;
 }
 tr.timesTable:nth-child(odd) {
@@ -50,4 +51,7 @@ tr.timesTable:nth-child(odd) td {
   padding: 0px;
   padding-left: 4px;
   padding-right: 4px;
+}
+.myTimeSTats {
+  width: 100%;
 }

@@ -78,8 +78,8 @@ $(window).on('load', function() {
 		}
 	});
 
-	$("body").on("keydown", function(event) {
-		console.log("Keydown: %d", event.which);
+	$("body").keydown(function(event) {
+
 		if (event.which == 32) {
 			$("#timerButton").trigger('click');
 			event.preventDefault();

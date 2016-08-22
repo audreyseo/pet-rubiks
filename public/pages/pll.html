@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html ng-app="myApp">
   <head>
-    <title>Learn the OLL Cases</title>
+    <title>Learn the PLL Cases</title>
     <meta charset="UTF-8">
     <!-- <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css"> -->
     <link rel="stylesheet" type="text/css" href="/lib/jquery-ui-1.11.4-2.custom/jquery-ui.min.css">
 
-
-    <!-- build:css:build css/pretty.min.css --><!-- /build -->
-    <!-- build:css:dev css/pretty.css --><!-- /build -->
-    <!-- build:remove:build,dev -->
+    <link rel="stylesheet" type="text/css" href="/css/basic.css">
     <link rel="stylesheet" type="text/css" href="/css/jquery_overriding.css">
     <link rel="stylesheet" type="text/css" href="/css/tabs.css">
     <link rel="stylesheet" type="text/css" href="/css/left.css">
@@ -17,21 +14,21 @@
     <link rel="stylesheet" type="text/css" href="/css/timeRecordsTable.css">
     <link rel="stylesheet" type="text/css" href="/css/colorCodingAlgorithms.css">
     <link rel="stylesheet" type="text/css" href="/css/casesTable.css">
-    <link rel="stylesheet" type="text/css" href="/css/basic.css">
-    <!-- /build -->
   </head>
   <body>
-    <div ng-controller="OLLController" id="everything">
+    <div><a href="http://0.0.0.0:5555/index.html">Home</a></div>
+    <div ng-controller="PLLController" id="everything">
       <!-- <my-tabs>
         <my-pane title="OLL Cases"> -->
         <div id="content" class="content">
           <div class="innerBox">
             <div id="navBar">
-              <span class="title big">OLL Cases</span><br>
+              <span class="title big">PLL Cases</span><br>
               <input type="button" id="edit" ng-cloak ng-bind=editString ng-click="editTable()" value={{editString}}>
             </div>
 
-            <input type="text" ng-model="filterString" placeholder="filter cases..."> <input type="button" ng-click="setFilter()" value="Filter"><br>
+            <input type="text" ng-model="filterString" placeholder="filter cases..."> <input type="button" ng-click="setFilter()" value="Filter"><br> <br>
+            <br>
             <div id="cases">
               <table ng-cloak>
                 <tr>
@@ -75,7 +72,7 @@
                   <td class="solve2"
                     ng-bind-html="case.solve2.alg | colorCodeAlgorithms"></td>
                   <td class="length2">{{::case.solve2.length}}</td>
-                  <td class="prob">{{::case.prob | number: 5}}</td>
+                  <td class="prob" ng-bind-html="::case.prob | colorCodeProbability"></td>
                   <td ng-if=showing.editCol>
                     <input id="{{::case.code}}" type="checkbox" ng-model="hiddenRows[case.code]" ng-true-value=1 ng-false-value=0>
                   </td>
@@ -83,7 +80,7 @@
                     <input id="{{case.code}}" type="checkbox" ng-model='practicing[case.code]'>
                   </td>
                   <td ng-if=showing.priorityCol>
-                    <select ng-show='practicing[case.code]' class="priorities" ng-model=cardPriorities[case.code]>
+                    <select ng-show='practicing[case.code]' class="priorities" ng-model='cardPriorities[case.code]'>
                       <option ng-repeat="val in cards.options" value="{{val}}">
                         {{val | number:0}}
                       </option>
@@ -105,21 +102,21 @@
         </div>
       <!-- </my-pane>
       <my-pane title="Flashcards"> -->
-        <div id="flashCardDiv" class="content">
-          <div class="innerBox">
-            <span class="title big">Flashcards</span><br>
-            <br>
-            <div id="myFlashCards">
-              <table>
-                <tr ng--repeat="card in practiceCards | orderBy:'priority'">
-                  <td>
-                    <flash-card cardsrc="{{card.src}}" cardcode="{{card.code}}" cardprob="{{card.prob}}" cardalg="{{returnSolve(card)}}"></flash-card>
-                  </td>
-                </tr>
-              </table>
-            </div>
+      <div id="flashCardDiv" class="content">
+        <div class="innerBox">
+          <span class="title big">Flashcards</span><br>
+          <br>
+          <div id="myFlashCards">
+            <table>
+              <tr ng--repeat="card in practiceCards | orderBy:'priority'">
+                <td>
+                  <pll-flash-card cardsrc="{{card.src}}" cardcode="{{card.code}}" cardprob="{{card.prob}}" cardalg="{{returnSolve(card)}}"></pll-flash-card>
+                </td>
+              </tr>
+            </table>
           </div>
         </div>
+      </div>
       <!-- </my-pane>
      </my-tabs> -->
 
@@ -208,51 +205,42 @@
         </div>
       </div>
     </div>
-    <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
-    <!-- <script type="text/javascript" src="http://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script> -->
-    <!-- build:[src]:build,dev scripts/ -->
-    <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
-    <script type="text/javascript" src="node_modules/angular-cookies/angular-cookies.min.js"></script>
-    <script type="text/javascript" src="node_modules/angular-sanitize/angular-sanitize.min.js"></script>
-    <!-- /build -->
 
-    <!-- build:remove:dev,build -->
-    <script type="text/javascript" src="/app/app.module.js"></script>
-    <script type="text/javascript" src="/app/cases/ollCases.value.js"></script>
-    <script type="text/javascript" src="/app/cases/pllCases.value.js"></script>
-    <script type="text/javascript" src="/app/cases/casemanager.factory.js"></script>
-    <script type="text/javascript" src="/app/app.config.js"></script>
-    <script type="text/javascript" src="/app/colorCodeAlgorithms/colorCodeAlgorithms.filter.js"></script>
-    <script type="text/javascript" src="/app/cookies/cookieData.value.js"></script>
-    <script type="text/javascript" src="/app/cookies/cookieDataTypes.value.js"></script>
-    <script type="text/javascript" src="/app/cookies/cookieStrings.value.js"></script>
-    <script type="text/javascript" src="/app/flashCard.directive.js"></script>
-    <script type="text/javascript" src="/app/hiddenRows.value.js"></script>
-    <script type="text/javascript" src="/app/time/timeConversion.factory.js"></script>
-    <script type="text/javascript" src="/app/stats/stats.factory.js"></script>
-    <script type="text/javascript" src="/app/time/timesStatistics.filter.js"></script>
-    <script type="text/javascript" src="/app/time/timeStats.directive.js"></script>
-    <script type="text/javascript" src="/app/dividingBox/dividingBox.directive.js"></script>
-    <script type="text/javascript" src="/app/cube-scrambler/cube-scrambler.module.js"></script>
-    <script type="text/javascript" src="/app/timer/timer.controller.js"></script>
-    <script type="text/javascript" src="/app/flash-cards/flash-cards.module.js"></script>
-    <script type="text/javascript" src="/app/content/content-control.factory.js"></script>
-    <script type="text/javascript" src="/app/content/oll-controller.controller.js"></script>
-    <!-- /build -->
+    <script type="text/javascript" src="scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="scripts/angular.min.js"></script>
+    <script type="text/javascript" src="scripts/angular-cookies.min.js"></script>
+    <script type="text/javascript" src="scripts/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="scripts/tooltip.js"></script>
 
-    <!-- build:js:dev js/module.js --><!-- /build -->
-    <!-- build:js:dev js/directive.js --><!-- /build -->
-    <!-- build:js:dev js/service.js --><!-- /build -->
-    <!-- build:js:dev js/factory.js --><!-- /build -->
-    <!-- build:js:dev js/controller.js --><!-- /build -->
-    <!-- build:js:dev js/filter.js --><!-- /build -->
-    <!-- build:js:dev js/value.js --><!-- /build -->
+    <script src="js/module.js"></script>
+    <script src="js/directive.js"></script>
+    <script src="js/service.js"></script>
+    <script src="js/factory.js"></script>
+    <script src="js/controller.js"></script>
+    <script src="js/filter.js"></script>
+    <script src="js/value.js"></script>
 
-    <!-- build:js:build js/app.min.js --><!-- /build -->
-    <!-- build:js:build js/animation.min.js --><!-- /build -->
 
-    <!-- build:remove:build -->
+
+
     <script type="text/javascript" src="/js/animation.js"></script>
-    <!-- /build -->
+   <!--  <script>
+      $( function() {
+        $( "#accordion" ).accordion({
+          collapsible: true,
+          heightStyle: "content",
+          animate: 100
+        });
+      } );
+    </script> -->
+
+    <!--<script type="text/javascript" src="js/controllers.js"></script>
+  		<script type="text/javascript" src="/js/timer.js"></script>
+  		<script type="text/javascript" src="js/scrambler.js"></script>
+  		<script type="text/javascript" src="http://code.angualarjs.org/1.3.8/angular-sanitize.min.js"></script>
+
+  		 </script>
+  		<script type="text/javascript" src="js/app_mod.js"></script>
+  		-->
   </body>
 </html>
