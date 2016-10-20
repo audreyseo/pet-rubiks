@@ -92,6 +92,7 @@ module.exports = function(grunt) {
     less: {
       dev: {
         files: {
+          "public/css/home.css": "less/home.less",
           "public/css/pretty.css": "less/*.less"
         }
       },
