@@ -124,7 +124,7 @@
         <div id="controls" ng-controller="InfoController">
           <div ng-controller="CubeScrambler">
             <dividing-box divider-id="scramble" divider-title="Scramble">
-              <div class="scrambleCodeDiv" data-toggle="tooltip" ng-click="scramble()" title="Click to Scramble">{{code}}</div><br><br>
+              <div class="scrambleCodeDiv unselectable" data-toggle="tooltip" ng-click="scramble()" title="Click to Scramble">{{code}}</div><br><br>
               <div ng-controller="TimerController" id="timerDiv">
                 <div id="timer">
                   <span class="title">Timer</span>
@@ -198,7 +198,8 @@
           <!-- </dividing-box> --><hr><br>
           <dividing-box divider-id="stats" divider-title="Stats">
 <!--             <span class="title">Stats</span>
- -->        <p>Number of known cases: {{number.knownCases}}</p>
+ -->        <p>Number of Known Cases: {{number.knownCases}}</p>
+            <p>Number of Cases Left: {{cases.length - number.knownCases}}</p>
             <p>Percentage of Cases Learned: {{number.percent | number:2}}%</p>
             <p>Probability of Knowing a Randomly Chosen Case: {{number.prob | number: 2}}%</p>
           </dividing-box>

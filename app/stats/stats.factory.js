@@ -5,7 +5,7 @@
 angular
 	.module('myApp')
 	.factory(
-			'statistics', ['timeConversion', 
+			'statistics', ['timeConversion',
 			function(timeConversion) {
 				var converter = timeConversion;
 				var factory = {
@@ -26,10 +26,12 @@ angular
 							q3: 0,
 							iqr: 0,
 							mean100: 0,
-							range: 0
+							range: 0,
+							count: 0,
+							full_range: 0
 						}
 				};
-				
+
 				factory.addData = addData;
 				factory.avg = avg;
 				factory.best = best;
@@ -55,19 +57,19 @@ angular
 				factory.variance = variance;
 				factory.worst = worst;
 
-				
+
 				function timeObject(value, i) {
 					return {index: value.index[i], time: value.time[i], millis: value.millis[i], timeStamp: value.timeStamp[i]};
 				}
-				
+
 				function compareNums(a, b) {
 					return a - b;
 				}
-				
+
 				function convert(num) {
 					return(converter.millisToString(Math.round(num)));
 				}
-				
+
 				function addData(value) {
 					if (angular.isDefined(value.time) && angular.isDefined(value.timeStamp)) {
 						factory.raw.push(value);
@@ -75,15 +77,15 @@ angular
 					}
 					factory.calculate();
 				}
-				
+
 				function length() {
 					return parseInt(factory.data.length);
 				}
-				
+
 				function loadData(value) {
 					var times = "";
 					var times2 = "";
-					
+
 					var data = [];
 //					console.log("Type of value: " + typeof value);
 					if (angular.isDefined(value)) {
@@ -93,11 +95,11 @@ angular
 								var timeObj = timeObject(value, i);
 								data.push(timeObj);
 							}
-							
+
 							factory.raw = data;
 //							console.log(angular.toJson(value));
 							factory.data = [];
-							
+
 							for (i = 0; i < factory.raw.length; i++) {
 								times = times + factory.raw[i].time + " ";
 								factory.data.push(converter.stringToMillis(factory.raw[i].time));
@@ -109,7 +111,7 @@ angular
 							factory.raw = value;
 //						console.log(angular.toJson(value));
 							factory.data = [];
-						
+
 							for (var i = 0; i < factory.raw.length; i++) {
 	  						times = times + factory.raw[i].time + " ";
 	  						factory.data.push(converter.stringToMillis(factory.raw[i].time));
@@ -119,7 +121,7 @@ angular
 					}
 					factory.calculate();
 				}
-				
+
 				function getSum(total, newValue) {
 					return total + newValue;
 				}
@@ -127,9 +129,9 @@ angular
 				function avg(data, length) {
 					return(data.reduce(getSum) / length);
 				}
-				
+
 				function mean() {
-					
+
 //					var total = 0;
 					var length = factory.data.length;
 					if (length > 5) {
@@ -141,13 +143,13 @@ angular
 						factory.stats.mean = -1;
 					}
 				}
-				
+
 				function getVariance(total, newValue) {
 					var mean = factory.stats.mean;
 					total += Math.pow(newValue - mean, 2);
 					return total;
 				}
-				
+
 				function variance() {
 					var total = 0;
 					var length = factory.data.length;
@@ -161,9 +163,9 @@ angular
 					} else {
 						factory.stats.variance = -1;
 					}
-					
+
 				}
-				
+
 				function stdDev() {
 					if (factory.data.length > 5 && factory.stats.variance >= 0) {
 						var mean = factory.stats.mean;
@@ -176,9 +178,9 @@ angular
 					} else {
 						factory.stats.stdDev = -1;
 					}
-					
+
 				}
-				
+
 				function mean5() {
 					var length = factory.data.length;
 					if (length >= 5) {
@@ -189,7 +191,7 @@ angular
 						factory.stats.mean5 = -1;
 					}
 				}
-				
+
 				function mean35() {
 					var length = factory.data.length;
 					if (length >= 5) {
@@ -202,7 +204,7 @@ angular
 						factory.stats.mean35 = -1;
 					}
 				}
-				
+
 				function mean10() {
 					var length = factory.data.length;
 					if (length >= 10) {
@@ -213,7 +215,7 @@ angular
 						factory.stats.mean10 = -1;
 					}
 				}
-				
+
 				function mean1012() {
 					var length = factory.data.length;
 					if (length >= 12) {
@@ -226,7 +228,7 @@ angular
 						factory.stats.mean1012 = -1;
 					}
 				}
-				
+
 				function mean100() {
 					var length = factory.data.length;
 					if (length >= 100) {
@@ -237,7 +239,7 @@ angular
 						factory.stats.mean100 = -1;
 					}
 				}
-				
+
 				function q1() {
 					var length = factory.data.length;
 					if (length > 10) {
@@ -256,7 +258,7 @@ angular
 						factory.stats.q1 = -1;
 					}
 				}
-				
+
 				function median() {
 					var length = factory.data.length;
 					if (length > 3) {
@@ -274,7 +276,7 @@ angular
 						factory.stats.median = -1;
 					}
 				}
-				
+
 				function q3() {
 					var length = factory.data.length;
 					if (length > 10) {
@@ -292,27 +294,27 @@ angular
 						factory.stats.q3 = -1;
 					}
 				}
-				
+
 				function best() {
 					var length = factory.data.length;
-					if (length > 3) {
+					if (length >= 2) {
 						var sorted = (factory.data.slice(0, factory.data.length)).sort(compareNums);
 						factory.stats.best = sorted[0];
 					} else {
 						factory.stats.best = -1;
 					}
 				}
-			
+
 				function worst() {
 					var length = factory.data.length;
-          if (length > 3) {
+          if (length >= 2) {
           	var sorted = (factory.data.slice(0, factory.data.length)).sort(compareNums);
           	factory.stats.worst = sorted[sorted.length - 1];
 					} else {
 						factory.stats.worst = -1;
 					}
 				}
-				
+
 				function iqr() {
 					var length = factory.data.length;
 					if (length > 10) {
@@ -321,17 +323,17 @@ angular
 						factory.stats.iqr = -1;
 					}
 				}
-				
+
 				function range() {
 					var length = factory.data.length;
-					if (length > 3) {
+					if (length >= 2) {
 						factory.stats.range = "(" + convert(factory.stats.best) + ", " + convert(factory.stats.worst) + ")";
 					} else {
 						factory.stats.range = -1;
 					}
-					
+
 				}
-				
+
 				function calculate() {
 					factory.mean();
 					factory.variance();
@@ -348,7 +350,9 @@ angular
 					factory.worst();
 					factory.iqr();
 					factory.range();
+					factory.stats.count = factory.data.length;
+					factory.stats.full_range = factory.stats.worst - factory.stats.best;
 				}
-				
+
 				return factory;
 			}]);

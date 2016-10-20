@@ -75,7 +75,7 @@
                   <td class="solve2"
                     ng-bind-html="case.solve2.alg | colorCodeAlgorithms"></td>
                   <td class="length2">{{::case.solve2.length}}</td>
-                  <td class="prob">{{::case.prob | number: 5}}</td>
+                  <td class="prob" ng-bind-html="::case.prob | colorCodeProbability"></td>
                   <td ng-if=showing.editCol>
                     <input id="{{::case.code}}" type="checkbox" ng-model="hiddenRows[case.code]" ng-true-value=1 ng-false-value=0>
                   </td>
@@ -127,7 +127,7 @@
         <div id="controls" ng-controller="InfoController">
           <div ng-controller="CubeScrambler">
             <dividing-box divider-id="scramble" divider-title="Scramble">
-              <div class="scrambleCodeDiv" data-toggle="tooltip" ng-click="scramble()" title="Click to Scramble">{{code}}</div><br><br>
+              <div class="scrambleCodeDiv uns" data-toggle="tooltip" ng-click="scramble()" title="Click to Scramble">{{code}}</div><br><br>
               <div ng-controller="TimerController" id="timerDiv">
                 <div id="timer">
                   <span class="title">Timer</span>
@@ -201,7 +201,8 @@
           <!-- </dividing-box> --><hr><br>
           <dividing-box divider-id="stats" divider-title="Stats">
 <!--             <span class="title">Stats</span>
- -->        <p>Number of known cases: {{number.knownCases}}</p>
+ -->        <p>Number of Known Cases: {{number.knownCases}}</p>
+            <p>Number of Cases Left: {{cases.length - number.knownCases}}</p>
             <p>Percentage of Cases Learned: {{number.percent | number:2}}%</p>
             <p>Probability of Knowing a Randomly Chosen Case: {{number.prob | number: 2}}%</p>
           </dividing-box>
@@ -223,6 +224,7 @@
     <script type="text/javascript" src="/app/cases/casemanager.factory.js"></script>
     <script type="text/javascript" src="/app/app.config.js"></script>
     <script type="text/javascript" src="/app/colorCodeAlgorithms/colorCodeAlgorithms.filter.js"></script>
+    <script type="text/javascript" src="/app/colorCodeProbability.filter.js"></script>
     <script type="text/javascript" src="/app/cookies/cookieData.value.js"></script>
     <script type="text/javascript" src="/app/cookies/cookieDataTypes.value.js"></script>
     <script type="text/javascript" src="/app/cookies/cookieStrings.value.js"></script>

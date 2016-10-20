@@ -23,6 +23,16 @@ function CaseManager(ollCases, pllCases) {
 	factory.type = type;
 
 	factory.mapCaseToNumber();
+//	init();
+//	
+//	function init() {
+//		for (var i = 0; i < factory.oll.length; i++) {
+//			factory.oll["prob_type"] = {}
+//			factory.oll.prob_type.red = factory.oll.prob == (1/54)
+//			factory.oll.prob_type.blue = factory.oll.prob == (1/108)
+//			factory.oll.prob_type.green = factory.oll.prob == (1/216)
+//		}
+//	}
 
 	function fetchCase(code) {
 		if (angular.isNumber(code)) {

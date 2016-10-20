@@ -56,21 +56,22 @@ $(window).on('load', function() {
 		}
 	});
 
-	$("div.title.divider").click(function(event) {
+	$("div#controls").on("click", "div.title.divider", function(event) {
 		event.preventDefault();
 	  var next = $(this).next();
 //	  console.log($(next).attr("style"));
 //  console.log(angular.toJson(heightDiffs));
-		if ($(this).next().attr("style") == "display: none;") {
+	  console.log("Hello");
+		if (next.attr("style") == "display: none;") {
 			$("#leftBar").animate({top: "-=" + heightDiffs[$($(this).parent()).attr("id")] + "px"}, 100);
-			$(this).next().slideDown(100);
+			next.slideDown(100);
 			$(this).animate({opacity: 1}, 100);
 		} else {
 			var h = $("#leftBar").height();
 			var thisH = $(next).height();
 			var diff = parseInt(thisH * .5);
 			heightDiffs[$($(this).parent()).attr("id")] = diff;
-			$(this).next().slideUp(100);
+			next.slideUp(100);
 			$("#leftBar").animate(
 					{top: "+=" + heightDiffs[$($(this).parent()).attr("id")] + "px",
 					}, 100);

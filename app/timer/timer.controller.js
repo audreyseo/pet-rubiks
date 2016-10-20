@@ -33,7 +33,8 @@ function TimerController($scope, $interval, $cookies, $log, $http, statistics) {
 		{a: "mean5", b: "mean35"},
 		{a: "mean10", b: "mean1012"},
 		{a: "variance", b: "stdDev"},
-		{a: "iqr", b: "range"}
+		{a: "iqr", b: "range"},
+		{a: "count", b: "full_range"}
   ];
   $scope.pairNames = {
   	"best": "Best",
@@ -49,7 +50,9 @@ function TimerController($scope, $interval, $cookies, $log, $http, statistics) {
   	"variance": "Variance",
   	"stdDev": "StdDev",
   	"iqr": "IQR",
-  	"range": "Range"
+  	"range": "Range",
+		"count": "Count",
+		"full_range": "Full Range"
   };
   $scope.recordsCookie = "TimeRecordsCookie";
   $scope.render = render;
