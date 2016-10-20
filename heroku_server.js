@@ -75,7 +75,7 @@ app.get('*/scripts/*.min.*', function(request, response) {
 		'tooltip.js': '/lib/bootstrap-3.3.6/js/'
 	};
 	var path = request.path;
-	path = path.replace('*/pages/', "");
+	path = path.replace('*/app/', "");
 	var name = path;
 	name = name.replace(/(.*\/)+((\w+.)+\w+)/, "$2");
 	console.log('name: %s', name);
