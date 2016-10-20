@@ -47,6 +47,7 @@ app.get('/pages/img/*.png',function(request, response) {
 });
 
 app.get('*/node_modules/*.min.*', function(request, response) {
+	console.log("Got a different one.");
 	var path = request.path;
 	path = path.replace('/pages/', "");
 	returnRequestedFile(response, path);
@@ -67,6 +68,7 @@ app.get('*/pages/css/*', function(request, response) {
 });
 
 app.get('*/scripts/*.min.*', function(request, response) {
+	console.log("Got this one.");
 	var dict = {
 		'angular.min.': 'node_modules/angular/',
 		'jquery.min.': 'node_modules/jquery/dist/',
@@ -77,7 +79,7 @@ app.get('*/scripts/*.min.*', function(request, response) {
 	var path = request.path;
 	path = path.replace('*/app/', "");
 	var name = path;
-	name = name.replace(/(.*\/)+((\w+.)+\w+)/, "$2");
+	name = name.replace(/(.*\/)+((\w+\.)+\w+)/, "$2");
 	console.log('name: %s', name);
 	for (var key in dict) {
 		if (name.match(key)) {
