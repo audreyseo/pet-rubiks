@@ -250,7 +250,7 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['clean', 'copy', 'move', 'karma:chrome']);
   grunt.registerTask('buildtest', ['clean', 'copy', 'move', 'karma:chrometest']);
 
-  grunt.registerTask('heroku', ['less:dev', 'concat:dev', 'cssmin:dev', 'uglify:heroku', 'processhtml:heroku']);
+  grunt.registerTask('heroku', ['less:dev', 'concat:dev', 'cssmin:dev', 'uglify:build', 'processhtml:heroku']);
 
   grunt.registerTask('dev', ['less:dev', 'concat:dev', 'cssmin:dev', 'processhtml:dev']);
   grunt.registerTask("devs", ["dev", "exec:serve"]);
