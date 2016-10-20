@@ -17,6 +17,18 @@ module.exports = function(grunt) {
           'public/templates/dividingBox.html': ['templates/dividingBox.html']
         }
       },
+      heroku: {
+        options: {
+          process: true,
+          strip: true
+        },
+        files: {
+          'public/index.html': ['index.html'],
+          'public/pages/pll.html': ['pages/pll.html'],
+          'public/pages/oll.html': ['pages/oll.html'],
+          'public/templates/dividingBox.html': ['templates/dividingBox.html']
+        }
+      },
       build: {
         options: {
           process: true,
@@ -43,6 +55,11 @@ module.exports = function(grunt) {
           "public/js/filter.js": ["app/**/*.filter.js"],
           "public/js/value.js": ["app/**/*.value.js"],
           "public/js/animation.js": ["js/animation.js"]
+        }
+      },
+      heroku: {
+        files: {
+          "public/js/app.js": ["app/app.module.js", "app/app.config.js", "app/**/!(*.mock|*.spec).js"]
         }
       },
       build: {
@@ -233,6 +250,7 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['clean', 'copy', 'move', 'karma:chrome']);
   grunt.registerTask('buildtest', ['clean', 'copy', 'move', 'karma:chrometest']);
 
+  grunt.registerTask('heroku', ['less:dev', 'concat:dev', 'cssmin:dev', 'uglify:heroku', 'processhtml:heroku']);
 
   grunt.registerTask('dev', ['less:dev', 'concat:dev', 'cssmin:dev', 'processhtml:dev']);
   grunt.registerTask("devs", ["dev", "exec:serve"]);

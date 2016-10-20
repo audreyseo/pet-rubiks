@@ -10,7 +10,8 @@
     "copy": "cp -R app/**/*.spec.js tests/ ;",
     "test": "cp -R app/*.spec.js tests/ ; cp -R app/**/*.spec.js tests/ ; karma start karma.conf.js",
     "full-test": "cp -R app/*.spec.js tests/ ; cp -R app/**/*.spec.js tests/ ; NODE_ENV=test karma start karma.conf.js",
-    "coverage": "istanbul cover tests/*.js"
+    "coverage": "istanbul cover tests/*.js",
+    "postinstall": "grunt build"
   },
   "repository": {
     "type": "git",
