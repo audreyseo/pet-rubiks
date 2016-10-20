@@ -13,6 +13,7 @@ app.use(require('etagify')());
 
 function returnRequestedFile(response, fileName) {
 	// response.sendFile(fileName, {root: __dirname}, function(err) {
+	console.log("Directory: %s", __dirname);
 	response.sendFile(fileName, {root: "./"}, function(err) {
 		if (err) {
 			console.log(err);
