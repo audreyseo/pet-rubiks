@@ -6,7 +6,9 @@
     <!-- <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css"> -->
     <link rel="stylesheet" type="text/css" href="/lib/jquery-ui-1.11.4-2.custom/jquery-ui.min.css">
 
-
+    <!-- build:css:build,heroku css/pretty.min.css --><!-- /build -->
+    <!-- build:css:dev css/pretty.css --><!-- /build -->
+    <!-- build:remove:build,dev -->
     <link rel="stylesheet" type="text/css" href="/css/jquery_overriding.css">
     <link rel="stylesheet" type="text/css" href="/css/tabs.css">
     <link rel="stylesheet" type="text/css" href="/css/left.css">
@@ -15,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="/css/colorCodingAlgorithms.css">
     <link rel="stylesheet" type="text/css" href="/css/casesTable.css">
     <link rel="stylesheet" type="text/css" href="/css/basic.css">
+    <!-- /build -->
   </head>
   <body>
     <div><a href="http://0.0.0.0:5555/index.html">Home</a></div>
@@ -207,7 +210,7 @@
       </div>
     </div>
 
-    <!-- build:[src]:dev scripts/ -->
+    <!-- build:[src]:dev,heroku,build scripts/ -->
     <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
     <script type="text/javascript" src="node_modules/angular-cookies/angular-cookies.min.js"></script>
@@ -215,7 +218,7 @@
     <script type="text/javascript" src="/lib/bootstrap-3.3.6/js/tooltip.js"></script>
     <!-- /build -->
 
-    <!-- build:remove:dev,build -->
+    <!-- build:remove:dev,build,heroku -->
     <script type="text/javascript" src="/app/app.module.js"></script>
     <script type="text/javascript" src="/app/cases/ollCases.value.js"></script>
     <script type="text/javascript" src="/app/cases/pllCases.value.js"></script>
@@ -248,10 +251,10 @@
     <!-- build:js:dev js/filter.js --><!-- /build -->
     <!-- build:js:dev js/value.js --><!-- /build -->
 
-    <!-- build:js:build js/app.min.js --><!-- /build -->
-    <!-- build:js:build js/animation.min.js --><!-- /build -->
+    <!-- build:js:build,heroku js/app.min.js --><!-- /build -->
+    <!-- build:js:build,heroku js/animation.min.js --><!-- /build -->
 
-    <!-- build:remove:build -->
+    <!-- build:remove:build,heroku -->
     <script type="text/javascript" src="/js/animation.js"></script>
     <!-- /build -->
    <!--  <script>
