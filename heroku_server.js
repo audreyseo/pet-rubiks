@@ -83,7 +83,9 @@ app.get('*/scripts/*.min.*', function(request, response) {
 	console.log('name, path: %s, %s', name, path);
 	for (var key in dict) {
 		if (name.match(key)) {
+			console.log("Matching value: %s", dict[key]);
 			path = dict[key] + name;
+			console.log("New path: %s", path);
 		}
 	}
 	returnRequestedFile(response, path);
