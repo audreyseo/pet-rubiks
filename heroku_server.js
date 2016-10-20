@@ -12,7 +12,8 @@ var app = express();
 app.use(require('etagify')());
 
 function returnRequestedFile(response, fileName) {
-	response.sendFile(fileName, {root: __dirname}, function(err) {
+	// response.sendFile(fileName, {root: __dirname}, function(err) {
+	response.sendFile(fileName, {root: "./"}, function(err) {
 		if (err) {
 			console.log(err);
 			response.status(err.status).end();
