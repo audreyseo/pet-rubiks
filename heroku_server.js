@@ -114,7 +114,7 @@ app.get('/data.csv', function(req, res) {
 	res.download("data.csv");
 });
 
-app.use('/', express.static('./'));
+app.use('/', express.static('./public/'));
 var herokuServer = app.listen(process.env.PORT, '0.0.0.0', function() {
 	var addr = herokuServer.address();
 	console.log("Listening @ http://%s:%d", addr.address, addr.port);
