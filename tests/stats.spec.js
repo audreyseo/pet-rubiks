@@ -37,21 +37,21 @@ function generateNewArray(max) {
 describe('	Test:	', function() {
   describe('Factory: Statistics', function() {
   	var statistics, timeConversion;
-  	  	
+
   	beforeEach(module('myApp'));
   	beforeEach(inject(function(_statistics_, _timeConversion_) {
   		statistics = _statistics_;
   		timeConversion = _timeConversion_;
   	}));
-  	
+
   	it('TimeConversion should be defined', function() {
   		expect(angular.isDefined(timeConversion)).toBe(true);
   	});
-  	
+
   	it("Statistics' stats should be defined", function() {
   		expect(angular.isDefined(statistics.stats)).toBe(true);
   	});
-  	
+
   	it("methods should be defined", function() {
   		expect(angular.isDefined(statistics.addData)).toBe(true);
   		expect(angular.isDefined(statistics.loadData)).toBe(true);
@@ -72,7 +72,7 @@ describe('	Test:	', function() {
   		expect(angular.isDefined(statistics.mean100)).toBe(true);
   		expect(angular.isDefined(statistics.calculate)).toBe(true);
   	});
-  	
+
   	describe("stats' variable", function() {
   		it("mean should be defined", function() {
   			expect(angular.isDefined(statistics.stats.mean)).toBe(true);
@@ -120,17 +120,17 @@ describe('	Test:	', function() {
   			expect(angular.isDefined(statistics.stats.range)).toBe(true);
   		});
   	});
-  	
+
   	describe('addData', function() {
   		var timeObject;
-  		
+
   		beforeEach(function() {
   			timeObject = {index: 0, time: "00:00.00", timeStamp: (new Date()).setDate(0)};
   		});
   		it('data should be appended when this function is called with proper args', function() {
   			var oldRawLength = statistics.raw.length;
   			var oldDataLength = statistics.data.length;
-  			
+
   			statistics.addData(timeObject);
   			expect(statistics.raw.length).toBe(oldRawLength + 1);
   			expect(statistics.data.length).toBe(oldDataLength + 1);
@@ -149,7 +149,7 @@ describe('	Test:	', function() {
   			expect(statistics.data[length - 1]).toEqual(timeConversion.stringToMillis(timeObject.time));
   		});
   	});
-  	
+
   	describe('length', function() {
   		var myRawData;
 			it("length should be the correct length even if we load different data", function() {
@@ -175,7 +175,7 @@ describe('	Test:	', function() {
   			expect(typeof length).toEqual('number');
   		});
   	});
-  	
+
   	describe('loadData', function() {
   		beforeEach(function() {
     		myRawData = [];
@@ -201,7 +201,7 @@ describe('	Test:	', function() {
   			expect(statistics.data).not.toBe(undefined);
   		});
   	});
-  	
+
   	describe('calculate', function() {
   		var myRawData;
   		beforeEach(function() {
@@ -227,7 +227,7 @@ describe('	Test:	', function() {
   			expect(statistics.calculate).toHaveBeenCalled();
   		});
   	});
-  	
+
   	describe('statistical functions', function() {
   		var myRawData;
   		beforeEach(function() {
@@ -235,7 +235,7 @@ describe('	Test:	', function() {
     		statistics.loadData(myRawData);
 //    		statistics.calculate();
     	});
-    	
+
     	describe('mean', function() {
     		it("stats.mean should change if mean() is called", function() {
     			var oldMean = statistics.stats.mean;
@@ -346,7 +346,7 @@ describe('	Test:	', function() {
     		});
     		it("after called, and data length < 5, avg() shouldn't be called", function() {
     			spyOn(statistics, 'avg');
-    			statistics.loadData(generateTimeArray(4));  				
+    			statistics.loadData(generateTimeArray(4));
     			statistics.mean5();
     			expect(statistics.avg).not.toHaveBeenCalled();
     		});
@@ -440,7 +440,7 @@ describe('	Test:	', function() {
     			expect(mean1012).toEqual(-1);
     		});
     	});
-    	
+
     	describe('mean100', function() {
   			it("if the size of the data array is less than 100, mean100 should be -1 when this is called", function() {
   				var data = generateTimeArray(10);
@@ -448,12 +448,12 @@ describe('	Test:	', function() {
   				var mean100 = statistics.stats.mean100;
   				expect(mean100).toEqual(-1);
   			});
-  			
+
   			beforeEach(function() {
   				var data = generateTimeArray(100);
   				statistics.loadData(data);
   			});
-  			
+
   			it("size of data ≥ 100, should not be -1", function() {
   				var mean100 = statistics.mean100;
   				expect(mean100).not.toEqual(-1);
@@ -471,7 +471,7 @@ describe('	Test:	', function() {
   				expect(mean100).toEqual(-1);
   			});
     	});
-    	
+
     	describe('q1', function() {
     		it("after called, data length > 10, q1 should be smaller than q3", function() {
     			var q1 = statistics.stats.q1;
@@ -484,7 +484,7 @@ describe('	Test:	', function() {
     			expect(statistics.stats.q1).toBe(-1);
     		});
     	});
-    	
+
     	describe('median', function() {
     		it("after called, and data length greater than 3, median should not be -1", function() {
     			var median = statistics.stats.median;
@@ -510,7 +510,7 @@ describe('	Test:	', function() {
     			expect(median).not.toEqual(oldMedian);
     		});
     	});
-    	
+
     	describe('q3', function() {
     		it("after called, and data.length greater han 10, should be greater than q1", function() {
     			var q3 = statistics.stats.q3;
@@ -525,20 +525,20 @@ describe('	Test:	', function() {
     			var worst = statistics.stats.worst;
     			expect(worst > best).toBe(true);
     		});
-    		it("if data length < 3, should be -1", function() {
-    			var data = generateTimeArray(2);
+    		it("if data length < 2, should be -1", function() {
+    			var data = generateTimeArray(1);
     			statistics.loadData(data);
     			expect(statistics.stats.best).toBe(-1);
     		});
     	});
     	describe('worst', function() {
-    		it("after called, and data.length ≥ 3, stats.worst should be > stats.best", function () {
+    		it("after called, and data.length ≥ 2, stats.worst should be > stats.best", function () {
     			var best = statistics.stats.best;
     			var worst = statistics.stats.worst;
     			expect(best < worst).toBe(true);
     		});
-    		it("if data length < 3, worst should be -1", function() {
-    			var data = generateTimeArray(2);
+    		it("if data length < 2, worst should be -1", function() {
+    			var data = generateTimeArray(1);
     			statistics.loadData(data);
     			expect(statistics.stats.worst).toBe(-1);
     		});
@@ -559,11 +559,11 @@ describe('	Test:	', function() {
     		});
     	});
     	describe('range', function() {
-    		it("after called, range should be a string if data.length > 3", function() {
+    		it("after called, range should be a string if data.length >= 2", function() {
     			expect(typeof statistics.stats.range).toEqual('string');
     		});
-    		it("after called, range should be -1 if data.length ≤ 3", function() {
-    			var data = generateTimeArray(2);
+    		it("after called, range should be -1 if data.length < 2", function() {
+    			var data = generateTimeArray(1);
     			statistics.loadData(data);
     			expect(statistics.stats.range).toBe(-1);
     		});

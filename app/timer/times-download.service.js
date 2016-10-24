@@ -36,4 +36,6 @@ function TimesDownload($http) {
   		console.log("Failure: " + response.status + " " + response.statusText + " " + response.config.method);
   	});
   }
+
+  return service;
 }

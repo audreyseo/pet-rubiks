@@ -4,16 +4,16 @@
 describe('	Test:	', function() {
 	describe('Factory: FlashCardData', function() {
 		var flashCardData, cookieStrings, $cookies, cookieData;
-		
+
 		beforeEach(module('myApp'));
-		
+
 		beforeEach(inject(function(_flashCardData_,_cookieStrings_,_$cookies_,_cookieData_) {
 			flashCardData = _flashCardData_;
 			cookieStrings = _cookieStrings_;
 			$cookies = _$cookies_;
 			cookieData = _cookieData_;
 		}));
-		
+
 		it('both the module and its functions should be defined', function() {
 			expect(angular.isDefined(flashCardData.initialize)).toBe(true);
 			expect(angular.isDefined(flashCardData.isPracticing)).toBe(true);
@@ -37,31 +37,31 @@ describe('	Test:	', function() {
 			expect(angular.isDefined(flashCardData.saveCardOptions)).toBe(true);
 			expect(angular.isDefined(flashCardData.getCardOptions)).toBe(true);
 		});
-		
+
 		it("its dependencies should be defined", function() {
 			expect(angular.isDefined(flashCardData)).toBe(true);
 			expect(angular.isDefined(cookieStrings)).toBe(true);
 			expect(angular.isDefined($cookies)).toBe(true);
 			expect(angular.isDefined(cookieData)).toBe(true);
 		});
-		
+
 		describe('initialize', function() {
 			beforeEach(function() {
 				flashCardData.initialize();
 			});
-			
+
 			it("After initialization, flashCards' objects should be initialized", function() {
 				expect(angular.isDefined(flashCardData.data)).toBe(true);
 				expect(angular.isDefined(flashCardData.cookies)).toBe(true);
 				expect(angular.isDefined(flashCardData.cards)).toBe(true);
 			});
 		});
-		
+
 		describe('data.practicing functions', function() {
 			beforeEach(function() {
 				flashCardData.data.practicing = {"OLL8":true, "OLL3":false};
 			});
-			
+
 			describe('isPracticing', function() {
 				// Returns a boolean value for a given code
 				it("should return the correct boolean value given a proper case code", function() {
@@ -96,7 +96,7 @@ describe('	Test:	', function() {
 			describe('removePracticing', function() {
 				it("once called with legit data, setPracticing should be called", function() {
 					spyOn(flashCardData, 'setPracticing');
-					
+
 				});
 				it("if called with caseCode=undefined, should not attempt to do anything", function() {
 					flashCardData.removePracticing(undefined);
@@ -143,7 +143,7 @@ describe('	Test:	', function() {
 				});
 			});
 		});
-		
+
 		describe('data.cardPriority functions', function() {
 			beforeEach(function() {
 				flashCardData.data.cardPriorities = {'OLL8': 1, 'OLL3': 2, 'LB2': 4};
@@ -241,13 +241,13 @@ describe('	Test:	', function() {
 				it("should return a defined object", function() {
 					expect(angular.isDefined(flashCardData.getCardPriorities())).toBe(true);
 				});
-				
+
 				describe('if cardPriorities is undefined', function() {
 					beforeEach(function() {
 						flashCardData.data.cardPriorities = undefined;
 						cookieData['cardPriorities'] = {'foo1': 2, 'foo2': 3};
 					});
-					
+
 					it("should still return an defined object if cookieData['cardPriorities'] is defined", function() {
 						expect(angular.isDefined(flashCardData.getCardPriorities())).toBe(true);
 					});
@@ -258,12 +258,12 @@ describe('	Test:	', function() {
 				});
 			});
 		});
-		
+
 		describe('cards functions', function() {
 			beforeEach(function() {
 				flashCardData.cards = {'fooCode1': {code: 'fooCode1'}};
 			});
-			
+
 			describe('getCard', function() {
 				it("should return an object if this is one of the cards", function() {
 					expect(typeof flashCardData.getCard('fooCode1')).toBe('object');
@@ -275,7 +275,7 @@ describe('	Test:	', function() {
 					expect(flashCardData.getCard(undefined)).toBe(-1);
 				});
 			});
-			
+
 			beforeEach(function() {
 				flashCardData.data.practiceCards = [{code: 'fooCode1'}];
 			});
@@ -319,7 +319,7 @@ describe('	Test:	', function() {
 				});
 			});
 		});
-		
+
 		describe('data.practiceCards functions', function() {
 			describe('savePracticeCards', function() {
 				beforeEach(function() {
@@ -327,7 +327,7 @@ describe('	Test:	', function() {
 				});
 				describe('when called with args', function() {
 					var fakeData;
-					
+
 					beforeEach(function() {
 						fakeData = [{code: 'fooCode2'}, {code: 'fooCode1'}];
 					});
@@ -361,11 +361,11 @@ describe('	Test:	', function() {
 				beforeEach(function() {
 					flashCardData.data.practiceCards = [{code: 'fooCode1'}];
 				});
-				
+
 				it("once called, returns practiceCards", function() {
 					expect(flashCardData.getPracticeCards()).toEqual(flashCardData.data.practiceCards);
 				});
-				
+
 				it("if called and practiceCards is undefined, returns cookieData.practiceCards", function() {
 					cookieData.practiceCards = [{code: 'fooCode1'}];
 					flashCardData.data.practiceCards = undefined;
@@ -373,7 +373,7 @@ describe('	Test:	', function() {
 				});
 			});
 		});
-		
+
 		describe('data.cards functions', function() {
 			beforeEach(function() {
 				flashCardData.data.cards = {maxNumber: 5, options: [1, 2, 3, 4, 5]};
@@ -385,7 +385,7 @@ describe('	Test:	', function() {
 						flashCardData.saveCards(undefined);
 						expect($cookies.putObject).not.toHaveBeenCalled();
 					});
-					
+
 					describe('if value is defined', function() {
 						var value;
 						beforeEach(function() {
@@ -397,6 +397,7 @@ describe('	Test:	', function() {
 							expect($cookies.putObject).toHaveBeenCalledWith(cookieStrings.dataCards, value);
 						});
 						it("if saved in cookies, getting it from $cookies.getObject should be the same", function() {
+							flashCardData.initialize();
 							spyOn($cookies, 'putObject').and.callThrough();
 							flashCardData.saveCards(value);
 							expect($cookies.getObject(cookieStrings.dataCards)).toEqual(value);
@@ -429,6 +430,8 @@ describe('	Test:	', function() {
 						});
 						it("should be able to retrieve the saved value through $cookies.getObject", function() {
 							spyOn($cookies, 'putObject').and.callThrough();
+							flashCardData.data = {};
+							flashCardData.data.cards = [];
 							flashCardData.saveCards();
 							expect($cookies.getObject(cookieStrings.dataCards)).toEqual(cookieData.cards);
 						});
@@ -449,7 +452,7 @@ describe('	Test:	', function() {
 				});
 			});
 		});
-		
+
 		describe('data.cardOptions functions', function() {
 			describe('getAlgorithmOption', function() {});
 			describe('setAlgorithmOption', function() {});
