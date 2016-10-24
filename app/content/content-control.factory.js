@@ -305,7 +305,7 @@ function ContentControl(manager, hiddenRows, cookieString, flashData, $cookies, 
 	function setCaseType(string) {
 		if (string.match(/p/i)) {
 			factory.manager.setStage("PLL");
-		} else if (sstring.match(/o/i)) {
+		} else if (string.match(/o/i)) {
 			factory.manager.setStage("OLL");
 		}
 	}

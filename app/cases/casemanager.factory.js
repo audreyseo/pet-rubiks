@@ -16,6 +16,7 @@ function CaseManager(ollCases, pllCases) {
 	factory.isOLL = isOLL;
 	factory.isOLLCase = isOLLCase;
 	factory.isPLL = isPLL;
+	factory.isPLLCase = isPLLCase;
 	factory.isSelected = isSelected;
 	factory.mapCaseToNumber = mapCaseToNumber;
 	factory.setStage = setStage;
@@ -24,7 +25,7 @@ function CaseManager(ollCases, pllCases) {
 
 	factory.mapCaseToNumber();
 //	init();
-//	
+//
 //	function init() {
 //		for (var i = 0; i < factory.oll.length; i++) {
 //			factory.oll["prob_type"] = {}
@@ -73,7 +74,10 @@ function CaseManager(ollCases, pllCases) {
 	}
 
 	function isOLLCase(string) {
-		return string.search(/\d/) > -1;
+		function isInArray(value, array) {
+  		return array.indexOf(value) > -1;
+		}
+		return isInArray(string, factory.ollCodes);
 	}
 
 	function isPLL() {
@@ -81,12 +85,16 @@ function CaseManager(ollCases, pllCases) {
 	}
 
 	function isPLLCase(string) {
-		if (string.match(/[A-Z][a-z]/)) {
-			return true;
-		} else if (string.match(/[A-Z]/)) {
-			return true;
+		function isInArray(value, array) {
+  		return array.indexOf(value) > -1;
 		}
-		return false;
+		return isInArray(string, factory.pllCodes);
+		// if (string.match(/[A-Z][a-z]/)) {
+		// 	return true;
+		// } else if (string.match(/[A-Z]/)) {
+		// 	return true;
+		// }
+		// return false;
 	}
 
 	function isSelected(index) {
@@ -95,12 +103,16 @@ function CaseManager(ollCases, pllCases) {
 
 	function mapCaseToNumber() {
 		factory.ollMap = {};
+		factory.ollCodes = [];
 		for (var i = 0; i < factory.oll.length; i++) {
+			factory.ollCodes.push(factory.oll[i].code);
 			factory.ollMap[factory.oll[i].code] = factory.oll[i].num;
 		}
 
 		factory.pllMap = {};
+		factory.pllCodes = [];
 		for (i = 0; i < factory.pll.length; i++) {
+			factory.pllCodes.push(factory.pll[i].code);
 			factory.pllMap[factory.pll[i].code] = i;
 		}
 	}
