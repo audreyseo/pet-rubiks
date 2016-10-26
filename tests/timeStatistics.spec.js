@@ -15,6 +15,11 @@ describe("Filter: millisToString", function() {
 		expect(millisToStringFilter((4 * 60 * 1000) + (33 * 1000) + (39))).toEqual("04:33.039");
 	});
 
+	it('Anything less than 200 and greater than 0 should be returned as', function() {
+	  expect(millisToStringFilter(10)).toBe(10);
+		expect(millisToStringFilter(199)).toBe(199);
+	});
+
 	it('Anything less than/equal to 0 should result in blank', function() {
 	  expect(millisToStringFilter(0)).toEqual("--:--.---");
 		expect(millisToStringFilter(-1)).toEqual("--:--.---");
@@ -35,5 +40,14 @@ describe("Filter: millisToString", function() {
 
 	it("Should return '--:--.--' if the number is -1", function() {
 		expect(millisToStringFilter(-1)).toEqual("--:--.---");
+	});
+
+	it('Should just return 00:00.000 if given a string that is not already formatted', function() {
+		expect(millisToStringFilter("0")).toEqual("00:00.000");
+		expect(millisToStringFilter("123340343")).toEqual("00:00.000");
+	});
+
+	it('if not a string that is not formatted just return', function() {
+		expect(millisToStringFilter("hi")).toEqual("hi");
 	});
 });

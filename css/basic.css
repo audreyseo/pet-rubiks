@@ -51,7 +51,8 @@ div {
   border-radius: 20px;
   text-align: center;
   margin: 40px;
-  margin-left: 50px;
+  margin-left: 0px;
+  margin-right: 50px;
   margin-top: 60px;
   overflow-y: scroll;
   background-color: rgba(210, 220, 230, 0.9);
