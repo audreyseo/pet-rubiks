@@ -3,46 +3,53 @@
  */
 describe('	Test:	', function() {
 	describe('Factory: FlashCardData', function() {
-		var flashCardData, cookieStrings, $cookies, cookieData;
+		var flashCardData, cookieStrings, $cookies, cookieData, $log;
 
 		beforeEach(module('myApp'));
 
-		beforeEach(inject(function(_flashCardData_,_cookieStrings_,_$cookies_,_cookieData_) {
+		beforeEach(inject(function(_flashCardData_,_cookieStrings_,_$cookies_,_cookieData_, _$log_) {
 			flashCardData = _flashCardData_;
 			cookieStrings = _cookieStrings_;
 			$cookies = _$cookies_;
 			cookieData = _cookieData_;
+			$log = _$log_;
 		}));
 
+		beforeEach(function() {
+			flashCardData.setType("pll");
+		});
+
 		it('both the module and its functions should be defined', function() {
-			expect(angular.isDefined(flashCardData.initialize)).toBe(true);
-			expect(angular.isDefined(flashCardData.isPracticing)).toBe(true);
-			expect(angular.isDefined(flashCardData.setPracticing)).toBe(true);
-			expect(angular.isDefined(flashCardData.savePracticing)).toBe(true);
-			expect(angular.isDefined(flashCardData.getPracticing)).toBe(true);
-			expect(angular.isDefined(flashCardData.getPriority)).toBe(true);
-			expect(angular.isDefined(flashCardData.setPriority)).toBe(true);
-			expect(angular.isDefined(flashCardData.removePriority)).toBe(true);
-			expect(angular.isDefined(flashCardData.saveCardPriorities)).toBe(true);
-			expect(angular.isDefined(flashCardData.getCardPriorities)).toBe(true);
-			expect(angular.isDefined(flashCardData.getCard)).toBe(true);
-			expect(angular.isDefined(flashCardData.setCard)).toBe(true);
-			expect(angular.isDefined(flashCardData.savePracticeCards)).toBe(true);
-			expect(angular.isDefined(flashCardData.getPracticeCards)).toBe(true);
-			expect(angular.isDefined(flashCardData.saveCards)).toBe(true);
-			expect(angular.isDefined(flashCardData.getCards)).toBe(true);
-			expect(angular.isDefined(flashCardData.getAlgorithmOption)).toBe(true);
-			expect(angular.isDefined(flashCardData.setAlgorithmOption)).toBe(true);
-			expect(angular.isDefined(flashCardData.removeAlgorithmOption)).toBe(true);
-			expect(angular.isDefined(flashCardData.saveCardOptions)).toBe(true);
-			expect(angular.isDefined(flashCardData.getCardOptions)).toBe(true);
+			expect(flashCardData.initialize).toBeDefined();
+			expect(flashCardData.isPracticing).toBeDefined();
+			expect(flashCardData.setPracticing).toBeDefined();
+			expect(flashCardData.savePracticing).toBeDefined();
+			expect(flashCardData.getPracticing).toBeDefined();
+			expect(flashCardData.getPriority).toBeDefined();
+			expect(flashCardData.setPriority).toBeDefined();
+			expect(flashCardData.removePriority).toBeDefined();
+			expect(flashCardData.getCardPriorities).toBeDefined();
+			expect(flashCardData.getCard).toBeDefined();
+			expect(flashCardData.setCard).toBeDefined();
+			expect(flashCardData.savePracticeCards).toBeDefined();
+			expect(flashCardData.getPracticeCards).toBeDefined();
+			expect(flashCardData.saveCards).toBeDefined();
+			expect(flashCardData.getCards).toBeDefined();
+			expect(flashCardData.getAlgorithmOption).toBeDefined();
+			expect(flashCardData.setAlgorithmOption).toBeDefined();
+			expect(flashCardData.removeAlgorithmOption).toBeDefined();
+			expect(flashCardData.saveCardOptions).toBeDefined();
+			expect(flashCardData.getCardOptions).toBeDefined();
 		});
 
 		it("its dependencies should be defined", function() {
-			expect(angular.isDefined(flashCardData)).toBe(true);
-			expect(angular.isDefined(cookieStrings)).toBe(true);
-			expect(angular.isDefined($cookies)).toBe(true);
-			expect(angular.isDefined(cookieData)).toBe(true);
+			expect(flashCardData).toBeDefined();
+			expect(cookieStrings).toBeDefined();
+			expect($cookies).toBeDefined();
+			expect(cookieData).toBeDefined();
+			expect(flashCardData.data).toBeDefined();
+			expect(flashCardData.cookies).toBeDefined();
+			expect(flashCardData.cards).toBeDefined();
 		});
 
 		describe('initialize', function() {
@@ -51,9 +58,9 @@ describe('	Test:	', function() {
 			});
 
 			it("After initialization, flashCards' objects should be initialized", function() {
-				expect(angular.isDefined(flashCardData.data)).toBe(true);
-				expect(angular.isDefined(flashCardData.cookies)).toBe(true);
-				expect(angular.isDefined(flashCardData.cards)).toBe(true);
+				expect(flashCardData.data).toBeDefined();
+				expect(flashCardData.cookies).toBeDefined();
+				expect(flashCardData.cards).toBeDefined();
 			});
 		});
 
@@ -115,7 +122,7 @@ describe('	Test:	', function() {
 				it("when called w/o arguments, $cookies.putObject() should be called but with data.practicing", function() {
 					spyOn($cookies, 'putObject');
 					flashCardData.savePracticing();
-					expect($cookies.putObject).toHaveBeenCalledWith(cookieStrings.practicing, flashCardData.data.practicing);
+					expect($cookies.putObject).toHaveBeenCalledWith(cookieStrings.pll.practicing, flashCardData.data.practicing);
 				});
 				it("when called w/ argument, $cookies.putObject() should be called but with our data", function() {
 					spyOn($cookies, 'putObject');
@@ -125,12 +132,12 @@ describe('	Test:	', function() {
 						'foo3': true
 					};
 					flashCardData.savePracticing(fakeData);
-					expect($cookies.putObject).toHaveBeenCalledWith(cookieStrings.practicing, fakeData);
+					expect($cookies.putObject).toHaveBeenCalledWith(cookieStrings.pll.practicing, fakeData);
 				});
 				it("after called w/o args, $cookies.getObject(cookies.practicing) should be the same as data.practicing", function() {
 					spyOn($cookies, 'putObject').and.callThrough();
 					flashCardData.savePracticing();
-					expect($cookies.getObject(cookieStrings.practicing)).toEqual(flashCardData.data.practicing);
+					expect($cookies.getObject(cookieStrings.pll.practicing)).toEqual(flashCardData.data.practicing);
 				});
 			});
 			describe('getPracticing', function() {
@@ -221,17 +228,17 @@ describe('	Test:	', function() {
 							'foo3': 3
 					};
 					flashCardData.saveCardPriorities(fakePriorities);
-					expect($cookies.putObject).toHaveBeenCalledWith(cookieStrings.cardPriorities, fakePriorities);
+					expect($cookies.putObject).toHaveBeenCalledWith(cookieStrings.pll.cardPriorities, fakePriorities);
 				});
 				it("once called w/o args, $cookies.putObject should also be called", function() {
 					spyOn($cookies, 'putObject');
 					flashCardData.saveCardPriorities();
-					expect($cookies.putObject).toHaveBeenCalledWith(cookieStrings.cardPriorities, flashCardData.data.cardPriorities);
+					expect($cookies.putObject).toHaveBeenCalledWith(cookieStrings.pll.cardPriorities, flashCardData.data.cardPriorities);
 				});
 				it("once called w/o args, $cookies.getObject(cookieStrings.cardPriorities) should be the same as cardPriorities", function() {
 					spyOn($cookies, 'putObject').and.callThrough();
 					flashCardData.saveCardPriorities();
-					expect($cookies.getObject(cookieStrings.cardPriorities)).toEqual(flashCardData.data.cardPriorities);
+					expect($cookies.getObject(cookieStrings.pll.cardPriorities)).toEqual(flashCardData.data.cardPriorities);
 				});
 			});
 			describe('getCardPriorities', function() {
@@ -334,26 +341,26 @@ describe('	Test:	', function() {
 					it("once called, $cookies.putObject should also be called", function() {
 						spyOn($cookies, 'putObject');
 						flashCardData.savePracticeCards(fakeData);
-						expect($cookies.putObject).toHaveBeenCalledWith(cookieStrings.practiceCards, fakeData);
+						expect($cookies.putObject).toHaveBeenCalledWith(cookieStrings.pll.practiceCards, fakeData);
 					});
 					it("after called, $cookies.getObject(practiceCards) should be the same as fakeData", function() {
 						spyOn($cookies, 'putObject').and.callThrough();
 						flashCardData.savePracticeCards(fakeData);
-						expect($cookies.getObject(cookieStrings.practiceCards)).toEqual(fakeData);
+						expect($cookies.getObject(cookieStrings.pll.practiceCards)).toEqual(fakeData);
 					});
 				});
 				describe('when called without args', function() {
 					it("once called, $cookies.putObject should also be called", function() {
 						spyOn($cookies, 'putObject');
 						flashCardData.savePracticeCards();
-						expect($cookies.putObject).toHaveBeenCalledWith(cookieStrings.practiceCards, flashCardData.data.practiceCards);
+						expect($cookies.putObject).toHaveBeenCalledWith(cookieStrings.pll.practiceCards, flashCardData.data.practiceCards);
 					});
 					it("after called, $cookies.getObject(practiceCards) should be the same as practiceCards", function() {
 						spyOn($cookies, 'putObject').and.callThrough();
 						flashCardData.savePracticeCards();
 //						console.log($cookies.getObject(cookieStrings.practiceCards));
 //						console.log(flashCardData.data.practiceCards);
-						expect($cookies.getObject(cookieStrings.practiceCards)).toEqual(flashCardData.data.practiceCards);
+						expect($cookies.getObject(cookieStrings.pll.practiceCards)).toEqual(flashCardData.data.practiceCards);
 					});
 				});
 			});
@@ -394,13 +401,14 @@ describe('	Test:	', function() {
 						it("should save by calling $cookies.putObject", function() {
 							spyOn($cookies, 'putObject');
 							flashCardData.saveCards(value);
-							expect($cookies.putObject).toHaveBeenCalledWith(cookieStrings.dataCards, value);
+							expect($cookies.putObject).toHaveBeenCalledWith(cookieStrings.pll.dataCards, value);
 						});
 						it("if saved in cookies, getting it from $cookies.getObject should be the same", function() {
 							flashCardData.initialize();
 							spyOn($cookies, 'putObject').and.callThrough();
 							flashCardData.saveCards(value);
-							expect($cookies.getObject(cookieStrings.dataCards)).toEqual(value);
+							expect($cookies.putObject).toHaveBeenCalled();
+							expect($cookies.getObject(cookieStrings.pll.dataCards)).toEqual(value);
 						});
 					});
 				});
@@ -409,12 +417,12 @@ describe('	Test:	', function() {
 						it("save it to the dataCards string", function() {
   						spyOn($cookies, 'putObject');
   						flashCardData.saveCards();
-  						expect($cookies.putObject).toHaveBeenCalledWith(cookieStrings.dataCards, flashCardData.data.cards);
+  						expect($cookies.putObject).toHaveBeenCalledWith(cookieStrings.pll.dataCards, flashCardData.data.cards);
   					});
   					it("should be able to call the same object through $cookies.getObject", function() {
   						spyOn($cookies, 'putObject').and.callThrough();
   						flashCardData.saveCards();
-  						expect($cookies.getObject(cookieStrings.dataCards)).toEqual(flashCardData.data.cards);
+  						expect($cookies.getObject(cookieStrings.pll.dataCards)).toEqual(flashCardData.data.cards);
   					});
 					});
 					describe('cards is not defined', function() {
@@ -426,14 +434,14 @@ describe('	Test:	', function() {
 							spyOn($cookies, 'putObject');
 							flashCardData.saveCards();
 //							console.log("cookieData.cards: " + angular.toJson(cookieData.cards));
-							expect($cookies.putObject).toHaveBeenCalledWith(cookieStrings.dataCards, cookieData.cards);
+							expect($cookies.putObject).toHaveBeenCalledWith(cookieStrings.pll.dataCards, cookieData.cards);
 						});
 						it("should be able to retrieve the saved value through $cookies.getObject", function() {
 							spyOn($cookies, 'putObject').and.callThrough();
 							flashCardData.data = {};
 							flashCardData.data.cards = [];
 							flashCardData.saveCards();
-							expect($cookies.getObject(cookieStrings.dataCards)).toEqual(cookieData.cards);
+							expect($cookies.getObject(cookieStrings.pll.dataCards)).toEqual(cookieData.cards);
 						});
 					});
 				});

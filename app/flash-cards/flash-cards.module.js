@@ -5,7 +5,7 @@
 
 angular
 	.module('myApp')
-	.factory('flashCardData', ['cookieStrings', '$cookies', 'cookieData', function(cookieStringData, $cookies, cookieData) {
+	.factory('flashCardData', ['cookieStrings', '$cookies', 'cookieData', '$log', function(cookieStringData, $cookies, cookieData, $log) {
   	var factory = {data: cookieData, cookies: cookieStringData, cards: {}};
 		var type = "";
   //	angular.copy(cookieData, factory.data);
@@ -20,7 +20,24 @@ angular
 
 
   	factory.initialize = function() {
-  		for (var ind in factory.data) {
+			var ind;
+			for (ind in factory.data) {
+				factory.data[ind] = cookieData[ind];
+			}
+			console.log('Cookie data: ' + angular.toJson(cookieData));
+			console.log('Factory data: ' + angular.toJson(factory.data));
+			if ((typeof factory.data) == 'undefined') {
+				console.log('The cookie data: ' + angular.toJson(cookieData));
+				factory.data = {
+						practicing: {"OCLL8": false},
+						practiceCards: [],
+						cardPriorities: {"OCLL8": -1},
+						cardOptions: {"L3": -1, "OCLL8": -1},
+						cards: {maxNumber: 5, options: range(0, 5)},
+						practiceButton: "Select cases to practice"
+				};
+			}
+  		for (ind in factory.data) {
   			if (!angular.isString(factory.data[ind])) {
   				try {
   				 factory.data[ind] = $cookies.getObject(factory.cookies[type][ind]);
@@ -85,6 +102,7 @@ angular
 				factory.data.practicing = newValue;
   			$cookies.putObject(factory.cookies[type].practicing, newValue);
   		} else {
+				console.log("Cookies[type]: " + angular.toJson(factory.cookies[type]));
   			$cookies.putObject(factory.cookies[type].practicing, factory.data.practicing);
   		}
   	};

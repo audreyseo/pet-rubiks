@@ -1,14 +1,17 @@
-describe('    Test:   ', function() {
-  describe('Controller: PLLController', function() {
-    var PLL, scope, $cookies, ContentControl;
-    beforeEach(module('myApp'));
+describe("    Test:   ", function() {
+  describe("Controller: OLLController", function() {
+    var createController, OLL, scope, ContentControl, $cookies;
 
+    beforeEach(module("myApp"));
     beforeEach(inject(function($rootScope, $controller, _ContentControl_, _$cookies_) {
       scope = $rootScope.$new();
       ContentControl = _ContentControl_;
       $cookies = _$cookies_;
+
       createController = function() {
-        return $controller('PLLController', {
+        ContentControl.cardOptions = {"thing": "other thing"};
+        ContentControl.cardPriorities = [];
+        return $controller('OLLController', {
           '$scope': scope,
           'ContentControl': ContentControl,
           '$cookies': $cookies
@@ -21,6 +24,7 @@ describe('    Test:   ', function() {
 
     describe("Defined or undefined", function() {
       it("Fields", function() {
+        expect(scope.addPriorityOptions).toBeDefined();
         expect(scope.animationOpts).toBeDefined();
         expect(scope.cardOptions).toBeDefined();
         expect(scope.cardPriorities).toBeDefined();
@@ -28,28 +32,33 @@ describe('    Test:   ', function() {
         expect(scope.cases).toBeDefined();
         expect(scope.cols).toBeDefined();
         expect(scope.classes).toBeDefined();
-        expect(scope.hidden).toBeDefined();
+        expect(scope.colClasses).toBeDefined();
         expect(scope.cookieString).toBeDefined();
-        expect(scope.filterString).toBeDefined();
-        expect(scope.practiceCards).toBeDefined();
-      });
-      it("Functions", function() {
-        expect(scope.addPriorityOptions).toBeDefined();
         expect(scope.countCases).toBeDefined();
+        expect(scope.cardData).toBeDefined();
         expect(scope.editCardSelection).toBeDefined();
         expect(scope.editTable).toBeDefined();
-        expect(scope.hideHiddenRows).toBeDefined();
+        expect(scope.filteredCases).toBeDefined();
+        expect(scope.filterString).toBeDefined();
+        expect(scope.flashCardsData).toBeDefined();
+        expect(scope.hiddenColsData).toBeDefined();
+        expect(scope.hiddenRows).toBeDefined();
+        expect(scope.hiddenRowsData).toBeDefined();
         expect(scope.hideHiddenCols).toBeDefined();
+        expect(scope.hideHiddenRows).toBeDefined();
         expect(scope.initialize).toBeDefined();
         expect(scope.knownCases).toBeDefined();
         expect(scope.modifyKnownCases).toBeDefined();
+        expect(scope.number).toBeDefined();
         expect(scope.pickAnAlgorithm).toBeDefined();
+        expect(scope.practiceCards).toBeDefined();
+        expect(scope.practicing).toBeDefined();
         expect(scope.returnSolve).toBeDefined();
         expect(scope.setFilter).toBeDefined();
         expect(scope.setSort).toBeDefined();
         expect(scope.showing).toBeDefined();
-        expect(scope.showHiddenCols).toBeDefined();
         expect(scope.showHiddenRows).toBeDefined();
+        expect(scope.showHiddenCols).toBeDefined();
         expect(scope.useCookieInfo).toBeDefined();
       });
     });
