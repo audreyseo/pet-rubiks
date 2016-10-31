@@ -13,6 +13,7 @@ function TimerController($scope, $interval, $cookies, $log, $http, statistics) {
   $scope.clock = 0;
   $scope.deleteAll = deleteAll;
   $scope.deleteIndex = deleteIndex;
+	$scope.deleteLastTime = deleteLastTime;
   $scope.deleteRecord = deleteRecord;
   $scope.delta = delta;
   $scope.displayTimeString = "00:00.00";
@@ -105,6 +106,18 @@ function TimerController($scope, $interval, $cookies, $log, $http, statistics) {
   		$scope.numRecords --;
   	}
   }
+
+	function deleteLastTime() {
+		var confirmed = window.confirm("This will delete your last time, " + $scope.records.time[$scope.records.time.length - 1] + ". Do you wish to proceed?");
+
+		if (confirmed) {
+			for (var str in $scope.records) {
+				$scope.records[str].pop();
+			}
+			$scope.numRecords --;
+			$scope.saveRecords();
+		}
+	}
 
   function deleteRecord(index) {
 //  	console.log("Index: " + index);

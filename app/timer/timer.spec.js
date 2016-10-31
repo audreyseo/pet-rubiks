@@ -8,11 +8,11 @@ function returnNaN() {
 
 describe('	Test:	', function() {
 	describe('Controller: TimerController', function() {
-		
+
 		var ctrl, createController, scope, $interval, $cookies, $log, statistics, $intervalSpy;
-		
-		beforeEach(module('myApp', 'ngCookies'));		
-		
+
+		beforeEach(module('myApp', 'ngCookies'));
+
 		beforeEach(inject(
 			function ($rootScope, _$interval_, _$cookies_, _$log_, _statistics_, $controller) {
   	    scope = $rootScope.$new();
@@ -32,12 +32,12 @@ describe('	Test:	', function() {
     	  };
 			}
 		));
-		
+
 		describe("Variables", function() {
 			beforeEach(function() {
 				ctrl = createController();
 			});
-			
+
 			it("variables should be defined", function() {
 				expect(scope.cookieOpts).toBeDefined();
 				expect(scope.clock).toBeDefined();
@@ -60,17 +60,18 @@ describe('	Test:	', function() {
 				expect(scope.time).toBeDefined();
 			});
 		});
-		
-		
-		
+
+
+
 		describe('Function', function() {
 			beforeEach(function() {
 				ctrl = createController();
 			});
-			
+
 			it("all functions should be defined", function() {
 				expect(scope.deleteRecord).toBeDefined();
 				expect(scope.deleteAll).toBeDefined();
+				expect(scope.deleteLastTime).toBeDefined();
 				expect(scope.deleteRecord).toBeDefined();
 				expect(scope.delta).toBeDefined();
 				expect(scope.downloadClicked).toBeDefined();
@@ -99,20 +100,20 @@ describe('	Test:	', function() {
   				beforeEach(function() {
     				scope.records = [{time: "00:00.000", index: 1}, {time: "00:00.000", index: 2}];
     			});
-    			
+
     			it('Deletes a record given an index that is smaller than $scope.records.length', function() {
     				var index=1;
     				scope.deleteRecord(index);
     				var newObject = [{time: "00:00.000", index:1}];
     				expect(scope.records).toEqual(newObject);
     			});
-    			
+
     			it('Does not delete a record that has a negative index', function() {
     				var index = -1;
     				scope.deleteRecord(index);
     				expect(scope.records).toEqual([{time: "00:00.000", index: 1}, {time: "00:00.000", index: 2}]);
     			});
-    			
+
     			it("Does not attempt to delete if index is NaN or undefined", function() {
     				spyOn(scope, 'deleteIndex');
     				spyOn(scope, 'saveRecords');
@@ -130,20 +131,20 @@ describe('	Test:	', function() {
   				beforeEach(function() {
     				scope.records = {time: ["00:00.000", "00:00.00"], index: [1, 2], timeStamp: ["00:00.000", "00:00.00"], millis: [0, 0]};
     			});
-    			
+
     			it('Deletes a record given an index that is smaller than $scope.records.length', function() {
     				var index=1;
     				scope.deleteRecord(index);
     				var newObject = {time: ["00:00.000"], index: [1], timeStamp: ["00:00.000"], millis: [0]};
     				expect(scope.records).toEqual(newObject);
     			});
-    			
+
     			it('Does not delete a record that has a negative index', function() {
     				var index = -1;
     				scope.deleteRecord(index);
     				expect(scope.records).toEqual({time: ["00:00.000", "00:00.00"], index: [1, 2], timeStamp: ["00:00.000", "00:00.00"], millis: [0, 0]});
     			});
-    			
+
     			it("Does not attempt to delete if index is NaN or undefined", function() {
     				var index = Math.sqrt(-1);
     				spyOn(scope, 'deleteIndex');
@@ -156,7 +157,52 @@ describe('	Test:	', function() {
     			});
   			});
   		});
-		
+
+			describe("deleteAll", function() {
+				it("should make records into base if actually works", function() {
+					spyOn(window, "confirm").and.returnValue(true);
+					spyOn(scope, "deleteAll").and.callThrough();
+					scope.deleteAll();
+					expect(scope.records).toEqual({time: [], timeStamp: [], index: [], millis: []});
+					expect(scope.numRecords).toEqual(0);
+				});
+
+				beforeEach(function() {
+					spyOn(scope, 'saveRecords');
+				});
+
+				it("should call saveRecords if user confirms", function() {
+					spyOn(window, "confirm").and.returnValue(true);
+					scope.deleteAll();
+					expect(scope.saveRecords).toHaveBeenCalled();
+				});
+
+				it("should not call saveRecords if user does not confirm", function() {
+					spyOn(window, "confirm").and.returnValue(false);
+					scope.deleteAll();
+					expect(scope.saveRecords).not.toHaveBeenCalled();
+				});
+			});
+
+			describe("deleteLastTime", function() {
+				it("should decrement the size of the array", function() {
+					var length = scope.records.length;
+				});
+
+			  it("should call saveRecords if the user confirms", function() {
+					spyOn(window, "confirm").and.returnValue(true);
+					spyOn(scope, "saveRecords");
+					scope.deleteLastTime();
+					expect(scope.saveRecords).toHaveBeenCalled();
+			  });
+				it("should not call saveRecords if user does nnot confirm", function() {
+					spyOn(window, "confirm").and.returnValue(false);
+					spyOn(scope, 'saveRecords');
+					scope.deleteLastTime();
+					expect(scope.saveRecords).not.toHaveBeenCalled();
+				});
+			});
+
   		describe('getCookies', function() {
   			it("Should get the copies of Record that used to be here.", function() {
   				spyOn($cookies, 'getObject');
@@ -171,13 +217,13 @@ describe('	Test:	', function() {
   				scope.render();
   				expect(old).not.toEqual(scope.time.string);
   			});
-  			
+
   			it ("once called, time.string should be what we think it will be", function() {
   				scope.clock = (20 * 60 * 1000) + (35 * 1000) + (945);
   				scope.render();
   				expect(scope.time.string).toEqual("20:35.945");
   			});
-  			
+
   			it ("If clock is undefined or NaN, should set time.string to 00:00.000", function() {
   				scope.clock = undefined;
   				scope.render();
@@ -187,7 +233,7 @@ describe('	Test:	', function() {
   				expect(scope.time.string).toEqual('00:00.000');
   			});
   		});
-  		
+
   		describe('reset', function(){
   			beforeEach(function() {
   				scope.state.stopped = true;
@@ -234,7 +280,7 @@ describe('	Test:	', function() {
   				spyOn(scope, 'reset');
   				spyOn(scope, 'render');
   			});
-  			
+
   			describe('syncronous testing', function() {
   				beforeEach(function() {
   					ctrl = createController();
@@ -266,7 +312,7 @@ describe('	Test:	', function() {
     				expect(scope.update).toHaveBeenCalled();
     			});
   			});
-  			
+
   			beforeEach(function() {
   				ctrl = createController($intervalSpy);
   				spyOn(scope, 'start').and.callThrough();
@@ -275,7 +321,7 @@ describe('	Test:	', function() {
   				spyOn(scope, 'render');
   				scope.start();
   			});
-  			
+
   			it("once called, should call reset() and render()", function() {
   				expect(scope.reset).toHaveBeenCalled();
   				expect(scope.render).toHaveBeenCalled();
