@@ -7,6 +7,7 @@ angular.module('myApp')
 			['statistics', '$cookies', function(statistics, $cookies) {
 				var recordsCookie = "TimeRecordsCookie";
 				var factory = {dates: {}, allData: [], allStats: statistics, dateKeys: []};
+				factory.getDayOnly = getDayOnly;
 				var comparator = "";
 
 				function getDayOnly(date) {

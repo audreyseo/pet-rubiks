@@ -281,13 +281,38 @@ function TimerController($scope, $interval, $cookies, $log, $http, statistics) {
   	});
 
   	var link1 = document.createElement('a');
-  	link1.setAttribute('href', "http://0.0.0.0:3000/data.csv");
-  	link1.setAttribute('download', 'data.csv');
+		var date = new Date();
+  	link1.setAttribute('href', "http://0.0.0.0:3000/"+ getDayOnly(date) + ".csv");
+  	link1.setAttribute('download', getDayOnly(date) + '.csv');
   	link1.setAttribute('id', "downloadLink");
   	$(link1).html("Download");
   	link1 = $(link1);
   	$("#saveButtonDiv").after(link1);
   }
+
+	function getDayOnly(date) {
+		if (angular.isDate(date)) {
+			var y = date.getFullYear();
+			var m = date.getMonth();
+			var d = date.getDate();
+			var months = [
+				"January",
+				"February",
+				"March",
+				"April",
+				"May",
+				"June",
+				"July",
+				"August",
+				"September",
+				"October",
+				"November",
+				"December"
+			];
+			return d + " " + months[m] + " " + y;
+		}
+		return("na");
+	}
 
   function saveRecords() {
   	if (angular.isDefined($scope.records.index)) {

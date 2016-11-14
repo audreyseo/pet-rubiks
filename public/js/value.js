@@ -169,6 +169,30 @@ angular
 		}
 	});
 
+angular.module('myApp')
+  .value('cubeTurnTypes', {
+    "3x3x3": ["", "2", "\'"],
+    "2x2x2": ["", "2", "\'"],
+    "4x4x4": ["", "2", "\'"],
+    "Pyraminx": ["", "\'"],
+  });
+
+angular.module('myApp')
+  .value('cubeTurns', {
+    "3x3x3": ["F", "B", "R", "L", "D", "U"],
+    "2x2x2": ["F", "B", "R", "L", "D", "U"],
+    "4x4x4": ["F", "B", "R", "L", "D", "U", "Uw", "Rw", "Lw", "Fw", "Bw", "Dw", "r", "l", "f", "b", "u", "d"],
+    "Pyraminx": ["F", "R", "L", "U", "f", "u", "r", "l"]
+  });
+
+angular.module('myApp')
+  .value("cubeTypes", [
+    "2x2x2",
+    "3x3x3",
+    "4x4x4",
+    "Pyraminx"
+  ]);
+
 /**
  * http://usejsdoc.org/
  */

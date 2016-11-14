@@ -795,6 +795,7 @@ function TimerController($scope, $interval, $cookies, $log, $http, statistics) {
   $scope.clock = 0;
   $scope.deleteAll = deleteAll;
   $scope.deleteIndex = deleteIndex;
+	$scope.deleteLastTime = deleteLastTime;
   $scope.deleteRecord = deleteRecord;
   $scope.delta = delta;
   $scope.displayTimeString = "00:00.00";
@@ -815,7 +816,8 @@ function TimerController($scope, $interval, $cookies, $log, $http, statistics) {
 		{a: "mean5", b: "mean35"},
 		{a: "mean10", b: "mean1012"},
 		{a: "variance", b: "stdDev"},
-		{a: "iqr", b: "range"}
+		{a: "iqr", b: "range"},
+		{a: "count", b: "full_range"}
   ];
   $scope.pairNames = {
   	"best": "Best",
@@ -831,7 +833,9 @@ function TimerController($scope, $interval, $cookies, $log, $http, statistics) {
   	"variance": "Variance",
   	"stdDev": "StdDev",
   	"iqr": "IQR",
-  	"range": "Range"
+  	"range": "Range",
+		"count": "Count",
+		"full_range": "Full Range"
   };
   $scope.recordsCookie = "TimeRecordsCookie";
   $scope.render = render;
@@ -884,6 +888,18 @@ function TimerController($scope, $interval, $cookies, $log, $http, statistics) {
   		$scope.numRecords --;
   	}
   }
+
+	function deleteLastTime() {
+		var confirmed = window.confirm("This will delete your last time, " + $scope.records.time[$scope.records.time.length - 1] + ". Do you wish to proceed?");
+
+		if (confirmed) {
+			for (var str in $scope.records) {
+				$scope.records[str].pop();
+			}
+			$scope.numRecords --;
+			$scope.saveRecords();
+		}
+	}
 
   function deleteRecord(index) {
 //  	console.log("Index: " + index);
@@ -1047,13 +1063,38 @@ function TimerController($scope, $interval, $cookies, $log, $http, statistics) {
   	});
 
   	var link1 = document.createElement('a');
-  	link1.setAttribute('href', "http://0.0.0.0:3000/data.csv");
-  	link1.setAttribute('download', 'data.csv');
+		var date = new Date();
+  	link1.setAttribute('href', "http://0.0.0.0:3000/"+ getDayOnly(date) + ".csv");
+  	link1.setAttribute('download', getDayOnly(date) + '.csv');
   	link1.setAttribute('id', "downloadLink");
   	$(link1).html("Download");
   	link1 = $(link1);
   	$("#saveButtonDiv").after(link1);
   }
+
+	function getDayOnly(date) {
+		if (angular.isDate(date)) {
+			var y = date.getFullYear();
+			var m = date.getMonth();
+			var d = date.getDate();
+			var months = [
+				"January",
+				"February",
+				"March",
+				"April",
+				"May",
+				"June",
+				"July",
+				"August",
+				"September",
+				"October",
+				"November",
+				"December"
+			];
+			return d + " " + months[m] + " " + y;
+		}
+		return("na");
+	}
 
   function saveRecords() {
   	if (angular.isDefined($scope.records.index)) {

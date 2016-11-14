@@ -149,8 +149,8 @@ app.put('*.csv', function(request, respond) {
 //  console.log(req)
 //}, send);
 //
-app.get('/data.csv', function(req, res) {
-	res.download("data.csv");
+app.get('/*.csv', function(req, res) {
+	res.download("data.csv", decodeURI(req.path));
 });
 app.use('/', express.static('./'));
 var serverRegular = app.listen(3000, '0.0.0.0', function() {
