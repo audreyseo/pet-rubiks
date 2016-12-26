@@ -73,6 +73,7 @@ function CaseManager(ollCases, pllCases) {
 	factory.isOLL = isOLL;
 	factory.isOLLCase = isOLLCase;
 	factory.isPLL = isPLL;
+	factory.isPLLCase = isPLLCase;
 	factory.isSelected = isSelected;
 	factory.mapCaseToNumber = mapCaseToNumber;
 	factory.setStage = setStage;
@@ -80,6 +81,16 @@ function CaseManager(ollCases, pllCases) {
 	factory.type = type;
 
 	factory.mapCaseToNumber();
+//	init();
+//
+//	function init() {
+//		for (var i = 0; i < factory.oll.length; i++) {
+//			factory.oll["prob_type"] = {}
+//			factory.oll.prob_type.red = factory.oll.prob == (1/54)
+//			factory.oll.prob_type.blue = factory.oll.prob == (1/108)
+//			factory.oll.prob_type.green = factory.oll.prob == (1/216)
+//		}
+//	}
 
 	function fetchCase(code) {
 		if (angular.isNumber(code)) {
@@ -120,7 +131,10 @@ function CaseManager(ollCases, pllCases) {
 	}
 
 	function isOLLCase(string) {
-		return string.search(/\d/) > -1;
+		function isInArray(value, array) {
+  		return array.indexOf(value) > -1;
+		}
+		return isInArray(string, factory.ollCodes);
 	}
 
 	function isPLL() {
@@ -128,12 +142,16 @@ function CaseManager(ollCases, pllCases) {
 	}
 
 	function isPLLCase(string) {
-		if (string.match(/[A-Z][a-z]/)) {
-			return true;
-		} else if (string.match(/[A-Z]/)) {
-			return true;
+		function isInArray(value, array) {
+  		return array.indexOf(value) > -1;
 		}
-		return false;
+		return isInArray(string, factory.pllCodes);
+		// if (string.match(/[A-Z][a-z]/)) {
+		// 	return true;
+		// } else if (string.match(/[A-Z]/)) {
+		// 	return true;
+		// }
+		// return false;
 	}
 
 	function isSelected(index) {
@@ -142,12 +160,16 @@ function CaseManager(ollCases, pllCases) {
 
 	function mapCaseToNumber() {
 		factory.ollMap = {};
+		factory.ollCodes = [];
 		for (var i = 0; i < factory.oll.length; i++) {
+			factory.ollCodes.push(factory.oll[i].code);
 			factory.ollMap[factory.oll[i].code] = factory.oll[i].num;
 		}
 
 		factory.pllMap = {};
+		factory.pllCodes = [];
 		for (i = 0; i < factory.pll.length; i++) {
+			factory.pllCodes.push(factory.pll[i].code);
 			factory.pllMap[factory.pll[i].code] = i;
 		}
 	}
@@ -310,7 +332,8 @@ angular.module('myApp')
 
 function colorCodeProbability() {
   return function(input) {
-    var possibles = [1.0/18.0, 1.0/36.0, 1.0/72.0];
+    var possiblesA = [1.0/18.0, 1.0/36.0, 1.0/72.0];
+    var possiblesB = [1.0/54.0, 1.0/108.0, 1.0/216.0];
     var wrappers = ["<span class=\"blue-prob\">$1</span>",
                     "<span class=\"green-prob\">$1</span>",
                     "<span class=\"red-prob\">$1</span>"];
@@ -327,7 +350,7 @@ function colorCodeProbability() {
     //		console.log("1: " + input + " | " + output);
     if (output !== "") {
       for (var i = 0; i < wrappers.length; i++) {
-        if (possibles[i] - input < 0.0001) {
+        if (Math.abs(possiblesA[i] - input) < 0.0001 || Math.abs(possiblesB[i] - input) < 0.0001) {
           // Need a regex that replaces all instances instead of just one instance
           var regex = new RegExp(/(\d+\.\d+)/);
           // Uses replace to insert the new text from replacementText[i]
@@ -651,7 +674,7 @@ function ContentControl(manager, hiddenRows, cookieString, flashData, $cookies, 
 	function setCaseType(string) {
 		if (string.match(/p/i)) {
 			factory.manager.setStage("PLL");
-		} else if (sstring.match(/o/i)) {
+		} else if (string.match(/o/i)) {
 			factory.manager.setStage("OLL");
 		}
 	}
@@ -1677,6 +1700,77 @@ function CubeScrambler($scope) {
 	};
 	
 };
+angular.module('myApp')
+  .value('cubeTurnTypes', {
+    "3x3x3": ["", "2", "\'"],
+    "2x2x2": ["", "2", "\'"],
+    "4x4x4": ["", "2", "\'"],
+    "Pyraminx": ["", "\'"],
+  });
+
+angular.module('myApp')
+  .value('cubeTurns', {
+    "3x3x3": ["F", "B", "R", "L", "D", "U"],
+    "2x2x2": ["F", "B", "R", "L", "D", "U"],
+    "4x4x4": ["F", "B", "R", "L", "D", "U", "Uw", "Rw", "Lw", "Fw", "Bw", "Dw", "r", "l", "f", "b", "u", "d"],
+    "Pyraminx": ["F", "R", "L", "U", "f", "u", "r", "l"]
+  });
+
+angular.module('myApp')
+  .value("cubeTypes", [
+    "2x2x2",
+    "3x3x3",
+    "4x4x4",
+    "Pyraminx"
+  ]);
+
+angular.module('myApp')
+  .factory('RandomCubeTurnGenerator', RandomCubeTurnGenerator);
+
+RandomCubeTurnGenerator.$inject = ["cubeTurnTypes", "cubeTurns", "cubeTypes"];
+
+function RandomCubeTurnGenerator(turnTypes, turns, cubeTypes) {
+  var factory = {};
+  factory.cubeType = "3x3x3"; // Set default cube type
+  factory.lastTurnType = "";
+  factory.lastTurn = "";
+  factory.turns = [];
+  factory.turnTypes = [];
+  factory.randomTurn = randomTurn;
+  factory.init = init;
+
+
+  function init(cubeType) {
+    if (cubeType < cubeTypes.length || cubeTYpe in cubeTypes) {
+      if (angular.isNumber(cubeType) && cubeType < cubeTypes.length) {
+        factory.cubeType = cubeTypes[cubeType];
+
+      } else {
+        factory.cubeType = cubeType;
+      }
+      factory.turns = turns[factory.cubeType];
+      factory.turnTypes = turnTypes[factory.cubeType];
+    }
+
+  }
+
+  function randomTurn() {
+    var randTurn = parseInt(Math.rand() * factory.turns.length);
+    var randType = parseInt(Math.rand() * factory.turnTypes.length);
+
+    while (factory.lastTurn == factory.turns[randTurn]) {
+      randTurn = parseInt(Math.rand() * factory.turns.length);
+    }
+
+    factory.lastTurn = factory.turns[randTurn];
+    factory.lastTurnType = factory.turnTypes[randType];
+    return factory.lastTurn + factory.lastTurnType;
+  }
+
+
+  return factory;
+}
+
 /**
  * http://usejsdoc.org/
  */
@@ -1698,7 +1792,7 @@ angular.module('myApp')
 
 angular
 	.module('myApp')
-	.factory('flashCardData', ['cookieStrings', '$cookies', 'cookieData', function(cookieStringData, $cookies, cookieData) {
+	.factory('flashCardData', ['cookieStrings', '$cookies', 'cookieData', '$log', function(cookieStringData, $cookies, cookieData, $log) {
   	var factory = {data: cookieData, cookies: cookieStringData, cards: {}};
 		var type = "";
   //	angular.copy(cookieData, factory.data);
@@ -1713,7 +1807,24 @@ angular
 
 
   	factory.initialize = function() {
-  		for (var ind in factory.data) {
+			var ind;
+			for (ind in factory.data) {
+				factory.data[ind] = cookieData[ind];
+			}
+			console.log('Cookie data: ' + angular.toJson(cookieData));
+			console.log('Factory data: ' + angular.toJson(factory.data));
+			if ((typeof factory.data) == 'undefined') {
+				console.log('The cookie data: ' + angular.toJson(cookieData));
+				factory.data = {
+						practicing: {"OCLL8": false},
+						practiceCards: [],
+						cardPriorities: {"OCLL8": -1},
+						cardOptions: {"L3": -1, "OCLL8": -1},
+						cards: {maxNumber: 5, options: range(0, 5)},
+						practiceButton: "Select cases to practice"
+				};
+			}
+  		for (ind in factory.data) {
   			if (!angular.isString(factory.data[ind])) {
   				try {
   				 factory.data[ind] = $cookies.getObject(factory.cookies[type][ind]);
@@ -1778,6 +1889,7 @@ angular
 				factory.data.practicing = newValue;
   			$cookies.putObject(factory.cookies[type].practicing, newValue);
   		} else {
+				console.log("Cookies[type]: " + angular.toJson(factory.cookies[type]));
   			$cookies.putObject(factory.cookies[type].practicing, factory.data.practicing);
   		}
   	};
@@ -1980,7 +2092,7 @@ angular
 angular
 	.module('myApp')
 	.factory(
-			'statistics', ['timeConversion', 
+			'statistics', ['timeConversion',
 			function(timeConversion) {
 				var converter = timeConversion;
 				var factory = {
@@ -2001,10 +2113,12 @@ angular
 							q3: 0,
 							iqr: 0,
 							mean100: 0,
-							range: 0
+							range: 0,
+							count: 0,
+							full_range: 0
 						}
 				};
-				
+
 				factory.addData = addData;
 				factory.avg = avg;
 				factory.best = best;
@@ -2030,19 +2144,19 @@ angular
 				factory.variance = variance;
 				factory.worst = worst;
 
-				
+
 				function timeObject(value, i) {
 					return {index: value.index[i], time: value.time[i], millis: value.millis[i], timeStamp: value.timeStamp[i]};
 				}
-				
+
 				function compareNums(a, b) {
 					return a - b;
 				}
-				
+
 				function convert(num) {
 					return(converter.millisToString(Math.round(num)));
 				}
-				
+
 				function addData(value) {
 					if (angular.isDefined(value.time) && angular.isDefined(value.timeStamp)) {
 						factory.raw.push(value);
@@ -2050,15 +2164,15 @@ angular
 					}
 					factory.calculate();
 				}
-				
+
 				function length() {
 					return parseInt(factory.data.length);
 				}
-				
+
 				function loadData(value) {
 					var times = "";
 					var times2 = "";
-					
+
 					var data = [];
 //					console.log("Type of value: " + typeof value);
 					if (angular.isDefined(value)) {
@@ -2068,11 +2182,11 @@ angular
 								var timeObj = timeObject(value, i);
 								data.push(timeObj);
 							}
-							
+
 							factory.raw = data;
 //							console.log(angular.toJson(value));
 							factory.data = [];
-							
+
 							for (i = 0; i < factory.raw.length; i++) {
 								times = times + factory.raw[i].time + " ";
 								factory.data.push(converter.stringToMillis(factory.raw[i].time));
@@ -2084,7 +2198,7 @@ angular
 							factory.raw = value;
 //						console.log(angular.toJson(value));
 							factory.data = [];
-						
+
 							for (var i = 0; i < factory.raw.length; i++) {
 	  						times = times + factory.raw[i].time + " ";
 	  						factory.data.push(converter.stringToMillis(factory.raw[i].time));
@@ -2094,7 +2208,7 @@ angular
 					}
 					factory.calculate();
 				}
-				
+
 				function getSum(total, newValue) {
 					return total + newValue;
 				}
@@ -2102,9 +2216,9 @@ angular
 				function avg(data, length) {
 					return(data.reduce(getSum) / length);
 				}
-				
+
 				function mean() {
-					
+
 //					var total = 0;
 					var length = factory.data.length;
 					if (length > 5) {
@@ -2116,13 +2230,13 @@ angular
 						factory.stats.mean = -1;
 					}
 				}
-				
+
 				function getVariance(total, newValue) {
 					var mean = factory.stats.mean;
 					total += Math.pow(newValue - mean, 2);
 					return total;
 				}
-				
+
 				function variance() {
 					var total = 0;
 					var length = factory.data.length;
@@ -2136,9 +2250,9 @@ angular
 					} else {
 						factory.stats.variance = -1;
 					}
-					
+
 				}
-				
+
 				function stdDev() {
 					if (factory.data.length > 5 && factory.stats.variance >= 0) {
 						var mean = factory.stats.mean;
@@ -2151,9 +2265,9 @@ angular
 					} else {
 						factory.stats.stdDev = -1;
 					}
-					
+
 				}
-				
+
 				function mean5() {
 					var length = factory.data.length;
 					if (length >= 5) {
@@ -2164,7 +2278,7 @@ angular
 						factory.stats.mean5 = -1;
 					}
 				}
-				
+
 				function mean35() {
 					var length = factory.data.length;
 					if (length >= 5) {
@@ -2177,7 +2291,7 @@ angular
 						factory.stats.mean35 = -1;
 					}
 				}
-				
+
 				function mean10() {
 					var length = factory.data.length;
 					if (length >= 10) {
@@ -2188,7 +2302,7 @@ angular
 						factory.stats.mean10 = -1;
 					}
 				}
-				
+
 				function mean1012() {
 					var length = factory.data.length;
 					if (length >= 12) {
@@ -2201,7 +2315,7 @@ angular
 						factory.stats.mean1012 = -1;
 					}
 				}
-				
+
 				function mean100() {
 					var length = factory.data.length;
 					if (length >= 100) {
@@ -2212,7 +2326,7 @@ angular
 						factory.stats.mean100 = -1;
 					}
 				}
-				
+
 				function q1() {
 					var length = factory.data.length;
 					if (length > 10) {
@@ -2231,7 +2345,7 @@ angular
 						factory.stats.q1 = -1;
 					}
 				}
-				
+
 				function median() {
 					var length = factory.data.length;
 					if (length > 3) {
@@ -2249,7 +2363,7 @@ angular
 						factory.stats.median = -1;
 					}
 				}
-				
+
 				function q3() {
 					var length = factory.data.length;
 					if (length > 10) {
@@ -2267,27 +2381,27 @@ angular
 						factory.stats.q3 = -1;
 					}
 				}
-				
+
 				function best() {
 					var length = factory.data.length;
-					if (length > 3) {
+					if (length >= 2) {
 						var sorted = (factory.data.slice(0, factory.data.length)).sort(compareNums);
 						factory.stats.best = sorted[0];
 					} else {
 						factory.stats.best = -1;
 					}
 				}
-			
+
 				function worst() {
 					var length = factory.data.length;
-          if (length > 3) {
+          if (length >= 2) {
           	var sorted = (factory.data.slice(0, factory.data.length)).sort(compareNums);
           	factory.stats.worst = sorted[sorted.length - 1];
 					} else {
 						factory.stats.worst = -1;
 					}
 				}
-				
+
 				function iqr() {
 					var length = factory.data.length;
 					if (length > 10) {
@@ -2296,17 +2410,17 @@ angular
 						factory.stats.iqr = -1;
 					}
 				}
-				
+
 				function range() {
 					var length = factory.data.length;
-					if (length > 3) {
+					if (length >= 2) {
 						factory.stats.range = "(" + convert(factory.stats.best) + ", " + convert(factory.stats.worst) + ")";
 					} else {
 						factory.stats.range = -1;
 					}
-					
+
 				}
-				
+
 				function calculate() {
 					factory.mean();
 					factory.variance();
@@ -2323,10 +2437,13 @@ angular
 					factory.worst();
 					factory.iqr();
 					factory.range();
+					factory.stats.count = factory.data.length;
+					factory.stats.full_range = factory.stats.worst - factory.stats.best;
 				}
-				
+
 				return factory;
 			}]);
+
 /**
  * http://usejsdoc.org/
  */
@@ -2496,20 +2613,23 @@ angular
 	.module('myApp')
 	.filter('millisToString', ['timeConversion', function(converter) {
 		return function(input) {
-			if (String(input).indexOf(":") < 0 && (typeof input == "number")) {
+			if (String(input).indexOf(":") < 0 && (typeof input === "number")) {
 //				console.log("int: " + parseInt(input) + " " + input);
 				var num = parseInt(input);
-				if (input < 0) {
+				if (input <= 0) {
 					return("--:--.---");
+				} else if (input > 0 && input < 200) {
+					return input;
 				} else {
 					return converter.millisToString(Math.round(parseInt(input)));
 				}
-			} else if (String(input).indexOf(":") < 0){
+			} else if (String(input).indexOf(":") < 0 && (!String(input).match(/^[a-zA-Z]+$/) || String(input) === "undefined")){
 				return converter.millisToString(0);
 			}
 			return input;
 		};
 	}]);
+
 /**
  * http://usejsdoc.org/
  */
@@ -2537,8 +2657,9 @@ angular.module('myApp')
 			['statistics', '$cookies', function(statistics, $cookies) {
 				var recordsCookie = "TimeRecordsCookie";
 				var factory = {dates: {}, allData: [], allStats: statistics, dateKeys: []};
+				factory.getDayOnly = getDayOnly;
 				var comparator = "";
-				
+
 				function getDayOnly(date) {
 					if (angular.isDate(date)) {
 						var y = date.getFullYear();
@@ -2560,36 +2681,36 @@ angular.module('myApp')
 						];
 						return d + " " + months[m] + " " + y;
 					}
-					return(na);
+					return("na");
 				}
-				
+
 				function findSame(timeStamp) {
 					return (getDayOnly(timeStamp) == comparator);
 				}
-				
+
 				factory.loadData = function(newData) {
 					var data = [];
-					
+
 					for (var i = 0; i < newData.index.length; i++) {
 						var timeObj = {index: newData.index[i], time: newData.time[i], millis: newData.millis[i], timeStamp: newData.timeStamp[i]};
 						data.push(timeObj);
 					}
-					
+
 					var oldLength = factory.allData.length;
 					var newLength = data.length;
-					factory.allData = factory.allData.concat(newData.slice(oldLength, newLength - oldLength));
+					factory.allData = data.slice(oldLength, newLength - oldLength);
 					for (var i = oldLength; i < newLength; i++) {
 						var index = null;
-						
+
 						if (angular.isUndefined(factory.allData[i].timeStamp)) {
 							factory.allData[i].timeStamp = "na";
 							comparator = "na";
 						} else {
 							comparator = getDayOnly(factory.allData[i].timeStamp);
 						}
-						
+
 						index = factory.dateKeys.indexOf(findSame);
-						
+
 						if (index < 0) {
 							factory.dateKeys.push(comparator);
 							factory.dates[comparator] = statistics;
@@ -2599,22 +2720,24 @@ angular.module('myApp')
 						}
 					}
 				};
-				
+
 				factory.update = function(newData) {
 					factory.loadData(newData);
 					factory.allStats.loadData(factory.allData);
-					factor.allStats.calculate();
+					factory.allStats.calculate();
 					for (var i = 0; i < factory.dateKeys.length; i++) {
 						factory.dates[factory.dateKeys[i]].calculate();
 					}
 				};
-				
+
 				factory.save = function() {
 					for (var i = 0; i < factory.dateKeys.length; i++) {
 						$cookies.put(recordsCookie + factory.dateKeys[i], factory.dates[factory.dateKeys[i]]);
 					}
 				};
+				return factory;
 			}]);
+
 /**
  * http://usejsdoc.org/
  */
@@ -2630,19 +2753,21 @@ function TimerController($scope, $interval, $cookies, $log, $http, statistics) {
   $scope.clock = 0;
   $scope.deleteAll = deleteAll;
   $scope.deleteIndex = deleteIndex;
+	$scope.deleteLastTime = deleteLastTime;
   $scope.deleteRecord = deleteRecord;
   $scope.delta = delta;
   $scope.displayTimeString = "00:00.00";
+	$scope.downloadable;
   $scope.downloadClicked = downloadClicked;
-  $scope.downloadable;
-  $scope.isEncoded = isEncoded;
   $scope.encodedUri = "";
   $scope.getCookies = getCookies;
+	$scope.getDuration = getDuration;
   $scope.interval = null;
+	$scope.isEncoded = isEncoded;
+	$scope.myStats = statistics;
+	$scope.numRecords = 0;
   $scope.offset;
   $scope.options = {delay: 5};
-  $scope.records = {time: [], timeStamp: [], index: [], millis: []};
-  $scope.numRecords = 0;
   $scope.pairs = [
 		{a: "best", b: "worst"},
 		{a: "q1", b: "q3"},
@@ -2650,7 +2775,8 @@ function TimerController($scope, $interval, $cookies, $log, $http, statistics) {
 		{a: "mean5", b: "mean35"},
 		{a: "mean10", b: "mean1012"},
 		{a: "variance", b: "stdDev"},
-		{a: "iqr", b: "range"}
+		{a: "iqr", b: "range"},
+		{a: "count", b: "full_range"}
   ];
   $scope.pairNames = {
   	"best": "Best",
@@ -2666,8 +2792,11 @@ function TimerController($scope, $interval, $cookies, $log, $http, statistics) {
   	"variance": "Variance",
   	"stdDev": "StdDev",
   	"iqr": "IQR",
-  	"range": "Range"
+  	"range": "Range",
+		"count": "Count",
+		"full_range": "Full Range"
   };
+	$scope.records = {time: [], timeStamp: [], index: [], millis: []};
   $scope.recordsCookie = "TimeRecordsCookie";
   $scope.render = render;
   $scope.reset = reset;
@@ -2677,7 +2806,6 @@ function TimerController($scope, $interval, $cookies, $log, $http, statistics) {
   $scope.saveRecords = saveRecords;
   $scope.start = start;
   $scope.state = {running: false, stopped: false};
-  $scope.myStats = statistics;
   $scope.stop = stop;
   $scope.time = {string: "00:00.00"};
   $scope.update = update;
@@ -2719,6 +2847,18 @@ function TimerController($scope, $interval, $cookies, $log, $http, statistics) {
   		$scope.numRecords --;
   	}
   }
+
+	function deleteLastTime() {
+		var confirmed = window.confirm("This will delete your last time, " + $scope.records.time[$scope.records.time.length - 1] + ". Do you wish to proceed?");
+
+		if (confirmed) {
+			for (var str in $scope.records) {
+				$scope.records[str].pop();
+			}
+			$scope.numRecords --;
+			$scope.saveRecords();
+		}
+	}
 
   function deleteRecord(index) {
 //  	console.log("Index: " + index);
@@ -2772,6 +2912,51 @@ function TimerController($scope, $interval, $cookies, $log, $http, statistics) {
 			}
   	}
   }
+
+	function getDuration() {
+		var date1 = $scope.records.timeStamp[0];
+		var date2 = $scope.records.timeStamp[$scope.records.timeStamp.length - 1];
+		if (angular.isDate(date1) && angular.isDate(date2)) {
+			var del = date2 - date1;
+			var hours = del.getHours();
+			var minutes = del.getMinutes();
+			var seconds = del.getSeconds();
+			var milliseconds = del.getMilliseconds();
+			var time = "";
+			if (hours < 10) {
+				time = time + "0" + hours;
+			} else {
+				time = time + hours;
+			}
+			time = time + ":";
+			if (minutes < 10) [
+				time = time + "0" + minutes;
+			] else {
+				time = time + minutes;
+			}
+			time = time + ":";
+
+			if (seconds < 10) {
+				time = time + "0" + seconds;
+			} else {
+				time = time + seconds;
+			}
+
+			time = time + ".";
+
+			if (milliseconds < 10) {
+				time = time + "00" + milliseconds;
+			} else if (milliseconds < 100) {
+				time = time + "0" + milliseconds;
+			} else {
+				time = time + milliseconds;
+			}
+
+			return time;
+
+		}
+		return "00:00:00.000";
+	}
 
   function isEncoded() {
   	return ($scope.downloadable);
@@ -2882,13 +3067,38 @@ function TimerController($scope, $interval, $cookies, $log, $http, statistics) {
   	});
 
   	var link1 = document.createElement('a');
-  	link1.setAttribute('href', "http://0.0.0.0:3000/data.csv");
-  	link1.setAttribute('download', 'data.csv');
+		var date = new Date();
+  	link1.setAttribute('href', "http://0.0.0.0:3000/"+ getDayOnly(date) + ".csv");
+  	link1.setAttribute('download', getDayOnly(date) + '.csv');
   	link1.setAttribute('id', "downloadLink");
   	$(link1).html("Download");
   	link1 = $(link1);
   	$("#saveButtonDiv").after(link1);
   }
+
+	function getDayOnly(date) {
+		if (angular.isDate(date)) {
+			var y = date.getFullYear();
+			var m = date.getMonth();
+			var d = date.getDate();
+			var months = [
+				"January",
+				"February",
+				"March",
+				"April",
+				"May",
+				"June",
+				"July",
+				"August",
+				"September",
+				"October",
+				"November",
+				"December"
+			];
+			return d + " " + months[m] + " " + y;
+		}
+		return("na");
+	}
 
   function saveRecords() {
   	if (angular.isDefined($scope.records.index)) {
@@ -2982,4 +3192,6 @@ function TimesDownload($http) {
   		console.log("Failure: " + response.status + " " + response.statusText + " " + response.config.method);
   	});
   }
+
+  return service;
 }

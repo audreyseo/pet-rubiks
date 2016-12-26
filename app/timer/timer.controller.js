@@ -17,16 +17,17 @@ function TimerController($scope, $interval, $cookies, $log, $http, statistics) {
   $scope.deleteRecord = deleteRecord;
   $scope.delta = delta;
   $scope.displayTimeString = "00:00.00";
+	$scope.downloadable;
   $scope.downloadClicked = downloadClicked;
-  $scope.downloadable;
-  $scope.isEncoded = isEncoded;
   $scope.encodedUri = "";
   $scope.getCookies = getCookies;
+	$scope.getDuration = getDuration;
   $scope.interval = null;
+	$scope.isEncoded = isEncoded;
+	$scope.myStats = statistics;
+	$scope.numRecords = 0;
   $scope.offset;
   $scope.options = {delay: 5};
-  $scope.records = {time: [], timeStamp: [], index: [], millis: []};
-  $scope.numRecords = 0;
   $scope.pairs = [
 		{a: "best", b: "worst"},
 		{a: "q1", b: "q3"},
@@ -55,6 +56,7 @@ function TimerController($scope, $interval, $cookies, $log, $http, statistics) {
 		"count": "Count",
 		"full_range": "Full Range"
   };
+	$scope.records = {time: [], timeStamp: [], index: [], millis: []};
   $scope.recordsCookie = "TimeRecordsCookie";
   $scope.render = render;
   $scope.reset = reset;
@@ -64,7 +66,6 @@ function TimerController($scope, $interval, $cookies, $log, $http, statistics) {
   $scope.saveRecords = saveRecords;
   $scope.start = start;
   $scope.state = {running: false, stopped: false};
-  $scope.myStats = statistics;
   $scope.stop = stop;
   $scope.time = {string: "00:00.00"};
   $scope.update = update;
@@ -171,6 +172,19 @@ function TimerController($scope, $interval, $cookies, $log, $http, statistics) {
 			}
   	}
   }
+
+	function getDuration() {
+		if ($scope.records.timeStamp.length > 1) {
+			var date1 = $scope.records.timeStamp[0];
+			var date2 = $scope.records.timeStamp[$scope.records.timeStamp.length - 1];
+			console.log("date1: " + angular.isDate(date1) + "date2: " + angular.isDate(date2));
+			if (angular.isDate(date1) && angular.isDate(date2)) {
+				var del = date2.getTime() - date1.getTime();
+				return del;
+			}
+		}
+		return "00:00:00.000";
+	}
 
   function isEncoded() {
   	return ($scope.downloadable);

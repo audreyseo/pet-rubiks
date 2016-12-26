@@ -253,7 +253,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('heroku', ['less:dev', 'concat:dev', 'cssmin:dev', 'uglify:build', 'processhtml:heroku']);
 
-  grunt.registerTask('dev', ['less:dev', 'concat:dev', 'cssmin:dev', 'processhtml:dev']);
+  grunt.registerTask('dev', ['less:dev', 'concat:dev', 'less:loose', 'processhtml:dev']);
   grunt.registerTask("devs", ["dev", "exec:serve"]);
   grunt.registerTask('build', ['less:dev', 'concat:build', 'uglify:dev', 'cssmin:dev']);
   grunt.registerTask('builds', ['build', 'exec:serve']);

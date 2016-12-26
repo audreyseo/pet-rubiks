@@ -176,6 +176,10 @@
                           <td class="right" align="left">{{pairNames[pair.b]}}:
                             {{myStats.stats[pair.b] | millisToString}}</td>
                         </tr>
+                        <tr>
+                          <td class="left" align="left">Duration:</td>
+                          <td class="right" align="right">{{getDuration() | millisToString}}</td>
+                        </tr>
                       </table>
                     </div>
                   </div>
